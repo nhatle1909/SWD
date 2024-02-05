@@ -1,14 +1,16 @@
 
-using EXE.Interface;
-using EXE.Service;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Models.Repository;
 using MongoDB.Driver;
+using Repository.Repository;
+using Repository.Tools;
+using Service.Interface;
+using Service.Service;
 using System.Text;
 
-namespace EXE
+namespace SWD
 {
     public class Program
     {
@@ -17,6 +19,7 @@ namespace EXE
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
+            builder.Services.AddSingleton<IOTPService, OTPService>();
             builder.Services.AddScoped<ITemplateService, TemplateService>();
             builder.Services.AddScoped<IAccountService, AccountService>();
             builder.Services.AddScoped<IOTPService, OTPService>();
@@ -24,11 +27,11 @@ namespace EXE
 
             builder.Services.AddControllers();
 
-            builder.Services.AddAutoMapper(typeof(Program));
+            builder.Services.AddAutoMapper(typeof(MapperProfile));
 
             builder.Services.AddControllersWithViews();
-           
-       
+
+
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen(c =>
@@ -50,22 +53,23 @@ namespace EXE
                     Scheme = "bearer"
                 });
                 c.AddSecurityRequirement(new OpenApiSecurityRequirement
-    {
-        {
-            new OpenApiSecurityScheme
-            {
-                Reference = new OpenApiReference
                 {
-                    Type = ReferenceType.SecurityScheme,
-                    Id = "Bearer"
-                }
-            },
-            Array.Empty<string>()
-        }
-    });
+                    {
+                        new OpenApiSecurityScheme
+                        {
+                            Reference = new OpenApiReference
+                            {
+                                Type = ReferenceType.SecurityScheme,
+                                Id = "Bearer"
+                            }
+                        },
+                        Array.Empty<string>()
+                    }
+                });
             });
-            builder.Services.AddSingleton<IOTPService, OTPService>();  
-            
+
+
+
             builder.Services.AddSingleton<IMongoClient, MongoClient>(s =>
             {
                 var uri = s.GetRequiredService<IConfiguration>()["ConnectionString"];

@@ -1,9 +1,9 @@
-﻿using EXE.Interface;
-using Microsoft.AspNetCore.Mvc;
-using Models.Model;
-using Models.ModelView;
+﻿using Microsoft.AspNetCore.Mvc;
+using Repository.Model;
+using Repository.ModelView;
+using Service.Interface;
 
-namespace EXE.Controllers
+namespace SWD.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "YMxWinKVSmWhXokAuZ+YAHzc1AlA4N1WgkXZvP38FUsUwoNM09BR+cT3v158V8bQixcPXXhEqhmVK1A4j1byYw==",
+  "dgSpecHash": "F6jgqqPZ0+JZy6AW9hTuYP2MQGAU5AwPQ3ZUr1icHSDX7vfWHfUlYMw7Q3ysAKjVPzS90Yc5xfLTDaFf0u1eyw==",
   "success": true,
-  "projectFilePath": "D:\\DevTools\\repos\\SWD\\Model\\Model.csproj",
+  "projectFilePath": "D:\\DevTools\\repos\\SWD\\Model\\Service.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\ADMIN\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
     "C:\\Users\\ADMIN\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.1\\automapper.extensions.microsoft.dependencyinjection.12.0.1.nupkg.sha512",

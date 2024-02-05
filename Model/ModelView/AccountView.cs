@@ -8,5 +8,6 @@
         public required string PhoneNumber { get; set; }
         public required string Role { get; set; }
         public required bool isBanned { get; set; }
+   
     }
 }
