@@ -3376,9 +3376,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\DevTools\\repos\\SWD\\Model\\Model.csproj",
-      "projectName": "Model",
-      "projectPath": "D:\\DevTools\\repos\\SWD\\Model\\Model.csproj",
+      "projectUniqueName": "D:\\DevTools\\repos\\SWD\\Model\\Service.csproj",
+      "projectName": "Service",
+      "projectPath": "D:\\DevTools\\repos\\SWD\\Model\\Service.csproj",
       "packagesPath": "C:\\Users\\ADMIN\\.nuget\\packages\\",
       "outputPath": "D:\\DevTools\\repos\\SWD\\Model\\obj\\",
       "projectStyle": "PackageReference",

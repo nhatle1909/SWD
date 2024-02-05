@@ -1,9 +1,7 @@
-﻿using EXE.Interface;
-using Microsoft.AspNetCore.Mvc;
-using Models.Model;
-using Models.ModelView;
+﻿using Microsoft.AspNetCore.Mvc;
+using Service.Interface;
 
-namespace EXE.Controllers
+namespace SWD.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -14,12 +12,17 @@ namespace EXE.Controllers
         {
             _OTPService = OTPService;
         }
-        [HttpPost("Add-New-Account")]
-        public async Task<IActionResult> SendOTP([FromBody] string phoneNumber) 
+        [HttpPost("Send-SMS")]
+        public async Task<IActionResult> SendSMS(string phoneNumber, [FromBody] string message)
         {
-            var verification = _OTPService.SendOTP(phoneNumber);
+
+            var verification = await _OTPService.SendSMS(phoneNumber, message);
             return Ok(verification);
         }
-       
+        //[HttpPost("Send-Verify-OTP")]
+        //public async Task<IActionResult> SendOTP(string phoneNumber, string otp)
+        //{
+        //}
+
     }
 }
