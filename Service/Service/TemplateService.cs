@@ -52,7 +52,7 @@ namespace Service.Service
                 TotalCount = totalCount,
                 Page = pageIndex,
                 PageSize = pageSize,
-                Contact = item.ToList()
+                Template = item.ToList()
             };
             return response;
         }

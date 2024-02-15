@@ -1,58 +1,178 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Repository.Model;
-using Repository.ModelView;
 using Service.Interface;
+using System.ComponentModel.DataAnnotations;
+using static Repository.ModelView.AccountView;
 
 namespace SWD.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+
     public class AccountController : ControllerBase
     {
-        private readonly IAccountService _accountService;
-        public AccountController(IAccountService accountService, IConfiguration configuration)
-        {
-            _accountService = accountService;
-        }
-        [HttpPost("Add-New-Account")]
-        public async Task<IActionResult> AddOneAccount(AccountView accountView)
-        {
-            Account item = await _accountService.AddOneAccount(accountView);
 
-            return Ok(item);
-        }
-        [HttpPut("Ban-An-Account")]
-        public async Task<IActionResult> BanAccount(string Id, AccountView account)
+        private readonly IAccountService _ser;
+        public AccountController(IAccountService ser)
         {
-            Account item = await _accountService.BannedOneAccount(Id, account);
-            return Ok(item);
+            _ser = ser;
         }
-        [HttpPut("Update-Account")]
-        public async Task<IActionResult> UpdateAccount(string id, AccountView accountView)
+
+        [HttpPost("Register-Customer-Account")]
+        //[FromBody] method lấy data từ body request, nếu ko sài thì method sẽ lấy data từ url
+        public async Task<IActionResult> RegisterAnAccountForCustomer([FromBody] RegisterAccountView register)
         {
-            Account item = await _accountService.UpdateAccount(id, accountView);
-            return Ok(item);
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest(ModelState);
+                }
+                var status = await _ser.AddAnAccountForCustomer(register);
+                return Ok(new { message = $"{status}" });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
+
+        //[Authorize]
+
+        [HttpPost("Register-Staff-Account")]
+        public async Task<IActionResult> RegisterAnAccountForStaff([FromBody] RegisterForStaffAccountView registerForStaff)
+        {
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest(ModelState);
+                }
+                var status = await _ser.AddAnAccountForStaff(registerForStaff);
+                return Ok(status);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
         [HttpPost("Login")]
-        public async Task<IActionResult> LoginUser(string Username, string Password)
+        public async Task<IActionResult> LoginAccountByUsernameAndPassword(LoginAccountView login)
         {
-            if (!ModelState.IsValid)
+            try
             {
-                return BadRequest(ModelState);
+                string jwt = await _ser.LoginByUsernameAndPassword(login);
+                return Ok(jwt);
             }
-
-            (string, AccountView) tuple = await _accountService.Login(Username, Password);
-            if (tuple.Item1 == null)
+            catch (Exception ex)
             {
-                return Unauthorized();
+                return BadRequest(ex.Message);
             }
+        }
 
-            Dictionary<string, object> result = new()
+        [HttpPatch("Update-Account")]
+        public async Task<IActionResult> UpdateProfile([FromBody] UpdateAccountView update)
+        {
+            try
             {
-                { "token", tuple.Item1 },
-                { "user", tuple.Item2 }
-            };
-            return Ok(result);
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest(ModelState);
+                }
+                string jwt = await _ser.UpdateAnAccount(update);
+                return Ok(jwt);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpPost("Send-Mail-To-Reset-Password")]
+        public async Task<IActionResult> SendEmailToResetPasswordAccount([EmailAddress] string email)
+        {
+            try
+            {
+                string notice = await _ser.SendEmailToResetPassword(email);
+                return Ok(notice);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpPost("Reset-Password")]
+        public async Task<IActionResult> ResetPasswordAccount([FromBody] ResetPasswordAccountView resetPasswordAccountView)
+        {
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest(ModelState);
+                }
+                string notice = await _ser.ResetPassword(resetPasswordAccountView);
+                return Ok(notice);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        //[Authorize]
+        [HttpPatch("Change-Password")]
+        public async Task<IActionResult> ChangePasswordAccount([FromBody] ChangePasswordAccountView changePassword)
+        {
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest(ModelState);
+                }
+                string notice = await _ser.ChangePassword(changePassword);
+                return Ok(notice);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpPatch("Banned-Account")]
+        public async Task<IActionResult> BanAnAccount([FromBody] BanAccountView ban)
+        {
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest(ModelState);
+                }
+                string notice = await _ser.BanAnAccount(ban);
+                return Ok(notice);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpDelete("Remove-Account")]
+        public async Task<IActionResult> RemoveAnAccount([FromBody] DeleteAccountView delete)
+        {
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest(ModelState);
+                }
+                string notice = await _ser.DeleteAnAccount(delete);
+                return Ok(notice);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
     }
 }

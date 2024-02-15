@@ -1,19 +1,17 @@
-﻿using Repository.Model;
-using Repository.ModelView;
+﻿using static Repository.ModelView.AccountView;
 
 namespace Service.Interface
 {
     public interface IAccountService
     {
-        //public Task<IEnumerable<AccountModelView>> GetAllTemplateItem();
-        //public Task<AccountModelView> AddOneTemplateItem(TemplateModelView TemplateModelView);
-        //public Task<AccountModelView    > UpdateTemplateItem(string id, TemplateModelView TemplateModelView);
-        //public Task<bool> DeleteTemplateItem(string id);
-
-        public Task<(string, AccountView)> Login(string Username, string Password);
-        public Task<Account> Logout();
-        public Task<Account> AddOneAccount(AccountView accountView);
-        public Task<Account> UpdateAccount(string id, AccountView accountView);
-        public Task<Account> BannedOneAccount(string id, AccountView accountView);
+        Task<string> AddAnAccountForCustomer(RegisterAccountView register);
+        Task<string> AddAnAccountForStaff(RegisterForStaffAccountView registerForStaff);
+        Task<string> LoginByUsernameAndPassword(LoginAccountView login);
+        Task<string> UpdateAnAccount(UpdateAccountView update);
+        Task<string> SendEmailToResetPassword(string email);
+        Task<string> ResetPassword(ResetPasswordAccountView resetPasswordAccountView);
+        Task<string> ChangePassword(ChangePasswordAccountView changePassword);
+        Task<string> BanAnAccount(BanAccountView ban);
+        Task<string> DeleteAnAccount(DeleteAccountView delete);
     }
 }
