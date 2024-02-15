@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Repository.Model;
+using Repository.Models;
 using Repository.ModelView;
 namespace Repository.Tools
 {
@@ -9,6 +10,9 @@ namespace Repository.Tools
         {
             CreateMap<TemplateModel, TemplateModelView>().ReverseMap();
             CreateMap<Account, AccountView>().ReverseMap();
+            CreateMap<AccountStatus, AccountView>().ReverseMap();
+            CreateMap<Material, MaterialView>().ReverseMap();
+            CreateMap<Interior, InteriorView>().ReverseMap();
         }
     }
 }

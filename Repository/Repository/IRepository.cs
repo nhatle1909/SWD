@@ -11,7 +11,8 @@ namespace Repository.Repository
         Task<T> UpdateItemByValue(string id, T replacement);
         Task<IEnumerable<T>> GetByFilterAsync(Expression<Func<T, bool>> filterExpression);
 
-        Task<IEnumerable<T>> GetPagedAsync(int skip, int pageSize, bool isAsc, string sortField);
+        Task<IEnumerable<T>> GetPagedAsync(int skip, int pageSize, bool isAsc, string sortField, string searchValue, string searchField);
         Task<long> CountAsync();
+        Task<IEnumerable<T>> GetFieldsByFilterAsync(string[] fieldNames, Expression<Func<T, bool>> filter);
     }
 }

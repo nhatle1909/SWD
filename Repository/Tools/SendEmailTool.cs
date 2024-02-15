@@ -15,11 +15,11 @@ namespace Repository.Tools
 
     }
 
-    public class SendEmalTool : IEmailSender
+    public class SendEmailTool : IEmailSender
     {
         private readonly MailSettings _mailSettings;
-        private readonly ILogger<SendEmalTool> _logger;
-        public SendEmalTool(IOptions<MailSettings> mailSettings, ILogger<SendEmalTool> logger)
+        private readonly ILogger<SendEmailTool> _logger;
+        public SendEmailTool(IOptions<MailSettings> mailSettings, ILogger<SendEmailTool> logger)
         {
             _logger = logger;
             _mailSettings = mailSettings.Value;
