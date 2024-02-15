@@ -1,5 +1,6 @@
 
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Models.Repository;
@@ -26,6 +27,13 @@ namespace SWD
             builder.Services.AddScoped<IInteriorService, InteriorService>();
             builder.Services.AddScoped<IOTPService, OTPService>();
             builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+
+
+            //Add email sender
+            builder.Services.AddOptions();
+            var mailsetting = builder.Configuration.GetSection("MailSettings");
+            builder.Services.Configure<MailSettings>(mailsetting);
+            builder.Services.AddSingleton<IEmailSender, SendEmailTool>();
 
             builder.Services.AddControllers();
 

@@ -13,7 +13,7 @@ namespace Repository.Tools
         {
             _configuration = configuration;
         }
-        public string GenerateJwtToken(string userId, float hour)
+        public string GenerateJwtToken(string userId, string role, float hour)
         {
             var jwtKey = _configuration["JWT:Key"];
             var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtKey ?? ""));
@@ -22,6 +22,7 @@ namespace Repository.Tools
             var claims = new[]
             {
             new Claim("Id",userId),
+            new Claim("Role",role)
         };
 
             var token = new JwtSecurityToken(
