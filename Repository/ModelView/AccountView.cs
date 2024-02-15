@@ -1,13 +1,15 @@
-﻿namespace Repository.ModelView
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Repository.ModelView
 {
     public class AccountView
     {
-        public required string Username { get; set; }
-        public required string Password { get; set; }
-        public required string Email { get; set; }
-        public required string PhoneNumber { get; set; }
-        public required string Role { get; set; }
-        public required bool isBanned { get; set; }
+
+        [StringLength(50, MinimumLength = 5)] public required string Password { get; set; }
+        [EmailAddress(ErrorMessage = "Invalid Mail")] public required string Email { get; set; }
+
+        [Phone(ErrorMessage = "Invalid Phone Number")] public required string PhoneNumber { get; set; }
+        public required string Address { get; set; }
 
     }
 }

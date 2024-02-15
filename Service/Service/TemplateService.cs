@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
+using MongoDB.Bson;
 using Repository.Model;
 using Repository.ModelView;
 using Repository.Repository;
-using Repository.Tools;
 using Service.Interface;
 
 namespace Service.Service
@@ -21,7 +21,7 @@ namespace Service.Service
         public async Task<TemplateModel> AddOneTemplateItem(TemplateModelView TemplateModelView)
         {
             TemplateModel TemplateItem = _mapper.Map<TemplateModel>(TemplateModelView);
-            TemplateItem.id = IdGenerator.GenerateID();
+            TemplateItem.id = ObjectId.GenerateNewId().ToString();
             return await _repos.AddOneItem(TemplateItem);
         }
 
@@ -39,6 +39,22 @@ namespace Service.Service
         public async Task<IEnumerable<TemplateModel>> GetAllTemplateItem()
         {
             return await _repos.GetAllAsync();
+        }
+
+        public async Task<object> GetPagedTemplateItem(int pageIndex, int pageSize, bool isAsc, string sortField, string searchValue, string searchField)
+        {
+            int skip = (pageIndex - 1) * pageSize;
+            var item = await _repos.GetPagedAsync(skip, pageSize, isAsc, sortField, searchValue, searchField);
+            long totalCount = await _repos.CountAsync();
+            int totalPages = (int)Math.Ceiling((double)totalCount / pageSize);
+            var response = new
+            {
+                TotalCount = totalCount,
+                Page = pageIndex,
+                PageSize = pageSize,
+                Contact = item.ToList()
+            };
+            return response;
         }
 
         public async Task<TemplateModel> UpdateTemplateItem(string id, TemplateModelView TemplateModelView)

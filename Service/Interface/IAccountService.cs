@@ -1,5 +1,4 @@
-﻿
-using Repository.Model;
+﻿using Repository.Model;
 using Repository.ModelView;
 
 namespace Service.Interface

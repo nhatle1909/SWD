@@ -22,6 +22,8 @@ namespace SWD
             builder.Services.AddSingleton<IOTPService, OTPService>();
             builder.Services.AddScoped<ITemplateService, TemplateService>();
             builder.Services.AddScoped<IAccountService, AccountService>();
+            builder.Services.AddScoped<IMaterialService, MaterialService>();
+            builder.Services.AddScoped<IInteriorService, InteriorService>();
             builder.Services.AddScoped<IOTPService, OTPService>();
             builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 

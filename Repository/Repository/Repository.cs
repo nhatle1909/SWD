@@ -11,7 +11,7 @@ namespace Models.Repository
 
         internal readonly IMongoCollection<T> _collection;
         internal readonly string databasename = "EXE";
-        internal readonly string idFieldName = "TESTid";
+        internal readonly string idFieldName = "_id";
 
         public Repository(IMongoClient client)
         {
@@ -60,13 +60,14 @@ namespace Models.Repository
         }
 
 
-        public async Task<IEnumerable<T>> GetPagedAsync(int skip, int pageSize, bool isAsc, string sortField)
+        public async Task<IEnumerable<T>> GetPagedAsync(int skip, int pageSize, bool isAsc, string sortField, string searchValue, string searchField)
         {
+            var filterBuilder = Builders<T>.Filter.Regex(searchField, new BsonRegularExpression($".*{searchValue}.*", "i"));
             var sortDefinition = isAsc
                 ? Builders<T>.Sort.Ascending(sortField)
                 : Builders<T>.Sort.Descending(sortField);
             var result = await _collection
-                .Find(_ => true)
+                .Find(filterBuilder)
                 .Sort(sortDefinition)
                 .Skip(skip)
                 .Limit(pageSize)
