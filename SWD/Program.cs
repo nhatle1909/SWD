@@ -1,4 +1,3 @@
-
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.IdentityModel.Tokens;
@@ -20,14 +19,14 @@ namespace SWD
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
-            builder.Services.AddSingleton<IOTPService, OTPService>();
-            builder.Services.AddScoped<ITemplateService, TemplateService>();
+            builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
             builder.Services.AddScoped<IAccountService, AccountService>();
             builder.Services.AddScoped<IMaterialService, MaterialService>();
             builder.Services.AddScoped<IInteriorService, InteriorService>();
-            builder.Services.AddScoped<IOTPService, OTPService>();
-            builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+            builder.Services.AddScoped<IBlogService, BlogService>();
 
+            //Add HttpContext
+            builder.Services.AddHttpContextAccessor();
 
             //Add email sender
             builder.Services.AddOptions();
@@ -90,6 +89,7 @@ namespace SWD
                 loggingBuilder.AddConsole(); // Console Logging
             });
             builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+            .AddCookie()
             .AddJwtBearer(options =>
             {
                 options.TokenValidationParameters = new TokenValidationParameters
@@ -121,15 +121,13 @@ namespace SWD
                 app.UseSwaggerUI();
             }
             app.UseHttpsRedirection();
-
+            app.UseCors();
             app.UseStaticFiles();
-            app.UseHttpsRedirection();
+            app.UseAuthentication();
 
             app.UseAuthorization();
 
-            app.UseAuthentication();
             app.MapControllers();
-
             app.Run();
         }
     }

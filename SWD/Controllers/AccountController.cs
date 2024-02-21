@@ -36,8 +36,6 @@ namespace SWD.Controllers
             }
         }
 
-        //[Authorize]
-
         [HttpPost("Register-Staff-Account")]
         public async Task<IActionResult> RegisterAnAccountForStaff([FromBody] RegisterForStaffAccountView registerForStaff)
         {
@@ -56,12 +54,12 @@ namespace SWD.Controllers
             }
         }
 
-        [HttpPost("Login")]
-        public async Task<IActionResult> LoginAccountByUsernameAndPassword(LoginAccountView login)
+        [HttpPost("Login-By-Email-Password")]
+        public async Task<IActionResult> LoginAccountByEmailAndPassword(LoginAccountView login)
         {
             try
             {
-                string jwt = await _ser.LoginByUsernameAndPassword(login);
+                string jwt = await _ser.LoginByEmailAndPassword(login);
                 return Ok(jwt);
             }
             catch (Exception ex)
@@ -70,7 +68,7 @@ namespace SWD.Controllers
             }
         }
 
-        [HttpPatch("Update-Account")]
+        [HttpPatch("Update-An-Account")]
         public async Task<IActionResult> UpdateProfile([FromBody] UpdateAccountView update)
         {
             try
@@ -79,8 +77,26 @@ namespace SWD.Controllers
                 {
                     return BadRequest(ModelState);
                 }
-                string jwt = await _ser.UpdateAnAccount(update);
-                return Ok(jwt);
+                string status = await _ser.UpdateAnAccount(update);
+                return Ok(status);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpPatch("Update-Picture-Account")]
+        public async Task<IActionResult> UpdatePictureProfile([FromBody] UpdatePictureAccountView updatePicture)
+        {
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest(ModelState);
+                }
+                await _ser.UpdatePictureAccount(updatePicture);
+                return Ok();
             }
             catch (Exception ex)
             {
@@ -103,7 +119,7 @@ namespace SWD.Controllers
         }
 
         [HttpPost("Reset-Password")]
-        public async Task<IActionResult> ResetPasswordAccount([FromBody] ResetPasswordAccountView resetPasswordAccountView)
+        public async Task<IActionResult> ResetPasswordAccount([FromBody] ResetPasswordAccountView resetPassword)
         {
             try
             {
@@ -111,7 +127,7 @@ namespace SWD.Controllers
                 {
                     return BadRequest(ModelState);
                 }
-                string notice = await _ser.ResetPassword(resetPasswordAccountView);
+                string notice = await _ser.ResetPassword(resetPassword);
                 return Ok(notice);
             }
             catch (Exception ex)
@@ -120,7 +136,34 @@ namespace SWD.Controllers
             }
         }
 
-        //[Authorize]
+        [HttpPost("View-Profile")]
+        public async Task<IActionResult> ViewProfileAccount([FromBody] ViewProfileAccountView viewProfile)
+        {
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest(ModelState);
+                }
+                var profile = await _ser.ViewProfile(viewProfile);
+                if (profile.Item1 is null && profile.Item2 is null) return Ok("null");
+                var tuple = new
+                {
+                    Email = profile.Item1!.Email,
+                    PhoneNumber = profile.Item1.PhoneNumber,
+                    Address = profile.Item1.Address,
+                    Picture = profile.Item1.Picture,
+                    CreatedAt = profile.Item2!.CreatedAt,
+                    UpdatedAt = profile.Item2.UpdatedAt
+                };
+                return Ok(tuple);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
         [HttpPatch("Change-Password")]
         public async Task<IActionResult> ChangePasswordAccount([FromBody] ChangePasswordAccountView changePassword)
         {
@@ -168,6 +211,20 @@ namespace SWD.Controllers
                 }
                 string notice = await _ser.DeleteAnAccount(delete);
                 return Ok(notice);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpPost("Sign-Out")]
+        public async Task<IActionResult> SignOutAccount()
+        {
+            try
+            {
+                await _ser.SignOutAsync();
+                return Ok("Sign out successfully");
             }
             catch (Exception ex)
             {

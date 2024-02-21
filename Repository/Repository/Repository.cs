@@ -6,59 +6,49 @@ using System.Linq.Expressions;
 namespace Models.Repository
 {
     public class Repository<T> : IRepository<T> where T : class
-
     {
-
         internal readonly IMongoCollection<T> _collection;
-        internal readonly string databasename = "EXE";
-        internal readonly string idFieldName = "_id";
+        internal readonly string databasename = "SWD";
 
         public Repository(IMongoClient client)
         {
             var database = client.GetDatabase(databasename);
             _collection = database.GetCollection<T>(typeof(T).Name);
         }
-        public async Task<T> AddOneItem(T item)
+
+        public async Task AddOneItem(T item)
         {
             await _collection.InsertOneAsync(item);
-            return item;
-
         }
+
         public async Task<List<T>> AddManyItem(List<T> items)
         {
             await _collection.InsertManyAsync(items);
             return items;
         }
+
         public async Task<List<T>> GetAllAsync()
         {
             List<T> itemList = await _collection.Find(_ => true).ToListAsync();
             return itemList;
         }
+
         public async Task<IEnumerable<T>> GetByFilterAsync(Expression<Func<T, bool>> filterExpression)
         {
             return await _collection.Find(filterExpression).ToListAsync();
         }
-        public async Task<bool> RemoveItemByValue(string id)
+
+        public async Task RemoveItemByValue(string fieldName, string value)
         {
-            var filter = Builders<T>.Filter.Eq(idFieldName, id); // Assuming "ID" is the field in your MongoDB documents
-            var result = await _collection.DeleteOneAsync(filter);
-            return result.DeletedCount > 0;
-        }
-        public async Task<T> UpdateItemByValue(string id, T replacement)
-        {
-            var filter = Builders<T>.Filter.Eq(idFieldName, id);
-            var result = await _collection.ReplaceOneAsync(filter, replacement);
-            if (result.MatchedCount > 0)
-            {
-                T updatedItem = await _collection.Find(filter).FirstOrDefaultAsync();
-                return updatedItem;
-            }
-            else
-            {
-                throw new Exception("Failed to update item.");
-            }
+            var filter = Builders<T>.Filter.Eq(fieldName, value);
+            await _collection.DeleteOneAsync(filter);
         }
 
+        public async Task UpdateItemByValue(string fieldName, string value, T replacement)
+        {
+            var filter = Builders<T>.Filter.Eq(fieldName, value);
+            await _collection.ReplaceOneAsync(filter, replacement);
+        }
 
         public async Task<IEnumerable<T>> GetPagedAsync(int skip, int pageSize, bool isAsc, string sortField, string searchValue, string searchField)
         {
@@ -72,13 +62,14 @@ namespace Models.Repository
                 .Skip(skip)
                 .Limit(pageSize)
                 .ToListAsync();
-
             return result;
         }
+
         public async Task<long> CountAsync()
         {
             return await _collection.CountDocumentsAsync(new BsonDocument());
         }
+
         public async Task<IEnumerable<T>> GetFieldsByFilterAsync(string[] fieldNames, Expression<Func<T, bool>> filter)
         {
             //chỉ lấy những trường mình muốn lấy thay vì lấy tất cả

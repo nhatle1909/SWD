@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Http;
+using System.ComponentModel.DataAnnotations;
 
 namespace Repository.ModelView
 {
@@ -19,7 +20,7 @@ namespace Repository.ModelView
         public class RegisterForStaffAccountView
         {
             [Required]
-            public required string _id { get; set; }
+            public required string Jwt { get; set; }
 
             [EmailAddress]
             public required string Email { get; set; }
@@ -43,7 +44,7 @@ namespace Repository.ModelView
         public class UpdateAccountView
         {
             [Required]
-            public required string _id { get; set; }
+            public required string Jwt { get; set; }
 
             [EmailAddress]
             public required string Email { get; set; }
@@ -52,6 +53,13 @@ namespace Repository.ModelView
             public string? PhoneNumber { get; set; }
 
             public string? HomeAdress { get; set; }
+        }
+
+        public class UpdatePictureAccountView
+        {
+            [Required]
+            public required string Jwt { get; set; }
+            public required IFormFile Picture { get; set; }
         }
 
         public class ResetPasswordAccountView
@@ -69,7 +77,7 @@ namespace Repository.ModelView
         public class ChangePasswordAccountView
         {
             [Required]
-            public required string _id { get; set; }
+            public required string Jwt { get; set; }
 
             [StringLength(50, MinimumLength = 5)]
             public required string OldPassword { get; set; }
@@ -84,7 +92,7 @@ namespace Repository.ModelView
         public class BanAccountView
         {
             [Required]
-            public required string _id { get; set; }
+            public required string Jwt { get; set; }
 
             [EmailAddress]
             public required string Email { get; set; }
@@ -94,13 +102,19 @@ namespace Repository.ModelView
         public class DeleteAccountView
         {
             [Required]
-            public required string _id { get; set; }
+            public required string Jwt { get; set; }
 
             [EmailAddress]
             public required string Email { get; set; }
 
             [Required]
             public required string Comments { get; set; }
+        }
+
+        public class ViewProfileAccountView
+        {
+            [Required]
+            public required string Jwt { get; set; }
         }
     }
 }

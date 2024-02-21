@@ -1,58 +1,89 @@
 ﻿using AutoMapper;
 using MongoDB.Bson;
 using Repository.Model;
+using Repository.Models;
 using Repository.ModelView;
 using Repository.Repository;
+using Repository.Tools;
 using Service.Interface;
+using System.Linq;
+using static Repository.ModelView.InteriorView;
 
 namespace Service.Service
 {
     public class InteriorService : IInteriorService
     {
-        private readonly IRepository<Interior> _InteriorRepos;
-        private readonly IRepository<Material> _MaterialRepos;
-        private readonly IMapper _Mapper;
-        public InteriorService(IRepository<Interior> interiorRepos, IRepository<Material> materialRepos, IMapper mapper)
+        private readonly IRepository<AccountStatus> _repoAccountStatus;
+        private readonly IRepository<Interior> _repoInterior;
+        private readonly IRepository<Material> _repoMaterial;
+        private readonly IMapper _mapper;
+        public InteriorService(IRepository<AccountStatus> repoAccountStatus, IRepository<Interior> repoInterior, IRepository<Material> repoMaterial, IMapper mapper)
         {
-            _InteriorRepos = interiorRepos;
-            _MaterialRepos = materialRepos;
-            _Mapper = mapper;
+            _repoAccountStatus = repoAccountStatus;
+            _repoInterior = repoInterior;
+            _repoMaterial = repoMaterial;
+            _mapper = mapper;
         }
 
-        public async Task<Interior> AddOneInterior(InteriorView interiorView)
+        public async Task<string> AddOneInterior(AddInteriorView add)
         {
 
-            IEnumerable<Material> checkMaterial = await _MaterialRepos.GetByFilterAsync(a => a.MaterialId.Equals(interiorView.MaterialId));
-            if (!checkMaterial.Any())
+            string _id = Authentication.GetUserIdFromJwt(add.Jwt);
+            IEnumerable<AccountStatus> getUser = await _repoAccountStatus.GetFieldsByFilterAsync(["_id", "IsRole"],
+                            c => c.AccountId.Equals(_id));
+            var accountStatus = getUser.FirstOrDefault();
+            if (accountStatus is not null && accountStatus.IsRole == AccountStatus.Role.Staff)
             {
-                throw new Exception("Material does not exist");
+                if (add.Image.Length > 0)
+                {
+                    var interiorID = ObjectId.GenerateNewId().ToString();
+                    var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "InteriorPictures", $"{interiorID}_" + add.Image.FileName);
+                    using (var stream = System.IO.File.Create(path))
+                    {
+                        await add.Image.CopyToAsync(stream);
+                    }
+                    Interior interior = _mapper.Map<Interior>(add);
+                    interior.InteriorId = interiorID;
+                    interior.Image = "InteriorPictures" + $"{interiorID}_" + add.Image.FileName;
+                    await _repoInterior.AddOneItem(interior);
+                    return "Add Interior successfully";
+                }
+                return "Missing the Image";
             }
-            Interior item = _Mapper.Map<Interior>(interiorView);
-            item.InteriorId = ObjectId.GenerateNewId().ToString();
-
-            return await _InteriorRepos.AddOneItem(item);
+            return "Account is not existed or You have not permission to use this function";
         }
 
-        public async Task<bool> DeleteInterior(string id)
+        public async Task<string> DeleteInterior(DeleteInteriorView delete)
         {
-            IEnumerable<Interior> item = await _InteriorRepos.GetByFilterAsync(a => a.InteriorId.Equals(id));
-            if (!item.Any())
+            string _id = Authentication.GetUserIdFromJwt(delete.Jwt);
+            IEnumerable<AccountStatus> getUser = await _repoAccountStatus.GetFieldsByFilterAsync(["_id", "IsRole"],
+                            g => g.AccountId.Equals(_id));
+            var accountStatus = getUser.FirstOrDefault();
+            if (accountStatus is not null && accountStatus.IsRole == AccountStatus.Role.Staff)
             {
-                throw new Exception("Interior does not exist");
+                IEnumerable<Interior> getInterior = await _repoInterior.GetFieldsByFilterAsync([],
+                           g => g.MaterialId.Equals(delete.InteriorId));
+                var interior = getInterior.FirstOrDefault();
+                if (interior is not null)
+                {
+                    await _repoInterior.RemoveItemByValue("InteriorId", delete.InteriorId);
+                    return "Delete material successfully";
+                }
+                return "Interior is not existed";
             }
-            return await _InteriorRepos.RemoveItemByValue(id);
+            return "Account is not existed or You have not permission to use this function";
         }
 
         public async Task<IEnumerable<Interior>> GetAllInterior()
         {
-            return await _InteriorRepos.GetAllAsync();
+            return await _repoInterior.GetAllAsync();
         }
 
         public async Task<object> GetPagedInterior(int pageIndex, int pageSize, bool isAsc, string sortField, string searchValue, string searchField)
         {
             int skip = (pageIndex - 1) * pageSize;
-            var item = await _InteriorRepos.GetPagedAsync(skip, pageSize, isAsc, sortField, searchValue, searchField);
-            long totalCount = await _InteriorRepos.CountAsync();
+            var item = await _repoInterior.GetPagedAsync(skip, pageSize, isAsc, sortField, searchValue, searchField);
+            long totalCount = await _repoInterior.CountAsync();
             int totalPages = (int)Math.Ceiling((double)totalCount / pageSize);
             var response = new
             {
@@ -64,21 +95,57 @@ namespace Service.Service
             return response;
         }
 
-        public async Task<Interior> UpdateInterior(string id, InteriorView interiorView)
+        //public async Task<double> OptionalInteriorQuote(string[] arrMaterialId)
+        //{
+        //    IEnumerable<Material> materials = await _repoInterior.GetFieldsByFilterAsync(["Price"],
+        //                    c => arrMaterialId.Contains(c.MaterialId));
+        //    if (materials.Any())
+        //    {
+        //        double totalPrice = 0;
+        //        foreach (var material in materials)
+        //            totalPrice += material.Price;
+        //        return totalPrice;
+        //    }
+        //    return 0;
+        //}
+
+        public async Task<string> UpdateInterior(UpdateInteriorView update)
         {
-            IEnumerable<Interior> item = await _InteriorRepos.GetByFilterAsync(a => a.InteriorId.Equals(id));
-            if (!item.Any())
+            string _id = Authentication.GetUserIdFromJwt(update.Jwt);
+            IEnumerable<AccountStatus> getUser = await _repoAccountStatus.GetFieldsByFilterAsync(["_id", "IsRole"],
+                            g => g.AccountId.Equals(_id));
+            var accountStatus = getUser.FirstOrDefault();
+            if (accountStatus is not null && accountStatus.IsRole == AccountStatus.Role.Staff)
             {
-                throw new Exception("Interior does not exist");
+                IEnumerable<Interior> getInterior = await _repoInterior.GetFieldsByFilterAsync([],
+                           g => g.MaterialId.Equals(update.InteriorId));
+                var interior = getInterior.FirstOrDefault();
+                if (interior is not null)
+                {
+                    if (update.Image.Length > 0)
+                    {
+                        var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "InteriorPictures", $"{interior.InteriorId}_" + update.Image.FileName);
+                        using (var stream = System.IO.File.Create(path))
+                        {
+                            await update.Image.CopyToAsync(stream);
+                        }
+                        interior.InteriorName = update.InteriorName;
+                        interior.MaterialId = update.MaterialId;
+                        interior.Size = update.Size;
+                        interior.InteriorType = update.InteriorType;
+                        interior.Description = update.Description;
+                        interior.Image = "InteriorPictures" + $"{interior.InteriorId}_" + update.Image.FileName;
+                        interior.Quantity = update.Quantity;
+                        interior.Price = update.Price;
+                        interior.UpdatedAt = DateTime.Now;
+                        await _repoInterior.UpdateItemByValue("InteriorId", update.InteriorId, interior);
+                        return "Update interior successfully";
+                    }
+                    return "Missing the Image";
+                }
+                return "Interior is not existed";
             }
-            IEnumerable<Material> checkMaterial = await _MaterialRepos.GetByFilterAsync(a => a.MaterialId.Equals(interiorView.MaterialId));
-            if (!checkMaterial.Any())
-            {
-                throw new Exception("Material does not exist");
-            }
-            Interior newItem = _Mapper.Map<Interior>(item);
-            newItem.InteriorId = id;
-            return await _InteriorRepos.UpdateItemByValue(id, newItem);
+            return "Account is not existed or You have not permission to use this function";
         }
     }
 }

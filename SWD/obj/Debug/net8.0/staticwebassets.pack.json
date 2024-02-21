@@ -1,0 +1,25 @@
+{
+  "Files": [
+    {
+      "Id": "D:\\C#\\SWD392\\SWD\\SWD\\wwwroot\\AccountPictures\\user_default.png",
+      "PackagePath": "staticwebassets\\AccountPictures\\user_default.png"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.SWD.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.build.SWD.props",
+      "PackagePath": "build\\SWD.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildMultiTargeting.SWD.props",
+      "PackagePath": "buildMultiTargeting\\SWD.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildTransitive.SWD.props",
+      "PackagePath": "buildTransitive\\SWD.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

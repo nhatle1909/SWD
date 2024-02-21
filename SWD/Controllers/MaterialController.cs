@@ -2,6 +2,7 @@
 using Repository.Model;
 using Repository.ModelView;
 using Service.Interface;
+using static Repository.ModelView.MaterialView;
 namespace SWD.Controllers
 {
     [Route("api/[controller]")]
@@ -14,38 +15,39 @@ namespace SWD.Controllers
         {
             _Service = Service;
         }
-        [HttpPost("Add-One-Material")]
-        public async Task<IActionResult> AddOneMaterial(MaterialView item)
-        {
-            Material Item = await _Service.AddOneMaterial(item);
-            return Ok(Item);
-        }
+
         [HttpGet("Get-Paged-Material-List")]
         public async Task<object> GetPagedMaterialList(int pageIndex, int pageSize, bool isAsc, string searchValue, string searchField)
         {
             return await _Service.GetPagedMaterial(pageIndex, pageSize, isAsc, "MaterialName", searchValue, searchField);
         }
+
         [HttpGet("Get-All-Material")]
         public async Task<IActionResult> GetAllMaterial()
         {
             IEnumerable<Material> tempItemList = await _Service.GetAllMaterial();
             return Ok(tempItemList);
         }
-        [HttpPut("Update-Material")]
-        public async Task<IActionResult> UpdateMaterial(string id, MaterialView materialView)
+
+        [HttpPost("Add-One-Material")]
+        public async Task<IActionResult> AddOneMaterial(AddMaterialView add)
         {
-            Material tempItem = await _Service.UpdateMaterial(id, materialView);
-            return Ok(tempItem);
+            string status = await _Service.AddOneMaterial(add);
+            return Ok(status);
         }
-        [HttpDelete("Delete-Material")]
-        public async Task<IActionResult> DeleteMaterial(string id)
+
+        [HttpPut("Update-Material")]
+        public async Task<IActionResult> UpdateMaterial(UpdateMaterialView update)
         {
-            bool isDeleted = await _Service.DeleteMaterial(id);
-            if (isDeleted)
-            {
-                return Ok();
-            }
-            return BadRequest();
+            string status = await _Service.UpdateMaterial(update);
+            return Ok(status);
+        }
+
+        [HttpDelete("Delete-Material")]
+        public async Task<IActionResult> DeleteMaterial(DeleteMaterialView delete)
+        {
+            string status = await _Service.DeleteMaterial(delete);
+            return Ok(status);
         }
     }
 }

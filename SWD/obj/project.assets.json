@@ -535,15 +535,15 @@
           }
         }
       },
-      "Newtonsoft.Json/13.0.1": {
+      "Newtonsoft.Json/13.0.3": {
         "type": "package",
         "compile": {
-          "lib/netstandard2.0/Newtonsoft.Json.dll": {
+          "lib/net6.0/Newtonsoft.Json.dll": {
             "related": ".xml"
           }
         },
         "runtime": {
-          "lib/netstandard2.0/Newtonsoft.Json.dll": {
+          "lib/net6.0/Newtonsoft.Json.dll": {
             "related": ".xml"
           }
         }
@@ -1087,6 +1087,7 @@
         "framework": ".NETCoreApp,Version=v8.0",
         "dependencies": {
           "MailKit": "4.3.0",
+          "Newtonsoft.Json": "13.0.3",
           "Repository": "1.0.0",
           "Twilio": "6.16.1"
         },
@@ -2191,14 +2192,15 @@
         "runtimes/win/native/mongocrypt.dll"
       ]
     },
-    "Newtonsoft.Json/13.0.1": {
-      "sha512": "ppPFpBcvxdsfUonNcvITKqLl3bqxWbDCZIzDWHzjpdAHRFfZe0Dw9HmA0+za13IdyrgJwpkDTDA9fHaxOrt20A==",
+    "Newtonsoft.Json/13.0.3": {
+      "sha512": "HrC5BXdl00IP9zeV+0Z848QWPAoCr9P3bDEZguI+gkLcBKAOxix/tLEAAHC+UvDNPv4a2d18lOReHMOagPa+zQ==",
       "type": "package",
-      "path": "newtonsoft.json/13.0.1",
+      "path": "newtonsoft.json/13.0.3",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "LICENSE.md",
+        "README.md",
         "lib/net20/Newtonsoft.Json.dll",
         "lib/net20/Newtonsoft.Json.xml",
         "lib/net35/Newtonsoft.Json.dll",
@@ -2207,13 +2209,15 @@
         "lib/net40/Newtonsoft.Json.xml",
         "lib/net45/Newtonsoft.Json.dll",
         "lib/net45/Newtonsoft.Json.xml",
+        "lib/net6.0/Newtonsoft.Json.dll",
+        "lib/net6.0/Newtonsoft.Json.xml",
         "lib/netstandard1.0/Newtonsoft.Json.dll",
         "lib/netstandard1.0/Newtonsoft.Json.xml",
         "lib/netstandard1.3/Newtonsoft.Json.dll",
         "lib/netstandard1.3/Newtonsoft.Json.xml",
         "lib/netstandard2.0/Newtonsoft.Json.dll",
         "lib/netstandard2.0/Newtonsoft.Json.xml",
-        "newtonsoft.json.13.0.1.nupkg.sha512",
+        "newtonsoft.json.13.0.3.nupkg.sha512",
         "newtonsoft.json.nuspec",
         "packageIcon.png"
       ]
@@ -3751,23 +3755,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\ADMIN\\.nuget\\packages\\": {},
+    "C:\\Users\\MSI BH\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\DevTools\\repos\\SWD\\SWD\\SWD.csproj",
+      "projectUniqueName": "D:\\C#\\SWD392\\SWD\\SWD\\SWD.csproj",
       "projectName": "SWD",
-      "projectPath": "D:\\DevTools\\repos\\SWD\\SWD\\SWD.csproj",
-      "packagesPath": "C:\\Users\\ADMIN\\.nuget\\packages\\",
-      "outputPath": "D:\\DevTools\\repos\\SWD\\SWD\\obj\\",
+      "projectPath": "D:\\C#\\SWD392\\SWD\\SWD\\SWD.csproj",
+      "packagesPath": "C:\\Users\\MSI BH\\.nuget\\packages\\",
+      "outputPath": "D:\\C#\\SWD392\\SWD\\SWD\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\ADMIN\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\MSI BH\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -3783,11 +3787,11 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "D:\\DevTools\\repos\\SWD\\Repository\\Repository.csproj": {
-              "projectPath": "D:\\DevTools\\repos\\SWD\\Repository\\Repository.csproj"
+            "D:\\C#\\SWD392\\SWD\\Repository\\Repository.csproj": {
+              "projectPath": "D:\\C#\\SWD392\\SWD\\Repository\\Repository.csproj"
             },
-            "D:\\DevTools\\repos\\SWD\\Service\\Service.csproj": {
-              "projectPath": "D:\\DevTools\\repos\\SWD\\Service\\Service.csproj"
+            "D:\\C#\\SWD392\\SWD\\Service\\Service.csproj": {
+              "projectPath": "D:\\C#\\SWD392\\SWD\\Service\\Service.csproj"
             }
           }
         }

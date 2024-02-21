@@ -3247,23 +3247,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\ADMIN\\.nuget\\packages\\": {},
+    "C:\\Users\\MSI BH\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\DevTools\\repos\\SWD\\Repository\\Repository.csproj",
+      "projectUniqueName": "D:\\C#\\SWD392\\SWD\\Repository\\Repository.csproj",
       "projectName": "Repository",
-      "projectPath": "D:\\DevTools\\repos\\SWD\\Repository\\Repository.csproj",
-      "packagesPath": "C:\\Users\\ADMIN\\.nuget\\packages\\",
-      "outputPath": "D:\\DevTools\\repos\\SWD\\Repository\\obj\\",
+      "projectPath": "D:\\C#\\SWD392\\SWD\\Repository\\Repository.csproj",
+      "packagesPath": "C:\\Users\\MSI BH\\.nuget\\packages\\",
+      "outputPath": "D:\\C#\\SWD392\\SWD\\Repository\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\ADMIN\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\MSI BH\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],

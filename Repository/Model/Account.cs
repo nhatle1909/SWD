@@ -1,4 +1,5 @@
-﻿using MongoDB.Bson;
+﻿using Microsoft.AspNetCore.Http;
+using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 using System.ComponentModel.DataAnnotations;
 
@@ -6,14 +7,11 @@ namespace Repository.Model
 {
     public class Account
     {
-        [BsonId][BsonRepresentation(BsonType.String)] public required string AccountId { get; set; }
+        [BsonId][BsonRepresentation(BsonType.ObjectId)] public required string AccountId { get; set; }
         [BsonElement] public required string Password { get; set; }
-        [BsonElement][EmailAddress(ErrorMessage = "Invalid Mail")] public required string Email { get; set; }
-        [BsonElement][Phone(ErrorMessage = "Invalid Phone Number")] public string? PhoneNumber { get; set; }
+        [BsonElement][EmailAddress] public required string Email { get; set; }
+        [BsonElement][Phone] public string? PhoneNumber { get; set; }
         [BsonElement] public string? Address { get; set; }
-        public enum Role
-        {
-            Guest = 1, Customer = 2, Staff = 3, Admin = 4
-        }
+        [BsonElement] public required string Picture { get; set; }
     }
 }
