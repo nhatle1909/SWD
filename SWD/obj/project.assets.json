@@ -1063,7 +1063,7 @@
           "lib/net7.0/ZstdSharp.dll": {}
         }
       },
-      "Repository/1.0.0": {
+      "Repositories/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v8.0",
         "dependencies": {
@@ -1076,26 +1076,26 @@
           "Twilio": "6.16.1"
         },
         "compile": {
-          "bin/placeholder/Repository.dll": {}
+          "bin/placeholder/Repositories.dll": {}
         },
         "runtime": {
-          "bin/placeholder/Repository.dll": {}
+          "bin/placeholder/Repositories.dll": {}
         }
       },
-      "Service/1.0.0": {
+      "Services/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v8.0",
         "dependencies": {
           "MailKit": "4.3.0",
           "Newtonsoft.Json": "13.0.3",
-          "Repository": "1.0.0",
+          "Repositories": "1.0.0",
           "Twilio": "6.16.1"
         },
         "compile": {
-          "bin/placeholder/Service.dll": {}
+          "bin/placeholder/Services.dll": {}
         },
         "runtime": {
-          "bin/placeholder/Service.dll": {}
+          "bin/placeholder/Services.dll": {}
         }
       }
     }
@@ -3728,15 +3728,15 @@
         "zstdsharp.port.nuspec"
       ]
     },
-    "Repository/1.0.0": {
+    "Repositories/1.0.0": {
       "type": "project",
-      "path": "../Repository/Repository.csproj",
-      "msbuildProject": "../Repository/Repository.csproj"
+      "path": "../Repositories/Repositories.csproj",
+      "msbuildProject": "../Repositories/Repositories.csproj"
     },
-    "Service/1.0.0": {
+    "Services/1.0.0": {
       "type": "project",
-      "path": "../Service/Service.csproj",
-      "msbuildProject": "../Service/Service.csproj"
+      "path": "../Services/Services.csproj",
+      "msbuildProject": "../Services/Services.csproj"
     }
   },
   "projectFileDependencyGroups": {
@@ -3748,8 +3748,7 @@
       "Microsoft.AspNetCore.OpenApi >= 7.0.10",
       "Microsoft.Extensions.Logging >= 8.0.0",
       "MongoDB.Driver >= 2.23.1",
-      "Repository >= 1.0.0",
-      "Service >= 1.0.0",
+      "Services >= 1.0.0",
       "Swashbuckle.AspNetCore >= 6.5.0",
       "Twilio >= 6.16.1"
     ]
@@ -3787,11 +3786,8 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "D:\\C#\\SWD392\\SWD\\Repository\\Repository.csproj": {
-              "projectPath": "D:\\C#\\SWD392\\SWD\\Repository\\Repository.csproj"
-            },
-            "D:\\C#\\SWD392\\SWD\\Service\\Service.csproj": {
-              "projectPath": "D:\\C#\\SWD392\\SWD\\Service\\Service.csproj"
+            "D:\\C#\\SWD392\\SWD\\Services\\Services.csproj": {
+              "projectPath": "D:\\C#\\SWD392\\SWD\\Services\\Services.csproj"
             }
           }
         }

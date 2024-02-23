@@ -4,6 +4,7 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Models.Repository;
 using MongoDB.Driver;
+using Repositories.Repository;
 using Repository.Repository;
 using Repository.Tools;
 using Service.Interface;
@@ -24,6 +25,7 @@ namespace SWD
             builder.Services.AddScoped<IMaterialService, MaterialService>();
             builder.Services.AddScoped<IInteriorService, InteriorService>();
             builder.Services.AddScoped<IBlogService, BlogService>();
+            builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             //Add HttpContext
             builder.Services.AddHttpContextAccessor();

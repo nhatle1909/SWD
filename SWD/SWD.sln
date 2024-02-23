@@ -5,9 +5,9 @@ VisualStudioVersion = 17.7.34009.444
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SWD", "SWD.csproj", "{4FFA5C9E-83D6-4107-8BA6-149B17BC7A6A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Repository", "..\Repository\Repository.csproj", "{77BD7764-E08F-4AD6-9564-CC3E7E75D5AD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Repositories", "..\Repositories\Repositories.csproj", "{77BD7764-E08F-4AD6-9564-CC3E7E75D5AD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Service", "..\Service\Service.csproj", "{3519327F-BFE9-4E2F-9BD5-AE5953361473}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Services", "..\Services\Services.csproj", "{3519327F-BFE9-4E2F-9BD5-AE5953361473}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

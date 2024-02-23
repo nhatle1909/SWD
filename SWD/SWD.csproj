@@ -19,12 +19,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Repository\Repository.csproj" />
-    <ProjectReference Include="..\Service\Service.csproj" />
+    <Folder Include="wwwroot\InteriorPictures\" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\InteriorPictures\" />
+    <ProjectReference Include="..\Services\Services.csproj" />
   </ItemGroup>
 
 </Project>

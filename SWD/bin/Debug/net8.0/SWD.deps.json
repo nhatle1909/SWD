@@ -15,8 +15,7 @@
           "Microsoft.AspNetCore.OpenApi": "7.0.10",
           "Microsoft.Extensions.Logging": "8.0.0",
           "MongoDB.Driver": "2.23.1",
-          "Repository": "1.0.0",
-          "Service": "1.0.0",
+          "Services": "1.0.0",
           "Swashbuckle.AspNetCore": "6.5.0",
           "Twilio": "6.16.1"
         },
@@ -552,7 +551,7 @@
           }
         }
       },
-      "Repository/1.0.0": {
+      "Repositories/1.0.0": {
         "dependencies": {
           "AutoMapper": "12.0.1",
           "AutoMapper.Extensions.Microsoft.DependencyInjection": "12.0.1",
@@ -563,18 +562,18 @@
           "Twilio": "6.16.1"
         },
         "runtime": {
-          "Repository.dll": {}
+          "Repositories.dll": {}
         }
       },
-      "Service/1.0.0": {
+      "Services/1.0.0": {
         "dependencies": {
           "MailKit": "4.3.0",
           "Newtonsoft.Json": "13.0.3",
-          "Repository": "1.0.0",
+          "Repositories": "1.0.0",
           "Twilio": "6.16.1"
         },
         "runtime": {
-          "Service.dll": {}
+          "Services.dll": {}
         }
       }
     }
@@ -1047,12 +1046,12 @@
       "path": "zstdsharp.port/0.7.3",
       "hashPath": "zstdsharp.port.0.7.3.nupkg.sha512"
     },
-    "Repository/1.0.0": {
+    "Repositories/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
     },
-    "Service/1.0.0": {
+    "Services/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
