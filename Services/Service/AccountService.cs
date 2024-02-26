@@ -6,15 +6,18 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using MongoDB.Bson;
-using Repository.Model;
-using Repository.Models;
-using Repository.Repository;
-using Repository.Tools;
-using Service.Interface;
+using Repositories.Model;
+using Repositories.Models;
+using Repositories.Repository;
+using Services.Tool;
+using Services.Interface;
+using System.IO;
+using System.Net.NetworkInformation;
 using System.Web;
-using static Repository.ModelView.AccountView;
+using static Repositories.ModelView.AccountView;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
-namespace Service.Service
+namespace Services.Service
 {
 
     public class AccountService : IAccountService
@@ -41,12 +44,23 @@ namespace Service.Service
                             c => c.Email.Equals(register.Email.Trim()));
             if (!check.Any())
             {
+                //Encode picture
+                byte[] fileBytes;
+                var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "AccountPictures", "user_default.png");
+                using (var ms = new MemoryStream())
+                {
+                    using (var defaultUserImg = new FileStream(path, FileMode.Open))
+                    {
+                        await defaultUserImg.CopyToAsync(ms);
+                        fileBytes = ms.ToArray();
+                    }
+                }
                 string id = ObjectId.GenerateNewId().ToString();
                 Account account = _mapper.Map<Account>(register);
                 account.AccountId = id;
                 account.Email = register.Email.Trim();
-                account.Password = IdGenerator.HashPassword(register.Password);
-                account.Picture = "/AccountPictures/user_default.png";
+                account.Password = SomeTool.HashPassword(register.Password);
+                account.Picture = fileBytes;
                 await _unit.AccountRepo.AddOneItem(account);
 
                 AccountStatus accountStatus = _mapper.Map<AccountStatus>(register);
@@ -61,7 +75,7 @@ namespace Service.Service
 
         public async Task<string> AddAnAccountForStaff(RegisterForStaffAccountView registerForStaff)
         {
-            string _id = Authentication.GetUserIdFromJwt(registerForStaff.Jwt);
+            string _id = AuthenticationJwtTool.GetUserIdFromJwt(registerForStaff.Jwt);
             IEnumerable<AccountStatus> check = await _unit.AccountStatusRepo.GetFieldsByFilterAsync(["_id", "IsRole"],
                             c => c.AccountId.Equals(_id));
             if (check.Any())
@@ -73,12 +87,23 @@ namespace Service.Service
                             c => c.Email.Equals(registerForStaff.Email.Trim()));
                     if (!checkEmail.Any())
                     {
+                        //Encode picture
+                        byte[] fileBytes;
+                        var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "AccountPictures", "user_default.png");
+                        using (var ms = new MemoryStream())
+                        {
+                            using (var defaultUserImg = new FileStream(path, FileMode.Open))
+                            {
+                                await defaultUserImg.CopyToAsync(ms);
+                                fileBytes = ms.ToArray();
+                            }
+                        }
                         string id = ObjectId.GenerateNewId().ToString();
                         Account account = _mapper.Map<Account>(registerForStaff);
                         account.AccountId = id;
                         account.Email = registerForStaff.Email.Trim();
-                        account.Password = IdGenerator.HashPassword(registerForStaff.Password);
-                        account.Picture = "/AccountPictures/user_default.png"; ;
+                        account.Password = SomeTool.HashPassword(registerForStaff.Password);
+                        account.Picture = fileBytes;
                         await _unit.AccountRepo.AddOneItem(account);
 
                         AccountStatus accountStatus = _mapper.Map<AccountStatus>(registerForStaff);
@@ -101,7 +126,7 @@ namespace Service.Service
         {
             IEnumerable<Account> check = await _unit.AccountRepo.GetFieldsByFilterAsync(["_id"],
                 u => u.Email.Equals(login.Email.Trim()) &&
-                     u.Password.Equals(IdGenerator.HashPassword(login.Password)));
+                     u.Password.Equals(SomeTool.HashPassword(login.Password)));
             if (check.Any())
             {
                 Account get_id = check.First();
@@ -110,7 +135,7 @@ namespace Service.Service
                 AccountStatus accountStatus = get_isBanned.First();
                 if (!accountStatus.IsBanned)
                 {
-                    Authentication authenticationJwtBearer = new(_configuration);
+                    AuthenticationJwtTool authenticationJwtBearer = new(_configuration);
                     string jwt = authenticationJwtBearer.GenerateJwtToken(accountStatus.AccountId, 1);
                     return jwt;
                 }
@@ -120,7 +145,7 @@ namespace Service.Service
         }
         public async Task<string> UpdateAnAccount(UpdateAccountView update)
         {
-            string _id = Authentication.GetUserIdFromJwt(update.Jwt);
+            string _id = AuthenticationJwtTool.GetUserIdFromJwt(update.Jwt);
             IEnumerable<Account> check = await _unit.AccountRepo.GetFieldsByFilterAsync([],
                             c => c.AccountId.Equals(_id));
             IEnumerable<AccountStatus> check_status = await _unit.AccountStatusRepo.GetFieldsByFilterAsync([],
@@ -171,12 +196,12 @@ namespace Service.Service
             if (check_email.Any())
             {
                 Account account = check_email.First();
-                account.Password = IdGenerator.HashPassword(resetPassword.Password);
+                account.Password = SomeTool.HashPassword(resetPassword.Password);
                 await _unit.AccountRepo.UpdateItemByValue("Email", resetPassword.Email, account);
 
                 AccountStatus accountStatus = check_isAuthen.First();
                 accountStatus.IsAuthenticationEmail = true;
-                accountStatus.UpdatedAt = DateTime.Now;
+                accountStatus.UpdatedAt = System.DateTime.Now;
                 await _unit.AccountStatusRepo.UpdateItemByValue("Email", resetPassword.Email, accountStatus);
                 return "Reset password successfully";
             }
@@ -185,20 +210,20 @@ namespace Service.Service
 
         public async Task<string> ChangePassword(ChangePasswordAccountView changePassword)
         {
-            string _id = Authentication.GetUserIdFromJwt(changePassword.Jwt);
+            string _id = AuthenticationJwtTool.GetUserIdFromJwt(changePassword.Jwt);
             IEnumerable<Account> check = await _unit.AccountRepo.GetFieldsByFilterAsync([],
                             c => c.AccountId.Equals(_id) &&
-                                 c.Password.Equals(IdGenerator.HashPassword(changePassword.OldPassword)));
+                                 c.Password.Equals(SomeTool.HashPassword(changePassword.OldPassword)));
             Account account = check.FirstOrDefault()!;
             if (account != null)
             {
                 IEnumerable<AccountStatus> check_status = await _unit.AccountStatusRepo.GetFieldsByFilterAsync([],
                             c => c.AccountId.Equals(_id));
                 AccountStatus accountStatus = check_status.First();
-                accountStatus.UpdatedAt = DateTime.Now;
+                accountStatus.UpdatedAt = System.DateTime.Now;
                 await _unit.AccountStatusRepo.UpdateItemByValue("AccountId", accountStatus.AccountId, accountStatus);
 
-                account.Password = IdGenerator.HashPassword(changePassword.Password);
+                account.Password = SomeTool.HashPassword(changePassword.Password);
                 await _unit.AccountRepo.UpdateItemByValue("AccountId", account.AccountId, account);
                 return "Change password successfully";
             }
@@ -207,7 +232,7 @@ namespace Service.Service
 
         public async Task<string> BanAnAccount(BanAccountView ban)
         {
-            string _id = Authentication.GetUserIdFromJwt(ban.Jwt);
+            string _id = AuthenticationJwtTool.GetUserIdFromJwt(ban.Jwt);
             IEnumerable<AccountStatus> check = await _unit.AccountStatusRepo.GetFieldsByFilterAsync(["_id", "IsRole"],
                             c => c.AccountId.Equals(_id));
             if (check.Any())
@@ -234,7 +259,7 @@ namespace Service.Service
 
         public async Task<string> DeleteAnAccount(DeleteAccountView delete)
         {
-            string _id = Authentication.GetUserIdFromJwt(delete.Jwt);
+            string _id = AuthenticationJwtTool.GetUserIdFromJwt(delete.Jwt);
             IEnumerable<AccountStatus> check = await _unit.AccountStatusRepo.GetFieldsByFilterAsync(["_id", "IsRole"],
                             c => c.AccountId.Equals(_id));
             if (check.Any())
@@ -266,25 +291,34 @@ namespace Service.Service
             await _httpContextAccessor.HttpContext!.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
         }
 
-        public async Task<(Account?, AccountStatus?)> ViewProfile(ViewProfileAccountView viewProfile)
+        public async Task<object> ViewProfile(string email)
         {
-            string _id = Authentication.GetUserIdFromJwt(viewProfile.Jwt);
             IEnumerable<Account> getUser = await _unit.AccountRepo.GetFieldsByFilterAsync([],
-                            g => g.AccountId.Equals(_id));
+                            g => g.Email.Equals(email));
             IEnumerable<AccountStatus> getUserStatus = await _unit.AccountStatusRepo.GetFieldsByFilterAsync([],
-                            g => g.AccountId.Equals(_id));
+                            g => g.Email.Equals(email));
             if (getUser.Any() && getUserStatus.Any())
             {
                 var getProfileAccount = getUser.First();
+                getProfileAccount.Picture = SomeTool.GetImage(Convert.ToBase64String(getProfileAccount.Picture))!;
                 var getProfileStatus = getUserStatus.First();
-                return (getProfileAccount, getProfileStatus);
+                var reponse = new
+                {
+                    Email = getProfileAccount.Email,
+                    PhoneNumber = getProfileAccount.PhoneNumber,
+                    Address = getProfileAccount.Address,
+                    Picture = getProfileAccount.Picture,
+                    CreatedAt = getProfileStatus.CreatedAt,
+                    UpdatedAt = getProfileStatus.UpdatedAt
+                };
+                return reponse;
             }
-            return (null, null);
+            return "null";
         }
 
         public async Task UpdatePictureAccount(UpdatePictureAccountView updatePicture)
         {
-            string _id = Authentication.GetUserIdFromJwt(updatePicture.Jwt);
+            string _id = AuthenticationJwtTool.GetUserIdFromJwt(updatePicture.Jwt);
             IEnumerable<Account> getUser = await _unit.AccountRepo.GetFieldsByFilterAsync([],
                             g => g.AccountId.Equals(_id));
             if (getUser.Any())
@@ -292,20 +326,80 @@ namespace Service.Service
                 var getFieldsUser = getUser.First();
                 if (updatePicture.Picture.Length > 0)
                 {
-                    var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "AccountPictures", $"{getFieldsUser.AccountId}_" + updatePicture.Picture.FileName);
-                    using (var stream = System.IO.File.Create(path))
+                    //Encode picture
+                    byte[] fileBytes;
+                    using (var ms = new MemoryStream())
                     {
-                        await updatePicture.Picture.CopyToAsync(stream);
+                        await updatePicture.Picture.CopyToAsync(ms);
+                        fileBytes = ms.ToArray();
                     }
                     IEnumerable<AccountStatus> getUserStatus = await _unit.AccountStatusRepo.GetFieldsByFilterAsync([],
                             c => c.AccountId.Equals(_id));
                     var accountStatus = getUserStatus.First();
-                    getFieldsUser.Picture = "/AccountPictures/" + $"{getFieldsUser.AccountId}_" + updatePicture.Picture.FileName;
-                    accountStatus.UpdatedAt = DateTime.Now;
+                    getFieldsUser.Picture = fileBytes;
+                    accountStatus.UpdatedAt = System.DateTime.Now;
                     await _unit.AccountRepo.UpdateItemByValue("AccountId", getFieldsUser.AccountId, getFieldsUser);
                     await _unit.AccountStatusRepo.UpdateItemByValue("AccountId", getFieldsUser.AccountId, accountStatus);
                 }
             }
+        }
+
+        public async Task<object> GetPagingAccount(PagingAccountView paging)
+        {
+            const int pageSize = 5;
+            const string sortField = "Email";
+            List<string> searchFields = ["Email", "PhoneNumber"];
+            List<string> returnFields = ["Email", "PhoneNumber"];
+
+            string _id = AuthenticationJwtTool.GetUserIdFromJwt(paging.Jwt);
+            var getUserStatus = (await _unit.AccountStatusRepo.GetFieldsByFilterAsync(["_id", "IsRole"],
+                            g => g.AccountId.Equals(_id))).FirstOrDefault();
+            if (getUserStatus != null)
+            {
+                if (getUserStatus.IsRole == AccountStatus.Role.Admin)
+                {
+                    int skip = (paging.PageIndex - 1) * pageSize;
+                    var items = (await _unit.AccountRepo.PagingAsync(skip, pageSize, paging.IsAsc, sortField, paging.SearchValue, searchFields, returnFields)).ToList();
+                    return items;
+                }
+                return "You have not permission to use this function";
+            }
+            return "Account is not existed";
+        }
+
+        public async Task<object> GetAccountDetail(DetailAccountView detail)
+        {
+            string _id = AuthenticationJwtTool.GetUserIdFromJwt(detail.Jwt);
+            var getUserAccount = await _unit.AccountRepo.GetFieldsByFilterAsync([],
+                             g => g.AccountId.Equals(_id) || 
+                                  g.Email.Equals(detail.Email));
+
+            var getUserStatus = await _unit.AccountStatusRepo.GetFieldsByFilterAsync([],
+                            g => g.AccountId.Equals(_id) ||
+                                 g.Email.Equals(detail.Email));
+            var getFirstUserStatus = getUserStatus.FirstOrDefault();
+            if (getFirstUserStatus != null)
+            {
+                if (getFirstUserStatus.IsRole == AccountStatus.Role.Admin)
+                {
+                    var getSecondUser = getUserAccount.ElementAt(1);
+                    var getSecondStatus = getUserStatus.ElementAt(1);
+                    var response = new
+                    {
+                        Email = getSecondUser.Email,
+                        Phone = getSecondUser.PhoneNumber,
+                        Address = getSecondUser.Address,
+                        Picture = getSecondUser.Picture,
+                        IsAuthenticationEmail = getSecondStatus.IsAuthenticationEmail,
+                        Role = getSecondStatus.IsRole,
+                        IsBanned = getSecondStatus.IsBanned,
+                        Comments = getSecondStatus.Comments
+                    };
+                    return response;
+                }
+                return "You have not permission to use this function";
+            }
+            return "Account is not existed";
         }
     }
 }

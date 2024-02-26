@@ -1,17 +1,19 @@
-﻿using System;
+﻿using Repositories.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static Repository.ModelView.AccountView;
-using static Repository.ModelView.BlogView;
+using static Repositories.ModelView.AccountView;
+using static Repositories.ModelView.BlogView;
 
-namespace Service.Interface
+namespace Services.Interface
 {
     public interface IBlogService
     {
         Task<string> AddBlog(AddBlogView add);
         Task<string> UpdateBlog(UpdateBlogView update);
         Task<string> RemoveBlog(RemoveBlogView remove);
+        Task<object> GetPagingBlog(int pageIndex, bool isAsc, string? searchValue);
     }
 }

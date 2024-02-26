@@ -1,13 +1,13 @@
 ﻿using MongoDB.Driver;
-using Repository.Model;
-using Repository.Models;
+using Repositories.Model;
+using Repositories.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Repository.Repository
+namespace Repositories.Repository
 {
     public interface IUnitOfWork
     {

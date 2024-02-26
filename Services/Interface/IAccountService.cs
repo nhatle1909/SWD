@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Http;
-using Repository.Model;
-using Repository.Models;
-using static Repository.ModelView.AccountView;
+using Repositories.Model;
+using Repositories.Models;
+using static Repositories.ModelView.AccountView;
 
-namespace Service.Interface
+namespace Services.Interface
 {
     public interface IAccountService
     {
@@ -17,7 +17,9 @@ namespace Service.Interface
         Task<string> ChangePassword(ChangePasswordAccountView changePassword);
         Task<string> BanAnAccount(BanAccountView ban);
         Task<string> DeleteAnAccount(DeleteAccountView delete);
-        Task<(Account?, AccountStatus?)> ViewProfile(ViewProfileAccountView viewProfile);
+        Task<object> ViewProfile(string email);
+        Task<object> GetPagingAccount(PagingAccountView paging);
+        Task<object> GetAccountDetail(DetailAccountView detail);
         Task SignOutAsync();
     }
 }

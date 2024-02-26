@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Repository.Model;
-using Repository.ModelView;
-using Service.Interface;
-using static Repository.ModelView.InteriorView;
+using Repositories.Model;
+using Repositories.ModelView;
+using Services.Interface;
+using static Repositories.ModelView.InteriorView;
 
 namespace SWD.Controllers
 {
@@ -31,23 +31,24 @@ namespace SWD.Controllers
         }
 
         [HttpDelete("Delete-Interior")]
-        public async Task<IActionResult> DeleteInterior(DeleteInteriorView delete)
+        public async Task<IActionResult> DeleteInterior([FromBody] DeleteInteriorView delete)
         {
             var item = await _interiorService.DeleteInterior(delete);
             return Ok(item);
         }
 
-        [HttpGet("Get-Paged-Interior-List")]
-        public async Task<object> GetPagedInteriorList(int pageIndex, int pageSize, bool isAsc, string sortField, string searchValue, string searchField)
+        [HttpGet("Get-Paging-Interior-List")]
+        public async Task<IActionResult> GetPagingInteriorList(int pageIndex, bool isAsc, string? searchValue)
         {
-            return await _interiorService.GetPagedInterior(pageIndex, pageSize, isAsc, sortField, searchValue, searchField);
+            var result = await _interiorService.GetPagingInterior(pageIndex, isAsc, searchValue);
+            return Ok(result);
         }
 
-        [HttpGet("Get-All-Interior")]
-        public async Task<IActionResult> GetAllInterior()
+        [HttpGet("Get-Detail-Interior")]
+        public async Task<IActionResult> GetDetailInterior(string interiorId)
         {
-            IEnumerable<Interior> tempItemList = await _interiorService.GetAllInterior();
-            return Ok(tempItemList);
+            var result = await _interiorService.GetInteriorDetail(interiorId);
+            return Ok(result);
         }
 
         //[HttpPost("Optional-Interior-Quote")]

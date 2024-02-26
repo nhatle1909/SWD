@@ -4,7 +4,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using MimeKit;
 
-namespace Repository.Tools
+namespace Services.Tool
 {
     public class MailSettings
     {

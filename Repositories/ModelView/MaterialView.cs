@@ -1,8 +1,8 @@
 ﻿using MongoDB.Bson.Serialization.Attributes;
 using System.ComponentModel.DataAnnotations;
-using static Repository.Model.Material;
+using static Repositories.Model.Material;
 
-namespace Repository.ModelView
+namespace Repositories.ModelView
 {
     public class MaterialView
     {
@@ -33,6 +33,14 @@ namespace Repository.ModelView
         {
             public required string Jwt { get; set; }
             public required string MaterialId { get; set; }
+        }
+
+        public class PagingMaterialView
+        {
+            public required string Jwt { get; set; }
+            public int PageIndex { get; set; }
+            public bool IsAsc { get; set; }
+            public string? SearchValue { get; set; }
         }
     }
 }

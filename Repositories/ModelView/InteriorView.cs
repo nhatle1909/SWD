@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Http;
 using MongoDB.Bson.Serialization.Attributes;
 using System.ComponentModel.DataAnnotations;
-using static Repository.Model.Interior;
+using static Repositories.Model.Interior;
 
-namespace Repository.ModelView
+namespace Repositories.ModelView
 {
     public class InteriorView
     {
@@ -45,5 +45,6 @@ namespace Repository.ModelView
             public required string Jwt { get; set; }
             public required string InteriorId { get; set; }
         }
+
     }
 }

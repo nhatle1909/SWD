@@ -1,8 +1,8 @@
 ﻿using Models.Repository;
 using MongoDB.Driver;
-using Repository.Model;
-using Repository.Models;
-using Repository.Repository;
+using Repositories.Model;
+using Repositories.Models;
+using Repositories.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;

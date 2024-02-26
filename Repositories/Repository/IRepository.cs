@@ -1,7 +1,7 @@
 ﻿using MongoDB.Driver;
 using System.Linq.Expressions;
 
-namespace Repository.Repository
+namespace Repositories.Repository
 {
     public interface IRepository<T>
     {
@@ -13,7 +13,7 @@ namespace Repository.Repository
         Task UpdateItemByValue(string fieldName, string value, T replacement);
         Task<IEnumerable<T>> GetByFilterAsync(Expression<Func<T, bool>> filterExpression);
 
-        Task<IEnumerable<T>> GetPagedAsync(int skip, int pageSize, bool isAsc, string sortField, string searchValue, string searchField);
+        Task<IEnumerable<T>> PagingAsync(int skip, int pageSize, bool isAsc, string sortField, string? searchValue, List<string> searchFields, List<string> returnFields);
         Task<long> CountAsync();
         Task<IEnumerable<T>> GetFieldsByFilterAsync(string[] fieldNames, Expression<Func<T, bool>> filter);
     }

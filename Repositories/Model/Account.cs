@@ -3,7 +3,7 @@ using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 using System.ComponentModel.DataAnnotations;
 
-namespace Repository.Model
+namespace Repositories.Model
 {
     public class Account
     {
@@ -12,6 +12,6 @@ namespace Repository.Model
         [BsonElement][EmailAddress] public required string Email { get; set; }
         [BsonElement][Phone] public string? PhoneNumber { get; set; }
         [BsonElement] public string? Address { get; set; }
-        [BsonElement] public required string Picture { get; set; }
+        [BsonElement] public required byte[] Picture { get; set; }
     }
 }

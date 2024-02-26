@@ -1,10 +1,10 @@
 ﻿using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
-using static Repository.Model.Account;
+using static Repositories.Model.Account;
 
-namespace Repository.Models
+namespace Repositories.Models
 {
-    public class AccountStatus : BaseEntity
+    public class AccountStatus : DateAndTime
     {
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)] public required string AccountId { get; set; }

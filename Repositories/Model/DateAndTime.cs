@@ -1,9 +1,9 @@
 ﻿using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
-namespace Repository.Models
+namespace Repositories.Models
 {
-    public class BaseEntity
+    public class DateAndTime
     {
         [BsonElement] public required DateTime CreatedAt { get; set; } = DateTime.Now;
         [BsonElement] public DateTime? UpdatedAt { get; set; }

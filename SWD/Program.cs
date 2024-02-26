@@ -5,10 +5,9 @@ using Microsoft.OpenApi.Models;
 using Models.Repository;
 using MongoDB.Driver;
 using Repositories.Repository;
-using Repository.Repository;
-using Repository.Tools;
-using Service.Interface;
-using Service.Service;
+using Services.Tool;
+using Services.Interface;
+using Services.Service;
 using System.Text;
 
 namespace SWD
@@ -38,7 +37,7 @@ namespace SWD
 
             builder.Services.AddControllers();
 
-            builder.Services.AddAutoMapper(typeof(MapperProfile));
+            builder.Services.AddAutoMapper(typeof(MapperProfileTool));
 
             builder.Services.AddControllersWithViews();
 

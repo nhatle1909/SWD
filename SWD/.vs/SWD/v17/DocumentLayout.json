@@ -1,0 +1,373 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\C#\\SWD392\\SWD\\SWD\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{4FFA5C9E-83D6-4107-8BA6-149B17BC7A6A}|SWD.csproj|d:\\c#\\swd392\\swd\\swd\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4FFA5C9E-83D6-4107-8BA6-149B17BC7A6A}|SWD.csproj|solutionrelative:controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4FFA5C9E-83D6-4107-8BA6-149B17BC7A6A}|SWD.csproj|D:\\C#\\SWD392\\SWD\\SWD\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4FFA5C9E-83D6-4107-8BA6-149B17BC7A6A}|SWD.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4FFA5C9E-83D6-4107-8BA6-149B17BC7A6A}|SWD.csproj|D:\\C#\\SWD392\\SWD\\SWD\\controllers\\interiorcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4FFA5C9E-83D6-4107-8BA6-149B17BC7A6A}|SWD.csproj|solutionrelative:controllers\\interiorcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{77BD7764-E08F-4AD6-9564-CC3E7E75D5AD}|..\\Repositories\\Repositories.csproj|d:\\c#\\swd392\\swd\\repositories\\model\\interior.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4FFA5C9E-83D6-4107-8BA6-149B17BC7A6A}|SWD.csproj|D:\\C#\\SWD392\\SWD\\SWD\\controllers\\blogcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4FFA5C9E-83D6-4107-8BA6-149B17BC7A6A}|SWD.csproj|solutionrelative:controllers\\blogcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{77BD7764-E08F-4AD6-9564-CC3E7E75D5AD}|..\\Repositories\\Repositories.csproj|d:\\c#\\swd392\\swd\\repositories\\modelview\\blogview.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{77BD7764-E08F-4AD6-9564-CC3E7E75D5AD}|..\\Repositories\\Repositories.csproj|d:\\c#\\swd392\\swd\\repositories\\model\\blog.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{77BD7764-E08F-4AD6-9564-CC3E7E75D5AD}|..\\Repositories\\Repositories.csproj|d:\\c#\\swd392\\swd\\repositories\\model\\material.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4FFA5C9E-83D6-4107-8BA6-149B17BC7A6A}|SWD.csproj|D:\\C#\\SWD392\\SWD\\SWD\\controllers\\materialcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4FFA5C9E-83D6-4107-8BA6-149B17BC7A6A}|SWD.csproj|solutionrelative:controllers\\materialcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{77BD7764-E08F-4AD6-9564-CC3E7E75D5AD}|..\\Repositories\\Repositories.csproj|d:\\c#\\swd392\\swd\\repositories\\modelview\\accountview.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{77BD7764-E08F-4AD6-9564-CC3E7E75D5AD}|..\\Repositories\\Repositories.csproj|d:\\c#\\swd392\\swd\\repositories\\repository\\repository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{77BD7764-E08F-4AD6-9564-CC3E7E75D5AD}|..\\Repositories\\Repositories.csproj|d:\\c#\\swd392\\swd\\repositories\\repository\\irepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3519327F-BFE9-4E2F-9BD5-AE5953361473}|..\\Services\\Services.csproj|d:\\c#\\swd392\\swd\\services\\service\\accountservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3519327F-BFE9-4E2F-9BD5-AE5953361473}|..\\Services\\Services.csproj|d:\\c#\\swd392\\swd\\services\\service\\materialservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{77BD7764-E08F-4AD6-9564-CC3E7E75D5AD}|..\\Repositories\\Repositories.csproj|d:\\c#\\swd392\\swd\\repositories\\modelview\\interiorview.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{77BD7764-E08F-4AD6-9564-CC3E7E75D5AD}|..\\Repositories\\Repositories.csproj|d:\\c#\\swd392\\swd\\repositories\\model\\account.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{77BD7764-E08F-4AD6-9564-CC3E7E75D5AD}|..\\Repositories\\Repositories.csproj|d:\\c#\\swd392\\swd\\repositories\\model\\blogcomment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3519327F-BFE9-4E2F-9BD5-AE5953361473}|..\\Services\\Services.csproj|d:\\c#\\swd392\\swd\\services\\service\\blogservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{77BD7764-E08F-4AD6-9564-CC3E7E75D5AD}|..\\Repositories\\Repositories.csproj|d:\\c#\\swd392\\swd\\repositories\\model\\accountstatus.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3519327F-BFE9-4E2F-9BD5-AE5953361473}|..\\Services\\Services.csproj|d:\\c#\\swd392\\swd\\services\\service\\interiorservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{77BD7764-E08F-4AD6-9564-CC3E7E75D5AD}|..\\Repositories\\Repositories.csproj|d:\\c#\\swd392\\swd\\repositories\\modelview\\materialview.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 11,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:40:0:{e8034f19-ab72-4f06-83fd-f6832b41aa63}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:43:0:{e8034f19-ab72-4f06-83fd-f6832b41aa63}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:44:0:{e8034f19-ab72-4f06-83fd-f6832b41aa63}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{004be353-6879-467c-9d1e-9ac23cdf6d49}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "AccountStatus.cs",
+              "DocumentMoniker": "D:\\C#\\SWD392\\SWD\\Repositories\\Model\\AccountStatus.cs",
+              "RelativeDocumentMoniker": "..\\Repositories\\Model\\AccountStatus.cs",
+              "ToolTip": "D:\\C#\\SWD392\\SWD\\Repositories\\Model\\AccountStatus.cs",
+              "RelativeToolTip": "..\\Repositories\\Model\\AccountStatus.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-02-25T07:51:31.208Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "Account.cs",
+              "DocumentMoniker": "D:\\C#\\SWD392\\SWD\\Repositories\\Model\\Account.cs",
+              "RelativeDocumentMoniker": "..\\Repositories\\Model\\Account.cs",
+              "ToolTip": "D:\\C#\\SWD392\\SWD\\Repositories\\Model\\Account.cs",
+              "RelativeToolTip": "..\\Repositories\\Model\\Account.cs",
+              "ViewState": "AQIAAAMAAAAAAAAAAAAAAA4AAAA0AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-02-25T07:51:28.986Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "BlogComment.cs",
+              "DocumentMoniker": "D:\\C#\\SWD392\\SWD\\Repositories\\Model\\BlogComment.cs",
+              "RelativeDocumentMoniker": "..\\Repositories\\Model\\BlogComment.cs",
+              "ToolTip": "D:\\C#\\SWD392\\SWD\\Repositories\\Model\\BlogComment.cs",
+              "RelativeToolTip": "..\\Repositories\\Model\\BlogComment.cs",
+              "ViewState": "AQIAAAoAAAAAAAAAAAAAABEAAABCAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-02-25T07:47:26.281Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "AccountController.cs",
+              "DocumentMoniker": "D:\\C#\\SWD392\\SWD\\SWD\\Controllers\\AccountController.cs",
+              "RelativeDocumentMoniker": "Controllers\\AccountController.cs",
+              "ToolTip": "D:\\C#\\SWD392\\SWD\\SWD\\Controllers\\AccountController.cs",
+              "RelativeToolTip": "Controllers\\AccountController.cs",
+              "ViewState": "AQIAAFgAAAAAAAAAAAAcwNMAAAAeAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-02-25T07:38:02.752Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "IRepository.cs",
+              "DocumentMoniker": "D:\\C#\\SWD392\\SWD\\Repositories\\Repository\\IRepository.cs",
+              "RelativeDocumentMoniker": "..\\Repositories\\Repository\\IRepository.cs",
+              "ToolTip": "D:\\C#\\SWD392\\SWD\\Repositories\\Repository\\IRepository.cs",
+              "RelativeToolTip": "..\\Repositories\\Repository\\IRepository.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAMAAAAhAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-02-25T06:36:31.815Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "Repository.cs",
+              "DocumentMoniker": "D:\\C#\\SWD392\\SWD\\Repositories\\Repository\\Repository.cs",
+              "RelativeDocumentMoniker": "..\\Repositories\\Repository\\Repository.cs",
+              "ToolTip": "D:\\C#\\SWD392\\SWD\\Repositories\\Repository\\Repository.cs",
+              "RelativeToolTip": "..\\Repositories\\Repository\\Repository.cs",
+              "ViewState": "AQIAAAYAAAAAAAAAAAAAAFgAAAARAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-02-25T06:14:24.937Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "AccountView.cs",
+              "DocumentMoniker": "D:\\C#\\SWD392\\SWD\\Repositories\\ModelView\\AccountView.cs",
+              "RelativeDocumentMoniker": "..\\Repositories\\ModelView\\AccountView.cs",
+              "ToolTip": "D:\\C#\\SWD392\\SWD\\Repositories\\ModelView\\AccountView.cs",
+              "RelativeToolTip": "..\\Repositories\\ModelView\\AccountView.cs",
+              "ViewState": "AQIAADQAAAAAAAAAAAAjwD0AAAAtAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-02-25T05:38:55.759Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "AccountService.cs",
+              "DocumentMoniker": "D:\\C#\\SWD392\\SWD\\Services\\Service\\AccountService.cs",
+              "RelativeDocumentMoniker": "..\\Services\\Service\\AccountService.cs",
+              "ToolTip": "D:\\C#\\SWD392\\SWD\\Services\\Service\\AccountService.cs",
+              "RelativeToolTip": "..\\Services\\Service\\AccountService.cs",
+              "ViewState": "AQIAABcAAAAAAAAAAAAQwCEAAAAdAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-02-25T05:37:41.131Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "MaterialService.cs",
+              "DocumentMoniker": "D:\\C#\\SWD392\\SWD\\Services\\Service\\MaterialService.cs",
+              "RelativeDocumentMoniker": "..\\Services\\Service\\MaterialService.cs",
+              "ToolTip": "D:\\C#\\SWD392\\SWD\\Services\\Service\\MaterialService.cs",
+              "RelativeToolTip": "..\\Services\\Service\\MaterialService.cs",
+              "ViewState": "AQIAAAoAAAAAAAAAAAAAAA4AAAAzAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-02-25T03:46:59.008Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "InteriorService.cs",
+              "DocumentMoniker": "D:\\C#\\SWD392\\SWD\\Services\\Service\\InteriorService.cs",
+              "RelativeDocumentMoniker": "..\\Services\\Service\\InteriorService.cs",
+              "ToolTip": "D:\\C#\\SWD392\\SWD\\Services\\Service\\InteriorService.cs",
+              "RelativeToolTip": "..\\Services\\Service\\InteriorService.cs",
+              "ViewState": "AQIAABcAAAAAAAAAAAAIwFAAAAAyAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-02-24T04:49:48.509Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Interior.cs",
+              "DocumentMoniker": "D:\\C#\\SWD392\\SWD\\Repositories\\Model\\Interior.cs",
+              "RelativeDocumentMoniker": "..\\Repositories\\Model\\Interior.cs",
+              "ToolTip": "D:\\C#\\SWD392\\SWD\\Repositories\\Model\\Interior.cs",
+              "RelativeToolTip": "..\\Repositories\\Model\\Interior.cs",
+              "ViewState": "AQIAAAYAAAAAAAAAAAAqwAYAAAAcAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-02-24T04:49:22.039Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Material.cs",
+              "DocumentMoniker": "D:\\C#\\SWD392\\SWD\\Repositories\\Model\\Material.cs",
+              "RelativeDocumentMoniker": "..\\Repositories\\Model\\Material.cs",
+              "ToolTip": "D:\\C#\\SWD392\\SWD\\Repositories\\Model\\Material.cs",
+              "RelativeToolTip": "..\\Repositories\\Model\\Material.cs",
+              "ViewState": "AQIAAAMAAAAAAAAAAAAAAAcAAAAcAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-02-24T04:49:16.115Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "MaterialView.cs",
+              "DocumentMoniker": "D:\\C#\\SWD392\\SWD\\Repositories\\ModelView\\MaterialView.cs",
+              "RelativeDocumentMoniker": "..\\Repositories\\ModelView\\MaterialView.cs",
+              "ToolTip": "D:\\C#\\SWD392\\SWD\\Repositories\\ModelView\\MaterialView.cs",
+              "RelativeToolTip": "..\\Repositories\\ModelView\\MaterialView.cs",
+              "ViewState": "AQIAABMAAAAAAAAAAAAAACUAAAAnAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-02-24T04:49:13.19Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Blog.cs",
+              "DocumentMoniker": "D:\\C#\\SWD392\\SWD\\Repositories\\Model\\Blog.cs",
+              "RelativeDocumentMoniker": "..\\Repositories\\Model\\Blog.cs",
+              "ToolTip": "D:\\C#\\SWD392\\SWD\\Repositories\\Model\\Blog.cs",
+              "RelativeToolTip": "..\\Repositories\\Model\\Blog.cs",
+              "ViewState": "AQIAAA4AAAAAAAAAAAAQwAoAAAAcAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-02-24T03:50:59.737Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "BlogView.cs",
+              "DocumentMoniker": "D:\\C#\\SWD392\\SWD\\Repositories\\ModelView\\BlogView.cs",
+              "RelativeDocumentMoniker": "..\\Repositories\\ModelView\\BlogView.cs",
+              "ToolTip": "D:\\C#\\SWD392\\SWD\\Repositories\\ModelView\\BlogView.cs",
+              "RelativeToolTip": "..\\Repositories\\ModelView\\BlogView.cs",
+              "ViewState": "AQIAABkAAAAAAAAAAAAiwB4AAAAjAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-02-24T03:49:27.373Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "BlogService.cs",
+              "DocumentMoniker": "D:\\C#\\SWD392\\SWD\\Services\\Service\\BlogService.cs",
+              "RelativeDocumentMoniker": "..\\Services\\Service\\BlogService.cs",
+              "ToolTip": "D:\\C#\\SWD392\\SWD\\Services\\Service\\BlogService.cs",
+              "RelativeToolTip": "..\\Services\\Service\\BlogService.cs",
+              "ViewState": "AQIAAJQAAAAAAAAAAAAQwJkAAAAnAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-02-24T03:45:10.427Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "MaterialController.cs",
+              "DocumentMoniker": "D:\\C#\\SWD392\\SWD\\SWD\\Controllers\\MaterialController.cs",
+              "RelativeDocumentMoniker": "Controllers\\MaterialController.cs",
+              "ToolTip": "D:\\C#\\SWD392\\SWD\\SWD\\Controllers\\MaterialController.cs",
+              "RelativeToolTip": "Controllers\\MaterialController.cs",
+              "ViewState": "AQIAABAAAAAAAAAAAAAgwBkAAABDAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-02-23T04:56:36.418Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "BlogController.cs",
+              "DocumentMoniker": "D:\\C#\\SWD392\\SWD\\SWD\\Controllers\\BlogController.cs",
+              "RelativeDocumentMoniker": "Controllers\\BlogController.cs",
+              "ToolTip": "D:\\C#\\SWD392\\SWD\\SWD\\Controllers\\BlogController.cs",
+              "RelativeToolTip": "Controllers\\BlogController.cs",
+              "ViewState": "AQIAABEAAAAAAAAAAAAkwEkAAAApAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-02-23T04:56:31.901Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "InteriorView.cs",
+              "DocumentMoniker": "D:\\C#\\SWD392\\SWD\\Repositories\\ModelView\\InteriorView.cs",
+              "RelativeDocumentMoniker": "..\\Repositories\\ModelView\\InteriorView.cs",
+              "ToolTip": "D:\\C#\\SWD392\\SWD\\Repositories\\ModelView\\InteriorView.cs",
+              "RelativeToolTip": "..\\Repositories\\ModelView\\InteriorView.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAC0AAAAtAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-02-23T04:55:52.234Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "InteriorController.cs",
+              "DocumentMoniker": "D:\\C#\\SWD392\\SWD\\SWD\\Controllers\\InteriorController.cs",
+              "RelativeDocumentMoniker": "Controllers\\InteriorController.cs",
+              "ToolTip": "D:\\C#\\SWD392\\SWD\\SWD\\Controllers\\InteriorController.cs",
+              "RelativeToolTip": "Controllers\\InteriorController.cs",
+              "ViewState": "AQIAAA0AAAAAAAAAAAA3wBkAAAAkAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-02-21T05:54:02.389Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\C#\\SWD392\\SWD\\SWD\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "D:\\C#\\SWD392\\SWD\\SWD\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AQIAABAAAAAAAAAAAAA1wAcAAAAUAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-02-17T03:52:12.293Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

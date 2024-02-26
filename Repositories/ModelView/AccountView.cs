@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using System.ComponentModel.DataAnnotations;
 
-namespace Repository.ModelView
+namespace Repositories.ModelView
 {
     public class AccountView
     {
@@ -111,10 +111,19 @@ namespace Repository.ModelView
             public required string Comments { get; set; }
         }
 
-        public class ViewProfileAccountView
+        public class PagingAccountView
         {
-            [Required]
             public required string Jwt { get; set; }
+            public int PageIndex { get; set; }
+            public bool IsAsc { get; set; }
+            public string? SearchValue { get; set; }
+        }
+
+        public class DetailAccountView
+        {
+            public required string Jwt { get; set; }
+            [EmailAddress]
+            public required string Email { get; set; }
         }
     }
 }

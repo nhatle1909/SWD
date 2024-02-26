@@ -6,15 +6,16 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Repository.Models;
+using Repositories.Models;
 
-namespace Repository.Model
+namespace Repositories.Model
 {
-    public class Blog : BaseEntity
+    public class Blog : DateAndTime
     {
         [BsonId][BsonRepresentation(BsonType.ObjectId)] public required string BlogId { get; set; }
-        [BsonElement][BsonRepresentation(BsonType.ObjectId)] public required string AccountId { get; set; }
+        [BsonElement][EmailAddress] public required string Email { get; set; }
         [BsonElement] public required string Title { get; set; }
         [BsonElement] public required string Content { get; set; }
+        [BsonElement] public required List<byte[]> Pictures { get; set; }
     }
 }

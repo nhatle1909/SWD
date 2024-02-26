@@ -1,11 +1,11 @@
 ﻿using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
-using Repository.Models;
+using Repositories.Models;
 using System.ComponentModel.DataAnnotations;
 
-namespace Repository.Model
+namespace Repositories.Model
 {
-    public class Material : BaseEntity
+    public class Material : DateAndTime
     {
         [BsonId][BsonRepresentation(BsonType.ObjectId)] public required string MaterialId { get; set; }
         [BsonElement] public required string MaterialName { get; set; }

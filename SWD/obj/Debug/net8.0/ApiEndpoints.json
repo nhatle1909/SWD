@@ -1,0 +1,448 @@
+[
+  {
+    "ContainingType": "SWD.Controllers.AccountController",
+    "Method": "BanAnAccount",
+    "RelativePath": "api/Account/Banned-Account",
+    "HttpMethod": "PATCH",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "ban",
+        "Type": "Repositories.ModelView.AccountView\u002BBanAccountView",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SWD.Controllers.AccountController",
+    "Method": "ChangePasswordAccount",
+    "RelativePath": "api/Account/Change-Password",
+    "HttpMethod": "PATCH",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "changePassword",
+        "Type": "Repositories.ModelView.AccountView\u002BChangePasswordAccountView",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SWD.Controllers.AccountController",
+    "Method": "GetAccountDetail",
+    "RelativePath": "api/Account/Get-Detail-Account",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "detail",
+        "Type": "Repositories.ModelView.AccountView\u002BDetailAccountView",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SWD.Controllers.AccountController",
+    "Method": "GetPagingAccountList",
+    "RelativePath": "api/Account/Get-Paging-Account-List",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "paging",
+        "Type": "Repositories.ModelView.AccountView\u002BPagingAccountView",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SWD.Controllers.AccountController",
+    "Method": "LoginAccountByEmailAndPassword",
+    "RelativePath": "api/Account/Login-By-Email-Password",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "login",
+        "Type": "Repositories.ModelView.AccountView\u002BLoginAccountView",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SWD.Controllers.AccountController",
+    "Method": "RegisterAnAccountForCustomer",
+    "RelativePath": "api/Account/Register-Customer-Account",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "register",
+        "Type": "Repositories.ModelView.AccountView\u002BRegisterAccountView",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SWD.Controllers.AccountController",
+    "Method": "RegisterAnAccountForStaff",
+    "RelativePath": "api/Account/Register-Staff-Account",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "registerForStaff",
+        "Type": "Repositories.ModelView.AccountView\u002BRegisterForStaffAccountView",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SWD.Controllers.AccountController",
+    "Method": "RemoveAnAccount",
+    "RelativePath": "api/Account/Remove-Account",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "delete",
+        "Type": "Repositories.ModelView.AccountView\u002BDeleteAccountView",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SWD.Controllers.AccountController",
+    "Method": "ResetPasswordAccount",
+    "RelativePath": "api/Account/Reset-Password",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "resetPassword",
+        "Type": "Repositories.ModelView.AccountView\u002BResetPasswordAccountView",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SWD.Controllers.AccountController",
+    "Method": "SendEmailToResetPasswordAccount",
+    "RelativePath": "api/Account/Send-Mail-To-Reset-Password",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "email",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SWD.Controllers.AccountController",
+    "Method": "SignOutAccount",
+    "RelativePath": "api/Account/Sign-Out",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SWD.Controllers.AccountController",
+    "Method": "UpdateProfile",
+    "RelativePath": "api/Account/Update-An-Account",
+    "HttpMethod": "PATCH",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "update",
+        "Type": "Repositories.ModelView.AccountView\u002BUpdateAccountView",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SWD.Controllers.AccountController",
+    "Method": "UpdatePictureProfile",
+    "RelativePath": "api/Account/Update-Picture-Account",
+    "HttpMethod": "PATCH",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "updatePicture",
+        "Type": "Repositories.ModelView.AccountView\u002BUpdatePictureAccountView",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SWD.Controllers.AccountController",
+    "Method": "ViewProfileAccount",
+    "RelativePath": "api/Account/View-Profile",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "email",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SWD.Controllers.BlogController",
+    "Method": "AddAnBlog",
+    "RelativePath": "api/Blog/Add-An-Blog",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "add",
+        "Type": "Repositories.ModelView.BlogView\u002BAddBlogView",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SWD.Controllers.BlogController",
+    "Method": "GetPagingBlogList",
+    "RelativePath": "api/Blog/Get-Paging-Blog-List",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "pageIndex",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "isAsc",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "searchValue",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SWD.Controllers.BlogController",
+    "Method": "RemoveAnBlog",
+    "RelativePath": "api/Blog/Remove-An-Blog",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "remove",
+        "Type": "Repositories.ModelView.BlogView\u002BRemoveBlogView",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SWD.Controllers.BlogController",
+    "Method": "UpdateAnBlog",
+    "RelativePath": "api/Blog/Update-An-Blog",
+    "HttpMethod": "PATCH",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "update",
+        "Type": "Repositories.ModelView.BlogView\u002BUpdateBlogView",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SWD.Controllers.InteriorController",
+    "Method": "AddOneInterior",
+    "RelativePath": "api/Interior/Add-New-Interior",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "add",
+        "Type": "Repositories.ModelView.InteriorView\u002BAddInteriorView",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SWD.Controllers.InteriorController",
+    "Method": "DeleteInterior",
+    "RelativePath": "api/Interior/Delete-Interior",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "delete",
+        "Type": "Repositories.ModelView.InteriorView\u002BDeleteInteriorView",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SWD.Controllers.InteriorController",
+    "Method": "GetDetailInterior",
+    "RelativePath": "api/Interior/Get-Detail-Interior",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "interiorId",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SWD.Controllers.InteriorController",
+    "Method": "GetPagingInteriorList",
+    "RelativePath": "api/Interior/Get-Paging-Interior-List",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "pageIndex",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "isAsc",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "searchValue",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SWD.Controllers.InteriorController",
+    "Method": "UpdateInterior",
+    "RelativePath": "api/Interior/Update-Interior",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "update",
+        "Type": "Repositories.ModelView.InteriorView\u002BUpdateInteriorView",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SWD.Controllers.MaterialController",
+    "Method": "AddOneMaterial",
+    "RelativePath": "api/Material/Add-One-Material",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "add",
+        "Type": "Repositories.ModelView.MaterialView\u002BAddMaterialView",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SWD.Controllers.MaterialController",
+    "Method": "DeleteMaterial",
+    "RelativePath": "api/Material/Delete-Material",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "delete",
+        "Type": "Repositories.ModelView.MaterialView\u002BDeleteMaterialView",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SWD.Controllers.MaterialController",
+    "Method": "GetPagingMaterialList",
+    "RelativePath": "api/Material/Get-Paging-Material-List",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "paging",
+        "Type": "Repositories.ModelView.MaterialView\u002BPagingMaterialView",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SWD.Controllers.MaterialController",
+    "Method": "UpdateMaterial",
+    "RelativePath": "api/Material/Update-Material",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "update",
+        "Type": "Repositories.ModelView.MaterialView\u002BUpdateMaterialView",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  }
+]

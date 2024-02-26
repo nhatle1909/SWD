@@ -4,12 +4,12 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 
-namespace Repository.Tools
+namespace Services.Tool
 {
-    public class Authentication
+    public class AuthenticationJwtTool
     {
         private readonly IConfiguration _configuration;
-        public Authentication(IConfiguration configuration)
+        public AuthenticationJwtTool(IConfiguration configuration)
         {
             _configuration = configuration;
         }
@@ -38,7 +38,7 @@ namespace Repository.Tools
             var tokenHandler = new JwtSecurityTokenHandler();
             var token = tokenHandler.ReadJwtToken(jwtToken);
             var idClaim = token.Claims.FirstOrDefault(claim => claim.Type == "_id");
-            return idClaim?.Value ?? throw new Exception($"Can not get _id from token");
+            return idClaim?.Value ?? "Can not get id from token";
         }
     }
 }

@@ -2,15 +2,15 @@
 using AutoMapper;
 using Microsoft.Extensions.Logging;
 using MongoDB.Bson;
-using Repository.Model;
-using Repository.Models;
-using Repository.ModelView;
-using Repository.Repository;
-using Repository.Tools;
-using Service.Interface;
-using static Repository.ModelView.MaterialView;
+using Repositories.Model;
+using Repositories.Models;
+using Repositories.ModelView;
+using Repositories.Repository;
+using Services.Tool;
+using Services.Interface;
+using static Repositories.ModelView.MaterialView;
 
-namespace Service.Service
+namespace Services.Service
 {
     public class MaterialService : IMaterialService
     {
@@ -25,7 +25,7 @@ namespace Service.Service
         }
         public async Task<string> AddOneMaterial(AddMaterialView add)
         {
-            string _id = Authentication.GetUserIdFromJwt(add.Jwt);
+            string _id = AuthenticationJwtTool.GetUserIdFromJwt(add.Jwt);
             IEnumerable<AccountStatus> getUser = await _unit.AccountStatusRepo.GetFieldsByFilterAsync(["_id", "IsRole"],
                             c => c.AccountId.Equals(_id));
             var accountStatus = getUser.FirstOrDefault();
@@ -40,7 +40,7 @@ namespace Service.Service
 
         public async Task<string> DeleteMaterial(DeleteMaterialView delete)
         {
-            string _id = Authentication.GetUserIdFromJwt(delete.Jwt);
+            string _id = AuthenticationJwtTool.GetUserIdFromJwt(delete.Jwt);
             IEnumerable<AccountStatus> getUser = await _unit.AccountStatusRepo.GetFieldsByFilterAsync(["_id", "IsRole"],
                             g => g.AccountId.Equals(_id));
             var accountStatus = getUser.FirstOrDefault();
@@ -64,25 +64,32 @@ namespace Service.Service
             return await _unit.MaterialRepo.GetAllAsync();
         }
 
-        public async Task<object> GetPagedMaterial(int pageIndex, int pageSize, bool isAsc, string sortField, string searchValue, string searchField)
+        public async Task<object> GetPagingMaterial(PagingMaterialView paging)
         {
-            int skip = (pageIndex - 1) * pageSize;
-            var item = await _unit.MaterialRepo.GetPagedAsync(skip, pageSize, isAsc, sortField, searchValue, searchField);
-            long totalCount = await _unit.MaterialRepo.CountAsync();
-            int totalPages = (int)Math.Ceiling((double)totalCount / pageSize);
-            var response = new
+            const int pageSize = 5;
+            const string sortField = "CreatedAt";
+            List<string> searchFields = ["MaterialName", "Price"];
+            List<string> returnFields = [];
+
+            string _id = AuthenticationJwtTool.GetUserIdFromJwt(paging.Jwt);
+            var getUserStatus = (await _unit.AccountStatusRepo.GetFieldsByFilterAsync(["IsRole"],
+                            g => g.AccountId.Equals(_id))).FirstOrDefault();
+            if (getUserStatus != null)
             {
-                TotalCount = totalCount,
-                Page = pageIndex,
-                PageSize = pageSize,
-                Material = item.ToList()
-            };
-            return response;
+                if (getUserStatus.IsRole == AccountStatus.Role.Staff)
+                {
+                    int skip = (paging.PageIndex - 1) * pageSize;
+                    var items = (await _unit.MaterialRepo.PagingAsync(skip, pageSize, paging.IsAsc, sortField, paging.SearchValue, searchFields, returnFields)).ToList();
+                    return items;
+                }
+                return "You have not permission to use this function";
+            }
+            return "Account is not existed";
         }
 
         public async Task<string> UpdateMaterial(UpdateMaterialView update)
         {
-            string _id = Authentication.GetUserIdFromJwt(update.Jwt);
+            string _id = AuthenticationJwtTool.GetUserIdFromJwt(update.Jwt);
             IEnumerable<AccountStatus> getUser = await _unit.AccountStatusRepo.GetFieldsByFilterAsync(["_id", "IsRole"],
                             g => g.AccountId.Equals(_id));
             var accountStatus = getUser.FirstOrDefault();
@@ -96,7 +103,7 @@ namespace Service.Service
                     material.MaterialName = update.MaterialName;
                     material.MaterialType = update.MaterialType;
                     material.Price = update.Price;
-                    material.UpdatedAt = DateTime.Now;
+                    material.UpdatedAt = System.DateTime.Now;
                     await _unit.MaterialRepo.UpdateItemByValue("MaterialId", update.MaterialId, material);
                     return "Update material successfully";
                 }

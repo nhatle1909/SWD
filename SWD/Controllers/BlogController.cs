@@ -1,8 +1,9 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Service.Interface;
-using static Repository.ModelView.AccountView;
-using static Repository.ModelView.BlogView;
+using Services.Interface;
+using Services.Service;
+using static Repositories.ModelView.AccountView;
+using static Repositories.ModelView.BlogView;
 
 namespace SWD.Controllers
 {
@@ -17,7 +18,7 @@ namespace SWD.Controllers
         }
 
         [HttpPost("Add-An-Blog")]
-        public async Task<IActionResult> AddAnBlog([FromBody] AddBlogView add)
+        public async Task<IActionResult> AddAnBlog(AddBlogView add)
         {
             try
             {
@@ -35,7 +36,7 @@ namespace SWD.Controllers
         }
 
         [HttpPatch("Update-An-Blog")]
-        public async Task<IActionResult> UpdateAnBlog([FromBody] UpdateBlogView update)
+        public async Task<IActionResult> UpdateAnBlog(UpdateBlogView update)
         {
             try
             {
@@ -68,6 +69,13 @@ namespace SWD.Controllers
             {
                 return BadRequest(ex.Message);
             }
+        }
+
+        [HttpGet("Get-Paging-Blog-List")]
+        public async Task<IActionResult> GetPagingBlogList(int pageIndex, bool isAsc, string? searchValue)
+        {
+            var result = await _blogService.GetPagingBlog(pageIndex, isAsc, searchValue);
+            return Ok(result);
         }
     }
 }

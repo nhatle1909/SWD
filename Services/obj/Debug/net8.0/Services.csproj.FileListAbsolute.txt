@@ -25,8 +25,8 @@ D:\C#\SWD392\SWD\Services\obj\Debug\net8.0\Services.AssemblyInfoInputs.cache
 D:\C#\SWD392\SWD\Services\obj\Debug\net8.0\Services.AssemblyInfo.cs
 D:\C#\SWD392\SWD\Services\obj\Debug\net8.0\Services.csproj.CoreCompileInputs.cache
 D:\C#\SWD392\SWD\Services\obj\Debug\net8.0\Services.sourcelink.json
-D:\C#\SWD392\SWD\Services\obj\Debug\net8.0\Services.csproj.CopyComplete
 D:\C#\SWD392\SWD\Services\obj\Debug\net8.0\Services.dll
 D:\C#\SWD392\SWD\Services\obj\Debug\net8.0\refint\Services.dll
 D:\C#\SWD392\SWD\Services\obj\Debug\net8.0\Services.pdb
 D:\C#\SWD392\SWD\Services\obj\Debug\net8.0\ref\Services.dll
+D:\C#\SWD392\SWD\Services\obj\Debug\net8.0\Services.csproj.Up2Date

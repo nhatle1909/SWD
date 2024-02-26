@@ -1,7 +1,7 @@
 ﻿using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
-namespace Repository.Model
+namespace Repositories.Model
 {
     public class Request
     {

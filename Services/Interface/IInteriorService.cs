@@ -1,16 +1,16 @@
-﻿using Repository.Model;
-using Repository.ModelView;
-using static Repository.ModelView.InteriorView;
+﻿using Repositories.Model;
+using Repositories.ModelView;
+using static Repositories.ModelView.InteriorView;
 
-namespace Service.Interface
+namespace Services.Interface
 {
     public interface IInteriorService
     {
-        public Task<IEnumerable<Interior>> GetAllInterior();
-        public Task<object> GetPagedInterior(int pageIndex, int pageSize, bool isAsc, string sortField, string searchValue, string searchField);
-        public Task<string> AddOneInterior(AddInteriorView add);
-        public Task<string> UpdateInterior(UpdateInteriorView update);
-        public Task<string> DeleteInterior(DeleteInteriorView delete);
+        Task<object> GetPagingInterior(int pageIndex, bool isAsc, string? searchValue);
+        Task<Interior?> GetInteriorDetail(string interiorId);
+        Task<string> AddOneInterior(AddInteriorView add);
+        Task<string> UpdateInterior(UpdateInteriorView update);
+        Task<string> DeleteInterior(DeleteInteriorView delete);
         //public Task<double> OptionalInteriorQuote(string[] arrMaterialId);
     }
 }

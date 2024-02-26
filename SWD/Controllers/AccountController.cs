@@ -1,7 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Service.Interface;
+using Services.Interface;
 using System.ComponentModel.DataAnnotations;
-using static Repository.ModelView.AccountView;
+using System.Net.NetworkInformation;
+using static Repositories.ModelView.AccountView;
 
 namespace SWD.Controllers
 {
@@ -87,7 +88,7 @@ namespace SWD.Controllers
         }
 
         [HttpPatch("Update-Picture-Account")]
-        public async Task<IActionResult> UpdatePictureProfile([FromBody] UpdatePictureAccountView updatePicture)
+        public async Task<IActionResult> UpdatePictureProfile(UpdatePictureAccountView updatePicture)
         {
             try
             {
@@ -136,8 +137,8 @@ namespace SWD.Controllers
             }
         }
 
-        [HttpPost("View-Profile")]
-        public async Task<IActionResult> ViewProfileAccount([FromBody] ViewProfileAccountView viewProfile)
+        [HttpGet("View-Profile")]
+        public async Task<IActionResult> ViewProfileAccount([EmailAddress] string email)
         {
             try
             {
@@ -145,18 +146,8 @@ namespace SWD.Controllers
                 {
                     return BadRequest(ModelState);
                 }
-                var profile = await _ser.ViewProfile(viewProfile);
-                if (profile.Item1 is null && profile.Item2 is null) return Ok("null");
-                var tuple = new
-                {
-                    Email = profile.Item1!.Email,
-                    PhoneNumber = profile.Item1.PhoneNumber,
-                    Address = profile.Item1.Address,
-                    Picture = profile.Item1.Picture,
-                    CreatedAt = profile.Item2!.CreatedAt,
-                    UpdatedAt = profile.Item2.UpdatedAt
-                };
-                return Ok(tuple);
+                var profile = await _ser.ViewProfile(email);
+                return Ok(profile);
             }
             catch (Exception ex)
             {
@@ -225,6 +216,34 @@ namespace SWD.Controllers
             {
                 await _ser.SignOutAsync();
                 return Ok("Sign out successfully");
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpPost("Get-Paging-Account-List")]
+        public async Task<IActionResult> GetPagingAccountList([FromBody] PagingAccountView paging)
+        {
+            try
+            {
+                var response = await _ser.GetPagingAccount(paging);
+                return Ok(response);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpPost("Get-Detail-Account")]
+        public async Task<IActionResult> GetAccountDetail([FromBody] DetailAccountView detail)
+        {
+            try
+            {
+                var response = await _ser.GetAccountDetail(detail);
+                return Ok(response);
             }
             catch (Exception ex)
             {

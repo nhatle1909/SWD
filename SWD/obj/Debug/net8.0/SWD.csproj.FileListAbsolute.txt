@@ -125,9 +125,9 @@ D:\C#\SWD392\SWD\SWD\obj\Debug\net8.0\staticwebassets\msbuild.buildMultiTargetin
 D:\C#\SWD392\SWD\SWD\obj\Debug\net8.0\staticwebassets\msbuild.buildTransitive.SWD.props
 D:\C#\SWD392\SWD\SWD\obj\Debug\net8.0\staticwebassets.pack.json
 D:\C#\SWD392\SWD\SWD\obj\Debug\net8.0\scopedcss\bundle\SWD.styles.css
-D:\C#\SWD392\SWD\SWD\obj\Debug\net8.0\SWD.csproj.CopyComplete
 D:\C#\SWD392\SWD\SWD\obj\Debug\net8.0\SWD.dll
 D:\C#\SWD392\SWD\SWD\obj\Debug\net8.0\refint\SWD.dll
 D:\C#\SWD392\SWD\SWD\obj\Debug\net8.0\SWD.pdb
 D:\C#\SWD392\SWD\SWD\obj\Debug\net8.0\SWD.genruntimeconfig.cache
 D:\C#\SWD392\SWD\SWD\obj\Debug\net8.0\ref\SWD.dll
+D:\C#\SWD392\SWD\SWD\obj\Debug\net8.0\SWD.csproj.Up2Date

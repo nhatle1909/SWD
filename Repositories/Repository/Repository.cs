@@ -1,6 +1,6 @@
 ﻿using MongoDB.Bson;
 using MongoDB.Driver;
-using Repository.Repository;
+using Repositories.Repository;
 using System.Linq.Expressions;
 
 namespace Models.Repository
@@ -56,20 +56,45 @@ namespace Models.Repository
             await Collection.ReplaceOneAsync(filter, replacement);
         }
 
-        public async Task<IEnumerable<T>> GetPagedAsync(int skip, int pageSize, bool isAsc, string sortField, string searchValue, string searchField)
+        public async Task<IEnumerable<T>> PagingAsync(int skip, int pageSize, bool isAsc, string sortField, string? searchValue, List<string> searchFields, List<string> returnFields)
         {
-            var filterBuilder = Builders<T>.Filter.Regex(searchField, new BsonRegularExpression($".*{searchValue}.*", "i"));
+            var filterBuilder = Builders<T>.Filter.Empty;
+            if (searchValue != null)
+            {
+                var filters = new List<FilterDefinition<T>>();
+                foreach (var field in searchFields)
+                {
+                    var fieldFilter = Builders<T>.Filter.Regex(field, new BsonRegularExpression($".*{searchValue}.*", "i"));
+                    filters.Add(fieldFilter);
+                }
+                filterBuilder = Builders<T>.Filter.Or(filters);
+            }
+
             var sortDefinition = isAsc
                 ? Builders<T>.Sort.Ascending(sortField)
                 : Builders<T>.Sort.Descending(sortField);
-            var result = await Collection
+
+            var query = Collection
                 .Find(filterBuilder)
                 .Sort(sortDefinition)
                 .Skip(skip)
-                .Limit(pageSize)
-                .ToListAsync();
+                .Limit(pageSize);
+
+            if (returnFields.Any())
+            {
+                ProjectionDefinition<T> projection = new BsonDocument();
+                foreach (var field in returnFields)
+                {
+                    projection = projection.Include(field);
+                }
+                query = query.Project<T>(projection);
+            }
+
+            var result = await query.ToListAsync();
+
             return result;
         }
+
 
         public async Task<long> CountAsync()
         {

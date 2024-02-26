@@ -1,15 +1,16 @@
 ﻿using AutoMapper;
 using MongoDB.Bson;
-using Repository.Model;
-using Repository.Models;
-using Repository.ModelView;
-using Repository.Repository;
-using Repository.Tools;
-using Service.Interface;
+using Repositories.Model;
+using Repositories.Models;
+using Repositories.ModelView;
+using Repositories.Repository;
+using Services.Tool;
+using Services.Interface;
 using System.Linq;
-using static Repository.ModelView.InteriorView;
+using System.Security.Cryptography;
+using static Repositories.ModelView.InteriorView;
 
-namespace Service.Service
+namespace Services.Service
 {
     public class InteriorService : IInteriorService
     {
@@ -24,7 +25,7 @@ namespace Service.Service
         public async Task<string> AddOneInterior(AddInteriorView add)
         {
 
-            string _id = Authentication.GetUserIdFromJwt(add.Jwt);
+            string _id = AuthenticationJwtTool.GetUserIdFromJwt(add.Jwt);
             IEnumerable<AccountStatus> getUser = await _unit.AccountStatusRepo.GetFieldsByFilterAsync(["_id", "IsRole"],
                             c => c.AccountId.Equals(_id));
             var accountStatus = getUser.FirstOrDefault();
@@ -32,15 +33,15 @@ namespace Service.Service
             {
                 if (add.Image.Length > 0)
                 {
-                    var interiorID = ObjectId.GenerateNewId().ToString();
-                    var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "InteriorPictures", $"{interiorID}_" + add.Image.FileName);
-                    using (var stream = System.IO.File.Create(path))
+                    //Encode picture
+                    byte[] fileBytes;
+                    using (var ms = new MemoryStream())
                     {
-                        await add.Image.CopyToAsync(stream);
+                        await add.Image.CopyToAsync(ms);
+                        fileBytes = ms.ToArray();
                     }
                     Interior interior = _mapper.Map<Interior>(add);
-                    interior.InteriorId = interiorID;
-                    interior.Image = "InteriorPictures" + $"{interiorID}_" + add.Image.FileName;
+                    interior.Image = fileBytes;
                     await _unit.InteriorRepo.AddOneItem(interior);
                     return "Add Interior successfully";
                 }
@@ -51,7 +52,7 @@ namespace Service.Service
 
         public async Task<string> DeleteInterior(DeleteInteriorView delete)
         {
-            string _id = Authentication.GetUserIdFromJwt(delete.Jwt);
+            string _id = AuthenticationJwtTool.GetUserIdFromJwt(delete.Jwt);
             IEnumerable<AccountStatus> getUser = await _unit.AccountStatusRepo.GetFieldsByFilterAsync(["_id", "IsRole"],
                             g => g.AccountId.Equals(_id));
             var accountStatus = getUser.FirstOrDefault();
@@ -70,25 +71,25 @@ namespace Service.Service
             return "Account is not existed or You have not permission to use this function";
         }
 
-        public async Task<IEnumerable<Interior>> GetAllInterior()
+        public async Task<object> GetPagingInterior(int pageIndex, bool isAsc, string? searchValue)
         {
-            return await _unit.InteriorRepo.GetAllAsync();
+            const int pageSize = 5;
+            const string sortField = "CreatedAt";
+            List<string> searchFields = ["InteriorName", "Description", "Price"];
+            List<string> returnFields = ["InteriorName", "Image", "Price", "CreatedAt"];
+
+            int skip = (pageIndex - 1) * pageSize;
+            var items = (await _unit.InteriorRepo.PagingAsync(skip, pageSize, isAsc, sortField, searchValue, searchFields, returnFields)).ToList();
+            //long totalCount = await _unit.InteriorRepo.CountAsync();
+            //int totalPages = (int)Math.Ceiling((double)totalCount / pageSize);
+            return items;
         }
 
-        public async Task<object> GetPagedInterior(int pageIndex, int pageSize, bool isAsc, string sortField, string searchValue, string searchField)
+        public async Task<Interior?> GetInteriorDetail(string interiorId)
         {
-            int skip = (pageIndex - 1) * pageSize;
-            var item = await _unit.InteriorRepo.GetPagedAsync(skip, pageSize, isAsc, sortField, searchValue, searchField);
-            long totalCount = await _unit.InteriorRepo.CountAsync();
-            int totalPages = (int)Math.Ceiling((double)totalCount / pageSize);
-            var response = new
-            {
-                TotalCount = totalCount,
-                Page = pageIndex,
-                PageSize = pageSize,
-                Material = item.ToList()
-            };
-            return response;
+            var getInterior = (await _unit.InteriorRepo.GetFieldsByFilterAsync([],
+                            g => g.InteriorId.Equals(interiorId))).FirstOrDefault();
+            return getInterior;
         }
 
         //public async Task<double> OptionalInteriorQuote(string[] arrMaterialId)
@@ -107,7 +108,7 @@ namespace Service.Service
 
         public async Task<string> UpdateInterior(UpdateInteriorView update)
         {
-            string _id = Authentication.GetUserIdFromJwt(update.Jwt);
+            string _id = AuthenticationJwtTool.GetUserIdFromJwt(update.Jwt);
             IEnumerable<AccountStatus> getUser = await _unit.AccountStatusRepo.GetFieldsByFilterAsync(["_id", "IsRole"],
                             g => g.AccountId.Equals(_id));
             var accountStatus = getUser.FirstOrDefault();
@@ -120,20 +121,22 @@ namespace Service.Service
                 {
                     if (update.Image.Length > 0)
                     {
-                        var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "InteriorPictures", $"{interior.InteriorId}_" + update.Image.FileName);
-                        using (var stream = System.IO.File.Create(path))
+                        //Encode picture
+                        byte[] fileBytes;
+                        using (var ms = new MemoryStream())
                         {
-                            await update.Image.CopyToAsync(stream);
+                            await update.Image.CopyToAsync(ms);
+                            fileBytes = ms.ToArray();
                         }
                         interior.InteriorName = update.InteriorName;
                         interior.MaterialId = update.MaterialId;
                         interior.Size = update.Size;
                         interior.InteriorType = update.InteriorType;
                         interior.Description = update.Description;
-                        interior.Image = "InteriorPictures" + $"{interior.InteriorId}_" + update.Image.FileName;
+                        interior.Image = fileBytes;
                         interior.Quantity = update.Quantity;
                         interior.Price = update.Price;
-                        interior.UpdatedAt = DateTime.Now;
+                        interior.UpdatedAt = System.DateTime.Now;
                         await _unit.InteriorRepo.UpdateItemByValue("InteriorId", update.InteriorId, interior);
                         return "Update interior successfully";
                     }
