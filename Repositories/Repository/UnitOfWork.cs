@@ -99,5 +99,15 @@ namespace Repositories.Repository
                 return _contactRepo;
             }
         }
+        private IRepository<Request> _requestRepo;
+        public IRepository<Request> RequestRepo
+        {
+            get
+            {
+                if (_requestRepo is null)
+                    _requestRepo = new Repository<Request>(_mongoClient);
+                return _requestRepo;
+            }
+        }
     }
 }
