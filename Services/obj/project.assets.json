@@ -3271,23 +3271,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\MSI BH\\.nuget\\packages\\": {},
+    "C:\\Users\\ADMIN\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\C#\\SWD392\\SWD\\Services\\Services.csproj",
+      "projectUniqueName": "D:\\DevTools\\repos\\New folder (2)\\New folder\\SWD\\Services\\Services.csproj",
       "projectName": "Services",
-      "projectPath": "D:\\C#\\SWD392\\SWD\\Services\\Services.csproj",
-      "packagesPath": "C:\\Users\\MSI BH\\.nuget\\packages\\",
-      "outputPath": "D:\\C#\\SWD392\\SWD\\Services\\obj\\",
+      "projectPath": "D:\\DevTools\\repos\\New folder (2)\\New folder\\SWD\\Services\\Services.csproj",
+      "packagesPath": "C:\\Users\\ADMIN\\.nuget\\packages\\",
+      "outputPath": "D:\\DevTools\\repos\\New folder (2)\\New folder\\SWD\\Services\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\MSI BH\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\ADMIN\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -3303,8 +3303,8 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "D:\\C#\\SWD392\\SWD\\Repositories\\Repositories.csproj": {
-              "projectPath": "D:\\C#\\SWD392\\SWD\\Repositories\\Repositories.csproj"
+            "D:\\DevTools\\repos\\New folder (2)\\New folder\\SWD\\Repositories\\Repositories.csproj": {
+              "projectPath": "D:\\DevTools\\repos\\New folder (2)\\New folder\\SWD\\Repositories\\Repositories.csproj"
             }
           }
         }
@@ -3313,11 +3313,6 @@
         "warnAsError": [
           "NU1605"
         ]
-      },
-      "restoreAuditProperties": {
-        "enableAudit": "true",
-        "auditLevel": "low",
-        "auditMode": "direct"
       }
     },
     "frameworks": {
@@ -3353,7 +3348,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.200/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.101/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
