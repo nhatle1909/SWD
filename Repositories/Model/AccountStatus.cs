@@ -7,7 +7,8 @@ namespace Repositories.Models
     public class AccountStatus : DateAndTime
     {
         [BsonId]
-        [BsonRepresentation(BsonType.ObjectId)] public required string AccountId { get; set; }
+        [BsonRepresentation(BsonType.String)] 
+        public required string AccountId { get; set; } = ObjectId.GenerateNewId().ToString();
         [BsonElement] public required string Email { get; set; }
         [BsonElement] public required bool IsAuthenticationEmail { get; set; } = false;
         [BsonElement] public required Role IsRole { get; set; }

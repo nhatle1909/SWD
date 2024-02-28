@@ -16,5 +16,7 @@ namespace Repositories.Repository
         IRepository<Material> MaterialRepo { get; }
         IRepository<Interior> InteriorRepo { get; }
         IRepository<Blog> BlogRepo { get; }
+        IRepository<BlogComment> BlogCommentRepo { get; }
+        IRepository<Contact> ContactRepo { get; }
     }
 }

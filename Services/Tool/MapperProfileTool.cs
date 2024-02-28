@@ -4,6 +4,7 @@ using Repositories.Models;
 using Repositories.ModelView;
 using static Repositories.ModelView.AccountView;
 using static Repositories.ModelView.BlogView;
+using static Repositories.ModelView.ContactView;
 using static Repositories.ModelView.InteriorView;
 using static Repositories.ModelView.MaterialView;
 namespace Services.Tool
@@ -19,9 +20,16 @@ namespace Services.Tool
 
             CreateMap<Material, AddMaterialView>().ReverseMap();
 
-            CreateMap<Interior, AddInteriorView>().ReverseMap();
+            CreateMap<Interior, AddInteriorView>().ReverseMap()
+                                                  .ForMember(a => a.Image, a => a.Ignore()); ;
 
-            CreateMap<Blog, AddBlogView>().ReverseMap();
+            CreateMap<Blog, AddBlogView>().ReverseMap()
+                                          .ForMember(a => a.Pictures, a => a.Ignore());
+
+            CreateMap<BlogComment, AddCommentBlogView>().ReverseMap();
+
+            CreateMap<Contact, AddContactView>().ReverseMap()
+                                          .ForMember(a => a.Pictures, a => a.Ignore());
         }
     }
 }

@@ -3,72 +3,107 @@
   "WorkspaceRootPath": "D:\\C#\\SWD392\\SWD\\SWD\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{4FFA5C9E-83D6-4107-8BA6-149B17BC7A6A}|SWD.csproj|d:\\c#\\swd392\\swd\\swd\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{3519327F-BFE9-4E2F-9BD5-AE5953361473}|..\\Services\\Services.csproj|d:\\c#\\swd392\\swd\\services\\tool\\authenticationjwttool.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4FFA5C9E-83D6-4107-8BA6-149B17BC7A6A}|SWD.csproj|d:\\c#\\swd392\\swd\\swd\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{4FFA5C9E-83D6-4107-8BA6-149B17BC7A6A}|SWD.csproj|solutionrelative:appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3519327F-BFE9-4E2F-9BD5-AE5953361473}|..\\Services\\Services.csproj|d:\\c#\\swd392\\swd\\services\\service\\contactservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3519327F-BFE9-4E2F-9BD5-AE5953361473}|..\\Services\\Services.csproj|d:\\c#\\swd392\\swd\\services\\service\\accountservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{77BD7764-E08F-4AD6-9564-CC3E7E75D5AD}|..\\Repositories\\Repositories.csproj|d:\\c#\\swd392\\swd\\repositories\\model\\accountstatus.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{77BD7764-E08F-4AD6-9564-CC3E7E75D5AD}|..\\Repositories\\Repositories.csproj|d:\\c#\\swd392\\swd\\repositories\\modelview\\contactview.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4FFA5C9E-83D6-4107-8BA6-149B17BC7A6A}|SWD.csproj|D:\\C#\\SWD392\\SWD\\SWD\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{4FFA5C9E-83D6-4107-8BA6-149B17BC7A6A}|SWD.csproj|solutionrelative:controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4FFA5C9E-83D6-4107-8BA6-149B17BC7A6A}|SWD.csproj|D:\\C#\\SWD392\\SWD\\SWD\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4FFA5C9E-83D6-4107-8BA6-149B17BC7A6A}|SWD.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{3519327F-BFE9-4E2F-9BD5-AE5953361473}|..\\Services\\Services.csproj|d:\\c#\\swd392\\swd\\services\\service\\materialservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4FFA5C9E-83D6-4107-8BA6-149B17BC7A6A}|SWD.csproj|D:\\C#\\SWD392\\SWD\\SWD\\controllers\\interiorcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4FFA5C9E-83D6-4107-8BA6-149B17BC7A6A}|SWD.csproj|solutionrelative:controllers\\interiorcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{77BD7764-E08F-4AD6-9564-CC3E7E75D5AD}|..\\Repositories\\Repositories.csproj|d:\\c#\\swd392\\swd\\repositories\\model\\material.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{77BD7764-E08F-4AD6-9564-CC3E7E75D5AD}|..\\Repositories\\Repositories.csproj|d:\\c#\\swd392\\swd\\repositories\\model\\interior.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4FFA5C9E-83D6-4107-8BA6-149B17BC7A6A}|SWD.csproj|D:\\C#\\SWD392\\SWD\\SWD\\controllers\\blogcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4FFA5C9E-83D6-4107-8BA6-149B17BC7A6A}|SWD.csproj|solutionrelative:controllers\\blogcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{77BD7764-E08F-4AD6-9564-CC3E7E75D5AD}|..\\Repositories\\Repositories.csproj|d:\\c#\\swd392\\swd\\repositories\\modelview\\interiorview.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{77BD7764-E08F-4AD6-9564-CC3E7E75D5AD}|..\\Repositories\\Repositories.csproj|d:\\c#\\swd392\\swd\\repositories\\modelview\\blogview.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{3519327F-BFE9-4E2F-9BD5-AE5953361473}|..\\Services\\Services.csproj|d:\\c#\\swd392\\swd\\services\\service\\interiorservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{77BD7764-E08F-4AD6-9564-CC3E7E75D5AD}|..\\Repositories\\Repositories.csproj|d:\\c#\\swd392\\swd\\repositories\\model\\dateandtime.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{77BD7764-E08F-4AD6-9564-CC3E7E75D5AD}|..\\Repositories\\Repositories.csproj|d:\\c#\\swd392\\swd\\repositories\\model\\contact.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{77BD7764-E08F-4AD6-9564-CC3E7E75D5AD}|..\\Repositories\\Repositories.csproj|d:\\c#\\swd392\\swd\\repositories\\model\\blogcomment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{77BD7764-E08F-4AD6-9564-CC3E7E75D5AD}|..\\Repositories\\Repositories.csproj|d:\\c#\\swd392\\swd\\repositories\\model\\blog.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{77BD7764-E08F-4AD6-9564-CC3E7E75D5AD}|..\\Repositories\\Repositories.csproj|d:\\c#\\swd392\\swd\\repositories\\model\\material.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{77BD7764-E08F-4AD6-9564-CC3E7E75D5AD}|..\\Repositories\\Repositories.csproj|d:\\c#\\swd392\\swd\\repositories\\model\\account.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4FFA5C9E-83D6-4107-8BA6-149B17BC7A6A}|SWD.csproj|D:\\C#\\SWD392\\SWD\\SWD\\controllers\\contactcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4FFA5C9E-83D6-4107-8BA6-149B17BC7A6A}|SWD.csproj|solutionrelative:controllers\\contactcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3519327F-BFE9-4E2F-9BD5-AE5953361473}|..\\Services\\Services.csproj|d:\\c#\\swd392\\swd\\services\\service\\icontactservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{4FFA5C9E-83D6-4107-8BA6-149B17BC7A6A}|SWD.csproj|D:\\C#\\SWD392\\SWD\\SWD\\controllers\\materialcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{4FFA5C9E-83D6-4107-8BA6-149B17BC7A6A}|SWD.csproj|solutionrelative:controllers\\materialcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{77BD7764-E08F-4AD6-9564-CC3E7E75D5AD}|..\\Repositories\\Repositories.csproj|d:\\c#\\swd392\\swd\\repositories\\modelview\\accountview.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{3519327F-BFE9-4E2F-9BD5-AE5953361473}|..\\Services\\Services.csproj|d:\\c#\\swd392\\swd\\services\\interface\\iblogservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{77BD7764-E08F-4AD6-9564-CC3E7E75D5AD}|..\\Repositories\\Repositories.csproj|d:\\c#\\swd392\\swd\\repositories\\repository\\repository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{77BD7764-E08F-4AD6-9564-CC3E7E75D5AD}|..\\Repositories\\Repositories.csproj|d:\\c#\\swd392\\swd\\repositories\\modelview\\materialview.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{77BD7764-E08F-4AD6-9564-CC3E7E75D5AD}|..\\Repositories\\Repositories.csproj|d:\\c#\\swd392\\swd\\repositories\\repository\\irepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{3519327F-BFE9-4E2F-9BD5-AE5953361473}|..\\Services\\Services.csproj|d:\\c#\\swd392\\swd\\services\\interface\\imaterialservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{3519327F-BFE9-4E2F-9BD5-AE5953361473}|..\\Services\\Services.csproj|d:\\c#\\swd392\\swd\\services\\service\\accountservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{3519327F-BFE9-4E2F-9BD5-AE5953361473}|..\\Services\\Services.csproj|d:\\c#\\swd392\\swd\\services\\service\\materialservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{77BD7764-E08F-4AD6-9564-CC3E7E75D5AD}|..\\Repositories\\Repositories.csproj|d:\\c#\\swd392\\swd\\repositories\\modelview\\interiorview.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{77BD7764-E08F-4AD6-9564-CC3E7E75D5AD}|..\\Repositories\\Repositories.csproj|d:\\c#\\swd392\\swd\\repositories\\model\\account.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{77BD7764-E08F-4AD6-9564-CC3E7E75D5AD}|..\\Repositories\\Repositories.csproj|d:\\c#\\swd392\\swd\\repositories\\model\\blogcomment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{4FFA5C9E-83D6-4107-8BA6-149B17BC7A6A}|SWD.csproj|D:\\C#\\SWD392\\SWD\\SWD\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4FFA5C9E-83D6-4107-8BA6-149B17BC7A6A}|SWD.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{3519327F-BFE9-4E2F-9BD5-AE5953361473}|..\\Services\\Services.csproj|d:\\c#\\swd392\\swd\\services\\service\\blogservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{77BD7764-E08F-4AD6-9564-CC3E7E75D5AD}|..\\Repositories\\Repositories.csproj|d:\\c#\\swd392\\swd\\repositories\\model\\accountstatus.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{77BD7764-E08F-4AD6-9564-CC3E7E75D5AD}|..\\Repositories\\Repositories.csproj|d:\\c#\\swd392\\swd\\repositories\\modelview\\accountview.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{3519327F-BFE9-4E2F-9BD5-AE5953361473}|..\\Services\\Services.csproj|d:\\c#\\swd392\\swd\\services\\service\\interiorservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{3519327F-BFE9-4E2F-9BD5-AE5953361473}|..\\Services\\Services.csproj|d:\\c#\\swd392\\swd\\services\\interface\\iinteriorservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{77BD7764-E08F-4AD6-9564-CC3E7E75D5AD}|..\\Repositories\\Repositories.csproj|d:\\c#\\swd392\\swd\\repositories\\modelview\\materialview.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{4FFA5C9E-83D6-4107-8BA6-149B17BC7A6A}|SWD.csproj|D:\\C#\\SWD392\\SWD\\SWD\\controllers\\blogcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4FFA5C9E-83D6-4107-8BA6-149B17BC7A6A}|SWD.csproj|solutionrelative:controllers\\blogcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{77BD7764-E08F-4AD6-9564-CC3E7E75D5AD}|..\\Repositories\\Repositories.csproj|d:\\c#\\swd392\\swd\\repositories\\repository\\irepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{77BD7764-E08F-4AD6-9564-CC3E7E75D5AD}|..\\Repositories\\Repositories.csproj|d:\\c#\\swd392\\swd\\repositories\\modelview\\blogview.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4FFA5C9E-83D6-4107-8BA6-149B17BC7A6A}|SWD.csproj|D:\\C#\\SWD392\\SWD\\SWD\\controllers\\interiorcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4FFA5C9E-83D6-4107-8BA6-149B17BC7A6A}|SWD.csproj|solutionrelative:controllers\\interiorcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{77BD7764-E08F-4AD6-9564-CC3E7E75D5AD}|..\\Repositories\\Repositories.csproj|d:\\c#\\swd392\\swd\\repositories\\repository\\repository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -78,11 +113,263 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 11,
+          "SelectedChildIndex": 73,
           "Children": [
             {
               "$type": "Bookmark",
+              "Name": "ST:0:0:{eefa5220-e298-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:1:0:{e8b06f52-6d01-11d2-aa7d-00c04f990343}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{b1e99781-ab81-11d0-b683-00aa00a3ee26}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Bookmark",
               "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:1:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:132:0:{13b12e3e-c1b4-4539-9371-4fe9a0d523fc}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{13b12e3e-c1b4-4539-9371-4fe9a0d523fc}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c64b9c2-e352-428e-a56d-0ace190b99a6}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:129:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:130:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:131:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:2:0:{e8b06f52-6d01-11d2-aa7d-00c04f990343}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{873151d0-cf2e-48cc-b4bf-ad0394f6a3c3}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{c9c0ae26-aa77-11d2-b3f0-0000f87570ee}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:4:0:{e8034f19-ab72-4f06-83fd-f6832b41aa63}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:1377497384:0:{83107a3e-496a-485e-b455-16ddb978e55e}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:15:0:{e8b06f52-6d01-11d2-aa7d-00c04f990343}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:16:0:{e8b06f52-6d01-11d2-aa7d-00c04f990343}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:17:0:{e8b06f52-6d01-11d2-aa7d-00c04f990343}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:14:0:{e8b06f52-6d01-11d2-aa7d-00c04f990343}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:13:0:{e8b06f52-6d01-11d2-aa7d-00c04f990343}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:12:0:{e8b06f52-6d01-11d2-aa7d-00c04f990343}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:11:0:{e8b06f52-6d01-11d2-aa7d-00c04f990343}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:10:0:{e8b06f52-6d01-11d2-aa7d-00c04f990343}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:9:0:{e8b06f52-6d01-11d2-aa7d-00c04f990343}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:8:0:{e8b06f52-6d01-11d2-aa7d-00c04f990343}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:7:0:{e8b06f52-6d01-11d2-aa7d-00c04f990343}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:6:0:{e8b06f52-6d01-11d2-aa7d-00c04f990343}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:5:0:{e8b06f52-6d01-11d2-aa7d-00c04f990343}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:4:0:{e8b06f52-6d01-11d2-aa7d-00c04f990343}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:3:0:{e8b06f52-6d01-11d2-aa7d-00c04f990343}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:129:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:130:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:131:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:132:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:16:0:{e8034f19-ab72-4f06-83fd-f6832b41aa63}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:17:0:{e8034f19-ab72-4f06-83fd-f6832b41aa63}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{e1b7d1f8-9b3c-49b1-8f4f-bfc63a88835d}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{588470cc-84f8-4a57-9ac4-86bca0625ff4}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:1928210406:0:{bf84ea66-d821-4dba-b1b1-2777d8574775}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:350743133:0:{bf84ea66-d821-4dba-b1b1-2777d8574775}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:132:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:2:0:{d212f56b-c48a-434c-a121-1c5d80b59b9f}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:3:0:{d212f56b-c48a-434c-a121-1c5d80b59b9f}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:1:0:{d212f56b-c48a-434c-a121-1c5d80b59b9f}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:4:0:{d212f56b-c48a-434c-a121-1c5d80b59b9f}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:5:0:{d212f56b-c48a-434c-a121-1c5d80b59b9f}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:6:0:{d212f56b-c48a-434c-a121-1c5d80b59b9f}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:27:0:{e8034f19-ab72-4f06-83fd-f6832b41aa63}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:23:0:{e8034f19-ab72-4f06-83fd-f6832b41aa63}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:3:0:{e8034f19-ab72-4f06-83fd-f6832b41aa63}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:29:0:{e8034f19-ab72-4f06-83fd-f6832b41aa63}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{004be353-6879-467c-9d1e-9ac23cdf6d49}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:2:0:{e8034f19-ab72-4f06-83fd-f6832b41aa63}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:12:0:{2456bd12-ecf7-4988-a4a6-67d49173f565}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:13:0:{2456bd12-ecf7-4988-a4a6-67d49173f565}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:14:0:{e8034f19-ab72-4f06-83fd-f6832b41aa63}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:1:0:{e8034f19-ab72-4f06-83fd-f6832b41aa63}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:19:0:{e8034f19-ab72-4f06-83fd-f6832b41aa63}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:33:0:{e8034f19-ab72-4f06-83fd-f6832b41aa63}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:38:0:{e8034f19-ab72-4f06-83fd-f6832b41aa63}"
             },
             {
               "$type": "Bookmark",
@@ -98,6 +385,14 @@
             },
             {
               "$type": "Bookmark",
+              "Name": "ST:41:0:{e8034f19-ab72-4f06-83fd-f6832b41aa63}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:42:0:{e8034f19-ab72-4f06-83fd-f6832b41aa63}"
+            },
+            {
+              "$type": "Bookmark",
               "Name": "ST:43:0:{e8034f19-ab72-4f06-83fd-f6832b41aa63}"
             },
             {
@@ -106,76 +401,213 @@
             },
             {
               "$type": "Bookmark",
-              "Name": "ST:0:0:{004be353-6879-467c-9d1e-9ac23cdf6d49}"
+              "Name": "ST:0:0:{a80febb4-e7e0-4147-b476-21aaf2453969}"
             },
             {
-              "$type": "Bookmark",
-              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "D:\\C#\\SWD392\\SWD\\SWD\\appsettings.json",
+              "RelativeDocumentMoniker": "appsettings.json",
+              "ToolTip": "D:\\C#\\SWD392\\SWD\\SWD\\appsettings.json",
+              "RelativeToolTip": "appsettings.json",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABAAAAAmAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2024-02-28T04:59:09.597Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "AuthenticationJwtTool.cs",
+              "DocumentMoniker": "D:\\C#\\SWD392\\SWD\\Services\\Tool\\AuthenticationJwtTool.cs",
+              "RelativeDocumentMoniker": "..\\Services\\Tool\\AuthenticationJwtTool.cs",
+              "ToolTip": "D:\\C#\\SWD392\\SWD\\Services\\Tool\\AuthenticationJwtTool.cs",
+              "RelativeToolTip": "..\\Services\\Tool\\AuthenticationJwtTool.cs",
+              "ViewState": "AQIAACQAAAAAAAAAAAAUwDAAAAAyAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-02-28T04:46:38.502Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "DateAndTime.cs",
+              "DocumentMoniker": "D:\\C#\\SWD392\\SWD\\Repositories\\Model\\DateAndTime.cs",
+              "RelativeDocumentMoniker": "..\\Repositories\\Model\\DateAndTime.cs",
+              "ToolTip": "D:\\C#\\SWD392\\SWD\\Repositories\\Model\\DateAndTime.cs",
+              "RelativeToolTip": "..\\Repositories\\Model\\DateAndTime.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-02-28T04:30:43.925Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "ContactController.cs",
+              "DocumentMoniker": "D:\\C#\\SWD392\\SWD\\SWD\\Controllers\\ContactController.cs",
+              "RelativeDocumentMoniker": "Controllers\\ContactController.cs",
+              "ToolTip": "D:\\C#\\SWD392\\SWD\\SWD\\Controllers\\ContactController.cs",
+              "RelativeToolTip": "Controllers\\ContactController.cs",
+              "ViewState": "AQIAAC0AAAAAAAAAAAAuwFkAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-02-27T14:40:49.532Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "ContactService.cs",
+              "DocumentMoniker": "D:\\C#\\SWD392\\SWD\\Services\\Service\\ContactService.cs",
+              "RelativeDocumentMoniker": "..\\Services\\Service\\ContactService.cs",
+              "ToolTip": "D:\\C#\\SWD392\\SWD\\Services\\Service\\ContactService.cs",
+              "RelativeToolTip": "..\\Services\\Service\\ContactService.cs",
+              "ViewState": "AQIAACgAAAAAAAAAAAAiwDQAAAA2AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-02-27T14:05:28.817Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 18,
+              "Title": "IContactService.cs",
+              "DocumentMoniker": "D:\\C#\\SWD392\\SWD\\Services\\Service\\IContactService.cs",
+              "RelativeDocumentMoniker": "..\\Services\\Service\\IContactService.cs",
+              "ToolTip": "D:\\C#\\SWD392\\SWD\\Services\\Service\\IContactService.cs",
+              "RelativeToolTip": "..\\Services\\Service\\IContactService.cs",
+              "ViewState": "AQIAAAUAAAAAAAAAAAAWwA0AAAA9AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-02-27T14:03:41.983Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "ContactView.cs",
+              "DocumentMoniker": "D:\\C#\\SWD392\\SWD\\Repositories\\ModelView\\ContactView.cs",
+              "RelativeDocumentMoniker": "..\\Repositories\\ModelView\\ContactView.cs",
+              "ToolTip": "D:\\C#\\SWD392\\SWD\\Repositories\\ModelView\\ContactView.cs",
+              "RelativeToolTip": "..\\Repositories\\ModelView\\ContactView.cs",
+              "ViewState": "AQIAACcAAAAAAAAAAAAswBwAAAAJAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-02-27T13:56:21.906Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "IBlogService.cs",
+              "DocumentMoniker": "D:\\C#\\SWD392\\SWD\\Services\\Interface\\IBlogService.cs",
+              "RelativeDocumentMoniker": "..\\Services\\Interface\\IBlogService.cs",
+              "ToolTip": "D:\\C#\\SWD392\\SWD\\Services\\Interface\\IBlogService.cs",
+              "RelativeToolTip": "..\\Services\\Interface\\IBlogService.cs",
+              "ViewState": "AQIAAAkAAAAAAAAAAAAAAA0AAAAuAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-02-27T09:48:36.329Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "Contact.cs",
+              "DocumentMoniker": "D:\\C#\\SWD392\\SWD\\Repositories\\Model\\Contact.cs",
+              "RelativeDocumentMoniker": "..\\Repositories\\Model\\Contact.cs",
+              "ToolTip": "D:\\C#\\SWD392\\SWD\\Repositories\\Model\\Contact.cs",
+              "RelativeToolTip": "..\\Repositories\\Model\\Contact.cs",
+              "ViewState": "AQIAAAgAAAAAAAAAAAAQwA0AAABCAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-02-27T09:44:03.691Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "IMaterialService.cs",
+              "DocumentMoniker": "D:\\C#\\SWD392\\SWD\\Services\\Interface\\IMaterialService.cs",
+              "RelativeDocumentMoniker": "..\\Services\\Interface\\IMaterialService.cs",
+              "ToolTip": "D:\\C#\\SWD392\\SWD\\Services\\Interface\\IMaterialService.cs",
+              "RelativeToolTip": "..\\Services\\Interface\\IMaterialService.cs",
+              "ViewState": "AQIAAAMAAAAAAAAAAAAAAAsAAAA/AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-02-26T08:16:28.274Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 26,
+              "Title": "IInteriorService.cs",
+              "DocumentMoniker": "D:\\C#\\SWD392\\SWD\\Services\\Interface\\IInteriorService.cs",
+              "RelativeDocumentMoniker": "..\\Services\\Interface\\IInteriorService.cs",
+              "ToolTip": "D:\\C#\\SWD392\\SWD\\Services\\Interface\\IInteriorService.cs",
+              "RelativeToolTip": "..\\Services\\Interface\\IInteriorService.cs",
+              "ViewState": "AQIAAAMAAAAAAAAAAAAAAAgAAAAUAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-02-26T08:15:19.813Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
               "Title": "AccountStatus.cs",
               "DocumentMoniker": "D:\\C#\\SWD392\\SWD\\Repositories\\Model\\AccountStatus.cs",
               "RelativeDocumentMoniker": "..\\Repositories\\Model\\AccountStatus.cs",
               "ToolTip": "D:\\C#\\SWD392\\SWD\\Repositories\\Model\\AccountStatus.cs",
               "RelativeToolTip": "..\\Repositories\\Model\\AccountStatus.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "ViewState": "AQIAAAYAAAAAAAAAAAAAAA8AAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-02-25T07:51:31.208Z"
+              "WhenOpened": "2024-02-25T07:51:31.208Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 16,
               "Title": "Account.cs",
               "DocumentMoniker": "D:\\C#\\SWD392\\SWD\\Repositories\\Model\\Account.cs",
               "RelativeDocumentMoniker": "..\\Repositories\\Model\\Account.cs",
               "ToolTip": "D:\\C#\\SWD392\\SWD\\Repositories\\Model\\Account.cs",
               "RelativeToolTip": "..\\Repositories\\Model\\Account.cs",
-              "ViewState": "AQIAAAMAAAAAAAAAAAAAAA4AAAA0AAAA",
+              "ViewState": "AQIAAAYAAAAAAAAAAAAAAAoAAABdAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-02-25T07:51:28.986Z"
+              "WhenOpened": "2024-02-25T07:51:28.986Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 14,
               "Title": "BlogComment.cs",
               "DocumentMoniker": "D:\\C#\\SWD392\\SWD\\Repositories\\Model\\BlogComment.cs",
               "RelativeDocumentMoniker": "..\\Repositories\\Model\\BlogComment.cs",
               "ToolTip": "D:\\C#\\SWD392\\SWD\\Repositories\\Model\\BlogComment.cs",
               "RelativeToolTip": "..\\Repositories\\Model\\BlogComment.cs",
-              "ViewState": "AQIAAAoAAAAAAAAAAAAAABEAAABCAAAA",
+              "ViewState": "AQIAAAcAAAAAAAAAAAAAAA8AAABhAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-02-25T07:47:26.281Z"
+              "WhenOpened": "2024-02-25T07:47:26.281Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 6,
               "Title": "AccountController.cs",
               "DocumentMoniker": "D:\\C#\\SWD392\\SWD\\SWD\\Controllers\\AccountController.cs",
               "RelativeDocumentMoniker": "Controllers\\AccountController.cs",
               "ToolTip": "D:\\C#\\SWD392\\SWD\\SWD\\Controllers\\AccountController.cs",
               "RelativeToolTip": "Controllers\\AccountController.cs",
-              "ViewState": "AQIAADkAAAAAAAAAAAAwwNMAAAAeAAAA",
+              "ViewState": "AQIAAMAAAAAAAAAAAAAAAPEAAAAIAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-02-25T07:38:02.752Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 28,
               "Title": "IRepository.cs",
               "DocumentMoniker": "D:\\C#\\SWD392\\SWD\\Repositories\\Repository\\IRepository.cs",
               "RelativeDocumentMoniker": "..\\Repositories\\Repository\\IRepository.cs",
               "ToolTip": "D:\\C#\\SWD392\\SWD\\Repositories\\Repository\\IRepository.cs",
               "RelativeToolTip": "..\\Repositories\\Repository\\IRepository.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAMAAAAhAAAA",
+              "ViewState": "AQIAAAUAAAAAAAAAAAAxwAgAAAAkAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-02-25T06:36:31.815Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 31,
               "Title": "Repository.cs",
               "DocumentMoniker": "D:\\C#\\SWD392\\SWD\\Repositories\\Repository\\Repository.cs",
               "RelativeDocumentMoniker": "..\\Repositories\\Repository\\Repository.cs",
@@ -187,183 +619,244 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 25,
               "Title": "AccountView.cs",
               "DocumentMoniker": "D:\\C#\\SWD392\\SWD\\Repositories\\ModelView\\AccountView.cs",
               "RelativeDocumentMoniker": "..\\Repositories\\ModelView\\AccountView.cs",
               "ToolTip": "D:\\C#\\SWD392\\SWD\\Repositories\\ModelView\\AccountView.cs",
               "RelativeToolTip": "..\\Repositories\\ModelView\\AccountView.cs",
-              "ViewState": "AQIAADQAAAAAAAAAAAAjwD0AAAAtAAAA",
+              "ViewState": "AQIAAHQAAAAAAAAAAAAhwHkAAAAmAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-02-25T05:38:55.759Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 3,
               "Title": "AccountService.cs",
               "DocumentMoniker": "D:\\C#\\SWD392\\SWD\\Services\\Service\\AccountService.cs",
               "RelativeDocumentMoniker": "..\\Services\\Service\\AccountService.cs",
               "ToolTip": "D:\\C#\\SWD392\\SWD\\Services\\Service\\AccountService.cs",
               "RelativeToolTip": "..\\Services\\Service\\AccountService.cs",
-              "ViewState": "AQIAABcAAAAAAAAAAAAQwCEAAAAdAAAA",
+              "ViewState": "AQIAAJsAAAAAAAAAAAAAAKUAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-02-25T05:37:41.131Z"
+              "WhenOpened": "2024-02-25T05:37:41.131Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 7,
               "Title": "MaterialService.cs",
               "DocumentMoniker": "D:\\C#\\SWD392\\SWD\\Services\\Service\\MaterialService.cs",
               "RelativeDocumentMoniker": "..\\Services\\Service\\MaterialService.cs",
               "ToolTip": "D:\\C#\\SWD392\\SWD\\Services\\Service\\MaterialService.cs",
               "RelativeToolTip": "..\\Services\\Service\\MaterialService.cs",
-              "ViewState": "AQIAAAoAAAAAAAAAAAAAAA4AAAAzAAAA",
+              "ViewState": "AQIAACQAAAAAAAAAAAAhwDYAAAA6AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-02-25T03:46:59.008Z"
+              "WhenOpened": "2024-02-25T03:46:59.008Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 19,
+              "DocumentIndex": 11,
               "Title": "InteriorService.cs",
               "DocumentMoniker": "D:\\C#\\SWD392\\SWD\\Services\\Service\\InteriorService.cs",
               "RelativeDocumentMoniker": "..\\Services\\Service\\InteriorService.cs",
               "ToolTip": "D:\\C#\\SWD392\\SWD\\Services\\Service\\InteriorService.cs",
               "RelativeToolTip": "..\\Services\\Service\\InteriorService.cs",
-              "ViewState": "AQIAABcAAAAAAAAAAAAIwFAAAAAyAAAA",
+              "ViewState": "AQIAAGcAAAAAAAAAAAAmwHUAAAAhAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-02-24T04:49:48.509Z"
+              "WhenOpened": "2024-02-24T04:49:48.509Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 9,
               "Title": "Interior.cs",
               "DocumentMoniker": "D:\\C#\\SWD392\\SWD\\Repositories\\Model\\Interior.cs",
               "RelativeDocumentMoniker": "..\\Repositories\\Model\\Interior.cs",
               "ToolTip": "D:\\C#\\SWD392\\SWD\\Repositories\\Model\\Interior.cs",
               "RelativeToolTip": "..\\Repositories\\Model\\Interior.cs",
-              "ViewState": "AQIAAAYAAAAAAAAAAAAqwAYAAAAcAAAA",
+              "ViewState": "AQIAAAcAAAAAAAAAAAAiwA4AAAA+AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-02-24T04:49:22.039Z"
+              "WhenOpened": "2024-02-24T04:49:22.039Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 8,
               "Title": "Material.cs",
               "DocumentMoniker": "D:\\C#\\SWD392\\SWD\\Repositories\\Model\\Material.cs",
               "RelativeDocumentMoniker": "..\\Repositories\\Model\\Material.cs",
               "ToolTip": "D:\\C#\\SWD392\\SWD\\Repositories\\Model\\Material.cs",
               "RelativeToolTip": "..\\Repositories\\Model\\Material.cs",
-              "ViewState": "AQIAAAMAAAAAAAAAAAAAAAcAAAAcAAAA",
+              "ViewState": "AQIAAAYAAAAAAAAAAAAAAA8AAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-02-24T04:49:16.115Z"
+              "WhenOpened": "2024-02-24T04:49:16.115Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 20,
+              "DocumentIndex": 21,
               "Title": "MaterialView.cs",
               "DocumentMoniker": "D:\\C#\\SWD392\\SWD\\Repositories\\ModelView\\MaterialView.cs",
               "RelativeDocumentMoniker": "..\\Repositories\\ModelView\\MaterialView.cs",
               "ToolTip": "D:\\C#\\SWD392\\SWD\\Repositories\\ModelView\\MaterialView.cs",
               "RelativeToolTip": "..\\Repositories\\ModelView\\MaterialView.cs",
-              "ViewState": "AQIAABMAAAAAAAAAAAAAACUAAAAnAAAA",
+              "ViewState": "AQIAABgAAAAAAAAAAAAIwCMAAAAJAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-02-24T04:49:13.19Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 15,
               "Title": "Blog.cs",
               "DocumentMoniker": "D:\\C#\\SWD392\\SWD\\Repositories\\Model\\Blog.cs",
               "RelativeDocumentMoniker": "..\\Repositories\\Model\\Blog.cs",
               "ToolTip": "D:\\C#\\SWD392\\SWD\\Repositories\\Model\\Blog.cs",
               "RelativeToolTip": "..\\Repositories\\Model\\Blog.cs",
-              "ViewState": "AQIAAA4AAAAAAAAAAAAQwAoAAAAcAAAA",
+              "ViewState": "AQIAAAkAAAAAAAAAAAAqwA8AAABaAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-02-24T03:50:59.737Z"
+              "WhenOpened": "2024-02-24T03:50:59.737Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 29,
               "Title": "BlogView.cs",
               "DocumentMoniker": "D:\\C#\\SWD392\\SWD\\Repositories\\ModelView\\BlogView.cs",
               "RelativeDocumentMoniker": "..\\Repositories\\ModelView\\BlogView.cs",
               "ToolTip": "D:\\C#\\SWD392\\SWD\\Repositories\\ModelView\\BlogView.cs",
               "RelativeToolTip": "..\\Repositories\\ModelView\\BlogView.cs",
-              "ViewState": "AQIAABkAAAAAAAAAAAAiwB4AAAAjAAAA",
+              "ViewState": "AQIAAAwAAAAAAAAAAAAAABIAAAAnAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-02-24T03:49:27.373Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 24,
               "Title": "BlogService.cs",
               "DocumentMoniker": "D:\\C#\\SWD392\\SWD\\Services\\Service\\BlogService.cs",
               "RelativeDocumentMoniker": "..\\Services\\Service\\BlogService.cs",
               "ToolTip": "D:\\C#\\SWD392\\SWD\\Services\\Service\\BlogService.cs",
               "RelativeToolTip": "..\\Services\\Service\\BlogService.cs",
-              "ViewState": "AQIAAJQAAAAAAAAAAAAQwJkAAAAnAAAA",
+              "ViewState": "AQIAAJUAAAAAAAAAAAAAAKAAAAANAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-02-24T03:45:10.427Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 19,
               "Title": "MaterialController.cs",
               "DocumentMoniker": "D:\\C#\\SWD392\\SWD\\SWD\\Controllers\\MaterialController.cs",
               "RelativeDocumentMoniker": "Controllers\\MaterialController.cs",
               "ToolTip": "D:\\C#\\SWD392\\SWD\\SWD\\Controllers\\MaterialController.cs",
               "RelativeToolTip": "Controllers\\MaterialController.cs",
-              "ViewState": "AQIAABAAAAAAAAAAAAAgwBkAAABDAAAA",
+              "ViewState": "AQIAAA8AAAAAAAAAAAAgwBQAAAA3AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-02-23T04:56:36.418Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 27,
               "Title": "BlogController.cs",
               "DocumentMoniker": "D:\\C#\\SWD392\\SWD\\SWD\\Controllers\\BlogController.cs",
               "RelativeDocumentMoniker": "Controllers\\BlogController.cs",
               "ToolTip": "D:\\C#\\SWD392\\SWD\\SWD\\Controllers\\BlogController.cs",
               "RelativeToolTip": "Controllers\\BlogController.cs",
-              "ViewState": "AQIAABEAAAAAAAAAAAAkwEkAAAApAAAA",
+              "ViewState": "AQIAAA0AAAAAAAAAAAAcwCMAAAAJAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-02-23T04:56:31.901Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 10,
               "Title": "InteriorView.cs",
               "DocumentMoniker": "D:\\C#\\SWD392\\SWD\\Repositories\\ModelView\\InteriorView.cs",
               "RelativeDocumentMoniker": "..\\Repositories\\ModelView\\InteriorView.cs",
               "ToolTip": "D:\\C#\\SWD392\\SWD\\Repositories\\ModelView\\InteriorView.cs",
               "RelativeToolTip": "..\\Repositories\\ModelView\\InteriorView.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAC0AAAAtAAAA",
+              "ViewState": "AQIAABcAAAAAAAAAAAAWwBkAAAAnAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-02-23T04:55:52.234Z"
+              "WhenOpened": "2024-02-23T04:55:52.234Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 30,
               "Title": "InteriorController.cs",
               "DocumentMoniker": "D:\\C#\\SWD392\\SWD\\SWD\\Controllers\\InteriorController.cs",
               "RelativeDocumentMoniker": "Controllers\\InteriorController.cs",
               "ToolTip": "D:\\C#\\SWD392\\SWD\\SWD\\Controllers\\InteriorController.cs",
               "RelativeToolTip": "Controllers\\InteriorController.cs",
-              "ViewState": "AQIAAA0AAAAAAAAAAAA3wBkAAAAkAAAA",
+              "ViewState": "AQIAABIAAAAAAAAAAAA2wC4AAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-02-21T05:54:02.389Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 23,
               "Title": "Program.cs",
               "DocumentMoniker": "D:\\C#\\SWD392\\SWD\\SWD\\Program.cs",
               "RelativeDocumentMoniker": "Program.cs",
               "ToolTip": "D:\\C#\\SWD392\\SWD\\SWD\\Program.cs",
               "RelativeToolTip": "Program.cs",
-              "ViewState": "AQIAABAAAAAAAAAAAAA1wAcAAAAUAAAA",
+              "ViewState": "AQIAABcAAAAAAAAAAAAAACIAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-02-17T03:52:12.293Z"
+            }
+          ]
+        },
+        {
+          "DockedWidth": 1052,
+          "SelectedChildIndex": -1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:12:0:{d212f56b-c48a-434c-a121-1c5d80b59b9f}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:13:0:{d212f56b-c48a-434c-a121-1c5d80b59b9f}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:26:0:{e8034f19-ab72-4f06-83fd-f6832b41aa63}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:31:0:{e8034f19-ab72-4f06-83fd-f6832b41aa63}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:32:0:{e8034f19-ab72-4f06-83fd-f6832b41aa63}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:35:0:{e8034f19-ab72-4f06-83fd-f6832b41aa63}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:36:0:{e8034f19-ab72-4f06-83fd-f6832b41aa63}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:39:0:{e8034f19-ab72-4f06-83fd-f6832b41aa63}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:24:0:{e8034f19-ab72-4f06-83fd-f6832b41aa63}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:28:0:{e8034f19-ab72-4f06-83fd-f6832b41aa63}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:22:0:{e8034f19-ab72-4f06-83fd-f6832b41aa63}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:13:0:{e8034f19-ab72-4f06-83fd-f6832b41aa63}"
             }
           ]
         }

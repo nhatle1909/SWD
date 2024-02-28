@@ -92,20 +92,6 @@ namespace Services.Service
             return getInterior;
         }
 
-        //public async Task<double> OptionalInteriorQuote(string[] arrMaterialId)
-        //{
-        //    IEnumerable<Material> materials = await _repoInterior.GetFieldsByFilterAsync(["Price"],
-        //                    c => arrMaterialId.Contains(c.MaterialId));
-        //    if (materials.Any())
-        //    {
-        //        double totalPrice = 0;
-        //        foreach (var material in materials)
-        //            totalPrice += material.Price;
-        //        return totalPrice;
-        //    }
-        //    return 0;
-        //}
-
         public async Task<string> UpdateInterior(UpdateInteriorView update)
         {
             string _id = AuthenticationJwtTool.GetUserIdFromJwt(update.Jwt);

@@ -77,5 +77,27 @@ namespace Repositories.Repository
                 return _blogRepo;
             }
         }
+
+        private IRepository<BlogComment> _blogCommentRepo;
+        public IRepository<BlogComment> BlogCommentRepo
+        {
+            get
+            {
+                if (_blogCommentRepo is null)
+                    _blogCommentRepo = new Repository<BlogComment>(_mongoClient);
+                return _blogCommentRepo;
+            }
+        }
+
+        private IRepository<Contact> _contactRepo;
+        public IRepository<Contact> ContactRepo
+        {
+            get
+            {
+                if (_contactRepo is null)
+                    _contactRepo = new Repository<Contact>(_mongoClient);
+                return _contactRepo;
+            }
+        }
     }
 }

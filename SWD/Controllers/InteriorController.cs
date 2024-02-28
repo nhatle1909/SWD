@@ -51,12 +51,5 @@ namespace SWD.Controllers
             return Ok(result);
         }
 
-        //[HttpPost("Optional-Interior-Quote")]
-        //public async Task<IActionResult> OptionalInteriorQuote(string[] arrMaterialId)
-        //{
-        //    double totalPrice = await _interiorService.OptionalInteriorQuote(arrMaterialId);
-
-        //    return Ok(totalPrice);
-        //}
     }
 }

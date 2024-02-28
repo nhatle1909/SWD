@@ -11,6 +11,5 @@ namespace Services.Interface
         Task<string> AddOneInterior(AddInteriorView add);
         Task<string> UpdateInterior(UpdateInteriorView update);
         Task<string> DeleteInterior(DeleteInteriorView delete);
-        //public Task<double> OptionalInteriorQuote(string[] arrMaterialId);
     }
 }

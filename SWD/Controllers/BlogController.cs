@@ -77,5 +77,47 @@ namespace SWD.Controllers
             var result = await _blogService.GetPagingBlog(pageIndex, isAsc, searchValue);
             return Ok(result);
         }
+
+        [HttpPost("Add-An-Comment-Blog")]
+        public async Task<IActionResult> AddAnCommentBlog([FromBody] AddCommentBlogView addComment)
+        {
+            try
+            {
+                await _blogService.AddBlogComment(addComment);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpPatch("Update-An-Comment-Blog")]
+        public async Task<IActionResult> UpdateCommentAnBlog([FromBody] UpdateCommentBlogView updateComment)
+        {
+            try
+            {
+                await _blogService.UpdateCommentBlog(updateComment);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpDelete("Remove-An-Comment-Blog")]
+        public async Task<IActionResult> RemoveAnCommentBlog([FromBody] RemoveCommentBlogView removeComment)
+        {
+            try
+            {
+                await _blogService.RemoveCommentBlog(removeComment);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
     }
 }

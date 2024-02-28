@@ -12,7 +12,8 @@ namespace Repositories.Model
 {
     public class Blog : DateAndTime
     {
-        [BsonId][BsonRepresentation(BsonType.ObjectId)] public required string BlogId { get; set; }
+        [BsonId][BsonRepresentation(BsonType.String)] 
+        public required string BlogId { get; set; } = ObjectId.GenerateNewId().ToString();
         [BsonElement][EmailAddress] public required string Email { get; set; }
         [BsonElement] public required string Title { get; set; }
         [BsonElement] public required string Content { get; set; }

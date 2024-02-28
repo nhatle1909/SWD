@@ -10,5 +10,6 @@ namespace Services.Interface
         Task<string> AddOneMaterial(AddMaterialView add);
         Task<string> UpdateMaterial(UpdateMaterialView update);
         Task<string> DeleteMaterial(DeleteMaterialView delete);
+        Task<double> OptionalProductQuote(string[] arrMaterialId);
     }
 }

@@ -3,6 +3,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using static Org.BouncyCastle.Bcpg.Attr.ImageAttrib;
 
 namespace Services.Tool
 {
@@ -21,8 +22,8 @@ namespace Services.Tool
 
             var claims = new[]
             {
-            new Claim("_id",userId)
-        };
+                new Claim("_id",userId)
+            };
 
             var token = new JwtSecurityToken(
                 _configuration["JWT:Issure"],
@@ -33,12 +34,20 @@ namespace Services.Tool
                 );
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
+
         public static string GetUserIdFromJwt(string jwtToken)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
-            var token = tokenHandler.ReadJwtToken(jwtToken);
-            var idClaim = token.Claims.FirstOrDefault(claim => claim.Type == "_id");
-            return idClaim?.Value ?? "Can not get id from token";
+            try
+            {
+                var token = tokenHandler.ReadJwtToken(jwtToken);
+                var idClaim = token.Claims.FirstOrDefault(claim => claim.Type == "_id");
+                return idClaim?.Value ?? "Can not get id from token";
+            }
+            catch (ArgumentException)
+            {
+                return "Invalid JWT token format";
+            }
         }
     }
 }

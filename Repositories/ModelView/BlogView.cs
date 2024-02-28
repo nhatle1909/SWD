@@ -34,5 +34,28 @@ namespace Repositories.ModelView
             [Required] public required string Jwt { get; set; }
         }
 
+        public class AddCommentBlogView
+        {
+            public required string Jwt { get; set; }
+            public required string BlogId { get; set; }
+            [StringLength(10000, MinimumLength = 1)]
+            public required string Comment { get; set; }
+        }
+
+        public class UpdateCommentBlogView
+        {
+            public required string Jwt { get; set; }
+            public required string BlogCommentId { get; set; }
+            [StringLength(10000, MinimumLength = 1)]
+            public required string Comment { get; set; }
+        }
+
+        public class RemoveCommentBlogView
+        {
+            public required string Jwt { get; set; }
+            public required string BlogCommentId { get; set; }
+        }
+
+
     }
 }

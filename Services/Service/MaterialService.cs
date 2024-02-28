@@ -59,11 +59,6 @@ namespace Services.Service
             return "Account is not existed or You have not permission to use this function";
         }
 
-        public async Task<IEnumerable<Material>> GetAllMaterial()
-        {
-            return await _unit.MaterialRepo.GetAllAsync();
-        }
-
         public async Task<object> GetPagingMaterial(PagingMaterialView paging)
         {
             const int pageSize = 5;
@@ -111,5 +106,20 @@ namespace Services.Service
             }
             return "Account is not existed or You have not permission to use this function";
         }
+
+        public async Task<double> OptionalProductQuote(string[] arrMaterialId)
+        {
+            var materials = await _unit.MaterialRepo.GetFieldsByFilterAsync(["Price"],
+                            c => arrMaterialId.Contains(c.MaterialId));
+            if (materials.Any())
+            {
+                double totalPrice = 0;
+                foreach (var material in materials)
+                    totalPrice += material.Price;
+                return totalPrice;
+            }
+            return 0;
+        }
+
     }
 }

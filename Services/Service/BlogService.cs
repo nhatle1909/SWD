@@ -164,5 +164,53 @@ namespace Services.Service
             };
             return response;
         }
+
+        public async Task AddBlogComment(AddCommentBlogView addComment)
+        {
+            string _id = AuthenticationJwtTool.GetUserIdFromJwt(addComment.Jwt);
+            var getUser = (await _unit.AccountRepo.GetFieldsByFilterAsync(["Email"],
+                            g => g.Email.Equals(_id))).FirstOrDefault();
+            if (getUser != null)
+            {
+                BlogComment blogComment = _mapper.Map<BlogComment>(addComment);
+                blogComment.BlogId = addComment.BlogId;
+                blogComment.Email = getUser.Email;
+                await _unit.BlogCommentRepo.AddOneItem(blogComment);
+            }
+        }
+
+        public async Task UpdateCommentBlog(UpdateCommentBlogView updateComment)
+        {
+            string _id = AuthenticationJwtTool.GetUserIdFromJwt(updateComment.Jwt);
+            var getUser = (await _unit.AccountRepo.GetFieldsByFilterAsync(["Email"],
+                            g => g.Email.Equals(_id))).FirstOrDefault();
+            var getComment = (await _unit.BlogCommentRepo.GetFieldsByFilterAsync([],
+                            g => g.BlogCommentId.Equals(updateComment.BlogCommentId))).FirstOrDefault();
+            if (getUser != null && getComment != null)
+            {
+                if (getComment.Email.Equals(getUser.Email))
+                {
+                    getComment.Comment = updateComment.Comment;
+                    getComment.UpdatedAt = DateTime.Now;
+                    await _unit.BlogCommentRepo.UpdateItemByValue("BlogCommentId", getComment.BlogCommentId, getComment);
+                }
+            }
+        }
+
+        public async Task RemoveCommentBlog(RemoveCommentBlogView removeComment)
+        {
+            string _id = AuthenticationJwtTool.GetUserIdFromJwt(removeComment.Jwt);
+            var getUser = (await _unit.AccountRepo.GetFieldsByFilterAsync(["Email"],
+                            g => g.Email.Equals(_id))).FirstOrDefault();
+            var getComment = (await _unit.BlogCommentRepo.GetFieldsByFilterAsync([],
+                            g => g.BlogCommentId.Equals(removeComment.BlogCommentId))).FirstOrDefault();
+            if (getUser != null && getComment != null)
+            {
+                if (getComment.Email.Equals(getUser.Email))
+                {
+                    await _unit.BlogCommentRepo.RemoveItemByValue("BlogCommentId", getComment.BlogCommentId);
+                }
+            }
+        }
     }
 }

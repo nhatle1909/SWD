@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "5Jo9J4iHAkzc5HsGwjkITA4rGPVmaq6LclcuOSiz0XUCnpm6kpByZkM+Mcca9jmsLH75yJFaFgXIhWhSEFl8ug==",
+  "dgSpecHash": "5NMLcgA3a7g6lC7Ob45/Q6YYEB3rgYEiHp0+NJxo8t8OB9fkt9Cswp6R8bmpsdxL76ZQLt+4Rup+hAK7ue8Ihg==",
   "success": true,
   "projectFilePath": "D:\\C#\\SWD392\\SWD\\SWD\\SWD.csproj",
   "expectedPackageFiles": [
@@ -11,6 +11,7 @@
     "C:\\Users\\MSI BH\\.nuget\\packages\\bouncycastle.cryptography\\2.2.1\\bouncycastle.cryptography.2.2.1.nupkg.sha512",
     "C:\\Users\\MSI BH\\.nuget\\packages\\dnsclient\\1.6.1\\dnsclient.1.6.1.nupkg.sha512",
     "C:\\Users\\MSI BH\\.nuget\\packages\\mailkit\\4.3.0\\mailkit.4.3.0.nupkg.sha512",
+    "C:\\Users\\MSI BH\\.nuget\\packages\\microsoft.aspnetcore.authentication.google\\8.0.2\\microsoft.aspnetcore.authentication.google.8.0.2.nupkg.sha512",
     "C:\\Users\\MSI BH\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\8.0.1\\microsoft.aspnetcore.authentication.jwtbearer.8.0.1.nupkg.sha512",
     "C:\\Users\\MSI BH\\.nuget\\packages\\microsoft.aspnetcore.openapi\\7.0.10\\microsoft.aspnetcore.openapi.7.0.10.nupkg.sha512",
     "C:\\Users\\MSI BH\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",

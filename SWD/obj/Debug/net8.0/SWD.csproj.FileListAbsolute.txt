@@ -131,3 +131,4 @@ D:\C#\SWD392\SWD\SWD\obj\Debug\net8.0\SWD.pdb
 D:\C#\SWD392\SWD\SWD\obj\Debug\net8.0\SWD.genruntimeconfig.cache
 D:\C#\SWD392\SWD\SWD\obj\Debug\net8.0\ref\SWD.dll
 D:\C#\SWD392\SWD\SWD\obj\Debug\net8.0\SWD.csproj.Up2Date
+D:\C#\SWD392\SWD\SWD\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.Google.dll

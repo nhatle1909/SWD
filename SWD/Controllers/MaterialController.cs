@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Repositories.Model;
 using Repositories.ModelView;
 using Services.Interface;
@@ -42,5 +43,15 @@ namespace SWD.Controllers
             string status = await _Service.DeleteMaterial(delete);
             return Ok(status);
         }
+        [Authorize]
+        //httpget chỉ hỗ trợ những kiểu có thể parse sang string
+        [HttpPost("Optional-Product-Quote")]
+        public async Task<IActionResult> OptionalInteriorQuote(string[] arrMaterialId)
+        {
+            double totalPrice = await _Service.OptionalProductQuote(arrMaterialId);
+
+            return Ok(totalPrice);
+        }
+
     }
 }

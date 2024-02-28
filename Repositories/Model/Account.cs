@@ -7,7 +7,8 @@ namespace Repositories.Model
 {
     public class Account
     {
-        [BsonId][BsonRepresentation(BsonType.ObjectId)] public required string AccountId { get; set; }
+        [BsonId][BsonRepresentation(BsonType.String)] 
+        public required string AccountId { get; set; } = ObjectId.GenerateNewId().ToString();
         [BsonElement] public required string Password { get; set; }
         [BsonElement][EmailAddress] public required string Email { get; set; }
         [BsonElement][Phone] public string? PhoneNumber { get; set; }
