@@ -1,11 +1,39 @@
 {
   "Version": 1,
-  "Hash": "0NcO7cnfBA8U9Np9o0k3+mL3zkZVsC4uNdGdnnnehUk=",
+  "Hash": "r6OpVHWyVeiHBhLIHuCmO5x3rBgmmGIt7WKADn6CzMw=",
   "Source": "SWD",
   "BasePath": "_content/SWD",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [],
-  "DiscoveryPatterns": [],
-  "Assets": []
+  "DiscoveryPatterns": [
+    {
+      "Name": "SWD\\wwwroot",
+      "Source": "SWD",
+      "ContentRoot": "D:\\DevTools\\repos\\SWD\\be\\SWD\\wwwroot\\",
+      "BasePath": "_content/SWD",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": [
+    {
+      "Identity": "D:\\DevTools\\repos\\SWD\\be\\SWD\\wwwroot\\AccountPictures\\user_default.png",
+      "SourceId": "SWD",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\DevTools\\repos\\SWD\\be\\SWD\\wwwroot\\",
+      "BasePath": "_content/SWD",
+      "RelativePath": "AccountPictures/user_default.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\AccountPictures\\user_default.png"
+    }
+  ]
 }
