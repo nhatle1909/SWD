@@ -1,20 +1,25 @@
 import React from 'react'
 import { Route, Routes as ReactRoutes } from "react-router-dom";
-import AuthLayout from '../layout/authLayout/AuthLayout';
+import MainLayout from '../layout/authLayout/MainLayout';
 import Login from '../pages/auth/Login';
 import NotFound from '../pages/common/NotFound';
 
 import UnauthRoute from './guard/UnauthRoute';
 import PermissionRoute from './guard/PermissionRoute';
+import Home from '../pages/home/Home';
 const unauthRoutes = {
-  path: '/auth',
-  element: <AuthLayout />,
+  path: '/',
+  element: <MainLayout />,
   guard: <UnauthRoute />,
   children :[
     {
-      path:'login',
-      element: <Login/>
+      path:'',
+      element:<Home/>
     },
+    {
+      path:'auth/login',
+      element: <Login/>
+    }
   ]
 };
 

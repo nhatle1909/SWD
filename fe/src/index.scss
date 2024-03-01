@@ -2,6 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url('/src/assets/css/open-iconic-bootstrap.min.css');
+@import url('/src/assets/css/animate.css');
+@import url('/src/assets/css/owl.carousel.min.css');
+@import url('/src/assets/css/owl.theme.default.min.css');
+@import url('/src/assets/css/magnific-popup.css');
+@import url('/src/assets/css/aos.css');
+@import url('/src/assets/css/ionicons.min.css');
+@import url('/src/assets/css/bootstrap-datepicker.css');
+@import url('/src/assets/css/jquery.timepicker.css');
+@import url('/src/assets/css/flaticon.css');
+@import url('/src/assets/css/icomoon.css');
+@import url('/src/assets/css/style.css');
 html, body {
     scroll-behavior: smooth;
     margin: 0;
