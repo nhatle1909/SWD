@@ -37,3 +37,16 @@ D:\DevTools\repos\New folder (2)\New folder\SWD\Repositories\obj\Debug\net8.0\Re
 D:\DevTools\repos\New folder (2)\New folder\SWD\Repositories\obj\Debug\net8.0\refint\Repositories.dll
 D:\DevTools\repos\New folder (2)\New folder\SWD\Repositories\obj\Debug\net8.0\Repositories.pdb
 D:\DevTools\repos\New folder (2)\New folder\SWD\Repositories\obj\Debug\net8.0\ref\Repositories.dll
+D:\DevTools\repos\SWD\be\Repositories\bin\Debug\net8.0\Repositories.deps.json
+D:\DevTools\repos\SWD\be\Repositories\bin\Debug\net8.0\Repositories.dll
+D:\DevTools\repos\SWD\be\Repositories\bin\Debug\net8.0\Repositories.pdb
+D:\DevTools\repos\SWD\be\Repositories\obj\Debug\net8.0\Repositories.csproj.AssemblyReference.cache
+D:\DevTools\repos\SWD\be\Repositories\obj\Debug\net8.0\Repositories.GeneratedMSBuildEditorConfig.editorconfig
+D:\DevTools\repos\SWD\be\Repositories\obj\Debug\net8.0\Repositories.AssemblyInfoInputs.cache
+D:\DevTools\repos\SWD\be\Repositories\obj\Debug\net8.0\Repositories.AssemblyInfo.cs
+D:\DevTools\repos\SWD\be\Repositories\obj\Debug\net8.0\Repositories.csproj.CoreCompileInputs.cache
+D:\DevTools\repos\SWD\be\Repositories\obj\Debug\net8.0\Repositories.sourcelink.json
+D:\DevTools\repos\SWD\be\Repositories\obj\Debug\net8.0\Repositories.dll
+D:\DevTools\repos\SWD\be\Repositories\obj\Debug\net8.0\refint\Repositories.dll
+D:\DevTools\repos\SWD\be\Repositories\obj\Debug\net8.0\Repositories.pdb
+D:\DevTools\repos\SWD\be\Repositories\obj\Debug\net8.0\ref\Repositories.dll
