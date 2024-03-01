@@ -1,12 +1,15 @@
 import React from 'react'
 import { Route, Routes as ReactRoutes } from "react-router-dom";
 import MainLayout from '../layout/authLayout/MainLayout';
-import Login from '../pages/auth/Login';
+import Login from '../pages/auth/Auth';
 import NotFound from '../pages/common/NotFound';
 
 import UnauthRoute from './guard/UnauthRoute';
+import AdminRoute from './guard/AdminRoute';
 import PermissionRoute from './guard/PermissionRoute';
-import Home from '../pages/home/Home';
+import Home from '@/pages/home/Home';
+import About from '@/pages/about/About';
+import Users from '@/pages/admin/users/Users'
 const unauthRoutes = {
   path: '/',
   element: <MainLayout />,
@@ -17,27 +20,23 @@ const unauthRoutes = {
       element:<Home/>
     },
     {
-      path:'auth/login',
-      element: <Login/>
+      path:'about',
+      element:<About/>
     }
   ]
 };
 
-// const adminRoutes = {
-//   path: 'admin',
-//   guard: <AdminRoute />,
-//   element: <Layout page="admin"/>,
-//   children: [
-//     {
-//       path: 'categories',
-//       element: <ManageCategory />,
-//     },
-//     {
-//       path: 'users',
-//       element: <ManageUser />
-//     },
-//   ],
-// };
+const adminRoutes = {
+  path: 'admin',
+  guard: <AdminRoute />,
+  element: <MainLayout/>,
+  children: [
+    {
+      path: 'users',
+      element: <Users />,
+    },
+  ],
+};
 
 
 const notfoundRoute= {
@@ -45,7 +44,7 @@ const notfoundRoute= {
   element: <NotFound />,
 };
 
-const routes = [unauthRoutes, notfoundRoute];
+const routes = [unauthRoutes, adminRoutes, notfoundRoute];
 
 const Routes = () => {
   return (

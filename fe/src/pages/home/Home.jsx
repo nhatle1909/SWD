@@ -4,7 +4,7 @@ const Home = () => {
         <>
     
     <section className="home-slider js-fullheight owl-carousel">
-  <div className="slider-item js-fullheight" style={{ backgroundImage: `url('${linkImg('bg_1.jpg')}')` }}>
+  <div className="slider-item js-fullheight" style={{ backgroundImage: `url(${linkImg('bg_1.jpg')})` }}>
     <div className="overlay"></div>
     <div className="container">
       <div className="row no-gutters slider-text js-fullheight align-items-center justify-content-end" data-scrollax-parent="true">
@@ -17,7 +17,7 @@ const Home = () => {
     </div>
   </div>
 
-  <div className="slider-item js-fullheight" style={{ backgroundImage: `url('${linkImg('bg_2.jpg')}')` }}>
+  <div className="slider-item js-fullheight" style={{ backgroundImage: `url(${linkImg('bg_2.jpg')})` }}>
     <div className="overlay"></div>
     <div className="container">
       <div className="row no-gutters slider-text js-fullheight align-items-center justify-content-end" data-scrollax-parent="true">
@@ -70,11 +70,11 @@ const Home = () => {
     </div>
   </div>
 </section>
-{/* 
+
 		<section className="ftco-section ftc-no-pb">
 			<div className="container">
 				<div className="row no-gutters">
-					<div className="col-md-5 p-md-5 img img-2" style="background-image: url(images/about.jpg);">
+					<div className="col-md-5 p-md-5 img img-2" style={{backgroundImage: `url(${linkImg('about.jpg')})`}}>
 					</div>
 					<div className="col-md-7 wrap-about pb-md-5 ftco-animate">
 	          <div className="heading-section mb-5 pl-md-5 heading-section-with-line">
@@ -94,7 +94,7 @@ const Home = () => {
 		</section>
 
 
-		<section className="ftco-section ftco-counter img" id="section-counter" style="background-image: url(images/bg_3.jpg);" data-stellar-background-ratio="0.5">
+		<section className="ftco-section ftco-counter img" id="section-counter" style={{ backgroundImage: `url(${linkImg('bg_3.jpg')})` }} data-stellar-background-ratio="0.5">
     	<div className="container">
     		<div className="row d-md-flex align-items-center justify-content-center">
     			<div className="col-lg-4">
@@ -191,7 +191,7 @@ const Home = () => {
     			</div>
     			<div className="col-md-6 col-lg-3 ftco-animate">
     				<div className="project">
-	    				<img src="/src/assets/images/work-4.jpg" className="img-fluid" alt="Colorlib Template"/>
+	    				<img src={linkImg('work-4.jpg')} className="img-fluid" alt="Colorlib Template"/>
 	    				<div className="text">
 	    					<h3>Office Interior Design in Paris</h3>
 	    				</div>
@@ -202,9 +202,9 @@ const Home = () => {
     			</div>
     		</div>
     	</div>
-    </section> */}
+    </section> 
 
-    {/* <section className="ftco-section testimony-section">
+    <section className="ftco-section testimony-section">
       <div className="container">
         <div className="row justify-content-center mb-5 pb-3">
           <div className="col-md-7 heading-section ftco-animate">
@@ -217,7 +217,7 @@ const Home = () => {
             <div className="carousel-testimony owl-carousel">
               <div className="item">
                 <div className="testimony-wrap p-4 pb-5">
-                  <div className="user-img mb-5" style="background-image: url(/src/assets/images/person_1.jpg)">
+                  <div className="user-img mb-5" style={{ backgroundImage: `url(${linkImg('person_2.jpg')})` }}>
                     <span className="quote d-flex align-items-center justify-content-center">
                       <i className="icon-quote-left"></i>
                     </span>
@@ -231,7 +231,7 @@ const Home = () => {
               </div>
               <div className="item">
                 <div className="testimony-wrap p-4 pb-5">
-                  <div className="user-img mb-5" style="background-image: url(/src/assets/images/person_2.jpg)">
+                  <div className="user-img mb-5" style={{ backgroundImage: `url(${linkImg('person_2.jpg')})` }}>
                     <span className="quote d-flex align-items-center justify-content-center">
                       <i className="icon-quote-left"></i>
                     </span>
@@ -245,7 +245,7 @@ const Home = () => {
               </div>
               <div className="item">
                 <div className="testimony-wrap p-4 pb-5">
-                  <div className="user-img mb-5" style="background-image: url(/src/assets/images/person_3.jpg)">
+                  <div className="user-img mb-5" style={{ backgroundImage: `url(${linkImg('person_3.jpg')})` }}>
                     <span className="quote d-flex align-items-center justify-content-center">
                       <i className="icon-quote-left"></i>
                     </span>
@@ -259,7 +259,7 @@ const Home = () => {
               </div>
               <div className="item">
                 <div className="testimony-wrap p-4 pb-5">
-                  <div className="user-img mb-5" style="background-image: url(/src/assets/images/person_1.jpg)">
+                  <div className="user-img mb-5" style={{ backgroundImage: `url(${linkImg('person_1.jpg')})` }}>
                     <span className="quote d-flex align-items-center justify-content-center">
                       <i className="icon-quote-left"></i>
                     </span>
@@ -273,7 +273,7 @@ const Home = () => {
               </div>
               <div className="item">
                 <div className="testimony-wrap p-4 pb-5">
-                  <div className="user-img mb-5" style="background-image: url(/src/assets/images/person_1.jpg)">
+                  <div className="user-img mb-5" style={{ backgroundImage: `url(${linkImg('person_3.jpg')})` }}>
                     <span className="quote d-flex align-items-center justify-content-center">
                       <i className="icon-quote-left"></i>
                     </span>
@@ -302,7 +302,7 @@ const Home = () => {
 				<div className="row">
 					<div className="col-md-6 col-lg-3 ftco-animate">
 						<div className="staff">
-							<div className="img" style="background-image: url(/src/assets/images/staff-1.jpg);"></div>
+							<div className="img" style={{ backgroundImage: `url(${linkImg('staff_1.jpg')})` }}></div>
 							<div className="text pt-4">
 								<h3>David Smith</h3>
 								<span className="position mb-2">Achitect</span>
@@ -318,7 +318,7 @@ const Home = () => {
 					</div>
 					<div className="col-md-6 col-lg-3 ftco-animate">
 						<div className="staff">
-							<div className="img" style="background-image: url(/src/assets/images/staff-2.jpg);"></div>
+							<div className="img" style={{ backgroundImage: `url(${linkImg('staff_2.jpg')})` }}></div>
 							<div className="text pt-4">
 								<h3>David Smith</h3>
 								<span className="position mb-2">Achitect</span>
@@ -334,7 +334,7 @@ const Home = () => {
 					</div>
 					<div className="col-md-6 col-lg-3 ftco-animate">
 						<div className="staff">
-							<div className="img" style="background-image: url(/src/assets/images/staff-3.jpg);"></div>
+							<div className="img" style={{ backgroundImage: `url(${linkImg('staff_3.jpg')})` }}></div>
 							<div className="text pt-4">
 								<h3>David Smith</h3>
 								<span className="position mb-2">Achitect</span>
@@ -350,7 +350,7 @@ const Home = () => {
 					</div>
 					<div className="col-md-6 col-lg-3 ftco-animate">
 						<div className="staff">
-							<div className="img" style="background-image: url(/src/assets/images/staff-4.jpg);"></div>
+							<div className="img" style={{ backgroundImage: `url(${linkImg('staff_4.jpg')})` }}></div>
 							<div className="text pt-4">
 								<h3>David Smith</h3>
 								<span className="position mb-2">Achitect</span>
@@ -379,7 +379,7 @@ const Home = () => {
 				<div className="row">
           <div className="col-md-4 ftco-animate">
             <div className="blog-entry">
-              <a href="blog-single.html" className="block-20" style="background-image: url('images/image_1.jpg');">
+              <a href="blog-single.html" className="block-20" style={{ backgroundImage: `url(${linkImg('image_2.jpg')})` }}>
               </a>
               <div className="text d-flex py-4">
                 <div className="meta mb-3">
@@ -395,7 +395,7 @@ const Home = () => {
           </div>
           <div className="col-md-4 ftco-animate">
             <div className="blog-entry" data-aos-delay="100">
-              <a href="blog-single.html" className="block-20" style="background-image: url('images/image_2.jpg');">
+              <a href="blog-single.html" className="block-20" style={{ backgroundImage: `url(${linkImg('image_2.jpg')})` }}>
               </a>
               <div className="text d-flex py-4">
                 <div className="meta mb-3">
@@ -411,7 +411,7 @@ const Home = () => {
           </div>
           <div className="col-md-4 ftco-animate">
             <div className="blog-entry" data-aos-delay="200">
-              <a href="blog-single.html" className="block-20" style="background-image: url('images/image_3.jpg');">
+              <a href="blog-single.html" className="block-20" style={{ backgroundImage: `url(${linkImg('image_3.jpg')})` }}>
               </a>
               <div className="text d-flex py-4">
                 <div className="meta mb-3">
@@ -432,7 +432,7 @@ const Home = () => {
 		<section className="ftco-section ftc-no-pb">
 			<div className="container">
 				<div className="row no-gutters">
-					<div className="col-md-5 p-md-5 img img-2 order-md-last" style="background-image: url(/src/assets/images/img.jpg);">
+					<div className="col-md-5 p-md-5 img img-2 order-md-last" style={{ backgroundImage: `url(${linkImg('img.jpg')})` }}>
 					</div>
 					<div className="col-md-7 wrap-about pb-md-5 ftco-animate">
 	          <div className="heading-section mb-md-5 pl-md-5 heading-section-with-line">
@@ -449,7 +449,7 @@ const Home = () => {
 					</div>
 				</div>
 			</div>
-		</section> */}
+		</section>
         </>
     )
 }
