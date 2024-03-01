@@ -19,9 +19,6 @@ namespace Repositories.ModelView
 
         public class RegisterForStaffAccountView
         {
-            [Required]
-            public required string Jwt { get; set; }
-
             [EmailAddress]
             public required string Email { get; set; }
 
@@ -43,9 +40,6 @@ namespace Repositories.ModelView
 
         public class UpdateAccountView
         {
-            [Required]
-            public required string Jwt { get; set; }
-
             [EmailAddress]
             public required string Email { get; set; }
 
@@ -57,15 +51,12 @@ namespace Repositories.ModelView
 
         public class UpdatePictureAccountView
         {
-            [Required]
-            public required string Jwt { get; set; }
             public required IFormFile Picture { get; set; }
         }
 
         public class ResetPasswordAccountView
         {
-            [EmailAddress]
-            public required string Email { get; set; }
+            public required string Token { get; set; }
 
             [StringLength(50, MinimumLength = 5)]
             public required string Password { get; set; }
@@ -76,9 +67,6 @@ namespace Repositories.ModelView
 
         public class ChangePasswordAccountView
         {
-            [Required]
-            public required string Jwt { get; set; }
-
             [StringLength(50, MinimumLength = 5)]
             public required string OldPassword { get; set; }
 
@@ -91,9 +79,6 @@ namespace Repositories.ModelView
 
         public class BanAccountView
         {
-            [Required]
-            public required string Jwt { get; set; }
-
             [EmailAddress]
             public required string Email { get; set; }
             public string? Comments { get; set; }
@@ -101,9 +86,6 @@ namespace Repositories.ModelView
 
         public class DeleteAccountView
         {
-            [Required]
-            public required string Jwt { get; set; }
-
             [EmailAddress]
             public required string Email { get; set; }
 
@@ -113,7 +95,6 @@ namespace Repositories.ModelView
 
         public class PagingAccountView
         {
-            public required string Jwt { get; set; }
             public int PageIndex { get; set; }
             public bool IsAsc { get; set; }
             public string? SearchValue { get; set; }
@@ -121,7 +102,6 @@ namespace Repositories.ModelView
 
         public class DetailAccountView
         {
-            public required string Jwt { get; set; }
             [EmailAddress]
             public required string Email { get; set; }
         }

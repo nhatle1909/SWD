@@ -17,33 +17,49 @@ namespace SWD.Controllers
             _Service = Service;
         }
 
+        [Authorize(Roles = "Staff")]
         [HttpPost("Get-Paging-Material-List")]
         public async Task<object> GetPagingMaterialList([FromBody] PagingMaterialView paging)
         {
-            return await _Service.GetPagingMaterial(paging);
+            var status = await _Service.GetPagingMaterial(paging);
+            return Ok(new
+            {
+                Message = status
+            });
         }
 
+        [Authorize(Roles = "Staff")]
         [HttpPost("Add-One-Material")]
         public async Task<IActionResult> AddOneMaterial([FromBody] AddMaterialView add)
         {
             string status = await _Service.AddOneMaterial(add);
-            return Ok(status);
+            return Ok(new
+            {
+                Message = status
+            });
         }
 
+        [Authorize(Roles = "Staff")]
         [HttpPut("Update-Material")]
         public async Task<IActionResult> UpdateMaterial([FromBody] UpdateMaterialView update)
         {
             string status = await _Service.UpdateMaterial(update);
-            return Ok(status);
+            return Ok(new
+            {
+                Message = status
+            });
         }
 
         [HttpDelete("Delete-Material")]
         public async Task<IActionResult> DeleteMaterial([FromBody] DeleteMaterialView delete)
         {
             string status = await _Service.DeleteMaterial(delete);
-            return Ok(status);
+            return Ok(new
+            {
+                Message = status
+            });
         }
-        [Authorize]
+
         //httpget chỉ hỗ trợ những kiểu có thể parse sang string
         [HttpPost("Optional-Product-Quote")]
         public async Task<IActionResult> OptionalInteriorQuote(string[] arrMaterialId)

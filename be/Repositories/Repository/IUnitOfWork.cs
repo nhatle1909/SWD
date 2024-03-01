@@ -11,6 +11,7 @@ namespace Repositories.Repository
 {
     public interface IUnitOfWork
     {
+        IRepository<RefreshToken> RefreshTokenRepo { get; }
         IRepository<Account> AccountRepo { get; }
         IRepository<AccountStatus> AccountStatusRepo {  get; }
         IRepository<Material> MaterialRepo { get; }

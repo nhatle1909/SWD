@@ -11,12 +11,12 @@ namespace Services.Interface
 {
     public interface IBlogService
     {
-        Task<string> AddBlog(AddBlogView add);
-        Task<string> UpdateBlog(UpdateBlogView update);
-        Task<string> RemoveBlog(RemoveBlogView remove);
+        Task<string> AddBlog(string id, AddBlogView add);
+        Task<string> UpdateBlog(string id, UpdateBlogView update);
+        Task<string> RemoveBlog(string id, RemoveBlogView remove);
         Task<object> GetPagingBlog(int pageIndex, bool isAsc, string? searchValue);
-        Task AddBlogComment(AddCommentBlogView addComment);
-        Task UpdateCommentBlog(UpdateCommentBlogView updateComment);
-        Task RemoveCommentBlog(RemoveCommentBlogView removeComment);
+        Task AddBlogComment(string id, AddCommentBlogView addComment);
+        Task UpdateCommentBlog(string id, UpdateCommentBlogView updateComment);
+        Task RemoveCommentBlog(string id, RemoveCommentBlogView removeComment);
     }
 }

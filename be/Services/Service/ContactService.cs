@@ -5,6 +5,7 @@ using Repositories.Model;
 using Repositories.Models;
 using Repositories.ModelView;
 using Repositories.Repository;
+using Services.Interface;
 using Services.Tool;
 using System;
 using System.Collections.Generic;
@@ -57,54 +58,32 @@ namespace Services.Service
 
         public async Task<string> AddressTheContact(AddressContactView address)
         {
-            string _id = AuthenticationJwtTool.GetUserIdFromJwt(address.Jwt);
-            var getUserStatus = (await _unit.AccountStatusRepo.GetFieldsByFilterAsync(["IsRole"],
-                            g => g.AccountId.Equals(_id))).FirstOrDefault();
-            if (getUserStatus != null)
+            var getContact = (await _unit.ContactRepo.GetFieldsByFilterAsync([],
+                    g => g.ContactId.Equals(address.ContactId))).FirstOrDefault();
+            if (getContact != null)
             {
-                if (getUserStatus.IsRole == AccountStatus.Role.Staff)
-                {
-                    var getContact = (await _unit.ContactRepo.GetFieldsByFilterAsync([],
-                            g => g.ContactId.Equals(address.ContactId))).FirstOrDefault();
-                    if (getContact != null)
-                    {
-                        getContact.ResponseOfStaff = address.ResponseOfStaff;
-                        getContact.Status = Contact.State.Completed;
-                        getContact.UpdatedAt = DateTime.Now;
-                        await _unit.ContactRepo.UpdateItemByValue("ContactId", getContact.ContactId, getContact);
-                        string subject = "Interior quotation system";
-                        string body = $"<h3><strong>{address.ResponseOfStaff}</strong></h3>";
-                        await _emailSender.SendEmailAsync(getContact.Email, subject, body);
-                        return $"You have addressed the contact of email: {getContact.Email}";
-                    }
-                    return "The contact is not existed";
-                }
-                return "You have not permission to use this function";
+                getContact.ResponseOfStaff = address.ResponseOfStaff;
+                getContact.Status = Contact.State.Completed;
+                getContact.UpdatedAt = DateTime.UtcNow;
+                await _unit.ContactRepo.UpdateItemByValue("ContactId", getContact.ContactId, getContact);
+                string subject = "Interior quotation system";
+                string body = $"<h3><strong>{address.ResponseOfStaff}</strong></h3>";
+                await _emailSender.SendEmailAsync(getContact.Email, subject, body);
+                return $"You have addressed the contact of email: {getContact.Email}";
             }
-            return "Account is not existed";
+            return "The contact is not existed";
         }
 
         public async Task<string> DeleteContact(DeleteContactView delete)
         {
-            string _id = AuthenticationJwtTool.GetUserIdFromJwt(delete.Jwt);
-            var getUserStatus = (await _unit.AccountStatusRepo.GetFieldsByFilterAsync(["IsRole"],
-                            g => g.AccountId.Equals(_id))).FirstOrDefault();
-            if (getUserStatus != null)
+            var getContact = (await _unit.ContactRepo.GetFieldsByFilterAsync([],
+                    g => g.ContactId.Equals(delete.ContactId))).FirstOrDefault();
+            if (getContact != null && getContact.Status == Contact.State.Completed)
             {
-                if (getUserStatus.IsRole == AccountStatus.Role.Staff)
-                {
-                    var getContact = (await _unit.ContactRepo.GetFieldsByFilterAsync([],
-                            g => g.ContactId.Equals(delete.ContactId))).FirstOrDefault();
-                    if (getContact != null && getContact.Status == Contact.State.Completed)
-                    {
-                        await _unit.ContactRepo.RemoveItemByValue("ContactId", getContact.ContactId);
-                        return "Delete the contact successfully";
-                    }
-                    return "The Contact does not exist or the Contact in progress cannot be deleted";
-                }
-                return "You have not permission to use this function";
+                await _unit.ContactRepo.RemoveItemByValue("ContactId", getContact.ContactId);
+                return "Delete the contact successfully";
             }
-            return "Account is not existed";
+            return "The Contact does not exist or the Contact in progress cannot be deleted";
         }
 
         public async Task<object> GetPagingContact(PagingContactView paging)
@@ -114,38 +93,18 @@ namespace Services.Service
             List<string> searchFields = ["Email", "Title"];
             List<string> returnFields = ["Email", "Title", "Status", "CreatedAt"];
 
-            string _id = AuthenticationJwtTool.GetUserIdFromJwt(paging.Jwt);
-            var getUserStatus = (await _unit.AccountStatusRepo.GetFieldsByFilterAsync(["IsRole"],
-                            g => g.AccountId.Equals(_id))).FirstOrDefault();
-            if (getUserStatus != null)
-            {
-                if (getUserStatus.IsRole == AccountStatus.Role.Staff)
-                {
-                    int skip = (paging.PageIndex - 1) * pageSize;
-                    var items = (await _unit.ContactRepo.PagingAsync(skip, pageSize, paging.IsAsc, sortField, paging.SearchValue, searchFields, returnFields)).ToList();
-                    return items;
-                }
-                return "You have not permission to use this function";
-            }
-            return "Account is not existed";
+            int skip = (paging.PageIndex - 1) * pageSize;
+            var items = (await _unit.ContactRepo.PagingAsync(skip, pageSize, paging.IsAsc, sortField, paging.SearchValue, searchFields, returnFields)).ToList();
+            return items;
+
         }
 
         public async Task<object?> GetContactDetail(DetailContactView detail)
         {
-            string _id = AuthenticationJwtTool.GetUserIdFromJwt(detail.Jwt);
-            var getUserStatus = (await _unit.AccountStatusRepo.GetFieldsByFilterAsync(["IsRole"],
-                            g => g.AccountId.Equals(_id))).FirstOrDefault();
-            if (getUserStatus != null)
-            {
-                if (getUserStatus.IsRole == AccountStatus.Role.Staff)
-                {
-                    var getContact = (await _unit.ContactRepo.GetFieldsByFilterAsync([],
-                            g => g.ContactId.Equals(detail.ContactId))).FirstOrDefault();
-                    return getContact;
-                }
-                return "You have not permission to use this function";
-            }
-            return "Account is not existed";
+            var getContact = (await _unit.ContactRepo.GetFieldsByFilterAsync([],
+                    g => g.ContactId.Equals(detail.ContactId))).FirstOrDefault();
+            return getContact;
+
         }
     }
 }

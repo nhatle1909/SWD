@@ -1,0 +1,167 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\C#\\SWD392\\SWD\\be\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{9DD8504A-8125-48CE-ADDE-2DB8531A1B0A}|SWD\\SWD.csproj|D:\\C#\\SWD392\\SWD\\be\\swd\\controllers\\materialcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9DD8504A-8125-48CE-ADDE-2DB8531A1B0A}|SWD\\SWD.csproj|solutionrelative:swd\\controllers\\materialcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CCD73B82-BE65-484D-8CAE-1C66B2A7DBD6}|Services\\Services.csproj|D:\\C#\\SWD392\\SWD\\be\\services\\service\\materialservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CCD73B82-BE65-484D-8CAE-1C66B2A7DBD6}|Services\\Services.csproj|solutionrelative:services\\service\\materialservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9DD8504A-8125-48CE-ADDE-2DB8531A1B0A}|SWD\\SWD.csproj|d:\\c#\\swd392\\swd\\be\\swd\\controllers\\vnpaycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9DD8504A-8125-48CE-ADDE-2DB8531A1B0A}|SWD\\SWD.csproj|solutionrelative:swd\\controllers\\vnpaycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EC3F4E68-024B-4FB7-BC52-ECAE413E587F}|Repositories\\Repositories.csproj|D:\\C#\\SWD392\\SWD\\be\\repositories\\modelview\\materialview.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EC3F4E68-024B-4FB7-BC52-ECAE413E587F}|Repositories\\Repositories.csproj|solutionrelative:repositories\\modelview\\materialview.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CCD73B82-BE65-484D-8CAE-1C66B2A7DBD6}|Services\\Services.csproj|D:\\C#\\SWD392\\SWD\\be\\services\\interface\\imaterialservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CCD73B82-BE65-484D-8CAE-1C66B2A7DBD6}|Services\\Services.csproj|solutionrelative:services\\interface\\imaterialservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EC3F4E68-024B-4FB7-BC52-ECAE413E587F}|Repositories\\Repositories.csproj|D:\\C#\\SWD392\\SWD\\be\\repositories\\model\\material.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EC3F4E68-024B-4FB7-BC52-ECAE413E587F}|Repositories\\Repositories.csproj|solutionrelative:repositories\\model\\material.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9DD8504A-8125-48CE-ADDE-2DB8531A1B0A}|SWD\\SWD.csproj|D:\\C#\\SWD392\\SWD\\be\\swd\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9DD8504A-8125-48CE-ADDE-2DB8531A1B0A}|SWD\\SWD.csproj|solutionrelative:swd\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 13,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:40:0:{e8034f19-ab72-4f06-83fd-f6832b41aa63}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:43:0:{e8034f19-ab72-4f06-83fd-f6832b41aa63}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:44:0:{e8034f19-ab72-4f06-83fd-f6832b41aa63}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{004be353-6879-467c-9d1e-9ac23cdf6d49}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "VNPayController.cs",
+              "DocumentMoniker": "D:\\C#\\SWD392\\SWD\\be\\SWD\\Controllers\\VNPayController.cs",
+              "RelativeDocumentMoniker": "SWD\\Controllers\\VNPayController.cs",
+              "ToolTip": "D:\\C#\\SWD392\\SWD\\be\\SWD\\Controllers\\VNPayController.cs",
+              "RelativeToolTip": "SWD\\Controllers\\VNPayController.cs",
+              "ViewState": "AQIAAA0AAAAAAAAAAAAgwBkAAAANAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-01T05:19:54.532Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "MaterialView.cs",
+              "DocumentMoniker": "D:\\C#\\SWD392\\SWD\\be\\Repositories\\ModelView\\MaterialView.cs",
+              "RelativeDocumentMoniker": "Repositories\\ModelView\\MaterialView.cs",
+              "ToolTip": "D:\\C#\\SWD392\\SWD\\be\\Repositories\\ModelView\\MaterialView.cs",
+              "RelativeToolTip": "Repositories\\ModelView\\MaterialView.cs",
+              "ViewState": "AQIAAAMAAAAAAAAAAAAAACMAAAAJAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-01T05:10:01.462Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Material.cs",
+              "DocumentMoniker": "D:\\C#\\SWD392\\SWD\\be\\Repositories\\Model\\Material.cs",
+              "RelativeDocumentMoniker": "Repositories\\Model\\Material.cs",
+              "ToolTip": "D:\\C#\\SWD392\\SWD\\be\\Repositories\\Model\\Material.cs",
+              "RelativeToolTip": "Repositories\\Model\\Material.cs",
+              "ViewState": "AQIAAAMAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-01T05:09:58.894Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "IMaterialService.cs",
+              "DocumentMoniker": "D:\\C#\\SWD392\\SWD\\be\\Services\\Interface\\IMaterialService.cs",
+              "RelativeDocumentMoniker": "Services\\Interface\\IMaterialService.cs",
+              "ToolTip": "D:\\C#\\SWD392\\SWD\\be\\Services\\Interface\\IMaterialService.cs",
+              "RelativeToolTip": "Services\\Interface\\IMaterialService.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-01T05:09:54.922Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "MaterialService.cs",
+              "DocumentMoniker": "D:\\C#\\SWD392\\SWD\\be\\Services\\Service\\MaterialService.cs",
+              "RelativeDocumentMoniker": "Services\\Service\\MaterialService.cs",
+              "ToolTip": "D:\\C#\\SWD392\\SWD\\be\\Services\\Service\\MaterialService.cs",
+              "RelativeToolTip": "Services\\Service\\MaterialService.cs",
+              "ViewState": "AQIAABEAAAAAAAAAAAAQwBYAAAAdAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-02-29T12:58:56.374Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "MaterialController.cs",
+              "DocumentMoniker": "D:\\C#\\SWD392\\SWD\\be\\SWD\\Controllers\\MaterialController.cs",
+              "RelativeDocumentMoniker": "SWD\\Controllers\\MaterialController.cs",
+              "ToolTip": "D:\\C#\\SWD392\\SWD\\be\\SWD\\Controllers\\MaterialController.cs",
+              "RelativeToolTip": "SWD\\Controllers\\MaterialController.cs",
+              "ViewState": "AQIAAA4AAAAAAAAAAAAxwD8AAAAsAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-01T05:09:40.397Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\C#\\SWD392\\SWD\\be\\SWD\\Program.cs",
+              "RelativeDocumentMoniker": "SWD\\Program.cs",
+              "ToolTip": "D:\\C#\\SWD392\\SWD\\be\\SWD\\Program.cs",
+              "RelativeToolTip": "SWD\\Program.cs",
+              "ViewState": "AQIAAIMAAAAAAAAAAAAAwHwAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-02-29T02:55:26.883Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -45,20 +45,20 @@ namespace SWD
 
             builder.Services.AddControllersWithViews();
 
-            builder.Services.AddAuthentication(options =>
-        {
-            options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-            options.DefaultChallengeScheme = GoogleDefaults.AuthenticationScheme;
-        })
-        .AddGoogle(options =>
-        {
-            options.ClientId = builder.Configuration["Authentication:Google:ClientId"]!;
-            options.ClientSecret = builder.Configuration["Authentication:Google:ClientSecret"]!;
-            options.SaveTokens = true;
-            //default is signin-google
-            options.CallbackPath = "/api/Account/LoginAccountByGoogle";
+        //    builder.Services.AddAuthentication(options =>
+        //{
+        //    options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+        //    options.DefaultChallengeScheme = GoogleDefaults.AuthenticationScheme;
+        //})
+        //.AddGoogle(options =>
+        //{
+        //    options.ClientId = builder.Configuration["Authentication:Google:ClientId"]!;
+        //    options.ClientSecret = builder.Configuration["Authentication:Google:ClientSecret"]!;
+        //    options.SaveTokens = true;
+        //    //default is signin-google
+        //    options.CallbackPath = "/api/Account/LoginAccountByGoogle";
 
-        });
+        //});
 
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
@@ -67,8 +67,8 @@ namespace SWD
                 c.SwaggerDoc("v1",
                     new OpenApiInfo
                     {
-                        Title = "EXE",
-                        Description = "EXE Source",
+                        Title = "SWD",
+                        Description = "SWD Source",
                         Version = "v1",
                     });
                 c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
@@ -118,7 +118,8 @@ namespace SWD
                     ValidateIssuerSigningKey = true,
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JWT:Key"] ?? throw new ArgumentNullException("builder.Configuration[\"Jwt:Key\"]", "Jwt:Key is null"))),
                     ValidIssuer = builder.Configuration["JWT:Issure"],
-                    ValidAudience = builder.Configuration["JWT:Audience"]
+                    ValidAudience = builder.Configuration["JWT:Audience"],
+                    ClockSkew = TimeSpan.Zero
                 };
             });
             //Add Cors Policy
@@ -143,7 +144,7 @@ namespace SWD
             app.UseCors();
             app.UseStaticFiles();
             app.UseAuthentication();
-
+            app.UseRouting();
             app.UseAuthorization();
 
             app.MapControllers();

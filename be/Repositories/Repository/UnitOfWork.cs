@@ -20,6 +20,17 @@ namespace Repositories.Repository
 
         private readonly IMongoClient _mongoClient;
 
+        private IRepository<RefreshToken> _refreshTokenRepo;
+        public IRepository<RefreshToken> RefreshTokenRepo
+        {
+            get
+            {
+                if (_refreshTokenRepo is null)
+                    _refreshTokenRepo = new Repository<RefreshToken>(_mongoClient);
+                return _refreshTokenRepo;
+            }
+        }
+
         private IRepository<Account> _accountRepo;
         public IRepository<Account> AccountRepo
         {

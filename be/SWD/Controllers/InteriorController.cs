@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Repositories.Model;
 using Repositories.ModelView;
 using Services.Interface;
@@ -15,40 +16,60 @@ namespace SWD.Controllers
         {
             _interiorService = interiorService;
         }
+
+        [Authorize(Roles = "Staff")]
         [HttpPost("Add-New-Interior")]
         public async Task<IActionResult> AddOneInterior(AddInteriorView add)
         {
-            var item = await _interiorService.AddOneInterior(add);
-
-            return Ok(item);
+            var status = await _interiorService.AddOneInterior(add);
+            return Ok(new
+            {
+                Message = status
+            });
         }
 
+        [Authorize(Roles = "Staff")]
         [HttpPut("Update-Interior")]
         public async Task<IActionResult> UpdateInterior(UpdateInteriorView update)
         {
-            var item = await _interiorService.UpdateInterior(update);
-            return Ok(item);
+            var status = await _interiorService.UpdateInterior(update);
+            return Ok(new
+            {
+                Message = status
+            });
         }
 
+        [Authorize(Roles = "Staff")]
         [HttpDelete("Delete-Interior")]
         public async Task<IActionResult> DeleteInterior([FromBody] DeleteInteriorView delete)
         {
-            var item = await _interiorService.DeleteInterior(delete);
-            return Ok(item);
+            var status = await _interiorService.DeleteInterior(delete);
+            return Ok(new
+            {
+                Message = status
+            });
         }
 
+        [AllowAnonymous]
         [HttpGet("Get-Paging-Interior-List")]
         public async Task<IActionResult> GetPagingInteriorList(int pageIndex, bool isAsc, string? searchValue)
         {
-            var result = await _interiorService.GetPagingInterior(pageIndex, isAsc, searchValue);
-            return Ok(result);
+            var status = await _interiorService.GetPagingInterior(pageIndex, isAsc, searchValue);
+            return Ok(new
+            {
+                Message = status
+            });
         }
 
+        [AllowAnonymous]
         [HttpGet("Get-Detail-Interior")]
         public async Task<IActionResult> GetDetailInterior(string interiorId)
         {
-            var result = await _interiorService.GetInteriorDetail(interiorId);
-            return Ok(result);
+            var status = await _interiorService.GetInteriorDetail(interiorId);
+            return Ok(new
+            {
+                Message = status
+            });
         }
 
     }

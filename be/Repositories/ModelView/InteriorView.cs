@@ -9,7 +9,6 @@ namespace Repositories.ModelView
     {
         public class AddInteriorView
         {
-            public required string Jwt { get; set; }
             [StringLength(50, MinimumLength = 1)]
             public required string InteriorName { get; set; }
             public required string[] MaterialId { get; set; }
@@ -25,7 +24,6 @@ namespace Repositories.ModelView
 
         public class UpdateInteriorView
         {
-            public required string Jwt { get; set; }
             [StringLength(50, MinimumLength = 1)]
             public required string InteriorId { get; set; }
             public required string InteriorName { get; set; }
@@ -42,7 +40,6 @@ namespace Repositories.ModelView
 
         public class DeleteInteriorView
         {
-            public required string Jwt { get; set; }
             public required string InteriorId { get; set; }
         }
 

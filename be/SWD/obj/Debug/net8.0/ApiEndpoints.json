@@ -194,11 +194,6 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "Jwt",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
         "Name": "Picture",
         "Type": "Microsoft.AspNetCore.Http.IFormFile",
         "IsRequired": false
@@ -230,11 +225,6 @@
     "IsController": true,
     "Order": 0,
     "Parameters": [
-      {
-        "Name": "Jwt",
-        "Type": "System.String",
-        "IsRequired": false
-      },
       {
         "Name": "Title",
         "Type": "System.String",
@@ -337,11 +327,6 @@
     "Parameters": [
       {
         "Name": "BlogId",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "Jwt",
         "Type": "System.String",
         "IsRequired": false
       },
@@ -483,11 +468,6 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "Jwt",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
         "Name": "InteriorName",
         "Type": "System.String",
         "IsRequired": false
@@ -596,11 +576,6 @@
     "IsController": true,
     "Order": 0,
     "Parameters": [
-      {
-        "Name": "Jwt",
-        "Type": "System.String",
-        "IsRequired": false
-      },
       {
         "Name": "InteriorId",
         "Type": "System.String",
@@ -725,6 +700,38 @@
         "Name": "update",
         "Type": "Repositories.ModelView.MaterialView\u002BUpdateMaterialView",
         "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SWD.Controllers.VNPayController",
+    "Method": "VNPayPayment",
+    "RelativePath": "api/VNPay/VNPay-Payment",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "paymentView",
+        "Type": "Repositories.ModelView.PaymentView",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SWD.Controllers.VNPayController",
+    "Method": "VNPayReturn",
+    "RelativePath": "api/VNPay/VNPay-Return",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "url",
+        "Type": "System.String",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": []

@@ -40,7 +40,7 @@ namespace Services.Service
             pay.AddRequestData("vnp_TmnCode", tmnCode); //Mã website của merchant trên hệ thống của VNPAY (khi đăng ký tài khoản sẽ có trong mail VNPAY gửi về)
             pay.AddRequestData("vnp_Amount", (paymentView.TotalPrice * 100).ToString()); //số tiền cần thanh toán, công thức: số tiền * 100 - ví dụ 10.000 (mười nghìn đồng) --> 1000000
             pay.AddRequestData("vnp_BankCode", ""); //Mã Ngân hàng thanh toán (tham khảo: https://sandbox.vnpayment.vn/apis/danh-sach-ngan-hang/), có thể để trống, người dùng có thể chọn trên cổng thanh toán VNPAY
-            pay.AddRequestData("vnp_CreateDate", DateTime.Now.ToString("yyyyMMddHHmmss")); //ngày thanh toán theo định dạng yyyyMMddHHmmss
+            pay.AddRequestData("vnp_CreateDate", DateTime.UtcNow.ToString("yyyyMMddHHmmss")); //ngày thanh toán theo định dạng yyyyMMddHHmmss
             pay.AddRequestData("vnp_CurrCode", "VND"); //Đơn vị tiền tệ sử dụng thanh toán. Hiện tại chỉ hỗ trợ VND
             pay.AddRequestData("vnp_IpAddr", Utils.GetIpAddress()); //Địa chỉ IP của khách hàng thực hiện giao dịch
             pay.AddRequestData("vnp_Locale", "vn"); //Ngôn ngữ giao diện hiển thị - Tiếng Việt (vn), Tiếng Anh (en)
@@ -109,8 +109,8 @@ namespace Services.Service
             request.RequestId = ObjectId.GenerateNewId().ToString();
             request.RequestStatus = "Pending";
             request.AccountId = _id;
-            request.CreatedAt = DateTime.Now;
-            request.UpdatedAt = DateTime.Now;
+            request.CreatedAt = DateTime.UtcNow;
+            request.UpdatedAt = DateTime.UtcNow;
             await _unit.RequestRepo.AddOneItem(request);
             return request.RequestId;
         }
@@ -125,7 +125,7 @@ namespace Services.Service
                 newItem.RequestId = _id;
                 newItem.AccountId = item.FirstOrDefault().AccountId;
                 newItem.TotalPrice = item.FirstOrDefault().TotalPrice;
-                newItem.UpdatedAt = DateTime.Now;
+                newItem.UpdatedAt = DateTime.UtcNow;
                 newItem.RequestStatus = "Success";
                 await _unit.RequestRepo.UpdateItemByValue("RequestId", _id, newItem);
                 return "Update Successful";

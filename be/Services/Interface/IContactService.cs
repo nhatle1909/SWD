@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using static Repositories.ModelView.ContactView;
 
-namespace Services.Service
+namespace Services.Interface
 {
     public interface IContactService
     {
