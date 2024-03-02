@@ -4,8 +4,10 @@ import path from "path";
 
 export default defineConfig({
   root: path.resolve('./'),
-  plugins: [react() 
-  ],
+  plugins: [react()],
+  build: {
+    sourcemap: false, // Disable source maps for production builds
+  },
   resolve: {
     alias: [{ find: "@", replacement: "/src" }],
   },
