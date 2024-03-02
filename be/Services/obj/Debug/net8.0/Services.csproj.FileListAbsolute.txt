@@ -1,0 +1,64 @@
+D:\C#\SWD392\SWD\Service\bin\Debug\net8.0\Services.deps.json
+D:\C#\SWD392\SWD\Service\bin\Debug\net8.0\Services.dll
+D:\C#\SWD392\SWD\Service\bin\Debug\net8.0\Services.pdb
+D:\C#\SWD392\SWD\Service\bin\Debug\net8.0\Repositories.dll
+D:\C#\SWD392\SWD\Service\bin\Debug\net8.0\Repositories.pdb
+D:\C#\SWD392\SWD\Service\obj\Debug\net8.0\Services.csproj.AssemblyReference.cache
+D:\C#\SWD392\SWD\Service\obj\Debug\net8.0\Services.GeneratedMSBuildEditorConfig.editorconfig
+D:\C#\SWD392\SWD\Service\obj\Debug\net8.0\Services.AssemblyInfoInputs.cache
+D:\C#\SWD392\SWD\Service\obj\Debug\net8.0\Services.AssemblyInfo.cs
+D:\C#\SWD392\SWD\Service\obj\Debug\net8.0\Services.csproj.CoreCompileInputs.cache
+D:\C#\SWD392\SWD\Service\obj\Debug\net8.0\Services.sourcelink.json
+D:\C#\SWD392\SWD\Service\obj\Debug\net8.0\Services.csproj.CopyComplete
+D:\C#\SWD392\SWD\Service\obj\Debug\net8.0\Services.dll
+D:\C#\SWD392\SWD\Service\obj\Debug\net8.0\refint\Services.dll
+D:\C#\SWD392\SWD\Service\obj\Debug\net8.0\Services.pdb
+D:\C#\SWD392\SWD\Service\obj\Debug\net8.0\ref\Services.dll
+D:\C#\SWD392\SWD\Services\bin\Debug\net8.0\Services.deps.json
+D:\C#\SWD392\SWD\Services\bin\Debug\net8.0\Services.dll
+D:\C#\SWD392\SWD\Services\bin\Debug\net8.0\Services.pdb
+D:\C#\SWD392\SWD\Services\bin\Debug\net8.0\Repositories.dll
+D:\C#\SWD392\SWD\Services\bin\Debug\net8.0\Repositories.pdb
+D:\C#\SWD392\SWD\Services\obj\Debug\net8.0\Services.csproj.AssemblyReference.cache
+D:\C#\SWD392\SWD\Services\obj\Debug\net8.0\Services.GeneratedMSBuildEditorConfig.editorconfig
+D:\C#\SWD392\SWD\Services\obj\Debug\net8.0\Services.AssemblyInfoInputs.cache
+D:\C#\SWD392\SWD\Services\obj\Debug\net8.0\Services.AssemblyInfo.cs
+D:\C#\SWD392\SWD\Services\obj\Debug\net8.0\Services.csproj.CoreCompileInputs.cache
+D:\C#\SWD392\SWD\Services\obj\Debug\net8.0\Services.sourcelink.json
+D:\C#\SWD392\SWD\Services\obj\Debug\net8.0\Services.dll
+D:\C#\SWD392\SWD\Services\obj\Debug\net8.0\refint\Services.dll
+D:\C#\SWD392\SWD\Services\obj\Debug\net8.0\Services.pdb
+D:\C#\SWD392\SWD\Services\obj\Debug\net8.0\ref\Services.dll
+D:\C#\SWD392\SWD\Services\obj\Debug\net8.0\Services.csproj.Up2Date
+D:\DevTools\repos\New folder (2)\New folder\SWD\Services\bin\Debug\net8.0\Services.deps.json
+D:\DevTools\repos\New folder (2)\New folder\SWD\Services\bin\Debug\net8.0\Services.dll
+D:\DevTools\repos\New folder (2)\New folder\SWD\Services\bin\Debug\net8.0\Services.pdb
+D:\DevTools\repos\New folder (2)\New folder\SWD\Services\bin\Debug\net8.0\Repositories.dll
+D:\DevTools\repos\New folder (2)\New folder\SWD\Services\bin\Debug\net8.0\Repositories.pdb
+D:\DevTools\repos\New folder (2)\New folder\SWD\Services\obj\Debug\net8.0\Services.csproj.AssemblyReference.cache
+D:\DevTools\repos\New folder (2)\New folder\SWD\Services\obj\Debug\net8.0\Services.GeneratedMSBuildEditorConfig.editorconfig
+D:\DevTools\repos\New folder (2)\New folder\SWD\Services\obj\Debug\net8.0\Services.AssemblyInfoInputs.cache
+D:\DevTools\repos\New folder (2)\New folder\SWD\Services\obj\Debug\net8.0\Services.AssemblyInfo.cs
+D:\DevTools\repos\New folder (2)\New folder\SWD\Services\obj\Debug\net8.0\Services.csproj.CoreCompileInputs.cache
+D:\DevTools\repos\New folder (2)\New folder\SWD\Services\obj\Debug\net8.0\Services.sourcelink.json
+D:\DevTools\repos\New folder (2)\New folder\SWD\Services\obj\Debug\net8.0\Services.csproj.CopyComplete
+D:\DevTools\repos\New folder (2)\New folder\SWD\Services\obj\Debug\net8.0\Services.dll
+D:\DevTools\repos\New folder (2)\New folder\SWD\Services\obj\Debug\net8.0\refint\Services.dll
+D:\DevTools\repos\New folder (2)\New folder\SWD\Services\obj\Debug\net8.0\Services.pdb
+D:\DevTools\repos\New folder (2)\New folder\SWD\Services\obj\Debug\net8.0\ref\Services.dll
+D:\C#\SWD392\SWD\be\Services\bin\Debug\net8.0\Services.deps.json
+D:\C#\SWD392\SWD\be\Services\bin\Debug\net8.0\Services.dll
+D:\C#\SWD392\SWD\be\Services\bin\Debug\net8.0\Services.pdb
+D:\C#\SWD392\SWD\be\Services\bin\Debug\net8.0\Repositories.dll
+D:\C#\SWD392\SWD\be\Services\bin\Debug\net8.0\Repositories.pdb
+D:\C#\SWD392\SWD\be\Services\obj\Debug\net8.0\Services.csproj.AssemblyReference.cache
+D:\C#\SWD392\SWD\be\Services\obj\Debug\net8.0\Services.GeneratedMSBuildEditorConfig.editorconfig
+D:\C#\SWD392\SWD\be\Services\obj\Debug\net8.0\Services.AssemblyInfoInputs.cache
+D:\C#\SWD392\SWD\be\Services\obj\Debug\net8.0\Services.AssemblyInfo.cs
+D:\C#\SWD392\SWD\be\Services\obj\Debug\net8.0\Services.csproj.CoreCompileInputs.cache
+D:\C#\SWD392\SWD\be\Services\obj\Debug\net8.0\Services.sourcelink.json
+D:\C#\SWD392\SWD\be\Services\obj\Debug\net8.0\Services.csproj.Up2Date
+D:\C#\SWD392\SWD\be\Services\obj\Debug\net8.0\Services.dll
+D:\C#\SWD392\SWD\be\Services\obj\Debug\net8.0\refint\Services.dll
+D:\C#\SWD392\SWD\be\Services\obj\Debug\net8.0\Services.pdb
+D:\C#\SWD392\SWD\be\Services\obj\Debug\net8.0\ref\Services.dll

@@ -1,0 +1,276 @@
+D:\DevTools\repos\SWD\SWD\bin\Debug\net8.0\appsettings.Development.json
+D:\DevTools\repos\SWD\SWD\bin\Debug\net8.0\appsettings.json
+D:\DevTools\repos\SWD\SWD\bin\Debug\net8.0\SWD.exe
+D:\DevTools\repos\SWD\SWD\bin\Debug\net8.0\SWD.deps.json
+D:\DevTools\repos\SWD\SWD\bin\Debug\net8.0\SWD.runtimeconfig.json
+D:\DevTools\repos\SWD\SWD\bin\Debug\net8.0\SWD.dll
+D:\DevTools\repos\SWD\SWD\bin\Debug\net8.0\SWD.pdb
+D:\DevTools\repos\SWD\SWD\bin\Debug\net8.0\AutoMapper.dll
+D:\DevTools\repos\SWD\SWD\bin\Debug\net8.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+D:\DevTools\repos\SWD\SWD\bin\Debug\net8.0\AWSSDK.Core.dll
+D:\DevTools\repos\SWD\SWD\bin\Debug\net8.0\AWSSDK.SecurityToken.dll
+D:\DevTools\repos\SWD\SWD\bin\Debug\net8.0\DnsClient.dll
+D:\DevTools\repos\SWD\SWD\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+D:\DevTools\repos\SWD\SWD\bin\Debug\net8.0\Microsoft.AspNetCore.OpenApi.dll
+D:\DevTools\repos\SWD\SWD\bin\Debug\net8.0\Microsoft.IdentityModel.Abstractions.dll
+D:\DevTools\repos\SWD\SWD\bin\Debug\net8.0\Microsoft.IdentityModel.JsonWebTokens.dll
+D:\DevTools\repos\SWD\SWD\bin\Debug\net8.0\Microsoft.IdentityModel.Logging.dll
+D:\DevTools\repos\SWD\SWD\bin\Debug\net8.0\Microsoft.IdentityModel.Protocols.dll
+D:\DevTools\repos\SWD\SWD\bin\Debug\net8.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+D:\DevTools\repos\SWD\SWD\bin\Debug\net8.0\Microsoft.IdentityModel.Tokens.dll
+D:\DevTools\repos\SWD\SWD\bin\Debug\net8.0\Microsoft.OpenApi.dll
+D:\DevTools\repos\SWD\SWD\bin\Debug\net8.0\MongoDB.Bson.dll
+D:\DevTools\repos\SWD\SWD\bin\Debug\net8.0\MongoDB.Driver.dll
+D:\DevTools\repos\SWD\SWD\bin\Debug\net8.0\MongoDB.Driver.Core.dll
+D:\DevTools\repos\SWD\SWD\bin\Debug\net8.0\MongoDB.Libmongocrypt.dll
+D:\DevTools\repos\SWD\SWD\bin\Debug\net8.0\Newtonsoft.Json.dll
+D:\DevTools\repos\SWD\SWD\bin\Debug\net8.0\SharpCompress.dll
+D:\DevTools\repos\SWD\SWD\bin\Debug\net8.0\Snappier.dll
+D:\DevTools\repos\SWD\SWD\bin\Debug\net8.0\Swashbuckle.AspNetCore.Swagger.dll
+D:\DevTools\repos\SWD\SWD\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+D:\DevTools\repos\SWD\SWD\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+D:\DevTools\repos\SWD\SWD\bin\Debug\net8.0\System.IdentityModel.Tokens.Jwt.dll
+D:\DevTools\repos\SWD\SWD\bin\Debug\net8.0\Twilio.dll
+D:\DevTools\repos\SWD\SWD\bin\Debug\net8.0\ZstdSharp.dll
+D:\DevTools\repos\SWD\SWD\bin\Debug\net8.0\runtimes\linux\native\libmongocrypt.so
+D:\DevTools\repos\SWD\SWD\bin\Debug\net8.0\runtimes\osx\native\libmongocrypt.dylib
+D:\DevTools\repos\SWD\SWD\bin\Debug\net8.0\runtimes\win\native\mongocrypt.dll
+D:\DevTools\repos\SWD\SWD\obj\Debug\net8.0\SWD.csproj.AssemblyReference.cache
+D:\DevTools\repos\SWD\SWD\obj\Debug\net8.0\SWD.GeneratedMSBuildEditorConfig.editorconfig
+D:\DevTools\repos\SWD\SWD\obj\Debug\net8.0\SWD.AssemblyInfoInputs.cache
+D:\DevTools\repos\SWD\SWD\obj\Debug\net8.0\SWD.AssemblyInfo.cs
+D:\DevTools\repos\SWD\SWD\obj\Debug\net8.0\SWD.csproj.CoreCompileInputs.cache
+D:\DevTools\repos\SWD\SWD\obj\Debug\net8.0\SWD.MvcApplicationPartsAssemblyInfo.cs
+D:\DevTools\repos\SWD\SWD\obj\Debug\net8.0\SWD.MvcApplicationPartsAssemblyInfo.cache
+D:\DevTools\repos\SWD\SWD\obj\Debug\net8.0\SWD.sourcelink.json
+D:\DevTools\repos\SWD\SWD\obj\Debug\net8.0\staticwebassets.build.json
+D:\DevTools\repos\SWD\SWD\obj\Debug\net8.0\staticwebassets.development.json
+D:\DevTools\repos\SWD\SWD\obj\Debug\net8.0\staticwebassets\msbuild.SWD.Microsoft.AspNetCore.StaticWebAssets.props
+D:\DevTools\repos\SWD\SWD\obj\Debug\net8.0\staticwebassets\msbuild.build.SWD.props
+D:\DevTools\repos\SWD\SWD\obj\Debug\net8.0\staticwebassets\msbuild.buildMultiTargeting.SWD.props
+D:\DevTools\repos\SWD\SWD\obj\Debug\net8.0\staticwebassets\msbuild.buildTransitive.SWD.props
+D:\DevTools\repos\SWD\SWD\obj\Debug\net8.0\staticwebassets.pack.json
+D:\DevTools\repos\SWD\SWD\obj\Debug\net8.0\scopedcss\bundle\SWD.styles.css
+D:\DevTools\repos\SWD\SWD\obj\Debug\net8.0\SWD.csproj.CopyComplete
+D:\DevTools\repos\SWD\SWD\obj\Debug\net8.0\SWD.dll
+D:\DevTools\repos\SWD\SWD\obj\Debug\net8.0\refint\SWD.dll
+D:\DevTools\repos\SWD\SWD\obj\Debug\net8.0\SWD.pdb
+D:\DevTools\repos\SWD\SWD\obj\Debug\net8.0\SWD.genruntimeconfig.cache
+D:\DevTools\repos\SWD\SWD\obj\Debug\net8.0\ref\SWD.dll
+D:\DevTools\repos\SWD\SWD\bin\Debug\net8.0\Repository.dll
+D:\DevTools\repos\SWD\SWD\bin\Debug\net8.0\Service.dll
+D:\DevTools\repos\SWD\SWD\bin\Debug\net8.0\Repository.pdb
+D:\DevTools\repos\SWD\SWD\bin\Debug\net8.0\Service.pdb
+D:\DevTools\repos\SWD\SWD\bin\Debug\net8.0\BouncyCastle.Cryptography.dll
+D:\DevTools\repos\SWD\SWD\bin\Debug\net8.0\MailKit.dll
+D:\DevTools\repos\SWD\SWD\bin\Debug\net8.0\MimeKit.dll
+D:\C#\SWD392\SWD\SWD\bin\Debug\net8.0\appsettings.Development.json
+D:\C#\SWD392\SWD\SWD\bin\Debug\net8.0\appsettings.json
+D:\C#\SWD392\SWD\SWD\bin\Debug\net8.0\SWD.staticwebassets.runtime.json
+D:\C#\SWD392\SWD\SWD\bin\Debug\net8.0\SWD.exe
+D:\C#\SWD392\SWD\SWD\bin\Debug\net8.0\SWD.deps.json
+D:\C#\SWD392\SWD\SWD\bin\Debug\net8.0\SWD.runtimeconfig.json
+D:\C#\SWD392\SWD\SWD\bin\Debug\net8.0\SWD.dll
+D:\C#\SWD392\SWD\SWD\bin\Debug\net8.0\SWD.pdb
+D:\C#\SWD392\SWD\SWD\bin\Debug\net8.0\AutoMapper.dll
+D:\C#\SWD392\SWD\SWD\bin\Debug\net8.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+D:\C#\SWD392\SWD\SWD\bin\Debug\net8.0\AWSSDK.Core.dll
+D:\C#\SWD392\SWD\SWD\bin\Debug\net8.0\AWSSDK.SecurityToken.dll
+D:\C#\SWD392\SWD\SWD\bin\Debug\net8.0\BouncyCastle.Cryptography.dll
+D:\C#\SWD392\SWD\SWD\bin\Debug\net8.0\DnsClient.dll
+D:\C#\SWD392\SWD\SWD\bin\Debug\net8.0\MailKit.dll
+D:\C#\SWD392\SWD\SWD\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+D:\C#\SWD392\SWD\SWD\bin\Debug\net8.0\Microsoft.AspNetCore.OpenApi.dll
+D:\C#\SWD392\SWD\SWD\bin\Debug\net8.0\Microsoft.IdentityModel.Abstractions.dll
+D:\C#\SWD392\SWD\SWD\bin\Debug\net8.0\Microsoft.IdentityModel.JsonWebTokens.dll
+D:\C#\SWD392\SWD\SWD\bin\Debug\net8.0\Microsoft.IdentityModel.Logging.dll
+D:\C#\SWD392\SWD\SWD\bin\Debug\net8.0\Microsoft.IdentityModel.Protocols.dll
+D:\C#\SWD392\SWD\SWD\bin\Debug\net8.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+D:\C#\SWD392\SWD\SWD\bin\Debug\net8.0\Microsoft.IdentityModel.Tokens.dll
+D:\C#\SWD392\SWD\SWD\bin\Debug\net8.0\Microsoft.OpenApi.dll
+D:\C#\SWD392\SWD\SWD\bin\Debug\net8.0\MimeKit.dll
+D:\C#\SWD392\SWD\SWD\bin\Debug\net8.0\MongoDB.Bson.dll
+D:\C#\SWD392\SWD\SWD\bin\Debug\net8.0\MongoDB.Driver.dll
+D:\C#\SWD392\SWD\SWD\bin\Debug\net8.0\MongoDB.Driver.Core.dll
+D:\C#\SWD392\SWD\SWD\bin\Debug\net8.0\MongoDB.Libmongocrypt.dll
+D:\C#\SWD392\SWD\SWD\bin\Debug\net8.0\Newtonsoft.Json.dll
+D:\C#\SWD392\SWD\SWD\bin\Debug\net8.0\SharpCompress.dll
+D:\C#\SWD392\SWD\SWD\bin\Debug\net8.0\Snappier.dll
+D:\C#\SWD392\SWD\SWD\bin\Debug\net8.0\Swashbuckle.AspNetCore.Swagger.dll
+D:\C#\SWD392\SWD\SWD\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+D:\C#\SWD392\SWD\SWD\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+D:\C#\SWD392\SWD\SWD\bin\Debug\net8.0\System.IdentityModel.Tokens.Jwt.dll
+D:\C#\SWD392\SWD\SWD\bin\Debug\net8.0\Twilio.dll
+D:\C#\SWD392\SWD\SWD\bin\Debug\net8.0\ZstdSharp.dll
+D:\C#\SWD392\SWD\SWD\bin\Debug\net8.0\runtimes\linux\native\libmongocrypt.so
+D:\C#\SWD392\SWD\SWD\bin\Debug\net8.0\runtimes\osx\native\libmongocrypt.dylib
+D:\C#\SWD392\SWD\SWD\bin\Debug\net8.0\runtimes\win\native\mongocrypt.dll
+D:\C#\SWD392\SWD\SWD\bin\Debug\net8.0\Repositories.dll
+D:\C#\SWD392\SWD\SWD\bin\Debug\net8.0\Services.dll
+D:\C#\SWD392\SWD\SWD\bin\Debug\net8.0\Repositories.pdb
+D:\C#\SWD392\SWD\SWD\bin\Debug\net8.0\Services.pdb
+D:\C#\SWD392\SWD\SWD\obj\Debug\net8.0\SWD.csproj.AssemblyReference.cache
+D:\C#\SWD392\SWD\SWD\obj\Debug\net8.0\SWD.GeneratedMSBuildEditorConfig.editorconfig
+D:\C#\SWD392\SWD\SWD\obj\Debug\net8.0\SWD.AssemblyInfoInputs.cache
+D:\C#\SWD392\SWD\SWD\obj\Debug\net8.0\SWD.AssemblyInfo.cs
+D:\C#\SWD392\SWD\SWD\obj\Debug\net8.0\SWD.csproj.CoreCompileInputs.cache
+D:\C#\SWD392\SWD\SWD\obj\Debug\net8.0\SWD.MvcApplicationPartsAssemblyInfo.cs
+D:\C#\SWD392\SWD\SWD\obj\Debug\net8.0\SWD.MvcApplicationPartsAssemblyInfo.cache
+D:\C#\SWD392\SWD\SWD\obj\Debug\net8.0\SWD.sourcelink.json
+D:\C#\SWD392\SWD\SWD\obj\Debug\net8.0\staticwebassets.build.json
+D:\C#\SWD392\SWD\SWD\obj\Debug\net8.0\staticwebassets.development.json
+D:\C#\SWD392\SWD\SWD\obj\Debug\net8.0\staticwebassets\msbuild.SWD.Microsoft.AspNetCore.StaticWebAssets.props
+D:\C#\SWD392\SWD\SWD\obj\Debug\net8.0\staticwebassets\msbuild.build.SWD.props
+D:\C#\SWD392\SWD\SWD\obj\Debug\net8.0\staticwebassets\msbuild.buildMultiTargeting.SWD.props
+D:\C#\SWD392\SWD\SWD\obj\Debug\net8.0\staticwebassets\msbuild.buildTransitive.SWD.props
+D:\C#\SWD392\SWD\SWD\obj\Debug\net8.0\staticwebassets.pack.json
+D:\C#\SWD392\SWD\SWD\obj\Debug\net8.0\scopedcss\bundle\SWD.styles.css
+D:\C#\SWD392\SWD\SWD\obj\Debug\net8.0\SWD.dll
+D:\C#\SWD392\SWD\SWD\obj\Debug\net8.0\refint\SWD.dll
+D:\C#\SWD392\SWD\SWD\obj\Debug\net8.0\SWD.pdb
+D:\C#\SWD392\SWD\SWD\obj\Debug\net8.0\SWD.genruntimeconfig.cache
+D:\C#\SWD392\SWD\SWD\obj\Debug\net8.0\ref\SWD.dll
+D:\C#\SWD392\SWD\SWD\obj\Debug\net8.0\SWD.csproj.Up2Date
+D:\C#\SWD392\SWD\SWD\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.Google.dll
+D:\DevTools\repos\New folder (2)\New folder\SWD\SWD\bin\Debug\net8.0\appsettings.Development.json
+D:\DevTools\repos\New folder (2)\New folder\SWD\SWD\bin\Debug\net8.0\appsettings.json
+D:\DevTools\repos\New folder (2)\New folder\SWD\SWD\bin\Debug\net8.0\SWD.staticwebassets.runtime.json
+D:\DevTools\repos\New folder (2)\New folder\SWD\SWD\bin\Debug\net8.0\SWD.exe
+D:\DevTools\repos\New folder (2)\New folder\SWD\SWD\bin\Debug\net8.0\SWD.deps.json
+D:\DevTools\repos\New folder (2)\New folder\SWD\SWD\bin\Debug\net8.0\SWD.runtimeconfig.json
+D:\DevTools\repos\New folder (2)\New folder\SWD\SWD\bin\Debug\net8.0\SWD.dll
+D:\DevTools\repos\New folder (2)\New folder\SWD\SWD\bin\Debug\net8.0\SWD.pdb
+D:\DevTools\repos\New folder (2)\New folder\SWD\SWD\bin\Debug\net8.0\AutoMapper.dll
+D:\DevTools\repos\New folder (2)\New folder\SWD\SWD\bin\Debug\net8.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+D:\DevTools\repos\New folder (2)\New folder\SWD\SWD\bin\Debug\net8.0\AWSSDK.Core.dll
+D:\DevTools\repos\New folder (2)\New folder\SWD\SWD\bin\Debug\net8.0\AWSSDK.SecurityToken.dll
+D:\DevTools\repos\New folder (2)\New folder\SWD\SWD\bin\Debug\net8.0\BouncyCastle.Cryptography.dll
+D:\DevTools\repos\New folder (2)\New folder\SWD\SWD\bin\Debug\net8.0\DnsClient.dll
+D:\DevTools\repos\New folder (2)\New folder\SWD\SWD\bin\Debug\net8.0\MailKit.dll
+D:\DevTools\repos\New folder (2)\New folder\SWD\SWD\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.Google.dll
+D:\DevTools\repos\New folder (2)\New folder\SWD\SWD\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+D:\DevTools\repos\New folder (2)\New folder\SWD\SWD\bin\Debug\net8.0\Microsoft.AspNetCore.OpenApi.dll
+D:\DevTools\repos\New folder (2)\New folder\SWD\SWD\bin\Debug\net8.0\Microsoft.IdentityModel.Abstractions.dll
+D:\DevTools\repos\New folder (2)\New folder\SWD\SWD\bin\Debug\net8.0\Microsoft.IdentityModel.JsonWebTokens.dll
+D:\DevTools\repos\New folder (2)\New folder\SWD\SWD\bin\Debug\net8.0\Microsoft.IdentityModel.Logging.dll
+D:\DevTools\repos\New folder (2)\New folder\SWD\SWD\bin\Debug\net8.0\Microsoft.IdentityModel.Protocols.dll
+D:\DevTools\repos\New folder (2)\New folder\SWD\SWD\bin\Debug\net8.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+D:\DevTools\repos\New folder (2)\New folder\SWD\SWD\bin\Debug\net8.0\Microsoft.IdentityModel.Tokens.dll
+D:\DevTools\repos\New folder (2)\New folder\SWD\SWD\bin\Debug\net8.0\Microsoft.OpenApi.dll
+D:\DevTools\repos\New folder (2)\New folder\SWD\SWD\bin\Debug\net8.0\MimeKit.dll
+D:\DevTools\repos\New folder (2)\New folder\SWD\SWD\bin\Debug\net8.0\MongoDB.Bson.dll
+D:\DevTools\repos\New folder (2)\New folder\SWD\SWD\bin\Debug\net8.0\MongoDB.Driver.dll
+D:\DevTools\repos\New folder (2)\New folder\SWD\SWD\bin\Debug\net8.0\MongoDB.Driver.Core.dll
+D:\DevTools\repos\New folder (2)\New folder\SWD\SWD\bin\Debug\net8.0\MongoDB.Libmongocrypt.dll
+D:\DevTools\repos\New folder (2)\New folder\SWD\SWD\bin\Debug\net8.0\Newtonsoft.Json.dll
+D:\DevTools\repos\New folder (2)\New folder\SWD\SWD\bin\Debug\net8.0\SharpCompress.dll
+D:\DevTools\repos\New folder (2)\New folder\SWD\SWD\bin\Debug\net8.0\Snappier.dll
+D:\DevTools\repos\New folder (2)\New folder\SWD\SWD\bin\Debug\net8.0\Swashbuckle.AspNetCore.Swagger.dll
+D:\DevTools\repos\New folder (2)\New folder\SWD\SWD\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+D:\DevTools\repos\New folder (2)\New folder\SWD\SWD\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+D:\DevTools\repos\New folder (2)\New folder\SWD\SWD\bin\Debug\net8.0\System.IdentityModel.Tokens.Jwt.dll
+D:\DevTools\repos\New folder (2)\New folder\SWD\SWD\bin\Debug\net8.0\Twilio.dll
+D:\DevTools\repos\New folder (2)\New folder\SWD\SWD\bin\Debug\net8.0\ZstdSharp.dll
+D:\DevTools\repos\New folder (2)\New folder\SWD\SWD\bin\Debug\net8.0\runtimes\linux\native\libmongocrypt.so
+D:\DevTools\repos\New folder (2)\New folder\SWD\SWD\bin\Debug\net8.0\runtimes\osx\native\libmongocrypt.dylib
+D:\DevTools\repos\New folder (2)\New folder\SWD\SWD\bin\Debug\net8.0\runtimes\win\native\mongocrypt.dll
+D:\DevTools\repos\New folder (2)\New folder\SWD\SWD\bin\Debug\net8.0\Repositories.dll
+D:\DevTools\repos\New folder (2)\New folder\SWD\SWD\bin\Debug\net8.0\Services.dll
+D:\DevTools\repos\New folder (2)\New folder\SWD\SWD\bin\Debug\net8.0\Services.pdb
+D:\DevTools\repos\New folder (2)\New folder\SWD\SWD\bin\Debug\net8.0\Repositories.pdb
+D:\DevTools\repos\New folder (2)\New folder\SWD\SWD\obj\Debug\net8.0\SWD.csproj.AssemblyReference.cache
+D:\DevTools\repos\New folder (2)\New folder\SWD\SWD\obj\Debug\net8.0\SWD.GeneratedMSBuildEditorConfig.editorconfig
+D:\DevTools\repos\New folder (2)\New folder\SWD\SWD\obj\Debug\net8.0\SWD.AssemblyInfoInputs.cache
+D:\DevTools\repos\New folder (2)\New folder\SWD\SWD\obj\Debug\net8.0\SWD.AssemblyInfo.cs
+D:\DevTools\repos\New folder (2)\New folder\SWD\SWD\obj\Debug\net8.0\SWD.csproj.CoreCompileInputs.cache
+D:\DevTools\repos\New folder (2)\New folder\SWD\SWD\obj\Debug\net8.0\SWD.MvcApplicationPartsAssemblyInfo.cs
+D:\DevTools\repos\New folder (2)\New folder\SWD\SWD\obj\Debug\net8.0\SWD.MvcApplicationPartsAssemblyInfo.cache
+D:\DevTools\repos\New folder (2)\New folder\SWD\SWD\obj\Debug\net8.0\SWD.sourcelink.json
+D:\DevTools\repos\New folder (2)\New folder\SWD\SWD\obj\Debug\net8.0\staticwebassets.build.json
+D:\DevTools\repos\New folder (2)\New folder\SWD\SWD\obj\Debug\net8.0\staticwebassets.development.json
+D:\DevTools\repos\New folder (2)\New folder\SWD\SWD\obj\Debug\net8.0\staticwebassets\msbuild.SWD.Microsoft.AspNetCore.StaticWebAssets.props
+D:\DevTools\repos\New folder (2)\New folder\SWD\SWD\obj\Debug\net8.0\staticwebassets\msbuild.build.SWD.props
+D:\DevTools\repos\New folder (2)\New folder\SWD\SWD\obj\Debug\net8.0\staticwebassets\msbuild.buildMultiTargeting.SWD.props
+D:\DevTools\repos\New folder (2)\New folder\SWD\SWD\obj\Debug\net8.0\staticwebassets\msbuild.buildTransitive.SWD.props
+D:\DevTools\repos\New folder (2)\New folder\SWD\SWD\obj\Debug\net8.0\staticwebassets.pack.json
+D:\DevTools\repos\New folder (2)\New folder\SWD\SWD\obj\Debug\net8.0\scopedcss\bundle\SWD.styles.css
+D:\DevTools\repos\New folder (2)\New folder\SWD\SWD\obj\Debug\net8.0\SWD.csproj.CopyComplete
+D:\DevTools\repos\New folder (2)\New folder\SWD\SWD\obj\Debug\net8.0\SWD.dll
+D:\DevTools\repos\New folder (2)\New folder\SWD\SWD\obj\Debug\net8.0\refint\SWD.dll
+D:\DevTools\repos\New folder (2)\New folder\SWD\SWD\obj\Debug\net8.0\SWD.pdb
+D:\DevTools\repos\New folder (2)\New folder\SWD\SWD\obj\Debug\net8.0\SWD.genruntimeconfig.cache
+D:\DevTools\repos\New folder (2)\New folder\SWD\SWD\obj\Debug\net8.0\ref\SWD.dll
+D:\C#\SWD392\SWD\be\SWD\bin\Debug\net8.0\appsettings.Development.json
+D:\C#\SWD392\SWD\be\SWD\bin\Debug\net8.0\appsettings.json
+D:\C#\SWD392\SWD\be\SWD\bin\Debug\net8.0\SWD.staticwebassets.runtime.json
+D:\C#\SWD392\SWD\be\SWD\bin\Debug\net8.0\SWD.exe
+D:\C#\SWD392\SWD\be\SWD\bin\Debug\net8.0\SWD.deps.json
+D:\C#\SWD392\SWD\be\SWD\bin\Debug\net8.0\SWD.runtimeconfig.json
+D:\C#\SWD392\SWD\be\SWD\bin\Debug\net8.0\SWD.dll
+D:\C#\SWD392\SWD\be\SWD\bin\Debug\net8.0\SWD.pdb
+D:\C#\SWD392\SWD\be\SWD\bin\Debug\net8.0\AutoMapper.dll
+D:\C#\SWD392\SWD\be\SWD\bin\Debug\net8.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+D:\C#\SWD392\SWD\be\SWD\bin\Debug\net8.0\AWSSDK.Core.dll
+D:\C#\SWD392\SWD\be\SWD\bin\Debug\net8.0\AWSSDK.SecurityToken.dll
+D:\C#\SWD392\SWD\be\SWD\bin\Debug\net8.0\BouncyCastle.Cryptography.dll
+D:\C#\SWD392\SWD\be\SWD\bin\Debug\net8.0\DnsClient.dll
+D:\C#\SWD392\SWD\be\SWD\bin\Debug\net8.0\Google.Apis.dll
+D:\C#\SWD392\SWD\be\SWD\bin\Debug\net8.0\Google.Apis.Auth.dll
+D:\C#\SWD392\SWD\be\SWD\bin\Debug\net8.0\Google.Apis.Core.dll
+D:\C#\SWD392\SWD\be\SWD\bin\Debug\net8.0\MailKit.dll
+D:\C#\SWD392\SWD\be\SWD\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.Google.dll
+D:\C#\SWD392\SWD\be\SWD\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+D:\C#\SWD392\SWD\be\SWD\bin\Debug\net8.0\Microsoft.AspNetCore.OpenApi.dll
+D:\C#\SWD392\SWD\be\SWD\bin\Debug\net8.0\Microsoft.IdentityModel.Abstractions.dll
+D:\C#\SWD392\SWD\be\SWD\bin\Debug\net8.0\Microsoft.IdentityModel.JsonWebTokens.dll
+D:\C#\SWD392\SWD\be\SWD\bin\Debug\net8.0\Microsoft.IdentityModel.Logging.dll
+D:\C#\SWD392\SWD\be\SWD\bin\Debug\net8.0\Microsoft.IdentityModel.Protocols.dll
+D:\C#\SWD392\SWD\be\SWD\bin\Debug\net8.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+D:\C#\SWD392\SWD\be\SWD\bin\Debug\net8.0\Microsoft.IdentityModel.Tokens.dll
+D:\C#\SWD392\SWD\be\SWD\bin\Debug\net8.0\Microsoft.OpenApi.dll
+D:\C#\SWD392\SWD\be\SWD\bin\Debug\net8.0\MimeKit.dll
+D:\C#\SWD392\SWD\be\SWD\bin\Debug\net8.0\MongoDB.Bson.dll
+D:\C#\SWD392\SWD\be\SWD\bin\Debug\net8.0\MongoDB.Driver.dll
+D:\C#\SWD392\SWD\be\SWD\bin\Debug\net8.0\MongoDB.Driver.Core.dll
+D:\C#\SWD392\SWD\be\SWD\bin\Debug\net8.0\MongoDB.Libmongocrypt.dll
+D:\C#\SWD392\SWD\be\SWD\bin\Debug\net8.0\Newtonsoft.Json.dll
+D:\C#\SWD392\SWD\be\SWD\bin\Debug\net8.0\SharpCompress.dll
+D:\C#\SWD392\SWD\be\SWD\bin\Debug\net8.0\Snappier.dll
+D:\C#\SWD392\SWD\be\SWD\bin\Debug\net8.0\Swashbuckle.AspNetCore.Swagger.dll
+D:\C#\SWD392\SWD\be\SWD\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+D:\C#\SWD392\SWD\be\SWD\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+D:\C#\SWD392\SWD\be\SWD\bin\Debug\net8.0\System.CodeDom.dll
+D:\C#\SWD392\SWD\be\SWD\bin\Debug\net8.0\System.IdentityModel.Tokens.Jwt.dll
+D:\C#\SWD392\SWD\be\SWD\bin\Debug\net8.0\System.Management.dll
+D:\C#\SWD392\SWD\be\SWD\bin\Debug\net8.0\Twilio.dll
+D:\C#\SWD392\SWD\be\SWD\bin\Debug\net8.0\ZstdSharp.dll
+D:\C#\SWD392\SWD\be\SWD\bin\Debug\net8.0\runtimes\linux\native\libmongocrypt.so
+D:\C#\SWD392\SWD\be\SWD\bin\Debug\net8.0\runtimes\osx\native\libmongocrypt.dylib
+D:\C#\SWD392\SWD\be\SWD\bin\Debug\net8.0\runtimes\win\native\mongocrypt.dll
+D:\C#\SWD392\SWD\be\SWD\bin\Debug\net8.0\runtimes\win\lib\net7.0\System.Management.dll
+D:\C#\SWD392\SWD\be\SWD\bin\Debug\net8.0\Repositories.dll
+D:\C#\SWD392\SWD\be\SWD\bin\Debug\net8.0\Services.dll
+D:\C#\SWD392\SWD\be\SWD\bin\Debug\net8.0\Services.pdb
+D:\C#\SWD392\SWD\be\SWD\bin\Debug\net8.0\Repositories.pdb
+D:\C#\SWD392\SWD\be\SWD\obj\Debug\net8.0\SWD.csproj.AssemblyReference.cache
+D:\C#\SWD392\SWD\be\SWD\obj\Debug\net8.0\SWD.GeneratedMSBuildEditorConfig.editorconfig
+D:\C#\SWD392\SWD\be\SWD\obj\Debug\net8.0\SWD.AssemblyInfoInputs.cache
+D:\C#\SWD392\SWD\be\SWD\obj\Debug\net8.0\SWD.AssemblyInfo.cs
+D:\C#\SWD392\SWD\be\SWD\obj\Debug\net8.0\SWD.csproj.CoreCompileInputs.cache
+D:\C#\SWD392\SWD\be\SWD\obj\Debug\net8.0\SWD.MvcApplicationPartsAssemblyInfo.cs
+D:\C#\SWD392\SWD\be\SWD\obj\Debug\net8.0\SWD.MvcApplicationPartsAssemblyInfo.cache
+D:\C#\SWD392\SWD\be\SWD\obj\Debug\net8.0\SWD.sourcelink.json
+D:\C#\SWD392\SWD\be\SWD\obj\Debug\net8.0\staticwebassets.build.json
+D:\C#\SWD392\SWD\be\SWD\obj\Debug\net8.0\staticwebassets.development.json
+D:\C#\SWD392\SWD\be\SWD\obj\Debug\net8.0\staticwebassets\msbuild.SWD.Microsoft.AspNetCore.StaticWebAssets.props
+D:\C#\SWD392\SWD\be\SWD\obj\Debug\net8.0\staticwebassets\msbuild.build.SWD.props
+D:\C#\SWD392\SWD\be\SWD\obj\Debug\net8.0\staticwebassets\msbuild.buildMultiTargeting.SWD.props
+D:\C#\SWD392\SWD\be\SWD\obj\Debug\net8.0\staticwebassets\msbuild.buildTransitive.SWD.props
+D:\C#\SWD392\SWD\be\SWD\obj\Debug\net8.0\staticwebassets.pack.json
+D:\C#\SWD392\SWD\be\SWD\obj\Debug\net8.0\scopedcss\bundle\SWD.styles.css
+D:\C#\SWD392\SWD\be\SWD\obj\Debug\net8.0\SWD.csproj.Up2Date
+D:\C#\SWD392\SWD\be\SWD\obj\Debug\net8.0\SWD.dll
+D:\C#\SWD392\SWD\be\SWD\obj\Debug\net8.0\refint\SWD.dll
+D:\C#\SWD392\SWD\be\SWD\obj\Debug\net8.0\SWD.pdb
+D:\C#\SWD392\SWD\be\SWD\obj\Debug\net8.0\SWD.genruntimeconfig.cache
+D:\C#\SWD392\SWD\be\SWD\obj\Debug\net8.0\ref\SWD.dll

@@ -1,0 +1,39 @@
+{
+  "Version": 1,
+  "Hash": "LO0Iis/Z3PYbs/swaW5PLk4ZJpGBWaGAfGXddNMIMxw=",
+  "Source": "SWD",
+  "BasePath": "_content/SWD",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [
+    {
+      "Name": "SWD\\wwwroot",
+      "Source": "SWD",
+      "ContentRoot": "D:\\C#\\SWD392\\SWD\\be\\SWD\\wwwroot\\",
+      "BasePath": "_content/SWD",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": [
+    {
+      "Identity": "D:\\C#\\SWD392\\SWD\\be\\SWD\\wwwroot\\AccountPictures\\user_default.png",
+      "SourceId": "SWD",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\C#\\SWD392\\SWD\\be\\SWD\\wwwroot\\",
+      "BasePath": "_content/SWD",
+      "RelativePath": "AccountPictures/user_default.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\AccountPictures\\user_default.png"
+    }
+  ]
+}
