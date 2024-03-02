@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using MongoDB.Bson;
 using Repositories.Model;
@@ -95,16 +96,41 @@ namespace Services.Service
 
             int skip = (paging.PageIndex - 1) * pageSize;
             var items = (await _unit.ContactRepo.PagingAsync(skip, pageSize, paging.IsAsc, sortField, paging.SearchValue, searchFields, returnFields)).ToList();
-            return items;
+            var responses = new List<object>();
 
+            foreach (var item in items)
+            {
+                responses.Add(new 
+                { 
+                    ContactId = item.ContactId,
+                    Email = item.Email, 
+                    Title = item.Title,
+                    Status = item.Status,
+                    CreatedAt = item.CreatedAt
+                });
+            }
+            return responses;
         }
 
         public async Task<object?> GetContactDetail(DetailContactView detail)
         {
             var getContact = (await _unit.ContactRepo.GetFieldsByFilterAsync([],
                     g => g.ContactId.Equals(detail.ContactId))).FirstOrDefault();
-            return getContact;
-
+            if (getContact != null)
+            {
+                var pictures = new List<byte[]>();
+                if (getContact.Pictures != null)
+                {
+                    foreach (var picture in getContact.Pictures)
+                    {
+                        var getPicture = SomeTool.GetImage(Convert.ToBase64String(picture));
+                        pictures.Add(getPicture!);
+                    }
+                    getContact.Pictures = pictures;
+                }
+                return getContact;
+            }
+            return null;
         }
     }
 }

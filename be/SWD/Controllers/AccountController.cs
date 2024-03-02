@@ -66,12 +66,25 @@ namespace SWD.Controllers
             try
             {
                 var result = await _ser.LoginByEmailAndPassword(login);
-                return Ok(result);
+                return Ok(new
+                {
+                    Message = result
+                });
             }
             catch (Exception ex)
             {
                 return BadRequest(ex.Message);
             }
+        }
+
+        [HttpGet("Login-Google")]
+        public async Task<IActionResult> GoogleLogin(string id_token)
+        {
+            var status = await _ser.GoogleAuthorizeUser(id_token);
+            return Ok(new
+            {
+                Message = status
+            });
         }
 
         //[HttpPost("Renew-Token")]
@@ -95,7 +108,7 @@ namespace SWD.Controllers
             try
             {
                 // Lấy ID từ JWT
-                var id = (HttpContext.User.FindFirst(ClaimTypes.NameIdentifier)?.Value) ?? "";
+                var id = (HttpContext.User.FindFirst("id")?.Value) ?? "";
                 var status = await _ser.UpdateAnAccount(id, update);
                 return Ok(new
                 {
@@ -114,7 +127,7 @@ namespace SWD.Controllers
         {
             try
             {
-                var id = (HttpContext.User.FindFirst(ClaimTypes.NameIdentifier)?.Value) ?? "";
+                var id = (HttpContext.User.FindFirst("id")?.Value) ?? "";
                 await _ser.UpdatePictureAccount(id, updatePicture);
                 return Ok();
             }
@@ -182,7 +195,7 @@ namespace SWD.Controllers
         {
             try
             {
-                var id = (HttpContext.User.FindFirst(ClaimTypes.NameIdentifier)?.Value) ?? "";
+                var id = (HttpContext.User.FindFirst("id")?.Value) ?? "";
                 var status = await _ser.ChangePassword(id, changePassword);
                 return Ok(new
                 {

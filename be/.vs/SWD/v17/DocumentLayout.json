@@ -3,32 +3,52 @@
   "WorkspaceRootPath": "D:\\C#\\SWD392\\SWD\\be\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{9DD8504A-8125-48CE-ADDE-2DB8531A1B0A}|SWD\\SWD.csproj|D:\\C#\\SWD392\\SWD\\be\\swd\\controllers\\materialcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{9DD8504A-8125-48CE-ADDE-2DB8531A1B0A}|SWD\\SWD.csproj|solutionrelative:swd\\controllers\\materialcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{CCD73B82-BE65-484D-8CAE-1C66B2A7DBD6}|Services\\Services.csproj|D:\\C#\\SWD392\\SWD\\be\\services\\service\\materialservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{CCD73B82-BE65-484D-8CAE-1C66B2A7DBD6}|Services\\Services.csproj|d:\\c#\\swd392\\swd\\be\\services\\service\\materialservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{CCD73B82-BE65-484D-8CAE-1C66B2A7DBD6}|Services\\Services.csproj|solutionrelative:services\\service\\materialservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{9DD8504A-8125-48CE-ADDE-2DB8531A1B0A}|SWD\\SWD.csproj|d:\\c#\\swd392\\swd\\be\\swd\\controllers\\vnpaycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{9DD8504A-8125-48CE-ADDE-2DB8531A1B0A}|SWD\\SWD.csproj|solutionrelative:swd\\controllers\\vnpaycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{CCD73B82-BE65-484D-8CAE-1C66B2A7DBD6}|Services\\Services.csproj|d:\\c#\\swd392\\swd\\be\\services\\service\\interiorservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CCD73B82-BE65-484D-8CAE-1C66B2A7DBD6}|Services\\Services.csproj|solutionrelative:services\\service\\interiorservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{EC3F4E68-024B-4FB7-BC52-ECAE413E587F}|Repositories\\Repositories.csproj|D:\\C#\\SWD392\\SWD\\be\\repositories\\modelview\\materialview.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{EC3F4E68-024B-4FB7-BC52-ECAE413E587F}|Repositories\\Repositories.csproj|solutionrelative:repositories\\modelview\\materialview.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{CCD73B82-BE65-484D-8CAE-1C66B2A7DBD6}|Services\\Services.csproj|d:\\c#\\swd392\\swd\\be\\services\\service\\blogservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CCD73B82-BE65-484D-8CAE-1C66B2A7DBD6}|Services\\Services.csproj|solutionrelative:services\\service\\blogservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{CCD73B82-BE65-484D-8CAE-1C66B2A7DBD6}|Services\\Services.csproj|D:\\C#\\SWD392\\SWD\\be\\services\\interface\\imaterialservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CCD73B82-BE65-484D-8CAE-1C66B2A7DBD6}|Services\\Services.csproj|solutionrelative:services\\interface\\imaterialservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{CCD73B82-BE65-484D-8CAE-1C66B2A7DBD6}|Services\\Services.csproj|d:\\c#\\swd392\\swd\\be\\services\\service\\contactservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CCD73B82-BE65-484D-8CAE-1C66B2A7DBD6}|Services\\Services.csproj|solutionrelative:services\\service\\contactservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{EC3F4E68-024B-4FB7-BC52-ECAE413E587F}|Repositories\\Repositories.csproj|D:\\C#\\SWD392\\SWD\\be\\repositories\\model\\material.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{EC3F4E68-024B-4FB7-BC52-ECAE413E587F}|Repositories\\Repositories.csproj|solutionrelative:repositories\\model\\material.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{CCD73B82-BE65-484D-8CAE-1C66B2A7DBD6}|Services\\Services.csproj|d:\\c#\\swd392\\swd\\be\\services\\service\\accountservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CCD73B82-BE65-484D-8CAE-1C66B2A7DBD6}|Services\\Services.csproj|solutionrelative:services\\service\\accountservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EC3F4E68-024B-4FB7-BC52-ECAE413E587F}|Repositories\\Repositories.csproj|d:\\c#\\swd392\\swd\\be\\repositories\\model\\contact.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EC3F4E68-024B-4FB7-BC52-ECAE413E587F}|Repositories\\Repositories.csproj|solutionrelative:repositories\\model\\contact.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{9DD8504A-8125-48CE-ADDE-2DB8531A1B0A}|SWD\\SWD.csproj|D:\\C#\\SWD392\\SWD\\be\\swd\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{9DD8504A-8125-48CE-ADDE-2DB8531A1B0A}|SWD\\SWD.csproj|solutionrelative:swd\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9DD8504A-8125-48CE-ADDE-2DB8531A1B0A}|SWD\\SWD.csproj|D:\\C#\\SWD392\\SWD\\be\\swd\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9DD8504A-8125-48CE-ADDE-2DB8531A1B0A}|SWD\\SWD.csproj|solutionrelative:swd\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EC3F4E68-024B-4FB7-BC52-ECAE413E587F}|Repositories\\Repositories.csproj|d:\\c#\\swd392\\swd\\be\\repositories\\model\\interior.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EC3F4E68-024B-4FB7-BC52-ECAE413E587F}|Repositories\\Repositories.csproj|solutionrelative:repositories\\model\\interior.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EC3F4E68-024B-4FB7-BC52-ECAE413E587F}|Repositories\\Repositories.csproj|d:\\c#\\swd392\\swd\\be\\repositories\\modelview\\accountview.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EC3F4E68-024B-4FB7-BC52-ECAE413E587F}|Repositories\\Repositories.csproj|solutionrelative:repositories\\modelview\\accountview.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EC3F4E68-024B-4FB7-BC52-ECAE413E587F}|Repositories\\Repositories.csproj|d:\\c#\\swd392\\swd\\be\\repositories\\model\\cart.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EC3F4E68-024B-4FB7-BC52-ECAE413E587F}|Repositories\\Repositories.csproj|solutionrelative:repositories\\model\\cart.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EC3F4E68-024B-4FB7-BC52-ECAE413E587F}|Repositories\\Repositories.csproj|d:\\c#\\swd392\\swd\\be\\repositories\\modelview\\cartview.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EC3F4E68-024B-4FB7-BC52-ECAE413E587F}|Repositories\\Repositories.csproj|solutionrelative:repositories\\modelview\\cartview.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -38,11 +58,263 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 13,
+          "SelectedChildIndex": 73,
           "Children": [
             {
               "$type": "Bookmark",
+              "Name": "ST:0:0:{eefa5220-e298-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:1:0:{e8b06f52-6d01-11d2-aa7d-00c04f990343}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{b1e99781-ab81-11d0-b683-00aa00a3ee26}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Bookmark",
               "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:1:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:132:0:{13b12e3e-c1b4-4539-9371-4fe9a0d523fc}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{13b12e3e-c1b4-4539-9371-4fe9a0d523fc}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c64b9c2-e352-428e-a56d-0ace190b99a6}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:129:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:130:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:131:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:2:0:{e8b06f52-6d01-11d2-aa7d-00c04f990343}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{873151d0-cf2e-48cc-b4bf-ad0394f6a3c3}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{c9c0ae26-aa77-11d2-b3f0-0000f87570ee}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:4:0:{e8034f19-ab72-4f06-83fd-f6832b41aa63}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:1377497384:0:{83107a3e-496a-485e-b455-16ddb978e55e}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:15:0:{e8b06f52-6d01-11d2-aa7d-00c04f990343}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:16:0:{e8b06f52-6d01-11d2-aa7d-00c04f990343}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:17:0:{e8b06f52-6d01-11d2-aa7d-00c04f990343}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:14:0:{e8b06f52-6d01-11d2-aa7d-00c04f990343}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:13:0:{e8b06f52-6d01-11d2-aa7d-00c04f990343}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:12:0:{e8b06f52-6d01-11d2-aa7d-00c04f990343}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:11:0:{e8b06f52-6d01-11d2-aa7d-00c04f990343}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:10:0:{e8b06f52-6d01-11d2-aa7d-00c04f990343}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:9:0:{e8b06f52-6d01-11d2-aa7d-00c04f990343}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:8:0:{e8b06f52-6d01-11d2-aa7d-00c04f990343}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:7:0:{e8b06f52-6d01-11d2-aa7d-00c04f990343}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:6:0:{e8b06f52-6d01-11d2-aa7d-00c04f990343}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:5:0:{e8b06f52-6d01-11d2-aa7d-00c04f990343}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:4:0:{e8b06f52-6d01-11d2-aa7d-00c04f990343}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:3:0:{e8b06f52-6d01-11d2-aa7d-00c04f990343}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:129:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:130:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:131:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:132:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:16:0:{e8034f19-ab72-4f06-83fd-f6832b41aa63}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:17:0:{e8034f19-ab72-4f06-83fd-f6832b41aa63}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{e1b7d1f8-9b3c-49b1-8f4f-bfc63a88835d}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{588470cc-84f8-4a57-9ac4-86bca0625ff4}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:1928210406:0:{bf84ea66-d821-4dba-b1b1-2777d8574775}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:350743133:0:{bf84ea66-d821-4dba-b1b1-2777d8574775}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:132:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:2:0:{d212f56b-c48a-434c-a121-1c5d80b59b9f}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:3:0:{d212f56b-c48a-434c-a121-1c5d80b59b9f}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:1:0:{d212f56b-c48a-434c-a121-1c5d80b59b9f}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:4:0:{d212f56b-c48a-434c-a121-1c5d80b59b9f}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:5:0:{d212f56b-c48a-434c-a121-1c5d80b59b9f}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:6:0:{d212f56b-c48a-434c-a121-1c5d80b59b9f}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:27:0:{e8034f19-ab72-4f06-83fd-f6832b41aa63}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:23:0:{e8034f19-ab72-4f06-83fd-f6832b41aa63}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:3:0:{e8034f19-ab72-4f06-83fd-f6832b41aa63}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:29:0:{e8034f19-ab72-4f06-83fd-f6832b41aa63}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{004be353-6879-467c-9d1e-9ac23cdf6d49}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:2:0:{e8034f19-ab72-4f06-83fd-f6832b41aa63}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:12:0:{2456bd12-ecf7-4988-a4a6-67d49173f565}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:13:0:{2456bd12-ecf7-4988-a4a6-67d49173f565}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:14:0:{e8034f19-ab72-4f06-83fd-f6832b41aa63}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:1:0:{e8034f19-ab72-4f06-83fd-f6832b41aa63}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:19:0:{e8034f19-ab72-4f06-83fd-f6832b41aa63}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:33:0:{e8034f19-ab72-4f06-83fd-f6832b41aa63}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:38:0:{e8034f19-ab72-4f06-83fd-f6832b41aa63}"
             },
             {
               "$type": "Bookmark",
@@ -58,6 +330,14 @@
             },
             {
               "$type": "Bookmark",
+              "Name": "ST:41:0:{e8034f19-ab72-4f06-83fd-f6832b41aa63}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:42:0:{e8034f19-ab72-4f06-83fd-f6832b41aa63}"
+            },
+            {
+              "$type": "Bookmark",
               "Name": "ST:43:0:{e8034f19-ab72-4f06-83fd-f6832b41aa63}"
             },
             {
@@ -66,85 +346,149 @@
             },
             {
               "$type": "Bookmark",
-              "Name": "ST:0:0:{004be353-6879-467c-9d1e-9ac23cdf6d49}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "VNPayController.cs",
-              "DocumentMoniker": "D:\\C#\\SWD392\\SWD\\be\\SWD\\Controllers\\VNPayController.cs",
-              "RelativeDocumentMoniker": "SWD\\Controllers\\VNPayController.cs",
-              "ToolTip": "D:\\C#\\SWD392\\SWD\\be\\SWD\\Controllers\\VNPayController.cs",
-              "RelativeToolTip": "SWD\\Controllers\\VNPayController.cs",
-              "ViewState": "AQIAAA0AAAAAAAAAAAAgwBkAAAANAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-01T05:19:54.532Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "MaterialView.cs",
-              "DocumentMoniker": "D:\\C#\\SWD392\\SWD\\be\\Repositories\\ModelView\\MaterialView.cs",
-              "RelativeDocumentMoniker": "Repositories\\ModelView\\MaterialView.cs",
-              "ToolTip": "D:\\C#\\SWD392\\SWD\\be\\Repositories\\ModelView\\MaterialView.cs",
-              "RelativeToolTip": "Repositories\\ModelView\\MaterialView.cs",
-              "ViewState": "AQIAAAMAAAAAAAAAAAAAACMAAAAJAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-01T05:10:01.462Z"
+              "Name": "ST:0:0:{a80febb4-e7e0-4147-b476-21aaf2453969}"
             },
             {
               "$type": "Document",
               "DocumentIndex": 5,
-              "Title": "Material.cs",
-              "DocumentMoniker": "D:\\C#\\SWD392\\SWD\\be\\Repositories\\Model\\Material.cs",
-              "RelativeDocumentMoniker": "Repositories\\Model\\Material.cs",
-              "ToolTip": "D:\\C#\\SWD392\\SWD\\be\\Repositories\\Model\\Material.cs",
-              "RelativeToolTip": "Repositories\\Model\\Material.cs",
-              "ViewState": "AQIAAAMAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Title": "Contact.cs",
+              "DocumentMoniker": "D:\\C#\\SWD392\\SWD\\be\\Repositories\\Model\\Contact.cs",
+              "RelativeDocumentMoniker": "Repositories\\Model\\Contact.cs",
+              "ToolTip": "D:\\C#\\SWD392\\SWD\\be\\Repositories\\Model\\Contact.cs",
+              "RelativeToolTip": "Repositories\\Model\\Contact.cs",
+              "ViewState": "AQIAAAYAAAAAAAAAAAAAAAUAAAAcAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-01T05:09:58.894Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "IMaterialService.cs",
-              "DocumentMoniker": "D:\\C#\\SWD392\\SWD\\be\\Services\\Interface\\IMaterialService.cs",
-              "RelativeDocumentMoniker": "Services\\Interface\\IMaterialService.cs",
-              "ToolTip": "D:\\C#\\SWD392\\SWD\\be\\Services\\Interface\\IMaterialService.cs",
-              "RelativeToolTip": "Services\\Interface\\IMaterialService.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-01T05:09:54.922Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "MaterialService.cs",
-              "DocumentMoniker": "D:\\C#\\SWD392\\SWD\\be\\Services\\Service\\MaterialService.cs",
-              "RelativeDocumentMoniker": "Services\\Service\\MaterialService.cs",
-              "ToolTip": "D:\\C#\\SWD392\\SWD\\be\\Services\\Service\\MaterialService.cs",
-              "RelativeToolTip": "Services\\Service\\MaterialService.cs",
-              "ViewState": "AQIAABEAAAAAAAAAAAAQwBYAAAAdAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-02-29T12:58:56.374Z",
+              "WhenOpened": "2024-03-02T15:26:10.799Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "MaterialController.cs",
-              "DocumentMoniker": "D:\\C#\\SWD392\\SWD\\be\\SWD\\Controllers\\MaterialController.cs",
-              "RelativeDocumentMoniker": "SWD\\Controllers\\MaterialController.cs",
-              "ToolTip": "D:\\C#\\SWD392\\SWD\\be\\SWD\\Controllers\\MaterialController.cs",
-              "RelativeToolTip": "SWD\\Controllers\\MaterialController.cs",
-              "ViewState": "AQIAAA4AAAAAAAAAAAAxwD8AAAAsAAAA",
+              "Title": "MaterialService.cs",
+              "DocumentMoniker": "D:\\C#\\SWD392\\SWD\\be\\Services\\Service\\MaterialService.cs",
+              "RelativeDocumentMoniker": "Services\\Service\\MaterialService.cs",
+              "ToolTip": "D:\\C#\\SWD392\\SWD\\be\\Services\\Service\\MaterialService.cs",
+              "RelativeToolTip": "Services\\Service\\MaterialService.cs",
+              "ViewState": "AQIAACkAAAAAAAAAAAAwwDcAAAAJAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-01T05:09:40.397Z",
+              "WhenOpened": "2024-03-02T15:23:40.224Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "InteriorService.cs",
+              "DocumentMoniker": "D:\\C#\\SWD392\\SWD\\be\\Services\\Service\\InteriorService.cs",
+              "RelativeDocumentMoniker": "Services\\Service\\InteriorService.cs",
+              "ToolTip": "D:\\C#\\SWD392\\SWD\\be\\Services\\Service\\InteriorService.cs",
+              "RelativeToolTip": "Services\\Service\\InteriorService.cs",
+              "ViewState": "AQIAAEoAAAAAAAAAAAAUwFsAAAANAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-02T15:14:49.637Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "BlogService.cs",
+              "DocumentMoniker": "D:\\C#\\SWD392\\SWD\\be\\Services\\Service\\BlogService.cs",
+              "RelativeDocumentMoniker": "Services\\Service\\BlogService.cs",
+              "ToolTip": "D:\\C#\\SWD392\\SWD\\be\\Services\\Service\\BlogService.cs",
+              "RelativeToolTip": "Services\\Service\\BlogService.cs",
+              "ViewState": "AQIAAHQAAAAAAAAAAAAIwK0AAAANAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-02T15:08:37.104Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "ContactService.cs",
+              "DocumentMoniker": "D:\\C#\\SWD392\\SWD\\be\\Services\\Service\\ContactService.cs",
+              "RelativeDocumentMoniker": "Services\\Service\\ContactService.cs",
+              "ToolTip": "D:\\C#\\SWD392\\SWD\\be\\Services\\Service\\ContactService.cs",
+              "RelativeToolTip": "Services\\Service\\ContactService.cs",
+              "ViewState": "AQIAAF0AAAAAAAAAAADwv3gAAAAyAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-02T15:08:25.635Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "AccountView.cs",
+              "DocumentMoniker": "D:\\C#\\SWD392\\SWD\\be\\Repositories\\ModelView\\AccountView.cs",
+              "RelativeDocumentMoniker": "Repositories\\ModelView\\AccountView.cs",
+              "ToolTip": "D:\\C#\\SWD392\\SWD\\be\\Repositories\\ModelView\\AccountView.cs",
+              "RelativeToolTip": "Repositories\\ModelView\\AccountView.cs",
+              "ViewState": "AQIAAEsAAAAAAAAAAAAewFMAAAAmAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-02T13:39:18.256Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "CartView.cs",
+              "DocumentMoniker": "D:\\C#\\SWD392\\SWD\\be\\Repositories\\ModelView\\CartView.cs",
+              "RelativeDocumentMoniker": "Repositories\\ModelView\\CartView.cs",
+              "ToolTip": "D:\\C#\\SWD392\\SWD\\be\\Repositories\\ModelView\\CartView.cs",
+              "RelativeToolTip": "Repositories\\ModelView\\CartView.cs",
+              "ViewState": "AQIAAAMAAAAAAAAAAAAAAAwAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-02T13:23:28.794Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "Interior.cs",
+              "DocumentMoniker": "D:\\C#\\SWD392\\SWD\\be\\Repositories\\Model\\Interior.cs",
+              "RelativeDocumentMoniker": "Repositories\\Model\\Interior.cs",
+              "ToolTip": "D:\\C#\\SWD392\\SWD\\be\\Repositories\\Model\\Interior.cs",
+              "RelativeToolTip": "Repositories\\Model\\Interior.cs",
+              "ViewState": "AQIAAAgAAAAAAAAAAAAQwBEAAABCAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-02T13:13:41.889Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "Cart.cs",
+              "DocumentMoniker": "D:\\C#\\SWD392\\SWD\\be\\Repositories\\Model\\Cart.cs",
+              "RelativeDocumentMoniker": "Repositories\\Model\\Cart.cs",
+              "ToolTip": "D:\\C#\\SWD392\\SWD\\be\\Repositories\\Model\\Cart.cs",
+              "RelativeToolTip": "Repositories\\Model\\Cart.cs",
+              "ViewState": "AQIAAAkAAAAAAAAAAAAAABIAAAArAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-02T12:59:26.963Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "AccountService.cs",
+              "DocumentMoniker": "D:\\C#\\SWD392\\SWD\\be\\Services\\Service\\AccountService.cs",
+              "RelativeDocumentMoniker": "Services\\Service\\AccountService.cs",
+              "ToolTip": "D:\\C#\\SWD392\\SWD\\be\\Services\\Service\\AccountService.cs",
+              "RelativeToolTip": "Services\\Service\\AccountService.cs",
+              "ViewState": "AQIAAI4BAAAAAAAAAAA2wJsBAAA3AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-01T13:23:45.023Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "AccountController.cs",
+              "DocumentMoniker": "D:\\C#\\SWD392\\SWD\\be\\SWD\\Controllers\\AccountController.cs",
+              "RelativeDocumentMoniker": "SWD\\Controllers\\AccountController.cs",
+              "ToolTip": "D:\\C#\\SWD392\\SWD\\be\\SWD\\Controllers\\AccountController.cs",
+              "RelativeToolTip": "SWD\\Controllers\\AccountController.cs",
+              "ViewState": "AQIAAAoBAAAAAAAAAAA6wMUAAAA5AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-01T13:02:02.038Z",
               "EditorCaption": ""
             },
             {
@@ -155,9 +499,64 @@
               "RelativeDocumentMoniker": "SWD\\Program.cs",
               "ToolTip": "D:\\C#\\SWD392\\SWD\\be\\SWD\\Program.cs",
               "RelativeToolTip": "SWD\\Program.cs",
-              "ViewState": "AQIAAIMAAAAAAAAAAAAAwHwAAAAAAAAA",
+              "ViewState": "AQIAACYAAAAAAAAAAAAQwG4AAAAdAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-02-29T02:55:26.883Z"
+              "WhenOpened": "2024-02-29T02:55:26.883Z",
+              "EditorCaption": ""
+            }
+          ]
+        },
+        {
+          "DockedWidth": 1052,
+          "SelectedChildIndex": -1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:12:0:{d212f56b-c48a-434c-a121-1c5d80b59b9f}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:13:0:{d212f56b-c48a-434c-a121-1c5d80b59b9f}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:26:0:{e8034f19-ab72-4f06-83fd-f6832b41aa63}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:31:0:{e8034f19-ab72-4f06-83fd-f6832b41aa63}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:32:0:{e8034f19-ab72-4f06-83fd-f6832b41aa63}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:35:0:{e8034f19-ab72-4f06-83fd-f6832b41aa63}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:36:0:{e8034f19-ab72-4f06-83fd-f6832b41aa63}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:39:0:{e8034f19-ab72-4f06-83fd-f6832b41aa63}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:24:0:{e8034f19-ab72-4f06-83fd-f6832b41aa63}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:28:0:{e8034f19-ab72-4f06-83fd-f6832b41aa63}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:22:0:{e8034f19-ab72-4f06-83fd-f6832b41aa63}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:13:0:{e8034f19-ab72-4f06-83fd-f6832b41aa63}"
             }
           ]
         }

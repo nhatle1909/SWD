@@ -25,7 +25,7 @@ namespace SWD.Controllers
         {
             try
             {
-                var id = (HttpContext.User.FindFirst(ClaimTypes.NameIdentifier)?.Value) ?? "";
+                var id = (HttpContext.User.FindFirst("id")?.Value) ?? "";
                 var status = await _blogService.AddBlog(id, add);
                 return Ok(new
                 {
@@ -44,7 +44,7 @@ namespace SWD.Controllers
         {
             try
             {
-                var id = (HttpContext.User.FindFirst(ClaimTypes.NameIdentifier)?.Value) ?? "";
+                var id = (HttpContext.User.FindFirst("id")?.Value) ?? "";
                 var status = await _blogService.UpdateBlog(id, update);
                 return Ok(new
                 {
@@ -63,7 +63,7 @@ namespace SWD.Controllers
         {
             try
             {
-                var id = (HttpContext.User.FindFirst(ClaimTypes.NameIdentifier)?.Value) ?? "";
+                var id = (HttpContext.User.FindFirst("id")?.Value) ?? "";
                 var status = await _blogService.RemoveBlog(id, remove);
                 return Ok(new
                 {
@@ -93,7 +93,7 @@ namespace SWD.Controllers
         {
             try
             {
-                var id = (HttpContext.User.FindFirst(ClaimTypes.NameIdentifier)?.Value) ?? "";
+                var id = (HttpContext.User.FindFirst("id")?.Value) ?? "";
                 await _blogService.AddBlogComment(id, addComment);
                 return Ok();
             }

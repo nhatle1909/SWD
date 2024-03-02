@@ -29,8 +29,8 @@ namespace Services.Tool
 
             var claims = new[]
             {
-                new Claim(ClaimTypes.NameIdentifier,userId),
-                new Claim(ClaimTypes.Role, role.ToString())
+                new Claim("id",userId),
+                new Claim("role", role.ToString())
             };
 
             var token = new JwtSecurityToken(
@@ -52,7 +52,7 @@ namespace Services.Tool
             //    IsUsed = false,
             //    IsRevoked = false,
             //    IssuedAt = DateTime.UtcNow,
-            //    ExpiredAt = DateTime.UtcNow.AddHours(10)
+            // ExpiredAt = DateTime.UtcNow.AddMonths(1)
             //};
             //await _unit.RefreshTokenRepo.AddOneItem(refreshTokenEntity);
             return accessToken;

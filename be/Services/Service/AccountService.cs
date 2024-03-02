@@ -19,6 +19,7 @@ using static System.Runtime.InteropServices.JavaScript.JSType;
 using Repositories.ModelView;
 using System.IdentityModel.Tokens.Jwt;
 using System.Text;
+using Google.Apis.Auth;
 
 namespace Services.Service
 {
@@ -133,6 +134,73 @@ namespace Services.Service
             return "Email or Password is invalid";
         }
 
+        public async Task<string> GoogleAuthorizeUser(string id_token)
+        {
+            string accountId;
+            AccountStatus.Role role;
+            var payload = await GoogleJsonWebSignature.ValidateAsync(id_token);
+            var getUserStatus = (await _unit.AccountStatusRepo.GetFieldsByFilterAsync([],
+                                g => g.Email.Equals(payload.Email))).FirstOrDefault();
+            // nếu chưa có tài khoản thì sẽ đăng ký và đăng nhập
+            if (getUserStatus == null)
+            {
+                string id = ObjectId.GenerateNewId().ToString();
+                accountId = id;
+                role = AccountStatus.Role.Customer;
+                //Encode picture
+                byte[] fileBytes;
+                var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "AccountPictures", "user_default.png");
+                using (var ms = new MemoryStream())
+                {
+                    using (var defaultUserImg = new FileStream(path, FileMode.Open))
+                    {
+                        await defaultUserImg.CopyToAsync(ms);
+                        fileBytes = ms.ToArray();
+                    }
+                }
+                Account account = new()
+                {
+                    AccountId = id,
+                    Password = SomeTool.HashPassword(payload.Email),
+                    Email = payload.Email,
+                    PhoneNumber = null,
+                    Address = null,
+                    Picture = fileBytes
+                };
+                AccountStatus accountStatus = new()
+                {
+                    AccountId = id,
+                    Email = payload.Email,
+                    IsAuthenticationEmail = true,
+                    IsRole = AccountStatus.Role.Customer,
+                    IsBanned = false,
+                    Comments = null,
+                    CreatedAt = DateTime.UtcNow,
+                    UpdatedAt = null
+                };
+                await _unit.AccountRepo.AddOneItem(account);
+                await _unit.AccountStatusRepo.AddOneItem(accountStatus);
+            }
+            else  // nếu đã có tài khoản thì chỉ đăng nhập
+            {
+                if (getUserStatus.IsBanned)
+                {
+                    return getUserStatus.Comments ??= "Thích thì khóa";
+                }
+                if (!getUserStatus.IsAuthenticationEmail)
+                {
+                    getUserStatus.IsAuthenticationEmail = true;
+                    await _unit.AccountStatusRepo.UpdateItemByValue("AccountId", getUserStatus.AccountId, getUserStatus);
+                }
+                accountId = getUserStatus.AccountId;
+                role = getUserStatus.IsRole;
+            }
+            AuthenticationJwtTool authenticationJwtBearer = new(_configuration);
+            var jwt = await authenticationJwtBearer.GenerateJwtToken(accountId, role.ToString());
+            return jwt;
+        }
+
+
         //public async Task<string> RenewToken(string refreshToken, string accessToken)
         //{
         //    AuthenticationJwtTool authenticationJwtBearer = new(_configuration, _unit);
@@ -146,31 +214,20 @@ namespace Services.Service
                             c => c.AccountId.Equals(id));
             var check_status = await _unit.AccountStatusRepo.GetFieldsByFilterAsync([],
                             c => c.AccountId.Equals(id));
-            if (check.Any())
+
+            if (update.PhoneNumber == null || update.PhoneNumber.Length == 10)
             {
                 Account account = check.First();
-                IEnumerable<AccountStatus> check_email = await _unit.AccountStatusRepo.GetFieldsByFilterAsync(["Email"],
-                            c => c.Email.Equals(update.Email.Trim()));
-                if (account.Email.Equals(update.Email.Trim()) || !check_email.Any())
-                {
-                    if (update.PhoneNumber == null || update.PhoneNumber.Length == 10)
-                    {
-                        account.Email = update.Email.Trim();
-                        account.PhoneNumber = update.PhoneNumber;
-                        account.Address = update.HomeAdress;
-                        await _unit.AccountRepo.UpdateItemByValue("AccountId", id, account);
+                account.PhoneNumber = update.PhoneNumber;
+                account.Address = update.HomeAdress;
+                await _unit.AccountRepo.UpdateItemByValue("AccountId", id, account);
 
-                        AccountStatus accountStatus = check_status.First();
-                        accountStatus.Email = update.Email.Trim();
-                        accountStatus.UpdatedAt = DateTime.UtcNow;
-                        await _unit.AccountStatusRepo.UpdateItemByValue("AccountId", id, accountStatus);
-                        return "Update Account successfully";
-                    }
-                    return "Phone number is not valid";
-                }
-                return "Email is existed";
+                AccountStatus accountStatus = check_status.First();
+                accountStatus.UpdatedAt = DateTime.UtcNow;
+                await _unit.AccountStatusRepo.UpdateItemByValue("AccountId", id, accountStatus);
+                return "Update Account successfully";
             }
-            return "Account is not existed";
+            return "Phone number is not valid";
         }
 
         public async Task<string> SendEmailToResetPassword(string email)
@@ -324,8 +381,20 @@ namespace Services.Service
 
             int skip = (paging.PageIndex - 1) * pageSize;
             var items = (await _unit.AccountRepo.PagingAsync(skip, pageSize, paging.IsAsc, sortField, paging.SearchValue, searchFields, returnFields)).ToList();
-            return items;
+
+            var responses = new List<object>();
+
+            foreach (var item in items)
+            {
+                responses.Add(new 
+                { 
+                    Email = item.Email, 
+                    Phone = item.PhoneNumber 
+                });
+            }
+            return responses;
         }
+
 
         public async Task<object> GetAccountDetail(DetailAccountView detail)
         {
@@ -336,6 +405,7 @@ namespace Services.Service
                             g => g.Email.Equals(detail.Email))).FirstOrDefault();
             if (getUserAccount != null && getUserStatus != null)
             {
+                getUserAccount.Picture = SomeTool.GetImage(Convert.ToBase64String(getUserAccount.Picture))!;
                 var response = new
                 {
                     Email = getUserAccount.Email,
@@ -351,5 +421,6 @@ namespace Services.Service
             }
             return " Unexisted Email";
         }
+
     }
 }

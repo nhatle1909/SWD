@@ -28,6 +28,7 @@ namespace SWD
             builder.Services.AddScoped<IBlogService, BlogService>();
             builder.Services.AddScoped<IRequestService,RequestService>();
             builder.Services.AddScoped<IContactService, ContactService>();
+            builder.Services.AddScoped<ICartService, CartService>();
             builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             //Add HttpContext
@@ -44,21 +45,6 @@ namespace SWD
             builder.Services.AddAutoMapper(typeof(MapperProfileTool));
 
             builder.Services.AddControllersWithViews();
-
-        //    builder.Services.AddAuthentication(options =>
-        //{
-        //    options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-        //    options.DefaultChallengeScheme = GoogleDefaults.AuthenticationScheme;
-        //})
-        //.AddGoogle(options =>
-        //{
-        //    options.ClientId = builder.Configuration["Authentication:Google:ClientId"]!;
-        //    options.ClientSecret = builder.Configuration["Authentication:Google:ClientSecret"]!;
-        //    options.SaveTokens = true;
-        //    //default is signin-google
-        //    options.CallbackPath = "/api/Account/LoginAccountByGoogle";
-
-        //});
 
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
