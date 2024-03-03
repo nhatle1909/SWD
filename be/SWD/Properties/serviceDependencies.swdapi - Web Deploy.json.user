@@ -2,14 +2,14 @@
   "dependencies": {
     "apis1": {
       "restored": true,
-      "restoreTime": "2024-03-01T14:31:05.4311046Z"
+      "restoreTime": "2024-03-02T02:01:24.8677529Z"
     }
   },
   "parameters": {
     "apis1.resourceGroupName": {
       "Name": "apis1.resourceGroupName",
       "Type": "resourceGroup",
-      "Value": "swdapi"
+      "Value": "API"
     },
     "apis1.subscriptionId": {
       "Name": "apis1.subscriptionId",

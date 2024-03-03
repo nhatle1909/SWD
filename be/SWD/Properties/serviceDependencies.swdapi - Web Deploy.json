@@ -1,7 +1,7 @@
 {
   "dependencies": {
     "apis1": {
-      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.ApiManagement/service/SWDapiGroup/apis/swdapi",
+      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.ApiManagement/service/SWDapima/apis/SWD",
       "type": "apis.azure"
     }
   }
