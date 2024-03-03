@@ -23,7 +23,7 @@ namespace SWD.Controllers
             {
                 return BadRequest("Invalid Data Format");
             }
-            var id = (HttpContext.User.FindFirst(ClaimTypes.NameIdentifier)?.Value) ?? "";
+            var id = (HttpContext.User.FindFirst("id")?.Value) ?? "";
             string check = await _vnpayService.AddPendingRequest(id, totalPrice);
             if (check != null)
             {

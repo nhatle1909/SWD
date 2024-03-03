@@ -128,18 +128,34 @@ namespace SWD
                 options.AddDefaultPolicy(builder =>
                 {
                     builder.AllowAnyOrigin()
+                            
                            .AllowAnyMethod()
                            .AllowAnyHeader();
                 });
             });
             var app = builder.Build();
 
-            // Configure the HTTP request pipeline.
+            //Configure the HTTP request pipeline. 
+            // Run Localhost
             if (app.Environment.IsDevelopment())
             {
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
+            //publish api
+
+            //app.UseSwagger(options =>
+            //{
+            //    options.RouteTemplate = "swagger/{documentName}/swagger.json";
+            //});
+            //app.UseSwaggerUI(c =>
+            //{
+            //    c.SwaggerEndpoint("/swagger/v1/swagger.json", "SWD API");
+
+            //    c.RoutePrefix = "";
+            //    c.EnableTryItOutByDefault();
+            //});
+            app.UseDefaultFiles();
             app.UseHttpsRedirection();
             app.UseCors();
             app.UseStaticFiles();

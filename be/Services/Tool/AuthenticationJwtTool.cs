@@ -29,8 +29,8 @@ namespace Services.Tool
 
             var claims = new[]
             {
-                new Claim(ClaimTypes.NameIdentifier,userId),
-                new Claim(ClaimTypes.Role, role.ToString())
+                new Claim("id",userId),
+                new Claim("role",role)
             };
 
             var token = new JwtSecurityToken(
