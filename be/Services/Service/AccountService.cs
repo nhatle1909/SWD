@@ -126,7 +126,7 @@ namespace Services.Service
                 if (!accountStatus.IsBanned)
                 {
                     AuthenticationJwtTool authenticationJwtBearer = new(_configuration);
-                    var jwt = await authenticationJwtBearer.GenerateJwtToken(accountStatus.AccountId, accountStatus.IsRole.ToString());
+                    var jwt = authenticationJwtBearer.GenerateJwtToken(accountStatus.AccountId, accountStatus.IsRole.ToString());
                     return jwt;
                 }
                 return accountStatus.Comments ??= "Thích thì khóa";
@@ -196,7 +196,7 @@ namespace Services.Service
                 role = getUserStatus.IsRole;
             }
             AuthenticationJwtTool authenticationJwtBearer = new(_configuration);
-            var jwt = await authenticationJwtBearer.GenerateJwtToken(accountId, role.ToString());
+            var jwt = authenticationJwtBearer.GenerateJwtToken(accountId, role.ToString());
             return jwt;
         }
 

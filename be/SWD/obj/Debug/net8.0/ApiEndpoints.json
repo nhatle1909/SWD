@@ -729,9 +729,9 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "paymentView",
-        "Type": "Repositories.ModelView.PaymentView",
-        "IsRequired": true
+        "Name": "totalPrice",
+        "Type": "System.Int32",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": []

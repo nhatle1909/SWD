@@ -1,5 +1,4 @@
-﻿
-using AutoMapper;
+﻿using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using MongoDB.Bson;
 using MongoDB.Driver;
@@ -30,7 +29,7 @@ namespace Services.Service
             _mapper = mapper;
             ipget = _ipget;
         }
-        public async Task<string> Payment(string requestId, PaymentView paymentView)
+        public async Task<string> Payment(string requestId, int TotalPrice)
         {
             //// Payment cần truyền tổng giá , Add Pending request vào database -> Front end gọi api kèm requestView, front end phải gửi tổng giá, account id
 
@@ -38,7 +37,7 @@ namespace Services.Service
             pay.AddRequestData("vnp_Version", "2.1.0"); //Phiên bản api mà merchant kết nối. Phiên bản hiện tại là 2.1.0
             pay.AddRequestData("vnp_Command", "pay"); //Mã API sử dụng, mã cho giao dịch thanh toán là 'pay'
             pay.AddRequestData("vnp_TmnCode", tmnCode); //Mã website của merchant trên hệ thống của VNPAY (khi đăng ký tài khoản sẽ có trong mail VNPAY gửi về)
-            pay.AddRequestData("vnp_Amount", (paymentView.TotalPrice * 100).ToString()); //số tiền cần thanh toán, công thức: số tiền * 100 - ví dụ 10.000 (mười nghìn đồng) --> 1000000
+            pay.AddRequestData("vnp_Amount", (TotalPrice * 100).ToString()); //số tiền cần thanh toán, công thức: số tiền * 100 - ví dụ 10.000 (mười nghìn đồng) --> 1000000
             pay.AddRequestData("vnp_BankCode", ""); //Mã Ngân hàng thanh toán (tham khảo: https://sandbox.vnpayment.vn/apis/danh-sach-ngan-hang/), có thể để trống, người dùng có thể chọn trên cổng thanh toán VNPAY
             pay.AddRequestData("vnp_CreateDate", DateTime.UtcNow.ToString("yyyyMMddHHmmss")); //ngày thanh toán theo định dạng yyyyMMddHHmmss
             pay.AddRequestData("vnp_CurrCode", "VND"); //Đơn vị tiền tệ sử dụng thanh toán. Hiện tại chỉ hỗ trợ VND
@@ -90,9 +89,9 @@ namespace Services.Service
             throw new NotImplementedException();
         }
 
-        public async Task<string> AddPendingRequest(PaymentView paymentView)
+        public async Task<string> AddPendingRequest(string _id, int totalPrice)
         {
-            string _id = AuthenticationJwtTool.GetUserIdFromJwt(paymentView.Jwt);
+
             if (!string.IsNullOrEmpty(_id))
             {
                 IEnumerable<AccountStatus> item = await _unit.AccountStatusRepo.GetFieldsByFilterAsync(["IsAuthenticationEmail"], ass => ass.IsAuthenticationEmail == true && ass.AccountId.Equals(_id));
@@ -105,12 +104,15 @@ namespace Services.Service
             {
                 return null;
             }
-            Request request = _mapper.Map<Request>(paymentView);
-            request.RequestId = ObjectId.GenerateNewId().ToString();
-            request.RequestStatus = "Pending";
-            request.AccountId = _id;
-            request.CreatedAt = DateTime.UtcNow;
-            request.UpdatedAt = DateTime.UtcNow;
+            Request request = new Request
+            {
+                RequestId = ObjectId.GenerateNewId().ToString(),
+                RequestStatus = "Pending",
+                AccountId = _id,
+                CreatedAt = DateTime.UtcNow,
+                UpdatedAt = DateTime.UtcNow,
+                TotalPrice = totalPrice
+            };
             await _unit.RequestRepo.AddOneItem(request);
             return request.RequestId;
         }
@@ -147,4 +149,3 @@ namespace Services.Service
 
     }
 }
-
