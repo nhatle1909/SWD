@@ -21,7 +21,7 @@ namespace Services.Tool
             _configuration = configuration;
             //_unit = unit;
         }
-        public async Task<string> GenerateJwtToken(string userId, string role)
+        public string GenerateJwtToken(string userId, string role)
         {
             var jwtKey = _configuration["JWT:Key"];
             var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtKey ?? ""));

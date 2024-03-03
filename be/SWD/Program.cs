@@ -121,11 +121,25 @@ namespace SWD
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
+            // run local
             if (app.Environment.IsDevelopment())
             {
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
+            //publish api
+
+            //app.UseSwagger(options =>
+            //{
+            //    options.RouteTemplate = "swagger/{documentName}/swagger.json";
+            //});
+            //app.UseSwaggerUI(c =>
+            //{
+            //    c.SwaggerEndpoint("/swagger/v1/swagger.json", "SWD API");
+
+            //    c.RoutePrefix = "";
+            //    c.EnableTryItOutByDefault();
+            //});
             app.UseHttpsRedirection();
             app.UseCors();
             app.UseStaticFiles();

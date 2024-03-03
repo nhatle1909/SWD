@@ -33,7 +33,6 @@ namespace Services.Tool
 
             CreateMap<Request, IEnumerable<Request>>().ReverseMap();
             CreateMap<Request, RequestView>().ReverseMap();
-            CreateMap<Request, PaymentView>().ReverseMap();
         }
     }
 }

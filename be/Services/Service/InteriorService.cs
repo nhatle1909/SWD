@@ -72,6 +72,7 @@ namespace Services.Service
 
                 responses.Add(new
                 {
+                    InteriorId = item.InteriorId,
                     InteriorName = item.InteriorName,
                     Image = SomeTool.GetImage(Convert.ToBase64String(item.Image)),
                     Price = item.Price,

@@ -1,6 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Repositories.ModelView;
 using Services.Interface;
+using System.Security.Claims;
 
 namespace SWD.Controllers
 {
@@ -13,21 +15,24 @@ namespace SWD.Controllers
         {
             _vnpayService = vnpayService;
         }
-
+        [Authorize(Roles = "Customer")]
         [HttpPost("VNPay-Payment")]
-        public async Task<IActionResult> VNPayPayment(PaymentView paymentView)
+        public async Task<IActionResult> VNPayPayment(int totalPrice)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest("Invalid Data Format");
             }
-            string check = await _vnpayService.AddPendingRequest(paymentView);
+            var id = (HttpContext.User.FindFirst("id")?.Value) ?? "";
+            string check = await _vnpayService.AddPendingRequest(id, totalPrice);
             if (check != null)
             {
-                return Ok(_vnpayService.Payment(check, paymentView).Result);
+                return Ok(_vnpayService.Payment(check, totalPrice).Result);
             }
             return BadRequest("Email has not authenticated");
         }
+
+        [Authorize(Roles = "Customer")]
         [HttpGet("VNPay-Return")]
         public async Task<IActionResult> VNPayReturn(string url)
         {
