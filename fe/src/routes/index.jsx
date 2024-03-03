@@ -10,6 +10,7 @@ import PermissionRoute from './guard/PermissionRoute';
 import Home from '@/pages/home/Home';
 import About from '@/pages/about/About';
 import Users from '@/pages/admin/users/Users'
+import Profile from '../pages/profile/Profile';
 const unauthRoutes = {
   path: '/',
   element: <MainLayout />,
@@ -21,7 +22,12 @@ const unauthRoutes = {
     },
     {
       path:'about',
-      element:<About/>
+      element:<About/>,
+    },
+    {
+      path:'profile',
+      element: <Profile/>,
+      permissions:['user']
     }
   ]
 };
