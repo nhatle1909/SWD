@@ -53,5 +53,5 @@ jobs:
         with:
           app-name: 'swdapi'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_CDB127C183DE40C8841EE0880961E0E9 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_77D79C9C9ED14FF4AF23BB9A95DEC9CD }}
           package: .
