@@ -7,18 +7,16 @@ import {
   login, 
 } from "@/api/auth";
 import { setLocalStorage } from "../../utils/common";
+import { jwtDecode } from "jwt-decode";
 export const actionLogin = (
   {email, password}
 ) => {
   return async (dispatch) => {
     try {
       const { data } = await login(email, password);  
-      dispatch(setAuthUser({
-        token: data,
-        email: email
-      }));
-      setLocalStorage('auth', {token: data, email: email});
-
+      const info = jwtDecode(data);
+      dispatch(setAuthUser({token:data, email: email, role: info.role}));
+      setLocalStorage('auth', {token: data, email: email, role: info.role});
     } catch (error) {
       console.log(error)
       throw error;
@@ -31,8 +29,9 @@ export const actionSignUpUser = ({email, password}) => {
     try {
       await signUpUser(email, password);
       const { data } = await login(email, password);
-      dispatch(setAuthUser({token:data, email: email}));
-      setLocalStorage('auth', {token: data, email: email});
+      const info = jwtDecode(data);
+      dispatch(setAuthUser({token:data, email: email, role: info.role}));
+      setLocalStorage('auth', {token: data, email: email, role: info.role});
 
     } catch (error) {
       console.log(error)

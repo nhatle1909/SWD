@@ -11,6 +11,8 @@ import Home from '@/pages/home/Home';
 import About from '@/pages/about/About';
 import Users from '@/pages/admin/users/Users'
 import Profile from '../pages/profile/Profile';
+import StaffRoute from './guard/StaffRoute';
+import ManageBlog from '../pages/staff/blog/ManageBlog';
 const unauthRoutes = {
   path: '/',
   element: <MainLayout />,
@@ -44,13 +46,24 @@ const adminRoutes = {
   ],
 };
 
+const staffRoutes = {
+  path: 'staff',
+  guard: <StaffRoute />,
+  element: <MainLayout/>,
+  children: [
+    {
+      path: 'blogs',
+      element: <ManageBlog />,
+    },
+  ],
+};
 
 const notfoundRoute= {
   path: "*",
   element: <NotFound />,
 };
 
-const routes = [unauthRoutes, adminRoutes, notfoundRoute];
+const routes = [unauthRoutes, adminRoutes,staffRoutes, notfoundRoute];
 
 const Routes = () => {
   return (

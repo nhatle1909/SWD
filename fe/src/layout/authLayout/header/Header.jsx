@@ -30,6 +30,7 @@ const Header = () => {
 				dispatch(setAuthUser(authLocal))
 				return authLocal
 			}
+
 			return null;
 		})
 
@@ -48,12 +49,26 @@ const Header = () => {
 		];
 
 		const itemsDashboard = [
-			getItem('Dashboard', null,null, [
+			getItem('Dashboard', null,null, 
+			auth?.role === 'Admin' ? 
+			[
+				//add for admin routes
 				getItem(<a onClick={() => {
 					navigator('/admin/users')
 				}}>Users</a>, null, null),
 				
-			])
+			]:
+			auth?.role === 'Staff' ? 
+			[
+				//add for staff routes
+				getItem(<a onClick={() => {
+					navigator('/staff/blogs')
+				}}>Blogs</a>, null, null),
+			]
+			:
+			[]
+			
+			)
 		
 		]
 
@@ -61,9 +76,9 @@ const Header = () => {
 			{
 				label: <a onClick={() => navigator('/profile')}>Profile</a>
 			},
-			{
+			auth?.role === 'Admin' || auth?.role === 'Staff' ? {
 				label: <Menu style={{ width: 256 }} mode="vertical" items={itemsDashboard} />
-			},
+			}: null,
 			{
 				label: <a>Change Password</a>
 			},
@@ -75,12 +90,14 @@ const Header = () => {
     return (
         <nav className={`navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light`} id="ftco-navbar">
 	    <div className="container">
-	      <a className="navbar-brand" href="index.html">SWD</a>
+	      <a className="navbar-brand" href="/">SWD</a>
 	      <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
 	        <span className="oi oi-menu"></span> Menu
 	      </button>
 
-	      <div className="collapse navbar-collapse" id="ftco-nav">
+	      <div className="collapse navbar-collapse" style={{
+					visibility: 'visible'
+				}} id="ftco-nav">
 	        <ul className="navbar-nav ml-auto">
 	        	<li className={`nav-item ${location.pathname === '/' ? 'active' : ''}`}><a href='/' className="nav-link">Home</a></li>
 	        	<li className={`nav-item ${location.pathname === '/about' ? 'active' : ''} `}><a onClick={() => navigator('/about')} className="nav-link">About</a></li>
