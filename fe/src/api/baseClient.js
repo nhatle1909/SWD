@@ -1,6 +1,8 @@
 
 import axios from "axios";
-import {setAuthUser} from '../store/authentication/slice'
+import { toast } from 'react-toastify';
+import {setAuthUser} from '../store/auth/slice'
+import { getLocalStorage, setLocalStorage } from "../utils/common";
 
 let store;
 
@@ -8,7 +10,7 @@ const BASE_URL = import.meta.env.VITE_APP_BASE_URL;
 console.log(BASE_URL)
 const baseClient = axios.create({
   baseURL: BASE_URL,
-  withCredentials: true
+  withCredentials: false
 });
 
 export const injectStore = (_store) =>
@@ -17,29 +19,19 @@ export const injectStore = (_store) =>
 baseClient.interceptors.response.use((response) => {
    return response;
 }, error => {
-  console.log('err:::', error)
   if( error.response.status === 401) {
-    return baseClient
-    .post("/auth/login/refresh", {
-      token: JSON.parse(localStorage.getItem('auth') 
-    ).data.refreshToken,
+    setLocalStorage('auth', {})
+    toast('Token is expired, Please login again!', {
+      type:'warning'
     })
-    .then(async ({ data }) => {
-      await store.dispatch(setAuthUser(data))
-      localStorage.setItem('auth', JSON.stringify(data))
-      return baseClient(error.config);
-    }).catch((err) => {
-      console.log('err refresh', err)
-    });
-  }else{
     return Promise.reject(error)
   }
+  return Promise.reject(error)
 });
 
 baseClient.interceptors.request.use((config) => {
-  const token = store.getState().authentication.authUser?.data.token;
-  console.log('test::', store.getState())
-  config.headers.Authorization = "Bearer "+token;
+  const auth = getLocalStorage('auth')
+  config.headers.Authorization = "Bearer "+auth?.token;
   return config;
 })
 

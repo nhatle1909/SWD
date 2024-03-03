@@ -5,9 +5,7 @@ const AuthLayout = () => {
     return (
         <>
         <Header/>
-        <br/>
             <Outlet/> 
-            <br/>
         <Footer/>
         </>
     )
