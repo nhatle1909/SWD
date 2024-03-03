@@ -8,7 +8,6 @@ namespace Repositories.ModelView
     {
         public class AddMaterialView
         {
-            public required string Jwt { get; set; }
             [StringLength(50, MinimumLength = 1)]
             public required string MaterialName { get; set; }
             public required ClassifyMaterial MaterialType { get; set; }
@@ -18,7 +17,6 @@ namespace Repositories.ModelView
 
         public class UpdateMaterialView
         {
-            public required string Jwt { get; set; }
             public required string MaterialId { get; set; }
 
             [StringLength(50, MinimumLength = 1)]
@@ -31,13 +29,11 @@ namespace Repositories.ModelView
 
         public class DeleteMaterialView
         {
-            public required string Jwt { get; set; }
             public required string MaterialId { get; set; }
         }
 
         public class PagingMaterialView
         {
-            public required string Jwt { get; set; }
             public int PageIndex { get; set; }
             public bool IsAsc { get; set; }
             public string? SearchValue { get; set; }

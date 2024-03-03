@@ -28,6 +28,7 @@ namespace SWD
             builder.Services.AddScoped<IBlogService, BlogService>();
             builder.Services.AddScoped<IRequestService,RequestService>();
             builder.Services.AddScoped<IContactService, ContactService>();
+            builder.Services.AddScoped<ICartService, CartService>();
             builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             //Add HttpContext
@@ -45,21 +46,6 @@ namespace SWD
 
             builder.Services.AddControllersWithViews();
 
-            builder.Services.AddAuthentication(options =>
-        {
-            options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-            options.DefaultChallengeScheme = GoogleDefaults.AuthenticationScheme;
-        })
-        .AddGoogle(options =>
-        {
-            options.ClientId = builder.Configuration["Authentication:Google:ClientId"]!;
-            options.ClientSecret = builder.Configuration["Authentication:Google:ClientSecret"]!;
-            options.SaveTokens = true;
-            //default is signin-google
-            options.CallbackPath = "/api/Account/LoginAccountByGoogle";
-
-        });
-
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen(c =>
@@ -67,8 +53,8 @@ namespace SWD
                 c.SwaggerDoc("v1",
                     new OpenApiInfo
                     {
-                        Title = "EXE",
-                        Description = "EXE Source",
+                        Title = "SWD",
+                        Description = "SWD Source",
                         Version = "v1",
                     });
                 c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
@@ -118,7 +104,8 @@ namespace SWD
                     ValidateIssuerSigningKey = true,
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JWT:Key"] ?? throw new ArgumentNullException("builder.Configuration[\"Jwt:Key\"]", "Jwt:Key is null"))),
                     ValidIssuer = builder.Configuration["JWT:Issure"],
-                    ValidAudience = builder.Configuration["JWT:Audience"]
+                    ValidAudience = builder.Configuration["JWT:Audience"],
+                    ClockSkew = TimeSpan.Zero
                 };
             });
             //Add Cors Policy
@@ -134,16 +121,30 @@ namespace SWD
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
+            // run local
             if (app.Environment.IsDevelopment())
             {
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
+            //publish api
+
+            //app.UseSwagger(options =>
+            //{
+            //    options.RouteTemplate = "swagger/{documentName}/swagger.json";
+            //});
+            //app.UseSwaggerUI(c =>
+            //{
+            //    c.SwaggerEndpoint("/swagger/v1/swagger.json", "SWD API");
+
+            //    c.RoutePrefix = "";
+            //    c.EnableTryItOutByDefault();
+            //});
             app.UseHttpsRedirection();
             app.UseCors();
             app.UseStaticFiles();
             app.UseAuthentication();
-
+            app.UseRouting();
             app.UseAuthorization();
 
             app.MapControllers();

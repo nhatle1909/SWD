@@ -34,20 +34,51 @@ namespace Services.Service
             _logger = logger;
         }
 
-        public async Task<string> AddBlog(AddBlogView add)
+        public async Task<string> AddBlog(string id, AddBlogView add)
         {
-            string _id = AuthenticationJwtTool.GetUserIdFromJwt(add.Jwt);
-            IEnumerable<AccountStatus> getUser = await _unit.AccountStatusRepo.GetFieldsByFilterAsync(["Email", "IsRole"],
-                            g => g.AccountId.Equals(_id));
-            if (getUser.Any())
+            var getUser = (await _unit.AccountStatusRepo.GetFieldsByFilterAsync(["Email"],
+                            g => g.AccountId.Equals(id))).FirstOrDefault();
+            if (getUser != null)
             {
-                AccountStatus getFieldsFromUser = getUser.First();
-                if (getFieldsFromUser.IsRole == AccountStatus.Role.Staff)
+                if (add.Pictures.Length > 0)
                 {
-                    if (add.Pictures.Length > 0)
+                    List<byte[]> picturesBytesList = new List<byte[]>();
+                    foreach (var picture in add.Pictures)
+                    {
+                        //Encode picture
+                        using (var ms = new MemoryStream())
+                        {
+                            await picture.CopyToAsync(ms);
+                            byte[] fileBytes = ms.ToArray();
+                            picturesBytesList.Add(fileBytes);
+                        }
+                    }
+                    Blog blog = _mapper.Map<Blog>(add);
+                    blog.Email = getUser.Email;
+                    blog.Pictures = picturesBytesList;
+                    await _unit.BlogRepo.AddOneItem(blog);
+                    return "Add Blog successfully";
+                }
+                return "Missing the Pictures";
+            }
+            return "Account is not existed";
+        }
+
+        public async Task<string> UpdateBlog(string id, UpdateBlogView update)
+        {
+            var getUser = (await _unit.AccountStatusRepo.GetFieldsByFilterAsync(["Email"],
+                            g => g.AccountId.Equals(id))).FirstOrDefault();
+            if (getUser != null)
+            {
+                var getBlog = await _unit.BlogRepo.GetFieldsByFilterAsync([],
+                        g => g.BlogId.Equals(update.BlogId));
+                Blog blog = getBlog.FirstOrDefault()!;
+                if (blog is not null && blog.Email.Equals(getUser.Email))
+                {
+                    if (update.Pictures.Length > 0)
                     {
                         List<byte[]> picturesBytesList = new List<byte[]>();
-                        foreach (var picture in add.Pictures)
+                        foreach (var picture in update.Pictures)
                         {
                             //Encode picture
                             using (var ms = new MemoryStream())
@@ -57,86 +88,36 @@ namespace Services.Service
                                 picturesBytesList.Add(fileBytes);
                             }
                         }
-                        Blog blog = _mapper.Map<Blog>(add);
-                        blog.Email = getFieldsFromUser.Email;
+                        blog.Title = update.Title;
+                        blog.Content = update.Content;
                         blog.Pictures = picturesBytesList;
-                        await _unit.BlogRepo.AddOneItem(blog);
-                        return "Add Blog successfully";
+                        blog.UpdatedAt = DateTime.UtcNow;
+                        await _unit.BlogRepo.UpdateItemByValue("BlogId", update.BlogId, blog);
+                        return "Update Blog successfully";
+
                     }
                     return "Missing the Pictures";
                 }
-                return "You have not permission to use this function";
+                return "Blog is not existed";
             }
             return "Account is not existed";
         }
 
-
-        public async Task<string> UpdateBlog(UpdateBlogView update)
+        public async Task<string> RemoveBlog(string id, RemoveBlogView remove)
         {
-            string _id = AuthenticationJwtTool.GetUserIdFromJwt(update.Jwt);
-            IEnumerable<AccountStatus> getUser = await _unit.AccountStatusRepo.GetFieldsByFilterAsync(["Email", "IsRole"],
-                            g => g.AccountId.Equals(_id));
-            if (getUser.Any())
+            var getUser = (await _unit.AccountStatusRepo.GetFieldsByFilterAsync(["Email"],
+                            g => g.AccountId.Equals(id))).FirstOrDefault();
+            if (getUser != null)
             {
-                AccountStatus getFieldsFromUser = getUser.First();
-                if (getFieldsFromUser.IsRole == AccountStatus.Role.Staff)
+                var getBlog = await _unit.BlogRepo.GetFieldsByFilterAsync([],
+                    g => g.BlogId.Equals(remove.BlogId));
+                Blog blog = getBlog.FirstOrDefault()!;
+                if (blog is not null && blog.Email.Equals(getUser.Email))
                 {
-                    IEnumerable<Blog> getBlog = await _unit.BlogRepo.GetFieldsByFilterAsync([],
-                            g => g.BlogId.Equals(update.BlogId));
-                    Blog blog = getBlog.FirstOrDefault()!;
-                    if (blog is not null && blog.Email.Equals(getFieldsFromUser.Email))
-                    {
-                        if (update.Pictures.Length > 0)
-                        {
-                            List<byte[]> picturesBytesList = new List<byte[]>();
-                            foreach (var picture in update.Pictures)
-                            {
-                                //Encode picture
-                                using (var ms = new MemoryStream())
-                                {
-                                    await picture.CopyToAsync(ms);
-                                    byte[] fileBytes = ms.ToArray();
-                                    picturesBytesList.Add(fileBytes);
-                                }
-                            }
-                            blog.Title = update.Title;
-                            blog.Content = update.Content;
-                            blog.Pictures = picturesBytesList;
-                            blog.UpdatedAt = DateTime.Now;
-                            await _unit.BlogRepo.UpdateItemByValue("BlogId", update.BlogId, blog);
-                            return "Update Blog successfully";
-
-                        }
-                        return "Missing the Pictures";
-                    }
-                    return "Blog is not existed";
+                    await _unit.BlogRepo.RemoveItemByValue("BlogId", remove.BlogId);
+                    return "Remove Blog successfully";
                 }
-                return "You have not permission to use this function";
-            }
-            return "Account is not existed";
-        }
-
-        public async Task<string> RemoveBlog(RemoveBlogView remove)
-        {
-            string _id = AuthenticationJwtTool.GetUserIdFromJwt(remove.Jwt);
-            IEnumerable<AccountStatus> getUser = await _unit.AccountStatusRepo.GetFieldsByFilterAsync(["Email", "IsRole"],
-                            g => g.AccountId.Equals(_id));
-            if (getUser.Any())
-            {
-                AccountStatus getFieldsFromUser = getUser.First();
-                if (getFieldsFromUser.IsRole == AccountStatus.Role.Staff)
-                {
-                    IEnumerable<Blog> getBlog = await _unit.BlogRepo.GetFieldsByFilterAsync([],
-                            g => g.BlogId.Equals(remove.BlogId));
-                    Blog blog = getBlog.FirstOrDefault()!;
-                    if (blog is not null && blog.Email.Equals(getFieldsFromUser.Email))
-                    {
-                        await _unit.BlogRepo.RemoveItemByValue("BlogId", remove.BlogId);
-                        return "Remove Blog successfully";
-                    }
-                    return "Blog is not existed";
-                }
-                return "You have not permission to use this function";
+                return "Blog is not existed";
             }
             return "Account is not existed";
         }
@@ -147,29 +128,16 @@ namespace Services.Service
             const string sortField = "CreatedAt";
             List<string> searchFields = ["Title", "Content"];
             List<string> returnFields = [];
-            List<byte[]> pictures = new List<byte[]>();
 
             int skip = (pageIndex - 1) * pageSize;
             var items = (await _unit.BlogRepo.PagingAsync(skip, pageSize, isAsc, sortField, searchValue, searchFields, returnFields)).ToList();
-            foreach (var item in items)
-            {
-                var getUser = (await _unit.AccountRepo.GetFieldsByFilterAsync(["Picture"],
-                            g => g.Email.Equals(item.Email))).FirstOrDefault();
-                pictures.Add(getUser!.Picture);
-            }
-            var response = new
-            {
-                Pictures = pictures,
-                Items = items
-            };
-            return response;
+            return items;
         }
 
-        public async Task AddBlogComment(AddCommentBlogView addComment)
+        public async Task AddBlogComment(string id, AddCommentBlogView addComment)
         {
-            string _id = AuthenticationJwtTool.GetUserIdFromJwt(addComment.Jwt);
             var getUser = (await _unit.AccountRepo.GetFieldsByFilterAsync(["Email"],
-                            g => g.Email.Equals(_id))).FirstOrDefault();
+                            g => g.Email.Equals(id))).FirstOrDefault();
             if (getUser != null)
             {
                 BlogComment blogComment = _mapper.Map<BlogComment>(addComment);
@@ -179,32 +147,30 @@ namespace Services.Service
             }
         }
 
-        public async Task UpdateCommentBlog(UpdateCommentBlogView updateComment)
+        public async Task UpdateCommentBlog(string id, UpdateCommentBlogView updateComment)
         {
-            string _id = AuthenticationJwtTool.GetUserIdFromJwt(updateComment.Jwt);
             var getUser = (await _unit.AccountRepo.GetFieldsByFilterAsync(["Email"],
-                            g => g.Email.Equals(_id))).FirstOrDefault();
+                            g => g.Email.Equals(id))).FirstOrDefault();
             var getComment = (await _unit.BlogCommentRepo.GetFieldsByFilterAsync([],
                             g => g.BlogCommentId.Equals(updateComment.BlogCommentId))).FirstOrDefault();
-            if (getUser != null && getComment != null)
+            if (getComment != null && getComment.Email.Equals(getUser.Email))
             {
                 if (getComment.Email.Equals(getUser.Email))
                 {
                     getComment.Comment = updateComment.Comment;
-                    getComment.UpdatedAt = DateTime.Now;
+                    getComment.UpdatedAt = DateTime.UtcNow;
                     await _unit.BlogCommentRepo.UpdateItemByValue("BlogCommentId", getComment.BlogCommentId, getComment);
                 }
             }
         }
 
-        public async Task RemoveCommentBlog(RemoveCommentBlogView removeComment)
+        public async Task RemoveCommentBlog(string id, RemoveCommentBlogView removeComment)
         {
-            string _id = AuthenticationJwtTool.GetUserIdFromJwt(removeComment.Jwt);
             var getUser = (await _unit.AccountRepo.GetFieldsByFilterAsync(["Email"],
-                            g => g.Email.Equals(_id))).FirstOrDefault();
+                            g => g.Email.Equals(id))).FirstOrDefault();
             var getComment = (await _unit.BlogCommentRepo.GetFieldsByFilterAsync([],
                             g => g.BlogCommentId.Equals(removeComment.BlogCommentId))).FirstOrDefault();
-            if (getUser != null && getComment != null)
+            if (getComment != null && getComment.Email.Equals(getUser.Email))
             {
                 if (getComment.Email.Equals(getUser.Email))
                 {

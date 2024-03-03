@@ -13,12 +13,22 @@ namespace Repositories.Repository
 {
     public class UnitOfWork : IUnitOfWork
     {
+        private readonly IMongoClient _mongoClient;
         public UnitOfWork(IMongoClient mongoClient)
         {
             _mongoClient = mongoClient;          
         }
 
-        private readonly IMongoClient _mongoClient;
+        private IRepository<RefreshToken> _refreshTokenRepo;
+        public IRepository<RefreshToken> RefreshTokenRepo
+        {
+            get
+            {
+                if (_refreshTokenRepo is null)
+                    _refreshTokenRepo = new Repository<RefreshToken>(_mongoClient);
+                return _refreshTokenRepo;
+            }
+        }
 
         private IRepository<Account> _accountRepo;
         public IRepository<Account> AccountRepo
@@ -107,6 +117,17 @@ namespace Repositories.Repository
                 if (_requestRepo is null)
                     _requestRepo = new Repository<Request>(_mongoClient);
                 return _requestRepo;
+            }
+        }
+
+        private IRepository<Cart> _cartRepo;
+        public IRepository<Cart> CartRepo
+        {
+            get
+            {
+                if (_cartRepo is null)
+                    _cartRepo = new Repository<Cart>(_mongoClient);
+                return _cartRepo;
             }
         }
     }

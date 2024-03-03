@@ -13,7 +13,6 @@ namespace Repositories.ModelView
     {
         public class AddBlogView
         {
-            [Required] public required string Jwt { get; set; }
             [StringLength(100, MinimumLength = 1)] public required string Title { get; set; }
             [StringLength(10000, MinimumLength = 1)] public required string Content { get; set; }
             public required IFormFile[] Pictures { get; set; }
@@ -21,8 +20,7 @@ namespace Repositories.ModelView
 
         public class UpdateBlogView
         {
-            [Required] public required string BlogId { get; set; }
-            [Required] public required string Jwt { get; set; }
+            public required string BlogId { get; set; }
             [StringLength(100, MinimumLength = 1)] public required string Title { get; set; }
             [StringLength(10000, MinimumLength = 1)] public required string Content { get; set; }
             public required IFormFile[] Pictures { get; set; }
@@ -30,13 +28,11 @@ namespace Repositories.ModelView
 
         public class RemoveBlogView
         {
-            [Required] public required string BlogId { get; set; }
-            [Required] public required string Jwt { get; set; }
+            public required string BlogId { get; set; }
         }
 
         public class AddCommentBlogView
         {
-            public required string Jwt { get; set; }
             public required string BlogId { get; set; }
             [StringLength(10000, MinimumLength = 1)]
             public required string Comment { get; set; }
@@ -44,7 +40,6 @@ namespace Repositories.ModelView
 
         public class UpdateCommentBlogView
         {
-            public required string Jwt { get; set; }
             public required string BlogCommentId { get; set; }
             [StringLength(10000, MinimumLength = 1)]
             public required string Comment { get; set; }
@@ -52,7 +47,6 @@ namespace Repositories.ModelView
 
         public class RemoveCommentBlogView
         {
-            public required string Jwt { get; set; }
             public required string BlogCommentId { get; set; }
         }
 

@@ -25,38 +25,22 @@ namespace Services.Service
         }
         public async Task<string> AddOneMaterial(AddMaterialView add)
         {
-            string _id = AuthenticationJwtTool.GetUserIdFromJwt(add.Jwt);
-            IEnumerable<AccountStatus> getUser = await _unit.AccountStatusRepo.GetFieldsByFilterAsync(["_id", "IsRole"],
-                            c => c.AccountId.Equals(_id));
-            var accountStatus = getUser.FirstOrDefault();
-            if (accountStatus is not null && accountStatus.IsRole == AccountStatus.Role.Staff)
-            {
-                Material material = _mapper.Map<Material>(add);
-                await _unit.MaterialRepo.AddOneItem(material);
-                return "Add material successfully";
-            }
-            return "Account is not existed or You have not permission to use this function";
+            Material material = _mapper.Map<Material>(add);
+            await _unit.MaterialRepo.AddOneItem(material);
+            return "Add material successfully";
         }
 
         public async Task<string> DeleteMaterial(DeleteMaterialView delete)
         {
-            string _id = AuthenticationJwtTool.GetUserIdFromJwt(delete.Jwt);
-            IEnumerable<AccountStatus> getUser = await _unit.AccountStatusRepo.GetFieldsByFilterAsync(["_id", "IsRole"],
-                            g => g.AccountId.Equals(_id));
-            var accountStatus = getUser.FirstOrDefault();
-            if (accountStatus is not null && accountStatus.IsRole == AccountStatus.Role.Staff)
+            var getMaterial = await _unit.MaterialRepo.GetFieldsByFilterAsync([],
+                       g => g.MaterialId.Equals(delete.MaterialId));
+            var material = getMaterial.FirstOrDefault();
+            if (material is not null)
             {
-                IEnumerable<Material> getMaterial = await _unit.MaterialRepo.GetFieldsByFilterAsync([],
-                           g => g.MaterialId.Equals(delete.MaterialId));
-                var material = getMaterial.FirstOrDefault();
-                if (material is not null)
-                {
-                    await _unit.MaterialRepo.RemoveItemByValue("MaterialId", delete.MaterialId);
-                    return "Delete material successfully";
-                }
-                return "Material is not existed";
+                await _unit.MaterialRepo.RemoveItemByValue("MaterialId", delete.MaterialId);
+                return "Delete material successfully";
             }
-            return "Account is not existed or You have not permission to use this function";
+            return "Material is not existed";
         }
 
         public async Task<object> GetPagingMaterial(PagingMaterialView paging)
@@ -66,45 +50,26 @@ namespace Services.Service
             List<string> searchFields = ["MaterialName", "Price"];
             List<string> returnFields = [];
 
-            string _id = AuthenticationJwtTool.GetUserIdFromJwt(paging.Jwt);
-            var getUserStatus = (await _unit.AccountStatusRepo.GetFieldsByFilterAsync(["IsRole"],
-                            g => g.AccountId.Equals(_id))).FirstOrDefault();
-            if (getUserStatus != null)
-            {
-                if (getUserStatus.IsRole == AccountStatus.Role.Staff)
-                {
-                    int skip = (paging.PageIndex - 1) * pageSize;
-                    var items = (await _unit.MaterialRepo.PagingAsync(skip, pageSize, paging.IsAsc, sortField, paging.SearchValue, searchFields, returnFields)).ToList();
-                    return items;
-                }
-                return "You have not permission to use this function";
-            }
-            return "Account is not existed";
+            int skip = (paging.PageIndex - 1) * pageSize;
+            var items = (await _unit.MaterialRepo.PagingAsync(skip, pageSize, paging.IsAsc, sortField, paging.SearchValue, searchFields, returnFields)).ToList();
+            return items;
         }
 
         public async Task<string> UpdateMaterial(UpdateMaterialView update)
         {
-            string _id = AuthenticationJwtTool.GetUserIdFromJwt(update.Jwt);
-            IEnumerable<AccountStatus> getUser = await _unit.AccountStatusRepo.GetFieldsByFilterAsync(["_id", "IsRole"],
-                            g => g.AccountId.Equals(_id));
-            var accountStatus = getUser.FirstOrDefault();
-            if (accountStatus is not null && accountStatus.IsRole == AccountStatus.Role.Staff)
+            var getMaterial = await _unit.MaterialRepo.GetFieldsByFilterAsync([],
+                        g => g.MaterialId.Equals(update.MaterialId));
+            var material = getMaterial.FirstOrDefault();
+            if (material is not null)
             {
-                IEnumerable<Material> getMaterial = await _unit.MaterialRepo.GetFieldsByFilterAsync([],
-                            g => g.MaterialId.Equals(update.MaterialId));
-                var material = getMaterial.FirstOrDefault();
-                if (material is not null)
-                {
-                    material.MaterialName = update.MaterialName;
-                    material.MaterialType = update.MaterialType;
-                    material.Price = update.Price;
-                    material.UpdatedAt = System.DateTime.Now;
-                    await _unit.MaterialRepo.UpdateItemByValue("MaterialId", update.MaterialId, material);
-                    return "Update material successfully";
-                }
-                return "Material is not existed";
+                material.MaterialName = update.MaterialName;
+                material.MaterialType = update.MaterialType;
+                material.Price = update.Price;
+                material.UpdatedAt = System.DateTime.UtcNow;
+                await _unit.MaterialRepo.UpdateItemByValue("MaterialId", update.MaterialId, material);
+                return "Update material successfully";
             }
-            return "Account is not existed or You have not permission to use this function";
+            return "Material is not existed";
         }
 
         public async Task<double> OptionalProductQuote(string[] arrMaterialId)

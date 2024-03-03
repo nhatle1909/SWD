@@ -11,6 +11,7 @@ namespace Repositories.Repository
 {
     public interface IUnitOfWork
     {
+        IRepository<RefreshToken> RefreshTokenRepo { get; }
         IRepository<Account> AccountRepo { get; }
         IRepository<AccountStatus> AccountStatusRepo {  get; }
         IRepository<Material> MaterialRepo { get; }
@@ -19,5 +20,6 @@ namespace Repositories.Repository
         IRepository<BlogComment> BlogCommentRepo { get; }
         IRepository<Contact> ContactRepo { get; }
         IRepository<Request> RequestRepo { get; }
+        IRepository<Cart> CartRepo { get; }
     }
 }

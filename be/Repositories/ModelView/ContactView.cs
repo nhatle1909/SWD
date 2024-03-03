@@ -23,20 +23,17 @@ namespace Repositories.ModelView
 
         public class AddressContactView
         {
-            public required string Jwt { get; set; }
             public required string ContactId { get; set; }
             public required string ResponseOfStaff { get; set; }
         }
 
         public class DeleteContactView
         {
-            public required string Jwt { get; set; }
             public required string ContactId { get; set; }
         }
 
         public class PagingContactView
         {
-            public required string Jwt { get; set; }
             public int PageIndex { get; set; }
             public bool IsAsc { get; set; }
             public string? SearchValue { get; set; }
@@ -44,7 +41,6 @@ namespace Repositories.ModelView
 
         public class DetailContactView
         {
-            public required string Jwt { get; set; }
             public required string ContactId { get; set; }
         }
     }

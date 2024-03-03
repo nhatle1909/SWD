@@ -1,7 +1,13 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.AspNetCore.Mvc;
+using MongoDB.Bson;
+using Repositories.ModelView;
 using Services.Interface;
 using System.ComponentModel.DataAnnotations;
 using System.Net.NetworkInformation;
+using System.Security.Claims;
+using Twilio.TwiML.Messaging;
 using static Repositories.ModelView.AccountView;
 
 namespace SWD.Controllers
@@ -24,12 +30,11 @@ namespace SWD.Controllers
         {
             try
             {
-                if (!ModelState.IsValid)
-                {
-                    return BadRequest(ModelState);
-                }
                 var status = await _ser.AddAnAccountForCustomer(register);
-                return Ok(new { message = $"{status}" });
+                return Ok(new
+                {
+                    Message = status
+                });
             }
             catch (Exception ex)
             {
@@ -37,17 +42,17 @@ namespace SWD.Controllers
             }
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPost("Register-Staff-Account")]
         public async Task<IActionResult> RegisterAnAccountForStaff([FromBody] RegisterForStaffAccountView registerForStaff)
         {
             try
             {
-                if (!ModelState.IsValid)
-                {
-                    return BadRequest(ModelState);
-                }
                 var status = await _ser.AddAnAccountForStaff(registerForStaff);
-                return Ok(status);
+                return Ok(new
+                {
+                    Message = status
+                });
             }
             catch (Exception ex)
             {
@@ -60,8 +65,11 @@ namespace SWD.Controllers
         {
             try
             {
-                string jwt = await _ser.LoginByEmailAndPassword(login);
-                return Ok(jwt);
+                var result = await _ser.LoginByEmailAndPassword(login);
+                return Ok(new
+                {
+                    Message = result
+                });
             }
             catch (Exception ex)
             {
@@ -69,17 +77,43 @@ namespace SWD.Controllers
             }
         }
 
+        [HttpGet("Login-Google")]
+        public async Task<IActionResult> GoogleLogin(string id_token)
+        {
+            var status = await _ser.GoogleAuthorizeUser(id_token);
+            return Ok(new
+            {
+                Message = status
+            });
+        }
+
+        //[HttpPost("Renew-Token")]
+        //public async Task<IActionResult> RenewToken(string refreshToken, string accessToken)
+        //{
+        //    try
+        //    {
+        //        var status = await _ser.RenewToken(refreshToken, accessToken);
+        //        return Ok(status);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return BadRequest(ex.Message);
+        //    }
+        //}
+
+        [Authorize]
         [HttpPatch("Update-An-Account")]
         public async Task<IActionResult> UpdateProfile([FromBody] UpdateAccountView update)
         {
             try
             {
-                if (!ModelState.IsValid)
+                // Lấy ID từ JWT
+                var id = (HttpContext.User.FindFirst("id")?.Value) ?? "";
+                var status = await _ser.UpdateAnAccount(id, update);
+                return Ok(new
                 {
-                    return BadRequest(ModelState);
-                }
-                string status = await _ser.UpdateAnAccount(update);
-                return Ok(status);
+                    Message = status
+                });
             }
             catch (Exception ex)
             {
@@ -87,16 +121,14 @@ namespace SWD.Controllers
             }
         }
 
+        [Authorize]
         [HttpPatch("Update-Picture-Account")]
         public async Task<IActionResult> UpdatePictureProfile(UpdatePictureAccountView updatePicture)
         {
             try
             {
-                if (!ModelState.IsValid)
-                {
-                    return BadRequest(ModelState);
-                }
-                await _ser.UpdatePictureAccount(updatePicture);
+                var id = (HttpContext.User.FindFirst("id")?.Value) ?? "";
+                await _ser.UpdatePictureAccount(id, updatePicture);
                 return Ok();
             }
             catch (Exception ex)
@@ -110,8 +142,11 @@ namespace SWD.Controllers
         {
             try
             {
-                string notice = await _ser.SendEmailToResetPassword(email);
-                return Ok(notice);
+                var status = await _ser.SendEmailToResetPassword(email);
+                return Ok(new
+                {
+                    Message = status
+                });
             }
             catch (Exception ex)
             {
@@ -124,12 +159,11 @@ namespace SWD.Controllers
         {
             try
             {
-                if (!ModelState.IsValid)
+                var status = await _ser.ResetPassword(resetPassword);
+                return Ok(new
                 {
-                    return BadRequest(ModelState);
-                }
-                string notice = await _ser.ResetPassword(resetPassword);
-                return Ok(notice);
+                    Message = status
+                });
             }
             catch (Exception ex)
             {
@@ -137,17 +171,17 @@ namespace SWD.Controllers
             }
         }
 
+        [AllowAnonymous]
         [HttpGet("View-Profile")]
         public async Task<IActionResult> ViewProfileAccount([EmailAddress] string email)
         {
             try
             {
-                if (!ModelState.IsValid)
-                {
-                    return BadRequest(ModelState);
-                }
                 var profile = await _ser.ViewProfile(email);
-                return Ok(profile);
+                return Ok(new
+                {
+                    Message = profile
+                });
             }
             catch (Exception ex)
             {
@@ -155,17 +189,18 @@ namespace SWD.Controllers
             }
         }
 
+        [Authorize]
         [HttpPatch("Change-Password")]
         public async Task<IActionResult> ChangePasswordAccount([FromBody] ChangePasswordAccountView changePassword)
         {
             try
             {
-                if (!ModelState.IsValid)
+                var id = (HttpContext.User.FindFirst("id")?.Value) ?? "";
+                var status = await _ser.ChangePassword(id, changePassword);
+                return Ok(new
                 {
-                    return BadRequest(ModelState);
-                }
-                string notice = await _ser.ChangePassword(changePassword);
-                return Ok(notice);
+                    Message = status
+                });
             }
             catch (Exception ex)
             {
@@ -173,17 +208,17 @@ namespace SWD.Controllers
             }
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPatch("Banned-Account")]
         public async Task<IActionResult> BanAnAccount([FromBody] BanAccountView ban)
         {
             try
             {
-                if (!ModelState.IsValid)
+                var status = await _ser.BanAnAccount(ban);
+                return Ok(new
                 {
-                    return BadRequest(ModelState);
-                }
-                string notice = await _ser.BanAnAccount(ban);
-                return Ok(notice);
+                    Message = status
+                });
             }
             catch (Exception ex)
             {
@@ -191,17 +226,17 @@ namespace SWD.Controllers
             }
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpDelete("Remove-Account")]
         public async Task<IActionResult> RemoveAnAccount([FromBody] DeleteAccountView delete)
         {
             try
             {
-                if (!ModelState.IsValid)
+                var status = await _ser.DeleteAnAccount(delete);
+                return Ok(new
                 {
-                    return BadRequest(ModelState);
-                }
-                string notice = await _ser.DeleteAnAccount(delete);
-                return Ok(notice);
+                    Message = status
+                });
             }
             catch (Exception ex)
             {
@@ -209,13 +244,17 @@ namespace SWD.Controllers
             }
         }
 
+        [Authorize]
         [HttpPost("Sign-Out")]
         public async Task<IActionResult> SignOutAccount()
         {
             try
             {
                 await _ser.SignOutAsync();
-                return Ok("Sign out successfully");
+                return Ok(new
+                {
+                    Message = "Sign out successfully"
+                });
             }
             catch (Exception ex)
             {
@@ -223,13 +262,17 @@ namespace SWD.Controllers
             }
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPost("Get-Paging-Account-List")]
         public async Task<IActionResult> GetPagingAccountList([FromBody] PagingAccountView paging)
         {
             try
             {
-                var response = await _ser.GetPagingAccount(paging);
-                return Ok(response);
+                var status = await _ser.GetPagingAccount(paging);
+                return Ok(new
+                {
+                    Message = status
+                });
             }
             catch (Exception ex)
             {
@@ -237,13 +280,17 @@ namespace SWD.Controllers
             }
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPost("Get-Detail-Account")]
         public async Task<IActionResult> GetAccountDetail([FromBody] DetailAccountView detail)
         {
             try
             {
-                var response = await _ser.GetAccountDetail(detail);
-                return Ok(response);
+                var status = await _ser.GetAccountDetail(detail);
+                return Ok(new
+                {
+                    Message = status
+                });
             }
             catch (Exception ex)
             {

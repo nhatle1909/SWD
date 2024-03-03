@@ -9,13 +9,4 @@ namespace Repositories.ModelView
         public required string RequestStatus { get; set; }
         public required int TotalPrice { get; set; }
     }
-    public class PaymentView
-    {
-        [Required]
-        public required string Jwt { get; set; }
-        [Range(10000, int.MaxValue)]
-        [Required]
-        public required int TotalPrice { get; set; }
-    }
-
 }

@@ -1,7 +1,9 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Services.Interface;
 using Services.Service;
+using System.Security.Claims;
 using static Repositories.ModelView.AccountView;
 using static Repositories.ModelView.BlogView;
 
@@ -17,17 +19,18 @@ namespace SWD.Controllers
             _blogService = blogService;
         }
 
+        [Authorize(Roles = "Staff")]
         [HttpPost("Add-An-Blog")]
         public async Task<IActionResult> AddAnBlog(AddBlogView add)
         {
             try
             {
-                if (!ModelState.IsValid)
+                var id = (HttpContext.User.FindFirst("id")?.Value) ?? "";
+                var status = await _blogService.AddBlog(id, add);
+                return Ok(new
                 {
-                    return BadRequest(ModelState);
-                }
-                var status = await _blogService.AddBlog(add);
-                return Ok(status);
+                    Message = status
+                });
             }
             catch (Exception ex)
             {
@@ -35,17 +38,18 @@ namespace SWD.Controllers
             }
         }
 
+        [Authorize(Roles = "Staff")]
         [HttpPatch("Update-An-Blog")]
         public async Task<IActionResult> UpdateAnBlog(UpdateBlogView update)
         {
             try
             {
-                if (!ModelState.IsValid)
+                var id = (HttpContext.User.FindFirst("id")?.Value) ?? "";
+                var status = await _blogService.UpdateBlog(id, update);
+                return Ok(new
                 {
-                    return BadRequest(ModelState);
-                }
-                var status = await _blogService.UpdateBlog(update);
-                return Ok(status);
+                    Message = status
+                });
             }
             catch (Exception ex)
             {
@@ -53,17 +57,18 @@ namespace SWD.Controllers
             }
         }
 
+        [Authorize(Roles = "Staff")]
         [HttpDelete("Remove-An-Blog")]
         public async Task<IActionResult> RemoveAnBlog([FromBody] RemoveBlogView remove)
         {
             try
             {
-                if (!ModelState.IsValid)
+                var id = (HttpContext.User.FindFirst("id")?.Value) ?? "";
+                var status = await _blogService.RemoveBlog(id, remove);
+                return Ok(new
                 {
-                    return BadRequest(ModelState);
-                }
-                var status = await _blogService.RemoveBlog(remove);
-                return Ok(status);
+                    Message = status
+                });
             }
             catch (Exception ex)
             {
@@ -71,19 +76,25 @@ namespace SWD.Controllers
             }
         }
 
+        [AllowAnonymous]
         [HttpGet("Get-Paging-Blog-List")]
         public async Task<IActionResult> GetPagingBlogList(int pageIndex, bool isAsc, string? searchValue)
         {
             var result = await _blogService.GetPagingBlog(pageIndex, isAsc, searchValue);
-            return Ok(result);
+            return Ok(new
+            {
+                Message = result
+            }); ;
         }
 
+        [Authorize]
         [HttpPost("Add-An-Comment-Blog")]
         public async Task<IActionResult> AddAnCommentBlog([FromBody] AddCommentBlogView addComment)
         {
             try
             {
-                await _blogService.AddBlogComment(addComment);
+                var id = (HttpContext.User.FindFirst("id")?.Value) ?? "";
+                await _blogService.AddBlogComment(id, addComment);
                 return Ok();
             }
             catch (Exception ex)
@@ -92,12 +103,14 @@ namespace SWD.Controllers
             }
         }
 
+        [Authorize]
         [HttpPatch("Update-An-Comment-Blog")]
         public async Task<IActionResult> UpdateCommentAnBlog([FromBody] UpdateCommentBlogView updateComment)
         {
             try
             {
-                await _blogService.UpdateCommentBlog(updateComment);
+                var id = (HttpContext.User.FindFirst(ClaimTypes.NameIdentifier)?.Value) ?? "";
+                await _blogService.UpdateCommentBlog(id, updateComment);
                 return Ok();
             }
             catch (Exception ex)
@@ -106,12 +119,14 @@ namespace SWD.Controllers
             }
         }
 
+        [Authorize]
         [HttpDelete("Remove-An-Comment-Blog")]
         public async Task<IActionResult> RemoveAnCommentBlog([FromBody] RemoveCommentBlogView removeComment)
         {
             try
             {
-                await _blogService.RemoveCommentBlog(removeComment);
+                var id = (HttpContext.User.FindFirst(ClaimTypes.NameIdentifier)?.Value) ?? "";
+                await _blogService.RemoveCommentBlog(id, removeComment);
                 return Ok();
             }
             catch (Exception ex)
