@@ -9,6 +9,7 @@ using Repositories.Repository;
 using Services.Interface;
 using Services.Tool;
 using Services.Tools;
+using static Repositories.ModelView.CartView;
 namespace Services.Service
 {
     public class RequestService : IRequestService
@@ -29,10 +30,15 @@ namespace Services.Service
             _mapper = mapper;
             ipget = _ipget;
         }
-        public async Task<string> Payment(string requestId, int TotalPrice)
+        public async Task<string> Payment(string requestId, AddCartView[] cartViews)
         {
+            int TotalPrice = 0;
             //// Payment cần truyền tổng giá , Add Pending request vào database -> Front end gọi api kèm requestView, front end phải gửi tổng giá, account id
-
+            foreach (AddCartView cartView in cartViews) 
+            {
+                IEnumerable<Interior> item = await _unit.InteriorRepo.GetFieldsByFilterAsync(["Price"], a => a.InteriorId.Equals(cartView.InteriorId));
+                TotalPrice = TotalPrice + item.FirstOrDefault().Price * cartView.Quantity;
+            }
 
             pay.AddRequestData("vnp_Version", "2.1.0"); //Phiên bản api mà merchant kết nối. Phiên bản hiện tại là 2.1.0
             pay.AddRequestData("vnp_Command", "pay"); //Mã API sử dụng, mã cho giao dịch thanh toán là 'pay'
@@ -89,8 +95,17 @@ namespace Services.Service
             throw new NotImplementedException();
         }
 
-        public async Task<string> AddPendingRequest(string _id, int totalPrice)
+        public async Task<string> AddPendingRequest(string _id, AddCartView[] cartViews)
         {
+
+
+            int TotalPrice = 0;
+            //// Payment cần truyền tổng giá , Add Pending request vào database -> Front end gọi api kèm requestView, front end phải gửi tổng giá, account id
+            foreach (AddCartView cartView in cartViews)
+            {
+                IEnumerable<Interior> item = await _unit.InteriorRepo.GetFieldsByFilterAsync(["Price"], a => a.InteriorId.Equals(cartView.InteriorId));
+                TotalPrice = TotalPrice + item.FirstOrDefault().Price * cartView.Quantity;
+            }
 
             if (!string.IsNullOrEmpty(_id))
             {
@@ -111,7 +126,7 @@ namespace Services.Service
                 AccountId = _id,
                 CreatedAt = DateTime.UtcNow,
                 UpdatedAt = DateTime.UtcNow,
-                TotalPrice = totalPrice
+                TotalPrice = TotalPrice
             };
             await _unit.RequestRepo.AddOneItem(request);
             return request.RequestId;
