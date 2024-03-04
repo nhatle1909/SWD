@@ -1,7 +1,12 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "D:\\C#\\SWD392\\SWD\\",
-  "Documents": [],
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{248D8517-9325-45A2-A2AD-18F9E964AA15}|be\\Services\\Services.csproj|d:\\c#\\swd392\\swd\\be\\services\\service\\cartservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{248D8517-9325-45A2-A2AD-18F9E964AA15}|be\\Services\\Services.csproj|solutionrelative:be\\services\\service\\cartservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -9,7 +14,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": -1,
+          "SelectedChildIndex": 8,
           "Children": [
             {
               "$type": "Bookmark",
@@ -42,6 +47,19 @@
             {
               "$type": "Bookmark",
               "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "CartService.cs",
+              "DocumentMoniker": "D:\\C#\\SWD392\\SWD\\be\\Services\\Service\\CartService.cs",
+              "RelativeDocumentMoniker": "be\\Services\\Service\\CartService.cs",
+              "ToolTip": "D:\\C#\\SWD392\\SWD\\be\\Services\\Service\\CartService.cs",
+              "RelativeToolTip": "be\\Services\\Service\\CartService.cs",
+              "ViewState": "AQIAADsAAAAAAAAAAAAwwAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-04T12:20:55.817Z",
+              "EditorCaption": ""
             }
           ]
         }
