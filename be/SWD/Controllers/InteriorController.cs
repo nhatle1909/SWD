@@ -18,7 +18,7 @@ namespace SWD.Controllers
         }
 
         [Authorize(Roles = "Staff")]
-        [HttpPost("Add-New-Interior")]
+        [HttpPost("Staff/Add-New-Interior")]
         public async Task<IActionResult> AddOneInterior(AddInteriorView add)
         {
             var status = await _interiorService.AddOneInterior(add);
@@ -29,7 +29,7 @@ namespace SWD.Controllers
         }
 
         [Authorize(Roles = "Staff")]
-        [HttpPut("Update-Interior")]
+        [HttpPut("Staff/Update-Interior")]
         public async Task<IActionResult> UpdateInterior(UpdateInteriorView update)
         {
             var status = await _interiorService.UpdateInterior(update);
@@ -40,7 +40,7 @@ namespace SWD.Controllers
         }
 
         [Authorize(Roles = "Staff")]
-        [HttpDelete("Delete-Interior")]
+        [HttpDelete("Staff/Delete-Interior")]
         public async Task<IActionResult> DeleteInterior([FromBody] DeleteInteriorView delete)
         {
             var status = await _interiorService.DeleteInterior(delete);
@@ -62,7 +62,7 @@ namespace SWD.Controllers
         }
 
         [AllowAnonymous]
-        [HttpGet("Get-Detail-Interior")]
+        [HttpGet("View-Detail-Interior-From-Paging")]
         public async Task<IActionResult> GetDetailInterior(string interiorId)
         {
             var status = await _interiorService.GetInteriorDetail(interiorId);

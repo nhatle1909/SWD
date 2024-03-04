@@ -16,7 +16,7 @@ namespace SWD.Controllers
             _vnpayService = vnpayService;
         }
         [Authorize(Roles = "Customer")]
-        [HttpPost("VNPay-Payment")]
+        [HttpPost("Customer/VNPay-Payment")]
         public async Task<IActionResult> VNPayPayment(int totalPrice)
         {
             if (!ModelState.IsValid)
@@ -33,7 +33,7 @@ namespace SWD.Controllers
         }
 
         [Authorize(Roles = "Customer")]
-        [HttpGet("VNPay-Return")]
+        [HttpGet("Customer/VNPay-Return")]
         public async Task<IActionResult> VNPayReturn(string url)
         {
             return Ok(await _vnpayService.CheckPayment(url));

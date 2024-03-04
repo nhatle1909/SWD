@@ -35,7 +35,7 @@ namespace SWD.Controllers
         }
 
         [Authorize(Roles = "Staff")]
-        [HttpPut("Address-An-Contact")]
+        [HttpPut("Staff/Address-An-Contact")]
         public async Task<IActionResult> AddressAnContact(AddressContactView address)
         {
             try
@@ -53,7 +53,7 @@ namespace SWD.Controllers
         }
 
         [Authorize(Roles = "Staff")]
-        [HttpDelete("Delete-An-Contact")]
+        [HttpDelete("Staff/Delete-An-Contact")]
         public async Task<IActionResult> DeleteAnContact(DeleteContactView delete)
         {
             try
@@ -71,7 +71,7 @@ namespace SWD.Controllers
         }
 
         [Authorize(Roles = "Staff")]
-        [HttpPost("Get-Paging-Contact-List")]
+        [HttpPost("Staff/Get-Paging-Contact-List")]
         public async Task<IActionResult> GetPagingContactlList(PagingContactView paging)
         {
             try
@@ -89,7 +89,7 @@ namespace SWD.Controllers
         }
 
         [Authorize(Roles = "Staff")]
-        [HttpPost("Get-Contact-Detail")]
+        [HttpPost("Staff/View-Private-Detail-Contact-From-Paging")]
         public async Task<IActionResult> GetContactDetail(DetailContactView detail)
         {
             try

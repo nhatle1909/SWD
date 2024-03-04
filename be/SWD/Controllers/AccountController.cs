@@ -24,7 +24,7 @@ namespace SWD.Controllers
             _ser = ser;
         }
 
-        [HttpPost("Register-Customer-Account")]
+        [HttpPost("Create-Customer-Account")]
         //[FromBody] method lấy data từ body request, nếu ko sài thì method sẽ lấy data từ url
         public async Task<IActionResult> RegisterAnAccountForCustomer([FromBody] RegisterAccountView register)
         {
@@ -43,7 +43,7 @@ namespace SWD.Controllers
         }
 
         [Authorize(Roles = "Admin")]
-        [HttpPost("Register-Staff-Account")]
+        [HttpPost("Admin/Create-Staff-Account")]
         public async Task<IActionResult> RegisterAnAccountForStaff([FromBody] RegisterForStaffAccountView registerForStaff)
         {
             try
@@ -102,7 +102,7 @@ namespace SWD.Controllers
         //}
 
         [Authorize]
-        [HttpPatch("Update-An-Account")]
+        [HttpPatch("Authorize/Update-An-Account")]
         public async Task<IActionResult> UpdateProfile([FromBody] UpdateAccountView update)
         {
             try
@@ -122,7 +122,7 @@ namespace SWD.Controllers
         }
 
         [Authorize]
-        [HttpPatch("Update-Picture-Account")]
+        [HttpPatch("Authorize/Update-Picture-Account")]
         public async Task<IActionResult> UpdatePictureProfile(UpdatePictureAccountView updatePicture)
         {
             try
@@ -172,7 +172,7 @@ namespace SWD.Controllers
         }
 
         [AllowAnonymous]
-        [HttpGet("View-Profile")]
+        [HttpGet("View-Public-Profile")]
         public async Task<IActionResult> ViewProfileAccount([EmailAddress] string email)
         {
             try
@@ -190,7 +190,7 @@ namespace SWD.Controllers
         }
 
         [Authorize]
-        [HttpPatch("Change-Password")]
+        [HttpPatch("Authorize/Change-Password")]
         public async Task<IActionResult> ChangePasswordAccount([FromBody] ChangePasswordAccountView changePassword)
         {
             try
@@ -209,7 +209,7 @@ namespace SWD.Controllers
         }
 
         [Authorize(Roles = "Admin")]
-        [HttpPatch("Banned-Account")]
+        [HttpPatch("Admin/Banned-Account")]
         public async Task<IActionResult> BanAnAccount([FromBody] BanAccountView ban)
         {
             try
@@ -227,7 +227,7 @@ namespace SWD.Controllers
         }
 
         [Authorize(Roles = "Admin")]
-        [HttpDelete("Remove-Account")]
+        [HttpDelete("Admin/Remove-Account")]
         public async Task<IActionResult> RemoveAnAccount([FromBody] DeleteAccountView delete)
         {
             try
@@ -245,7 +245,7 @@ namespace SWD.Controllers
         }
 
         [Authorize]
-        [HttpPost("Sign-Out")]
+        [HttpPost("Authorize/Sign-Out")]
         public async Task<IActionResult> SignOutAccount()
         {
             try
@@ -263,7 +263,7 @@ namespace SWD.Controllers
         }
 
         [Authorize(Roles = "Admin")]
-        [HttpPost("Get-Paging-Account-List")]
+        [HttpPost("Admin/Get-Paging-Account-List")]
         public async Task<IActionResult> GetPagingAccountList([FromBody] PagingAccountView paging)
         {
             try
@@ -281,7 +281,7 @@ namespace SWD.Controllers
         }
 
         [Authorize(Roles = "Admin")]
-        [HttpPost("Get-Detail-Account")]
+        [HttpPost("Admin/View-Private-Detail-Account-From-Paging")]
         public async Task<IActionResult> GetAccountDetail([FromBody] DetailAccountView detail)
         {
             try
