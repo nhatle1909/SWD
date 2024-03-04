@@ -20,7 +20,7 @@ namespace SWD.Controllers
         }
 
         [Authorize(Roles = "Staff")]
-        [HttpPost("Add-An-Blog")]
+        [HttpPost("Staff/Add-An-Blog")]
         public async Task<IActionResult> AddAnBlog(AddBlogView add)
         {
             try
@@ -39,7 +39,7 @@ namespace SWD.Controllers
         }
 
         [Authorize(Roles = "Staff")]
-        [HttpPatch("Update-An-Blog")]
+        [HttpPatch("Staff/Update-An-Blog")]
         public async Task<IActionResult> UpdateAnBlog(UpdateBlogView update)
         {
             try
@@ -58,7 +58,7 @@ namespace SWD.Controllers
         }
 
         [Authorize(Roles = "Staff")]
-        [HttpDelete("Remove-An-Blog")]
+        [HttpDelete("Staff/Remove-An-Blog")]
         public async Task<IActionResult> RemoveAnBlog([FromBody] RemoveBlogView remove)
         {
             try
@@ -88,7 +88,7 @@ namespace SWD.Controllers
         }
 
         [Authorize]
-        [HttpPost("Add-An-Comment-Blog")]
+        [HttpPost("Authorize/Add-An-Comment-Blog")]
         public async Task<IActionResult> AddAnCommentBlog([FromBody] AddCommentBlogView addComment)
         {
             try
@@ -104,7 +104,7 @@ namespace SWD.Controllers
         }
 
         [Authorize]
-        [HttpPatch("Update-An-Comment-Blog")]
+        [HttpPatch("Authorize/Update-An-Comment-Blog")]
         public async Task<IActionResult> UpdateCommentAnBlog([FromBody] UpdateCommentBlogView updateComment)
         {
             try
@@ -120,7 +120,7 @@ namespace SWD.Controllers
         }
 
         [Authorize]
-        [HttpDelete("Remove-An-Comment-Blog")]
+        [HttpDelete("Authorize/Remove-An-Comment-Blog")]
         public async Task<IActionResult> RemoveAnCommentBlog([FromBody] RemoveCommentBlogView removeComment)
         {
             try

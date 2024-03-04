@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "U9Q7dhkLxA9PxHrtz16EfHndbQsjn8yp28Ec9PUibLO7ZK/FpqY7bNCQoiNxOie65gLu+ABHcHzOnrx56RNbdQ==",
+  "dgSpecHash": "m9vkPxzjPRT6FaJssJNfvCVjSi4IcXGRrsyWCteYCxMotRVnLvWnYkbOiHVeV+EZBS1ecbWZv8SNiPXlKTlMpA==",
   "success": true,
-  "projectFilePath": "D:\\3.Git for backup\\SWD\\be\\Repositories\\Repositories.csproj",
+  "projectFilePath": "D:\\C#\\SWD392\\SWD\\be\\Repositories\\Repositories.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\MSI BH\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
     "C:\\Users\\MSI BH\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.1\\automapper.extensions.microsoft.dependencyinjection.12.0.1.nupkg.sha512",

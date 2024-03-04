@@ -2,8 +2,21 @@
 @tailwind components;
 @tailwind utilities;
 
-html, body {
+#root {
     scroll-behavior: smooth;
     margin: 0;
     padding: 0;
+    margin-top: -25px;
+}
+
+button.blue {
+    background-color: #4096ff;
+}
+
+button.red {
+    background-color: #fb827f;
+}
+
+.fs-page-header {
+    font-size: 28px;
 }

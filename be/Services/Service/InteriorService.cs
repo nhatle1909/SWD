@@ -44,12 +44,12 @@ namespace Services.Service
         public async Task<string> DeleteInterior(DeleteInteriorView delete)
         {
             IEnumerable<Interior> getInterior = await _unit.InteriorRepo.GetFieldsByFilterAsync([],
-                       g => g.MaterialId.Equals(delete.InteriorId));
+                       g => g.InteriorId.Equals(delete.InteriorId));
             var interior = getInterior.FirstOrDefault();
             if (interior is not null)
             {
                 await _unit.InteriorRepo.RemoveItemByValue("InteriorId", delete.InteriorId);
-                return "Delete material successfully";
+                return "Delete Interior successfully";
             }
             return "Interior is not existed";
         }
@@ -69,7 +69,6 @@ namespace Services.Service
 
             foreach (var item in items)
             {
-
                 responses.Add(new
                 {
                     InteriorId = item.InteriorId,
@@ -97,7 +96,7 @@ namespace Services.Service
         public async Task<string> UpdateInterior(UpdateInteriorView update)
         {
             IEnumerable<Interior> getInterior = await _unit.InteriorRepo.GetFieldsByFilterAsync([],
-                       g => g.MaterialId.Equals(update.InteriorId));
+                       g => g.InteriorId.Equals(update.InteriorId));
             var interior = getInterior.FirstOrDefault();
             if (interior is not null)
             {
@@ -111,8 +110,6 @@ namespace Services.Service
                         fileBytes = ms.ToArray();
                     }
                     interior.InteriorName = update.InteriorName;
-                    interior.MaterialId = update.MaterialId;
-                    interior.Size = update.Size;
                     interior.InteriorType = update.InteriorType;
                     interior.Description = update.Description;
                     interior.Image = fileBytes;

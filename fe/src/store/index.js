@@ -1,12 +1,13 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { useDispatch, useSelector } from "react-redux";
 
-import authenticationSlice from "./authentication/slice";
+import authenticationSlice from "./auth/slice";
+import userSlice from "./user/slice";
 
 export const store = configureStore({
   reducer: {
     authentication: authenticationSlice,
-
+    user: userSlice
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
@@ -15,4 +16,4 @@ export const store = configureStore({
 });
 
 export const useAppDispatch = () => useDispatch();
-export const useAppSelector= useSelector;
+export const useAppSelector = useSelector;

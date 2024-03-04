@@ -2,7 +2,7 @@
   {
     "ContainingType": "SWD.Controllers.AccountController",
     "Method": "BanAnAccount",
-    "RelativePath": "api/Account/Banned-Account",
+    "RelativePath": "api/Account/Admin/Banned-Account",
     "HttpMethod": "PATCH",
     "IsController": true,
     "Order": 0,
@@ -17,15 +17,47 @@
   },
   {
     "ContainingType": "SWD.Controllers.AccountController",
-    "Method": "ChangePasswordAccount",
-    "RelativePath": "api/Account/Change-Password",
-    "HttpMethod": "PATCH",
+    "Method": "RegisterAnAccountForStaff",
+    "RelativePath": "api/Account/Admin/Create-Staff-Account",
+    "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "changePassword",
-        "Type": "Repositories.ModelView.AccountView\u002BChangePasswordAccountView",
+        "Name": "registerForStaff",
+        "Type": "Repositories.ModelView.AccountView\u002BRegisterForStaffAccountView",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SWD.Controllers.AccountController",
+    "Method": "GetPagingAccountList",
+    "RelativePath": "api/Account/Admin/Get-Paging-Account-List",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "paging",
+        "Type": "Repositories.ModelView.AccountView\u002BPagingAccountView",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SWD.Controllers.AccountController",
+    "Method": "RemoveAnAccount",
+    "RelativePath": "api/Account/Admin/Remove-Account",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "delete",
+        "Type": "Repositories.ModelView.AccountView\u002BDeleteAccountView",
         "IsRequired": true
       }
     ],
@@ -34,7 +66,7 @@
   {
     "ContainingType": "SWD.Controllers.AccountController",
     "Method": "GetAccountDetail",
-    "RelativePath": "api/Account/Get-Detail-Account",
+    "RelativePath": "api/Account/Admin/View-Private-Detail-Account-From-Paging",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
@@ -49,15 +81,73 @@
   },
   {
     "ContainingType": "SWD.Controllers.AccountController",
-    "Method": "GetPagingAccountList",
-    "RelativePath": "api/Account/Get-Paging-Account-List",
+    "Method": "ChangePasswordAccount",
+    "RelativePath": "api/Account/Authorize/Change-Password",
+    "HttpMethod": "PATCH",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "changePassword",
+        "Type": "Repositories.ModelView.AccountView\u002BChangePasswordAccountView",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SWD.Controllers.AccountController",
+    "Method": "SignOutAccount",
+    "RelativePath": "api/Account/Authorize/Sign-Out",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SWD.Controllers.AccountController",
+    "Method": "UpdateProfile",
+    "RelativePath": "api/Account/Authorize/Update-An-Account",
+    "HttpMethod": "PATCH",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "update",
+        "Type": "Repositories.ModelView.AccountView\u002BUpdateAccountView",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SWD.Controllers.AccountController",
+    "Method": "UpdatePictureProfile",
+    "RelativePath": "api/Account/Authorize/Update-Picture-Account",
+    "HttpMethod": "PATCH",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Picture",
+        "Type": "Microsoft.AspNetCore.Http.IFormFile",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SWD.Controllers.AccountController",
+    "Method": "RegisterAnAccountForCustomer",
+    "RelativePath": "api/Account/Create-Customer-Account",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "paging",
-        "Type": "Repositories.ModelView.AccountView\u002BPagingAccountView",
+        "Name": "register",
+        "Type": "Repositories.ModelView.AccountView\u002BRegisterAccountView",
         "IsRequired": true
       }
     ],
@@ -97,54 +187,6 @@
   },
   {
     "ContainingType": "SWD.Controllers.AccountController",
-    "Method": "RegisterAnAccountForCustomer",
-    "RelativePath": "api/Account/Register-Customer-Account",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "register",
-        "Type": "Repositories.ModelView.AccountView\u002BRegisterAccountView",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "SWD.Controllers.AccountController",
-    "Method": "RegisterAnAccountForStaff",
-    "RelativePath": "api/Account/Register-Staff-Account",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "registerForStaff",
-        "Type": "Repositories.ModelView.AccountView\u002BRegisterForStaffAccountView",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "SWD.Controllers.AccountController",
-    "Method": "RemoveAnAccount",
-    "RelativePath": "api/Account/Remove-Account",
-    "HttpMethod": "DELETE",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "delete",
-        "Type": "Repositories.ModelView.AccountView\u002BDeleteAccountView",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "SWD.Controllers.AccountController",
     "Method": "ResetPasswordAccount",
     "RelativePath": "api/Account/Reset-Password",
     "HttpMethod": "POST",
@@ -177,50 +219,8 @@
   },
   {
     "ContainingType": "SWD.Controllers.AccountController",
-    "Method": "SignOutAccount",
-    "RelativePath": "api/Account/Sign-Out",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "SWD.Controllers.AccountController",
-    "Method": "UpdateProfile",
-    "RelativePath": "api/Account/Update-An-Account",
-    "HttpMethod": "PATCH",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "update",
-        "Type": "Repositories.ModelView.AccountView\u002BUpdateAccountView",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "SWD.Controllers.AccountController",
-    "Method": "UpdatePictureProfile",
-    "RelativePath": "api/Account/Update-Picture-Account",
-    "HttpMethod": "PATCH",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "Picture",
-        "Type": "Microsoft.AspNetCore.Http.IFormFile",
-        "IsRequired": false
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "SWD.Controllers.AccountController",
     "Method": "ViewProfileAccount",
-    "RelativePath": "api/Account/View-Profile",
+    "RelativePath": "api/Account/View-Public-Profile",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -235,34 +235,8 @@
   },
   {
     "ContainingType": "SWD.Controllers.BlogController",
-    "Method": "AddAnBlog",
-    "RelativePath": "api/Blog/Add-An-Blog",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "Title",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "Content",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "Pictures",
-        "Type": "Microsoft.AspNetCore.Http.IFormFile[]",
-        "IsRequired": false
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "SWD.Controllers.BlogController",
     "Method": "AddAnCommentBlog",
-    "RelativePath": "api/Blog/Add-An-Comment-Blog",
+    "RelativePath": "api/Blog/Authorize/Add-An-Comment-Blog",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
@@ -270,6 +244,38 @@
       {
         "Name": "addComment",
         "Type": "Repositories.ModelView.BlogView\u002BAddCommentBlogView",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SWD.Controllers.BlogController",
+    "Method": "RemoveAnCommentBlog",
+    "RelativePath": "api/Blog/Authorize/Remove-An-Comment-Blog",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "removeComment",
+        "Type": "Repositories.ModelView.BlogView\u002BRemoveCommentBlogView",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SWD.Controllers.BlogController",
+    "Method": "UpdateCommentAnBlog",
+    "RelativePath": "api/Blog/Authorize/Update-An-Comment-Blog",
+    "HttpMethod": "PATCH",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "updateComment",
+        "Type": "Repositories.ModelView.BlogView\u002BUpdateCommentBlogView",
         "IsRequired": true
       }
     ],
@@ -303,8 +309,34 @@
   },
   {
     "ContainingType": "SWD.Controllers.BlogController",
+    "Method": "AddAnBlog",
+    "RelativePath": "api/Blog/Staff/Add-An-Blog",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Title",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Content",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Pictures",
+        "Type": "Microsoft.AspNetCore.Http.IFormFile[]",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SWD.Controllers.BlogController",
     "Method": "RemoveAnBlog",
-    "RelativePath": "api/Blog/Remove-An-Blog",
+    "RelativePath": "api/Blog/Staff/Remove-An-Blog",
     "HttpMethod": "DELETE",
     "IsController": true,
     "Order": 0,
@@ -319,24 +351,8 @@
   },
   {
     "ContainingType": "SWD.Controllers.BlogController",
-    "Method": "RemoveAnCommentBlog",
-    "RelativePath": "api/Blog/Remove-An-Comment-Blog",
-    "HttpMethod": "DELETE",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "removeComment",
-        "Type": "Repositories.ModelView.BlogView\u002BRemoveCommentBlogView",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "SWD.Controllers.BlogController",
     "Method": "UpdateAnBlog",
-    "RelativePath": "api/Blog/Update-An-Blog",
+    "RelativePath": "api/Blog/Staff/Update-An-Blog",
     "HttpMethod": "PATCH",
     "IsController": true,
     "Order": 0,
@@ -365,19 +381,45 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "SWD.Controllers.BlogController",
-    "Method": "UpdateCommentAnBlog",
-    "RelativePath": "api/Blog/Update-An-Comment-Blog",
-    "HttpMethod": "PATCH",
+    "ContainingType": "SWD.Controllers.CartController",
+    "Method": "AddProductToCart",
+    "RelativePath": "api/Cart/Customer/Add-An-Product-To-Cart",
+    "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "updateComment",
-        "Type": "Repositories.ModelView.BlogView\u002BUpdateCommentBlogView",
+        "Name": "add",
+        "Type": "Repositories.ModelView.CartView\u002BAddCartView",
         "IsRequired": true
       }
     ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SWD.Controllers.CartController",
+    "Method": "DeleteProductToCart",
+    "RelativePath": "api/Cart/Customer/Delete-An-Product-To-Cart",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "interiorId",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SWD.Controllers.CartController",
+    "Method": "GetAllProductToCart",
+    "RelativePath": "api/Cart/Customer/Get-All-Product-To-Cart",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
     "ReturnTypes": []
   },
   {
@@ -414,7 +456,7 @@
   {
     "ContainingType": "SWD.Controllers.ContactController",
     "Method": "AddressAnContact",
-    "RelativePath": "api/Contact/Address-An-Contact",
+    "RelativePath": "api/Contact/Staff/Address-An-Contact",
     "HttpMethod": "PUT",
     "IsController": true,
     "Order": 0,
@@ -430,7 +472,7 @@
   {
     "ContainingType": "SWD.Controllers.ContactController",
     "Method": "DeleteAnContact",
-    "RelativePath": "api/Contact/Delete-An-Contact",
+    "RelativePath": "api/Contact/Staff/Delete-An-Contact",
     "HttpMethod": "DELETE",
     "IsController": true,
     "Order": 0,
@@ -445,24 +487,8 @@
   },
   {
     "ContainingType": "SWD.Controllers.ContactController",
-    "Method": "GetContactDetail",
-    "RelativePath": "api/Contact/Get-Contact-Detail",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "detail",
-        "Type": "Repositories.ModelView.ContactView\u002BDetailContactView",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "SWD.Controllers.ContactController",
     "Method": "GetPagingContactlList",
-    "RelativePath": "api/Contact/Get-Paging-Contact-List",
+    "RelativePath": "api/Contact/Staff/Get-Paging-Contact-List",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
@@ -476,84 +502,17 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "SWD.Controllers.InteriorController",
-    "Method": "AddOneInterior",
-    "RelativePath": "api/Interior/Add-New-Interior",
+    "ContainingType": "SWD.Controllers.ContactController",
+    "Method": "GetContactDetail",
+    "RelativePath": "api/Contact/Staff/View-Private-Detail-Contact-From-Paging",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "InteriorName",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "MaterialId",
-        "Type": "System.String[]",
-        "IsRequired": false
-      },
-      {
-        "Name": "Size",
-        "Type": "System.Double[]",
-        "IsRequired": false
-      },
-      {
-        "Name": "InteriorType",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "Description",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "Image",
-        "Type": "Microsoft.AspNetCore.Http.IFormFile",
-        "IsRequired": false
-      },
-      {
-        "Name": "Quantity",
-        "Type": "System.Int32[]",
-        "IsRequired": false
-      },
-      {
-        "Name": "Price",
-        "Type": "System.Double[]",
-        "IsRequired": false
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "SWD.Controllers.InteriorController",
-    "Method": "DeleteInterior",
-    "RelativePath": "api/Interior/Delete-Interior",
-    "HttpMethod": "DELETE",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "delete",
-        "Type": "Repositories.ModelView.InteriorView\u002BDeleteInteriorView",
+        "Name": "detail",
+        "Type": "Repositories.ModelView.ContactView\u002BDetailContactView",
         "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "SWD.Controllers.InteriorController",
-    "Method": "GetDetailInterior",
-    "RelativePath": "api/Interior/Get-Detail-Interior",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "interiorId",
-        "Type": "System.String",
-        "IsRequired": false
       }
     ],
     "ReturnTypes": []
@@ -586,30 +545,15 @@
   },
   {
     "ContainingType": "SWD.Controllers.InteriorController",
-    "Method": "UpdateInterior",
-    "RelativePath": "api/Interior/Update-Interior",
-    "HttpMethod": "PUT",
+    "Method": "AddOneInterior",
+    "RelativePath": "api/Interior/Staff/Add-New-Interior",
+    "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "InteriorId",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
         "Name": "InteriorName",
         "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "MaterialId",
-        "Type": "System.String[]",
-        "IsRequired": false
-      },
-      {
-        "Name": "Size",
-        "Type": "System.Double[]",
         "IsRequired": false
       },
       {
@@ -629,12 +573,90 @@
       },
       {
         "Name": "Quantity",
-        "Type": "System.Int32[]",
+        "Type": "System.Int32",
         "IsRequired": false
       },
       {
         "Name": "Price",
-        "Type": "System.Double[]",
+        "Type": "System.Double",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SWD.Controllers.InteriorController",
+    "Method": "DeleteInterior",
+    "RelativePath": "api/Interior/Staff/Delete-Interior",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "delete",
+        "Type": "Repositories.ModelView.InteriorView\u002BDeleteInteriorView",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SWD.Controllers.InteriorController",
+    "Method": "UpdateInterior",
+    "RelativePath": "api/Interior/Staff/Update-Interior",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "InteriorId",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "InteriorName",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "InteriorType",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Description",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Image",
+        "Type": "Microsoft.AspNetCore.Http.IFormFile",
+        "IsRequired": false
+      },
+      {
+        "Name": "Quantity",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Price",
+        "Type": "System.Double",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SWD.Controllers.InteriorController",
+    "Method": "GetDetailInterior",
+    "RelativePath": "api/Interior/View-Detail-Interior-From-Paging",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "interiorId",
+        "Type": "System.String",
         "IsRequired": false
       }
     ],
@@ -642,8 +664,24 @@
   },
   {
     "ContainingType": "SWD.Controllers.MaterialController",
+    "Method": "OptionalInteriorQuote",
+    "RelativePath": "api/Material/Authorize/Optional-Product-Quote",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "arrMaterialId",
+        "Type": "System.String[]",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SWD.Controllers.MaterialController",
     "Method": "AddOneMaterial",
-    "RelativePath": "api/Material/Add-One-Material",
+    "RelativePath": "api/Material/Staff/Add-One-Material",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
@@ -659,7 +697,7 @@
   {
     "ContainingType": "SWD.Controllers.MaterialController",
     "Method": "DeleteMaterial",
-    "RelativePath": "api/Material/Delete-Material",
+    "RelativePath": "api/Material/Staff/Delete-Material",
     "HttpMethod": "DELETE",
     "IsController": true,
     "Order": 0,
@@ -675,7 +713,7 @@
   {
     "ContainingType": "SWD.Controllers.MaterialController",
     "Method": "GetPagingMaterialList",
-    "RelativePath": "api/Material/Get-Paging-Material-List",
+    "RelativePath": "api/Material/Staff/Get-Paging-Material-List",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
@@ -690,24 +728,8 @@
   },
   {
     "ContainingType": "SWD.Controllers.MaterialController",
-    "Method": "OptionalInteriorQuote",
-    "RelativePath": "api/Material/Optional-Product-Quote",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "arrMaterialId",
-        "Type": "System.String[]",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "SWD.Controllers.MaterialController",
     "Method": "UpdateMaterial",
-    "RelativePath": "api/Material/Update-Material",
+    "RelativePath": "api/Material/Staff/Update-Material",
     "HttpMethod": "PUT",
     "IsController": true,
     "Order": 0,
@@ -723,7 +745,7 @@
   {
     "ContainingType": "SWD.Controllers.VNPayController",
     "Method": "VNPayPayment",
-    "RelativePath": "api/VNPay/VNPay-Payment",
+    "RelativePath": "api/VNPay/Customer/VNPay-Payment",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
@@ -739,7 +761,7 @@
   {
     "ContainingType": "SWD.Controllers.VNPayController",
     "Method": "VNPayReturn",
-    "RelativePath": "api/VNPay/VNPay-Return",
+    "RelativePath": "api/VNPay/Customer/VNPay-Return",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
