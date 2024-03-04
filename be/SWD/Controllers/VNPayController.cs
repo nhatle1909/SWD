@@ -15,7 +15,7 @@ namespace SWD.Controllers
         {
             _vnpayService = vnpayService;
         }
-        [Authorize(Roles ="Customer")]
+        [Authorize(Roles = "Customer")]
         [HttpPost("VNPay-Payment")]
         public async Task<IActionResult> VNPayPayment(int totalPrice)
         {
@@ -23,7 +23,7 @@ namespace SWD.Controllers
             {
                 return BadRequest("Invalid Data Format");
             }
-            var id = (HttpContext.User.FindFirst(ClaimTypes.NameIdentifier)?.Value) ?? "";
+            var id = (HttpContext.User.FindFirst("id")?.Value) ?? "";
             string check = await _vnpayService.AddPendingRequest(id, totalPrice);
             if (check != null)
             {

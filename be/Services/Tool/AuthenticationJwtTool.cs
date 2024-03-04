@@ -21,7 +21,7 @@ namespace Services.Tool
             _configuration = configuration;
             //_unit = unit;
         }
-        public async Task<string> GenerateJwtToken(string userId, string role)
+        public string GenerateJwtToken(string userId, string role)
         {
             var jwtKey = _configuration["JWT:Key"];
             var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtKey ?? ""));
@@ -29,8 +29,8 @@ namespace Services.Tool
 
             var claims = new[]
             {
-                new Claim(ClaimTypes.NameIdentifier,userId),
-                new Claim(ClaimTypes.Role, role.ToString())
+                new Claim("id",userId),
+                new Claim("role", role.ToString())
             };
 
             var token = new JwtSecurityToken(
@@ -52,7 +52,7 @@ namespace Services.Tool
             //    IsUsed = false,
             //    IsRevoked = false,
             //    IssuedAt = DateTime.UtcNow,
-            //    ExpiredAt = DateTime.UtcNow.AddHours(10)
+            // ExpiredAt = DateTime.UtcNow.AddMonths(1)
             //};
             //await _unit.RefreshTokenRepo.AddOneItem(refreshTokenEntity);
             return accessToken;

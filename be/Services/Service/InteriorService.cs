@@ -65,14 +65,33 @@ namespace Services.Service
             var items = (await _unit.InteriorRepo.PagingAsync(skip, pageSize, isAsc, sortField, searchValue, searchFields, returnFields)).ToList();
             //long totalCount = await _unit.InteriorRepo.CountAsync();
             //int totalPages = (int)Math.Ceiling((double)totalCount / pageSize);
-            return items;
+            var responses = new List<object>();
+
+            foreach (var item in items)
+            {
+
+                responses.Add(new
+                {
+                    InteriorId = item.InteriorId,
+                    InteriorName = item.InteriorName,
+                    Image = SomeTool.GetImage(Convert.ToBase64String(item.Image)),
+                    Price = item.Price,
+                    CreatedAt = item.CreatedAt
+                });
+            }
+            return responses;
         }
 
         public async Task<Interior?> GetInteriorDetail(string interiorId)
         {
             var getInterior = (await _unit.InteriorRepo.GetFieldsByFilterAsync([],
                             g => g.InteriorId.Equals(interiorId))).FirstOrDefault();
-            return getInterior;
+            if (getInterior is not null)
+            {
+                getInterior.Image = SomeTool.GetImage(Convert.ToBase64String(getInterior.Image))!;
+                return getInterior;
+            }
+            return null;
         }
 
         public async Task<string> UpdateInterior(UpdateInteriorView update)

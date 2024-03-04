@@ -81,6 +81,22 @@
   },
   {
     "ContainingType": "SWD.Controllers.AccountController",
+    "Method": "GoogleLogin",
+    "RelativePath": "api/Account/Login-Google",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id_token",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SWD.Controllers.AccountController",
     "Method": "RegisterAnAccountForCustomer",
     "RelativePath": "api/Account/Register-Customer-Account",
     "HttpMethod": "POST",
@@ -713,9 +729,9 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "paymentView",
-        "Type": "Repositories.ModelView.PaymentView",
-        "IsRequired": true
+        "Name": "totalPrice",
+        "Type": "System.Int32",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": []

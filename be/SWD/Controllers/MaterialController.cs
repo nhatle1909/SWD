@@ -50,6 +50,7 @@ namespace SWD.Controllers
             });
         }
 
+        [Authorize(Roles = "Staff")]
         [HttpDelete("Delete-Material")]
         public async Task<IActionResult> DeleteMaterial([FromBody] DeleteMaterialView delete)
         {
@@ -61,6 +62,7 @@ namespace SWD.Controllers
         }
 
         //httpget chỉ hỗ trợ những kiểu có thể parse sang string
+        [Authorize]
         [HttpPost("Optional-Product-Quote")]
         public async Task<IActionResult> OptionalInteriorQuote(string[] arrMaterialId)
         {

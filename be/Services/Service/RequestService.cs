@@ -1,5 +1,4 @@
-﻿
-using AutoMapper;
+﻿using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using MongoDB.Bson;
 using MongoDB.Driver;
@@ -92,7 +91,7 @@ namespace Services.Service
 
         public async Task<string> AddPendingRequest(string _id, int totalPrice)
         {
-           
+
             if (!string.IsNullOrEmpty(_id))
             {
                 IEnumerable<AccountStatus> item = await _unit.AccountStatusRepo.GetFieldsByFilterAsync(["IsAuthenticationEmail"], ass => ass.IsAuthenticationEmail == true && ass.AccountId.Equals(_id));
@@ -150,4 +149,3 @@ namespace Services.Service
 
     }
 }
-

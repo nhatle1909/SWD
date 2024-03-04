@@ -128,22 +128,10 @@ namespace Services.Service
             const string sortField = "CreatedAt";
             List<string> searchFields = ["Title", "Content"];
             List<string> returnFields = [];
-            List<byte[]> pictures = new List<byte[]>();
 
             int skip = (pageIndex - 1) * pageSize;
             var items = (await _unit.BlogRepo.PagingAsync(skip, pageSize, isAsc, sortField, searchValue, searchFields, returnFields)).ToList();
-            foreach (var item in items)
-            {
-                var getUser = (await _unit.AccountRepo.GetFieldsByFilterAsync(["Picture"],
-                            g => g.Email.Equals(item.Email))).FirstOrDefault();
-                pictures.Add(getUser!.Picture);
-            }
-            var response = new
-            {
-                Pictures = pictures,
-                Items = items
-            };
-            return response;
+            return items;
         }
 
         public async Task AddBlogComment(string id, AddCommentBlogView addComment)

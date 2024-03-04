@@ -12,9 +12,6 @@ namespace Repositories.ModelView
 
             [StringLength(50, MinimumLength = 5)]
             public required string Password { get; set; }
-
-            [Compare("Password")]
-            public required string ConfirmPassword { get; set; }
         }
 
         public class RegisterForStaffAccountView
@@ -24,9 +21,6 @@ namespace Repositories.ModelView
 
             [StringLength(50, MinimumLength = 5)]
             public required string Password { get; set; }
-
-            [Compare("Password")]
-            public required string ConfirmPassword { get; set; }
         }
 
         public class LoginAccountView
@@ -40,9 +34,6 @@ namespace Repositories.ModelView
 
         public class UpdateAccountView
         {
-            [EmailAddress]
-            public required string Email { get; set; }
-
             [Phone]
             public string? PhoneNumber { get; set; }
 
@@ -60,9 +51,6 @@ namespace Repositories.ModelView
 
             [StringLength(50, MinimumLength = 5)]
             public required string Password { get; set; }
-
-            [Compare("Password")]
-            public required string ConfirmPassword { get; set; }
         }
 
         public class ChangePasswordAccountView
