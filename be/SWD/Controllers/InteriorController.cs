@@ -22,10 +22,7 @@ namespace SWD.Controllers
         public async Task<IActionResult> AddOneInterior(AddInteriorView add)
         {
             var status = await _interiorService.AddOneInterior(add);
-            return Ok(new
-            {
-                Message = status
-            });
+            return Ok(status);
         }
 
         [Authorize(Roles = "Staff")]
@@ -33,10 +30,7 @@ namespace SWD.Controllers
         public async Task<IActionResult> UpdateInterior(UpdateInteriorView update)
         {
             var status = await _interiorService.UpdateInterior(update);
-            return Ok(new
-            {
-                Message = status
-            });
+            return Ok(status);
         }
 
         [Authorize(Roles = "Staff")]
@@ -44,10 +38,7 @@ namespace SWD.Controllers
         public async Task<IActionResult> DeleteInterior([FromBody] DeleteInteriorView delete)
         {
             var status = await _interiorService.DeleteInterior(delete);
-            return Ok(new
-            {
-                Message = status
-            });
+            return Ok(status);
         }
 
         [AllowAnonymous]
@@ -55,10 +46,7 @@ namespace SWD.Controllers
         public async Task<IActionResult> GetPagingInteriorList(int pageIndex, bool isAsc, string? searchValue)
         {
             var status = await _interiorService.GetPagingInterior(pageIndex, isAsc, searchValue);
-            return Ok(new
-            {
-                Message = status
-            });
+            return Ok(status);
         }
 
         [AllowAnonymous]
@@ -66,10 +54,7 @@ namespace SWD.Controllers
         public async Task<IActionResult> GetDetailInterior(string interiorId)
         {
             var status = await _interiorService.GetInteriorDetail(interiorId);
-            return Ok(new
-            {
-                Message = status
-            });
+            return Ok(status);
         }
 
     }

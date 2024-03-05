@@ -10,5 +10,15 @@ namespace Repositories.Model
         [BsonElement][BsonRepresentation(BsonType.ObjectId)] public required string AccountId { get; set; }
         [BsonElement] public required string RequestStatus { get; set; }
         [BsonElement] public required int TotalPrice { get; set; }
+        [BsonElement] public required RequestDetail[] RequestDetail { get; set; }
+        [BsonElement] public required int RemainPrice { get; set; } 
+        
+    }
+    public class RequestDetail 
+    {
+        [BsonElement]
+        [BsonRepresentation(BsonType.String)]
+        public required string InteriorId { get; set; }
+        [BsonElement] public required int Price { get; set; }
     }
 }

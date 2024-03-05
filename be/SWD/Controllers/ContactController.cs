@@ -23,10 +23,7 @@ namespace SWD.Controllers
             try
             {
                 var status = await _contactService.AddContact(add);
-                return Ok(new
-                {
-                    Message = status
-                });
+                return Ok(status);
             }
             catch (Exception ex)
             {
@@ -41,10 +38,7 @@ namespace SWD.Controllers
             try
             {
                 var status = await _contactService.AddressTheContact(address);
-                return Ok(new
-                {
-                    Message = status
-                });
+                return Ok(status);
             }
             catch (Exception ex)
             {
@@ -59,10 +53,7 @@ namespace SWD.Controllers
             try
             {
                 var status = await _contactService.DeleteContact(delete);
-                return Ok(new
-                {
-                    Message = status
-                });
+                return Ok(status);
             }
             catch (Exception ex)
             {
@@ -77,10 +68,7 @@ namespace SWD.Controllers
             try
             {
                 var status = await _contactService.GetPagingContact(paging);
-                return Ok(new
-                {
-                    Message = status
-                });
+                return Ok(status);
             }
             catch (Exception ex)
             {
@@ -95,10 +83,7 @@ namespace SWD.Controllers
             try
             {
                 var status = await _contactService.GetContactDetail(detail);
-                return Ok(new
-                {
-                    Message = status
-                });
+                return Ok(status);
             }
             catch (Exception ex)
             {

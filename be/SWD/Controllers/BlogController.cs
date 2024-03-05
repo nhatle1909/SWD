@@ -27,10 +27,7 @@ namespace SWD.Controllers
             {
                 var id = (HttpContext.User.FindFirst("id")?.Value) ?? "";
                 var status = await _blogService.AddBlog(id, add);
-                return Ok(new
-                {
-                    Message = status
-                });
+                return Ok(status);
             }
             catch (Exception ex)
             {
@@ -46,10 +43,7 @@ namespace SWD.Controllers
             {
                 var id = (HttpContext.User.FindFirst("id")?.Value) ?? "";
                 var status = await _blogService.UpdateBlog(id, update);
-                return Ok(new
-                {
-                    Message = status
-                });
+                return Ok(status);
             }
             catch (Exception ex)
             {
@@ -65,10 +59,7 @@ namespace SWD.Controllers
             {
                 var id = (HttpContext.User.FindFirst("id")?.Value) ?? "";
                 var status = await _blogService.RemoveBlog(id, remove);
-                return Ok(new
-                {
-                    Message = status
-                });
+                return Ok(status);
             }
             catch (Exception ex)
             {
@@ -81,10 +72,7 @@ namespace SWD.Controllers
         public async Task<IActionResult> GetPagingBlogList(int pageIndex, bool isAsc, string? searchValue)
         {
             var result = await _blogService.GetPagingBlog(pageIndex, isAsc, searchValue);
-            return Ok(new
-            {
-                Message = result
-            }); ;
+            return Ok(result); ;
         }
 
         [Authorize]
