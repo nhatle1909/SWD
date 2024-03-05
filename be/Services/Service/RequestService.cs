@@ -9,6 +9,8 @@ using Repositories.Repository;
 using Services.Interface;
 using Services.Tool;
 using Services.Tools;
+using System.Collections.Generic;
+using System.Security.Cryptography;
 using static Repositories.ModelView.CartView;
 namespace Services.Service
 {
@@ -30,20 +32,12 @@ namespace Services.Service
             _mapper = mapper;
             ipget = _ipget;
         }
-        public async Task<string> Payment(string requestId, AddCartView[] cartViews)
+        public async Task<string> Payment(string requestId, int Price)
         {
-            int TotalPrice = 0;
-            //// Payment cần truyền tổng giá , Add Pending request vào database -> Front end gọi api kèm requestView, front end phải gửi tổng giá, account id
-            foreach (AddCartView cartView in cartViews) 
-            {
-                IEnumerable<Interior> item = await _unit.InteriorRepo.GetFieldsByFilterAsync(["Price"], a => a.InteriorId.Equals(cartView.InteriorId));
-                TotalPrice = TotalPrice + item.FirstOrDefault().Price * cartView.Quantity;
-            }
-
             pay.AddRequestData("vnp_Version", "2.1.0"); //Phiên bản api mà merchant kết nối. Phiên bản hiện tại là 2.1.0
             pay.AddRequestData("vnp_Command", "pay"); //Mã API sử dụng, mã cho giao dịch thanh toán là 'pay'
             pay.AddRequestData("vnp_TmnCode", tmnCode); //Mã website của merchant trên hệ thống của VNPAY (khi đăng ký tài khoản sẽ có trong mail VNPAY gửi về)
-            pay.AddRequestData("vnp_Amount", (TotalPrice * 100).ToString()); //số tiền cần thanh toán, công thức: số tiền * 100 - ví dụ 10.000 (mười nghìn đồng) --> 1000000
+            pay.AddRequestData("vnp_Amount", (Price * 100).ToString()); //số tiền cần thanh toán, công thức: số tiền * 100 - ví dụ 10.000 (mười nghìn đồng) --> 1000000
             pay.AddRequestData("vnp_BankCode", ""); //Mã Ngân hàng thanh toán (tham khảo: https://sandbox.vnpayment.vn/apis/danh-sach-ngan-hang/), có thể để trống, người dùng có thể chọn trên cổng thanh toán VNPAY
             pay.AddRequestData("vnp_CreateDate", DateTime.UtcNow.ToString("yyyyMMddHHmmss")); //ngày thanh toán theo định dạng yyyyMMddHHmmss
             pay.AddRequestData("vnp_CurrCode", "VND"); //Đơn vị tiền tệ sử dụng thanh toán. Hiện tại chỉ hỗ trợ VND
@@ -70,15 +64,26 @@ namespace Services.Service
 
             string terminalId = Utils.ExtractUrlParam(url, "vnp_TmnCode");
             string bankCode = Utils.ExtractUrlParam(url, "vnp_BankCode");
+            
+            bool check = true;
+            IEnumerable<Request> item = await _unit.RequestRepo.GetFieldsByFilterAsync(["RequestStatus"],a => a.RequestId.Equals(_id));
 
-            bool checkSignature = pay.ValidateSignature(query, vnp_SecureHash, hashSecret);
+
+                bool checkSignature = pay.ValidateSignature(query, vnp_SecureHash, hashSecret);
             if (checkSignature)
             {
                 if (vnp_ResponseCode == "00" && vnp_TransactionStatus == "00")
                 {
                     //Thanh toan thanh cong
-                    await UpdateStatusRequest(_id);
-                    return "Checkout Successfull";
+                    if (item.FirstOrDefault().RequestStatus.Equals("Pending")) 
+                    {
+                        await UpdateStatusRequest(_id, "Accepted");
+                    }
+                    if (item.FirstOrDefault().RequestStatus.Equals("Accepted")) 
+                    {
+                        await UpdateStatusRequest(_id, "Completed");
+                    }
+                        return "Checkout Successfull";
                 }
                 else
                 {
@@ -97,15 +102,7 @@ namespace Services.Service
 
         public async Task<string> AddPendingRequest(string _id, AddCartView[] cartViews)
         {
-
-
-            int TotalPrice = 0;
-            //// Payment cần truyền tổng giá , Add Pending request vào database -> Front end gọi api kèm requestView, front end phải gửi tổng giá, account id
-            foreach (AddCartView cartView in cartViews)
-            {
-                IEnumerable<Interior> item = await _unit.InteriorRepo.GetFieldsByFilterAsync(["Price"], a => a.InteriorId.Equals(cartView.InteriorId));
-                TotalPrice = TotalPrice + item.FirstOrDefault().Price * cartView.Quantity;
-            }
+            int TotalPrice = await CalculateTotalPrice(cartViews);
 
             if (!string.IsNullOrEmpty(_id))
             {
@@ -119,6 +116,7 @@ namespace Services.Service
             {
                 return null;
             }
+            RequestDetail items = _mapper.Map<RequestDetail>(cartViews);
             Request request = new Request
             {
                 RequestId = ObjectId.GenerateNewId().ToString(),
@@ -126,30 +124,52 @@ namespace Services.Service
                 AccountId = _id,
                 CreatedAt = DateTime.UtcNow,
                 UpdatedAt = DateTime.UtcNow,
-                TotalPrice = TotalPrice
+                RequestDetail = _mapper.Map<RequestDetail[]>(cartViews),
+                TotalPrice = TotalPrice,
+                RemainPrice = TotalPrice * 7 / 10
             };
             await _unit.RequestRepo.AddOneItem(request);
+          
             return request.RequestId;
         }
 
-        public async Task<string> UpdateStatusRequest(string _id)
+        public async Task<string> UpdateStatusRequest(string _id,string status)
         {
             IEnumerable<Request> item = await _unit.RequestRepo.GetByFilterAsync(a => a.RequestId.Equals(_id) && a.RequestStatus.Equals("Pending"));
             if (item.Any())
             {
                 Request newItem = _mapper.Map<Request>(item);
 
-                newItem.RequestId = _id;
-                newItem.AccountId = item.FirstOrDefault().AccountId;
-                newItem.TotalPrice = item.FirstOrDefault().TotalPrice;
+                //newItem.RequestId = _id;
+                //newItem.AccountId = item.FirstOrDefault().AccountId;
+                //newItem.TotalPrice = item.FirstOrDefault().TotalPrice;
                 newItem.UpdatedAt = DateTime.UtcNow;
-                newItem.RequestStatus = "Success";
+                newItem.RequestStatus = status;
                 await _unit.RequestRepo.UpdateItemByValue("RequestId", _id, newItem);
                 return "Update Successful";
             }
             return "Item does not exist";
         }
+        public async Task<int> CalculateTotalPrice(AddCartView[] cartViews) 
+        {
+            int TotalPrice = 0;
+            //// Payment cần truyền tổng giá , Add Pending request vào database -> Front end gọi api kèm requestView, front end phải gửi tổng giá, account id
+            foreach (AddCartView cartView in cartViews)
+            {
+                IEnumerable<Interior> item = await _unit.InteriorRepo.GetFieldsByFilterAsync(["Price"], a => a.InteriorId.Equals(cartView.InteriorId));
+                TotalPrice = TotalPrice + item.FirstOrDefault().Price * cartView.Quantity;
+            }
 
+
+            return TotalPrice;
+        }
+        public async Task<int> CalculateDeposit(string _id) 
+        {
+            IEnumerable<Request> item = await _unit.RequestRepo.GetFieldsByFilterAsync(["TotalPrice"], a => a.RequestId.Equals(_id));
+            int deposit = item.FirstOrDefault().TotalPrice * 3 / 10;
+            return deposit;
+        }
+        
         public async Task<string> DeleteRequest(string _id)
         {
             //IEnumerable<Request> item = await _repos.GetFieldsByFilterAsync(["_id","RequestStatus"], a=>a.RequestsId.Equals(_id) && a.RequestStatus.Equals("Pending") );
@@ -161,6 +181,11 @@ namespace Services.Service
             return "Item does not exist";
         }
 
-
+        public async Task<int> GetRemainPrice(string _id)
+        {
+            IEnumerable<Request> item = await _unit.RequestRepo.GetFieldsByFilterAsync(["RemainPrice"], a => a.RequestId.Equals(_id));
+            int remainPrice = item.FirstOrDefault().TotalPrice * 3 / 10;
+            return remainPrice;
+        }
     }
 }

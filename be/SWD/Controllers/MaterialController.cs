@@ -22,10 +22,7 @@ namespace SWD.Controllers
         public async Task<object> GetPagingMaterialList([FromBody] PagingMaterialView paging)
         {
             var status = await _Service.GetPagingMaterial(paging);
-            return Ok(new
-            {
-                Message = status
-            });
+            return Ok(status);
         }
 
         [Authorize(Roles = "Staff")]
@@ -33,10 +30,7 @@ namespace SWD.Controllers
         public async Task<IActionResult> AddOneMaterial([FromBody] AddMaterialView add)
         {
             string status = await _Service.AddOneMaterial(add);
-            return Ok(new
-            {
-                Message = status
-            });
+            return Ok(status);
         }
 
         [Authorize(Roles = "Staff")]
@@ -44,10 +38,7 @@ namespace SWD.Controllers
         public async Task<IActionResult> UpdateMaterial([FromBody] UpdateMaterialView update)
         {
             string status = await _Service.UpdateMaterial(update);
-            return Ok(new
-            {
-                Message = status
-            });
+            return Ok(status);
         }
 
         [Authorize(Roles = "Staff")]
@@ -55,10 +46,7 @@ namespace SWD.Controllers
         public async Task<IActionResult> DeleteMaterial([FromBody] DeleteMaterialView delete)
         {
             string status = await _Service.DeleteMaterial(delete);
-            return Ok(new
-            {
-                Message = status
-            });
+            return Ok(status);
         }
 
         //httpget chỉ hỗ trợ những kiểu có thể parse sang string
