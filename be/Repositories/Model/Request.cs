@@ -16,9 +16,14 @@ namespace Repositories.Model
     }
     public class RequestDetail 
     {
+        public RequestDetail()
+        {
+           
+        }
+
         [BsonElement]
         [BsonRepresentation(BsonType.String)]
         public required string InteriorId { get; set; }
-        [BsonElement] public required int Price { get; set; }
+        [BsonElement] public required int Quantity { get; set; }
     }
 }

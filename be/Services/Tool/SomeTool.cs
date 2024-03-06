@@ -1,9 +1,13 @@
 ﻿using System.Security.Cryptography;
 using System.Text;
+using Twilio.Rest.Taskrouter.V1.Workspace.TaskQueue;
 namespace Services.Tool
 {
     public class SomeTool
     {
+        private static readonly string AllowedCharacters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+        private static readonly string AllowedCode = "0123456789";
+        private static readonly Random Random = new();
         public static byte[]? GetImage(string base64String)
         {
             byte[]? bytes = null;
@@ -69,6 +73,16 @@ namespace Services.Tool
 
                 return Encoding.UTF8.GetString(decryptedEmailBytes);
             }
+        }
+        public static string GenerateId()
+        {
+            var sb = new StringBuilder();
+            for (int i = 0; i < 5; i++)
+            {
+                int index = Random.Next(AllowedCharacters.Length);
+                sb.Append(AllowedCharacters[index]);
+            }
+            return sb.ToString();
         }
 
 

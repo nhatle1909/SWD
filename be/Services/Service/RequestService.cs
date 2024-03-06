@@ -34,6 +34,9 @@ namespace Services.Service
         }
         public async Task<string> Payment(string requestId, int Price)
         {
+            string random = SomeTool.GenerateId();
+            string Tref = requestId + random;
+            
             pay.AddRequestData("vnp_Version", "2.1.0"); //Phiên bản api mà merchant kết nối. Phiên bản hiện tại là 2.1.0
             pay.AddRequestData("vnp_Command", "pay"); //Mã API sử dụng, mã cho giao dịch thanh toán là 'pay'
             pay.AddRequestData("vnp_TmnCode", tmnCode); //Mã website của merchant trên hệ thống của VNPAY (khi đăng ký tài khoản sẽ có trong mail VNPAY gửi về)
@@ -46,7 +49,7 @@ namespace Services.Service
             pay.AddRequestData("vnp_OrderInfo", "Thanh toan don hang"); //Thông tin mô tả nội dung thanh toán
             pay.AddRequestData("vnp_OrderType", "other"); //topup: Nạp tiền điện thoại - billpayment: Thanh toán hóa đơn - fashion: Thời trang - other: Thanh toán trực tuyến
             pay.AddRequestData("vnp_ReturnUrl", returnUrl); //URL thông báo kết quả giao dịch khi Khách hàng kết thúc thanh toán
-            pay.AddRequestData("vnp_TxnRef", requestId); //mã hóa đơn
+            pay.AddRequestData("vnp_TxnRef", Tref); //mã hóa đơn
 
             string paymentUrl = pay.CreateRequestUrl(url, hashSecret);
             return paymentUrl;
@@ -56,7 +59,7 @@ namespace Services.Service
             var query = Utils.GetQueryString(url);
 
             string vnp_SecureHash = Utils.ExtractUrlParam(url, "vnp_SecureHash");
-            string _id = Utils.ExtractUrlParam(url, "vnp_TxnRef");
+            string _id = Utils.ExtractUrlParam(url, "vnp_TxnRef").Substring(0, Utils.ExtractUrlParam(url, "vnp_TxnRef").Length - 5);
             long vnp_Amount = Convert.ToInt64(Utils.ExtractUrlParam(url, "vnp_Amount")) / 100;
             long vnpayTranId = Convert.ToInt64(Utils.ExtractUrlParam(url, "vnp_TransactionNo"));
             string vnp_ResponseCode = Utils.ExtractUrlParam(url, "vnp_ResponseCode");
@@ -64,8 +67,7 @@ namespace Services.Service
 
             string terminalId = Utils.ExtractUrlParam(url, "vnp_TmnCode");
             string bankCode = Utils.ExtractUrlParam(url, "vnp_BankCode");
-            
-            bool check = true;
+
             IEnumerable<Request> item = await _unit.RequestRepo.GetFieldsByFilterAsync(["RequestStatus"],a => a.RequestId.Equals(_id));
 
 
@@ -77,17 +79,19 @@ namespace Services.Service
                     //Thanh toan thanh cong
                     if (item.FirstOrDefault().RequestStatus.Equals("Pending")) 
                     {
-                        await UpdateStatusRequest(_id, "Accepted");
+                        await UpdateStatusRequest(_id, "Processing");
                     }
-                    if (item.FirstOrDefault().RequestStatus.Equals("Accepted")) 
+                    if (item.FirstOrDefault().RequestStatus.Equals("Processing")) 
                     {
-                        await UpdateStatusRequest(_id, "Completed");
+                        await UpdateStatusRequest(_id, "Success");
                     }
                         return "Checkout Successfull";
                 }
                 else
                 {
+                    await UpdateStatusRequest(_id, "Canceled");
                     return "Failed";
+               
                 }
             }
             else
@@ -103,7 +107,7 @@ namespace Services.Service
         public async Task<string> AddPendingRequest(string _id, AddCartView[] cartViews)
         {
             int TotalPrice = await CalculateTotalPrice(cartViews);
-
+         
             if (!string.IsNullOrEmpty(_id))
             {
                 IEnumerable<AccountStatus> item = await _unit.AccountStatusRepo.GetFieldsByFilterAsync(["IsAuthenticationEmail"], ass => ass.IsAuthenticationEmail == true && ass.AccountId.Equals(_id));
@@ -116,7 +120,7 @@ namespace Services.Service
             {
                 return null;
             }
-            RequestDetail items = _mapper.Map<RequestDetail>(cartViews);
+       
             Request request = new Request
             {
                 RequestId = ObjectId.GenerateNewId().ToString(),
@@ -129,20 +133,43 @@ namespace Services.Service
                 RemainPrice = TotalPrice * 7 / 10
             };
             await _unit.RequestRepo.AddOneItem(request);
-          
+            await UpdateInteriorQuantity(request.RequestId, cartViews);
             return request.RequestId;
         }
 
+
+        //----------------------------------------------------End Interface---------------------------------------------------------------------//
+        //--------------------------------------------------------------------------------------------------------------------------------------//
+        
+        public async Task UpdateInteriorQuantity(string _id,AddCartView[] cartviews) 
+        {
+            IEnumerable<Request> items = await _unit.RequestRepo.GetFieldsByFilterAsync(["RequestDetail"], a => a.RequestId.Equals(_id));
+            foreach (RequestDetail item in items.FirstOrDefault().RequestDetail )
+            {
+               var interior = await _unit.InteriorRepo.GetByFilterAsync(i => i.InteriorId.Equals(item.InteriorId));
+                Interior newQuantity = interior.First();
+                newQuantity.Quantity = newQuantity.Quantity - item.Quantity ;
+                await _unit.InteriorRepo.UpdateItemByValue("InteriorId",item.InteriorId,newQuantity);
+            }
+            return;
+        }
         public async Task<string> UpdateStatusRequest(string _id,string status)
         {
-            IEnumerable<Request> item = await _unit.RequestRepo.GetByFilterAsync(a => a.RequestId.Equals(_id) && a.RequestStatus.Equals("Pending"));
+            IEnumerable<Request> item = await _unit.RequestRepo.GetByFilterAsync(a => a.RequestId.Equals(_id) && a.RequestStatus.Equals("Pending") || a.RequestStatus.Equals("Processing"));
+            
             if (item.Any())
             {
                 Request newItem = _mapper.Map<Request>(item);
 
-                //newItem.RequestId = _id;
-                //newItem.AccountId = item.FirstOrDefault().AccountId;
-                //newItem.TotalPrice = item.FirstOrDefault().TotalPrice;
+                if (item.FirstOrDefault().RequestStatus.Equals("Processing")) newItem.RemainPrice = 0;
+                else newItem.RemainPrice = item.FirstOrDefault().RemainPrice;
+
+                newItem.RequestId = _id;
+                newItem.AccountId = item.FirstOrDefault().AccountId;
+                newItem.TotalPrice = item.FirstOrDefault().TotalPrice;
+                newItem.RequestDetail = item.FirstOrDefault().RequestDetail;
+                newItem.CreatedAt = item.FirstOrDefault().CreatedAt;
+                
                 newItem.UpdatedAt = DateTime.UtcNow;
                 newItem.RequestStatus = status;
                 await _unit.RequestRepo.UpdateItemByValue("RequestId", _id, newItem);
@@ -184,8 +211,8 @@ namespace Services.Service
         public async Task<int> GetRemainPrice(string _id)
         {
             IEnumerable<Request> item = await _unit.RequestRepo.GetFieldsByFilterAsync(["RemainPrice"], a => a.RequestId.Equals(_id));
-            int remainPrice = item.FirstOrDefault().TotalPrice * 3 / 10;
-            return remainPrice;
+    
+            return item.FirstOrDefault().RemainPrice;
         }
     }
 }

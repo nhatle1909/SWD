@@ -37,7 +37,7 @@ namespace Services.Tool
 
             CreateMap<Cart, AddCartView>().ReverseMap();
 
-            CreateMap<RequestDetail[], AddCartView[]>().ReverseMap().ForAllMembers(opts => opts.Condition((source, dest, srcMember) => srcMember != null));
+            CreateMap<RequestDetail, AddCartView>().ReverseMap();
         }
     }
 }
