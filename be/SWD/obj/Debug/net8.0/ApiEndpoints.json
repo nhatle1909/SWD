@@ -578,7 +578,7 @@
       },
       {
         "Name": "Price",
-        "Type": "System.Double",
+        "Type": "System.Int32",
         "IsRequired": false
       }
     ],
@@ -640,7 +640,7 @@
       },
       {
         "Name": "Price",
-        "Type": "System.Double",
+        "Type": "System.Int32",
         "IsRequired": false
       }
     ],
@@ -751,9 +751,9 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "totalPrice",
-        "Type": "System.Int32",
-        "IsRequired": false
+        "Name": "cartViews",
+        "Type": "Repositories.ModelView.CartView\u002BAddCartView[]",
+        "IsRequired": true
       }
     ],
     "ReturnTypes": []

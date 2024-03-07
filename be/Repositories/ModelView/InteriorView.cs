@@ -16,8 +16,8 @@ namespace Repositories.ModelView
             public required IFormFile Image { get; set; }
             [Range(0, int.MaxValue)]
             public required int Quantity { get; set; }
-            [Range(0, double.MaxValue)]
-            public required double Price { get; set; }
+            [Range(0, int.MaxValue)]
+            public required int Price { get; set; }
         }
 
         public class UpdateInteriorView
@@ -30,8 +30,8 @@ namespace Repositories.ModelView
             public required IFormFile Image { get; set; }
             [Range(1, int.MaxValue)]
             public required int Quantity { get; set; }
-            [Range(0, double.MaxValue)]
-            public required double Price { get; set; }
+            [Range(0, int.MaxValue)]
+            public required int Price { get; set; }
         }
 
         public class DeleteInteriorView
