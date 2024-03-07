@@ -31,10 +31,7 @@ namespace SWD.Controllers
             try
             {
                 var status = await _ser.AddAnAccountForCustomer(register);
-                return Ok(new
-                {
-                    Message = status
-                });
+                return Ok(status);
             }
             catch (Exception ex)
             {
@@ -49,10 +46,7 @@ namespace SWD.Controllers
             try
             {
                 var status = await _ser.AddAnAccountForStaff(registerForStaff);
-                return Ok(new
-                {
-                    Message = status
-                });
+                return Ok(status);
             }
             catch (Exception ex)
             {
@@ -66,10 +60,7 @@ namespace SWD.Controllers
             try
             {
                 var result = await _ser.LoginByEmailAndPassword(login);
-                return Ok(new
-                {
-                    Message = result
-                });
+                return Ok(result);
             }
             catch (Exception ex)
             {
@@ -81,10 +72,7 @@ namespace SWD.Controllers
         public async Task<IActionResult> GoogleLogin(string id_token)
         {
             var status = await _ser.GoogleAuthorizeUser(id_token);
-            return Ok(new
-            {
-                Message = status
-            });
+            return Ok(status);
         }
 
         //[HttpPost("Renew-Token")]
@@ -110,10 +98,7 @@ namespace SWD.Controllers
                 // Lấy ID từ JWT
                 var id = (HttpContext.User.FindFirst("id")?.Value) ?? "";
                 var status = await _ser.UpdateAnAccount(id, update);
-                return Ok(new
-                {
-                    Message = status
-                });
+                return Ok(status);
             }
             catch (Exception ex)
             {
@@ -143,10 +128,7 @@ namespace SWD.Controllers
             try
             {
                 var status = await _ser.SendEmailToResetPassword(email);
-                return Ok(new
-                {
-                    Message = status
-                });
+                return Ok(status);
             }
             catch (Exception ex)
             {
@@ -160,10 +142,7 @@ namespace SWD.Controllers
             try
             {
                 var status = await _ser.ResetPassword(resetPassword);
-                return Ok(new
-                {
-                    Message = status
-                });
+                return Ok(status);
             }
             catch (Exception ex)
             {
@@ -178,10 +157,7 @@ namespace SWD.Controllers
             try
             {
                 var profile = await _ser.ViewProfile(email);
-                return Ok(new
-                {
-                    Message = profile
-                });
+                return Ok(profile);
             }
             catch (Exception ex)
             {
@@ -197,10 +173,7 @@ namespace SWD.Controllers
             {
                 var id = (HttpContext.User.FindFirst("id")?.Value) ?? "";
                 var status = await _ser.ChangePassword(id, changePassword);
-                return Ok(new
-                {
-                    Message = status
-                });
+                return Ok(status);
             }
             catch (Exception ex)
             {
@@ -215,10 +188,7 @@ namespace SWD.Controllers
             try
             {
                 var status = await _ser.BanAnAccount(ban);
-                return Ok(new
-                {
-                    Message = status
-                });
+                return Ok(status);
             }
             catch (Exception ex)
             {
@@ -233,10 +203,7 @@ namespace SWD.Controllers
             try
             {
                 var status = await _ser.DeleteAnAccount(delete);
-                return Ok(new
-                {
-                    Message = status
-                });
+                return Ok(status);
             }
             catch (Exception ex)
             {
@@ -251,10 +218,7 @@ namespace SWD.Controllers
             try
             {
                 await _ser.SignOutAsync();
-                return Ok(new
-                {
-                    Message = "Sign out successfully"
-                });
+                return Ok("Sign out successfully");
             }
             catch (Exception ex)
             {
@@ -269,10 +233,7 @@ namespace SWD.Controllers
             try
             {
                 var status = await _ser.GetPagingAccount(paging);
-                return Ok(new
-                {
-                    Message = status
-                });
+                return Ok(status);
             }
             catch (Exception ex)
             {
@@ -287,10 +248,7 @@ namespace SWD.Controllers
             try
             {
                 var status = await _ser.GetAccountDetail(detail);
-                return Ok(new
-                {
-                    Message = status
-                });
+                return Ok(status);
             }
             catch (Exception ex)
             {

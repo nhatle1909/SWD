@@ -17,8 +17,8 @@ namespace SWD.Controllers
             _vnpayService = vnpayService;
         }
         [Authorize(Roles = "Customer")]
-        [HttpPost("Customer/VNPay-Payment")]
-        public async Task<IActionResult> VNPayPayment(AddCartView[] cartViews)
+        [HttpPost("Customer/VNPay-Deposit-Payment")]
+        public async Task<IActionResult> VNPayPaymentDeposit(AddCartView[] cartViews)
         {
             if (!ModelState.IsValid)
             {
@@ -26,9 +26,10 @@ namespace SWD.Controllers
             }
             var id = (HttpContext.User.FindFirst("id")?.Value) ?? "";
             string check = await _vnpayService.AddPendingRequest(id, cartViews);
+            int deposit = await _vnpayService.CalculateDeposit(check);
             if (check != null)
             {
-                return Ok(_vnpayService.Payment(check,cartViews).Result);
+                return Ok(_vnpayService.Payment(check,deposit).Result);
             }
             return BadRequest("Email has not authenticated");
         }
@@ -38,6 +39,18 @@ namespace SWD.Controllers
         public async Task<IActionResult> VNPayReturn(string url)
         {
             return Ok(await _vnpayService.CheckPayment(url));
+        }
+        [Authorize(Roles ="Customer")]
+        [HttpPost("Customer/VNPay-RemainPrice-Payment")]
+        public async Task<IActionResult> VNPayPaymentRemainPrice(string requestId) 
+        {
+            if (!ModelState.IsValid) 
+            {
+                return BadRequest("Invalid Data");
+            }
+            int remainPrice = await _vnpayService.GetRemainPrice(requestId);
+
+            return Ok(_vnpayService.Payment(requestId,remainPrice).Result);
         }
 
 

@@ -744,8 +744,8 @@
   },
   {
     "ContainingType": "SWD.Controllers.VNPayController",
-    "Method": "VNPayPayment",
-    "RelativePath": "api/VNPay/Customer/VNPay-Payment",
+    "Method": "VNPayPaymentDeposit",
+    "RelativePath": "api/VNPay/Customer/VNPay-Deposit-Payment",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
@@ -754,6 +754,22 @@
         "Name": "cartViews",
         "Type": "Repositories.ModelView.CartView\u002BAddCartView[]",
         "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SWD.Controllers.VNPayController",
+    "Method": "VNPayPaymentRemainPrice",
+    "RelativePath": "api/VNPay/Customer/VNPay-RemainPrice-Payment",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "requestId",
+        "Type": "System.String",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": []

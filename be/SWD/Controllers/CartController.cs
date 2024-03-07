@@ -25,10 +25,7 @@ namespace SWD.Controllers
             {
                 var id = (HttpContext.User.FindFirst("id")?.Value) ?? "";
                 var status = await _cartService.AddProductFromCart(id, add);
-                return Ok(new
-                {
-                    Message = status
-                });
+                return Ok(status);
             }
             catch (Exception ex)
             {
@@ -43,10 +40,7 @@ namespace SWD.Controllers
             try
             {
                 var status = await _cartService.DeleteProductFromCart(interiorId);
-                return Ok(new
-                {
-                    Message = status
-                });
+                return Ok(status);
             }
             catch (Exception ex)
             {
@@ -62,10 +56,7 @@ namespace SWD.Controllers
             {
                 var id = (HttpContext.User.FindFirst("id")?.Value) ?? "";
                 var status = await _cartService.GetAllProductToCart(id);
-                return Ok(new
-                {
-                    Message = status
-                });
+                return Ok(status);
             }
             catch (Exception ex)
             {
