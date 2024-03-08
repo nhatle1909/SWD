@@ -7,7 +7,7 @@ export const login = (email, password) => {
 };
 
 export const signUpUser = (email, password) => {
-    return baseClient.post('/account/register-customer-account', { email, password, confirmPassword: password });
+    return baseClient.post('/account/create-customer-account',{ email, password, confirmPassword:password });
 };
 
 export const signUpSeller = (email, password) => {
