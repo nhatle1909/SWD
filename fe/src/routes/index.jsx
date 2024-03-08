@@ -9,7 +9,7 @@ import AdminRoute from './guard/AdminRoute';
 import PermissionRoute from './guard/PermissionRoute';
 import Home from '@/pages/home/Home';
 import About from '@/pages/about/About';
-import Users from '@/pages/admin/users/Users'
+import Users from '@/pages/admin/Users'
 import Profile from '../pages/profile/Profile';
 import StaffRoute from './guard/StaffRoute';
 import ManageBlog from '../pages/staff/blog/ManageBlog';
@@ -17,27 +17,27 @@ const unauthRoutes = {
   path: '/',
   element: <MainLayout />,
   guard: <UnauthRoute />,
-  children :[
+  children: [
     {
-      path:'',
-      element:<Home/>
+      path: '',
+      element: <Home />
     },
     {
-      path:'about',
-      element:<About/>,
+      path: 'about',
+      element: <About />,
     },
     {
-      path:'profile',
-      element: <Profile/>,
-      permissions:['user']
-    }
+      path: 'profile',
+      element: <Profile />,
+      permissions: ['user']
+    },
   ]
 };
 
 const adminRoutes = {
   path: 'admin',
   guard: <AdminRoute />,
-  element: <MainLayout/>,
+  element: <MainLayout />,
   children: [
     {
       path: 'users',
@@ -49,7 +49,7 @@ const adminRoutes = {
 const staffRoutes = {
   path: 'staff',
   guard: <StaffRoute />,
-  element: <MainLayout/>,
+  element: <MainLayout />,
   children: [
     {
       path: 'blogs',
@@ -58,12 +58,12 @@ const staffRoutes = {
   ],
 };
 
-const notfoundRoute= {
+const notfoundRoute = {
   path: "*",
   element: <NotFound />,
 };
 
-const routes = [unauthRoutes, adminRoutes,staffRoutes, notfoundRoute];
+const routes = [unauthRoutes, adminRoutes, staffRoutes, notfoundRoute];
 
 const Routes = () => {
   return (
@@ -74,14 +74,14 @@ const Routes = () => {
             <Route path={route.path} element={route?.element}>
               {route.children
                 ? route.children.map(({ element, path, permissions }) => (
-                    <Route key={path} element={route?.guard}>
-                      <Route
-                        element={<PermissionRoute permissions={permissions} />}
-                      >
-                        <Route path={path} element={element} />
-                      </Route>
+                  <Route key={path} element={route?.guard}>
+                    <Route
+                      element={<PermissionRoute permissions={permissions} />}
+                    >
+                      <Route path={path} element={element} />
                     </Route>
-                  ))
+                  </Route>
+                ))
                 : null}
             </Route>
           </Route>

@@ -23,10 +23,7 @@ namespace SWD.Controllers
             try
             {
                 var status = await _contactService.AddContact(add);
-                return Ok(new
-                {
-                    Message = status
-                });
+                return Ok(status);
             }
             catch (Exception ex)
             {
@@ -35,16 +32,13 @@ namespace SWD.Controllers
         }
 
         [Authorize(Roles = "Staff")]
-        [HttpPut("Address-An-Contact")]
+        [HttpPut("Staff/Address-An-Contact")]
         public async Task<IActionResult> AddressAnContact(AddressContactView address)
         {
             try
             {
                 var status = await _contactService.AddressTheContact(address);
-                return Ok(new
-                {
-                    Message = status
-                });
+                return Ok(status);
             }
             catch (Exception ex)
             {
@@ -53,16 +47,13 @@ namespace SWD.Controllers
         }
 
         [Authorize(Roles = "Staff")]
-        [HttpDelete("Delete-An-Contact")]
+        [HttpDelete("Staff/Delete-An-Contact")]
         public async Task<IActionResult> DeleteAnContact(DeleteContactView delete)
         {
             try
             {
                 var status = await _contactService.DeleteContact(delete);
-                return Ok(new
-                {
-                    Message = status
-                });
+                return Ok(status);
             }
             catch (Exception ex)
             {
@@ -71,16 +62,13 @@ namespace SWD.Controllers
         }
 
         [Authorize(Roles = "Staff")]
-        [HttpPost("Get-Paging-Contact-List")]
+        [HttpPost("Staff/Get-Paging-Contact-List")]
         public async Task<IActionResult> GetPagingContactlList(PagingContactView paging)
         {
             try
             {
                 var status = await _contactService.GetPagingContact(paging);
-                return Ok(new
-                {
-                    Message = status
-                });
+                return Ok(status);
             }
             catch (Exception ex)
             {
@@ -89,16 +77,13 @@ namespace SWD.Controllers
         }
 
         [Authorize(Roles = "Staff")]
-        [HttpPost("Get-Contact-Detail")]
+        [HttpPost("Staff/View-Private-Detail-Contact-From-Paging")]
         public async Task<IActionResult> GetContactDetail(DetailContactView detail)
         {
             try
             {
                 var status = await _contactService.GetContactDetail(detail);
-                return Ok(new
-                {
-                    Message = status
-                });
+                return Ok(status);
             }
             catch (Exception ex)
             {

@@ -24,17 +24,14 @@ namespace SWD.Controllers
             _ser = ser;
         }
 
-        [HttpPost("Register-Customer-Account")]
+        [HttpPost("Create-Customer-Account")]
         //[FromBody] method lấy data từ body request, nếu ko sài thì method sẽ lấy data từ url
         public async Task<IActionResult> RegisterAnAccountForCustomer([FromBody] RegisterAccountView register)
         {
             try
             {
                 var status = await _ser.AddAnAccountForCustomer(register);
-                return Ok(new
-                {
-                    Message = status
-                });
+                return Ok(status);
             }
             catch (Exception ex)
             {
@@ -43,16 +40,13 @@ namespace SWD.Controllers
         }
 
         [Authorize(Roles = "Admin")]
-        [HttpPost("Register-Staff-Account")]
+        [HttpPost("Admin/Create-Staff-Account")]
         public async Task<IActionResult> RegisterAnAccountForStaff([FromBody] RegisterForStaffAccountView registerForStaff)
         {
             try
             {
                 var status = await _ser.AddAnAccountForStaff(registerForStaff);
-                return Ok(new
-                {
-                    Message = status
-                });
+                return Ok(status);
             }
             catch (Exception ex)
             {
@@ -66,10 +60,7 @@ namespace SWD.Controllers
             try
             {
                 var result = await _ser.LoginByEmailAndPassword(login);
-                return Ok(new
-                {
-                    Message = result
-                });
+                return Ok(result);
             }
             catch (Exception ex)
             {
@@ -81,10 +72,7 @@ namespace SWD.Controllers
         public async Task<IActionResult> GoogleLogin(string id_token)
         {
             var status = await _ser.GoogleAuthorizeUser(id_token);
-            return Ok(new
-            {
-                Message = status
-            });
+            return Ok(status);
         }
 
         //[HttpPost("Renew-Token")]
@@ -102,7 +90,7 @@ namespace SWD.Controllers
         //}
 
         [Authorize]
-        [HttpPatch("Update-An-Account")]
+        [HttpPatch("Authorize/Update-An-Account")]
         public async Task<IActionResult> UpdateProfile([FromBody] UpdateAccountView update)
         {
             try
@@ -110,10 +98,7 @@ namespace SWD.Controllers
                 // Lấy ID từ JWT
                 var id = (HttpContext.User.FindFirst("id")?.Value) ?? "";
                 var status = await _ser.UpdateAnAccount(id, update);
-                return Ok(new
-                {
-                    Message = status
-                });
+                return Ok(status);
             }
             catch (Exception ex)
             {
@@ -122,7 +107,7 @@ namespace SWD.Controllers
         }
 
         [Authorize]
-        [HttpPatch("Update-Picture-Account")]
+        [HttpPatch("Authorize/Update-Picture-Account")]
         public async Task<IActionResult> UpdatePictureProfile(UpdatePictureAccountView updatePicture)
         {
             try
@@ -143,10 +128,7 @@ namespace SWD.Controllers
             try
             {
                 var status = await _ser.SendEmailToResetPassword(email);
-                return Ok(new
-                {
-                    Message = status
-                });
+                return Ok(status);
             }
             catch (Exception ex)
             {
@@ -160,10 +142,7 @@ namespace SWD.Controllers
             try
             {
                 var status = await _ser.ResetPassword(resetPassword);
-                return Ok(new
-                {
-                    Message = status
-                });
+                return Ok(status);
             }
             catch (Exception ex)
             {
@@ -172,16 +151,13 @@ namespace SWD.Controllers
         }
 
         [AllowAnonymous]
-        [HttpGet("View-Profile")]
+        [HttpGet("View-Public-Profile")]
         public async Task<IActionResult> ViewProfileAccount([EmailAddress] string email)
         {
             try
             {
                 var profile = await _ser.ViewProfile(email);
-                return Ok(new
-                {
-                    Message = profile
-                });
+                return Ok(profile);
             }
             catch (Exception ex)
             {
@@ -190,17 +166,14 @@ namespace SWD.Controllers
         }
 
         [Authorize]
-        [HttpPatch("Change-Password")]
+        [HttpPatch("Authorize/Change-Password")]
         public async Task<IActionResult> ChangePasswordAccount([FromBody] ChangePasswordAccountView changePassword)
         {
             try
             {
                 var id = (HttpContext.User.FindFirst("id")?.Value) ?? "";
                 var status = await _ser.ChangePassword(id, changePassword);
-                return Ok(new
-                {
-                    Message = status
-                });
+                return Ok(status);
             }
             catch (Exception ex)
             {
@@ -209,16 +182,13 @@ namespace SWD.Controllers
         }
 
         [Authorize(Roles = "Admin")]
-        [HttpPatch("Banned-Account")]
+        [HttpPatch("Admin/Banned-Account")]
         public async Task<IActionResult> BanAnAccount([FromBody] BanAccountView ban)
         {
             try
             {
                 var status = await _ser.BanAnAccount(ban);
-                return Ok(new
-                {
-                    Message = status
-                });
+                return Ok(status);
             }
             catch (Exception ex)
             {
@@ -227,16 +197,13 @@ namespace SWD.Controllers
         }
 
         [Authorize(Roles = "Admin")]
-        [HttpDelete("Remove-Account")]
+        [HttpDelete("Admin/Remove-Account")]
         public async Task<IActionResult> RemoveAnAccount([FromBody] DeleteAccountView delete)
         {
             try
             {
                 var status = await _ser.DeleteAnAccount(delete);
-                return Ok(new
-                {
-                    Message = status
-                });
+                return Ok(status);
             }
             catch (Exception ex)
             {
@@ -245,16 +212,13 @@ namespace SWD.Controllers
         }
 
         [Authorize]
-        [HttpPost("Sign-Out")]
+        [HttpPost("Authorize/Sign-Out")]
         public async Task<IActionResult> SignOutAccount()
         {
             try
             {
                 await _ser.SignOutAsync();
-                return Ok(new
-                {
-                    Message = "Sign out successfully"
-                });
+                return Ok("Sign out successfully");
             }
             catch (Exception ex)
             {
@@ -263,16 +227,13 @@ namespace SWD.Controllers
         }
 
         [Authorize(Roles = "Admin")]
-        [HttpPost("Get-Paging-Account-List")]
+        [HttpPost("Admin/Get-Paging-Account-List")]
         public async Task<IActionResult> GetPagingAccountList([FromBody] PagingAccountView paging)
         {
             try
             {
                 var status = await _ser.GetPagingAccount(paging);
-                return Ok(new
-                {
-                    Message = status
-                });
+                return Ok(status);
             }
             catch (Exception ex)
             {
@@ -281,16 +242,13 @@ namespace SWD.Controllers
         }
 
         [Authorize(Roles = "Admin")]
-        [HttpPost("Get-Detail-Account")]
+        [HttpPost("Admin/View-Private-Detail-Account-From-Paging")]
         public async Task<IActionResult> GetAccountDetail([FromBody] DetailAccountView detail)
         {
             try
             {
                 var status = await _ser.GetAccountDetail(detail);
-                return Ok(new
-                {
-                    Message = status
-                });
+                return Ok(status);
             }
             catch (Exception ex)
             {

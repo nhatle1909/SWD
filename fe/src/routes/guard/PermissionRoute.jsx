@@ -7,6 +7,8 @@ const PermissionRoute = ({permissions}) => {
     return <Outlet/>
   }
   const auth = getLocalStorage('auth');
+
+  console.log(auth);
   if(permissions.includes('user')){
     if(auth?.token){
       return <Outlet/>

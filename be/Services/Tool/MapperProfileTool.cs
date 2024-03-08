@@ -4,6 +4,7 @@ using Repositories.Models;
 using Repositories.ModelView;
 using static Repositories.ModelView.AccountView;
 using static Repositories.ModelView.BlogView;
+using static Repositories.ModelView.CartView;
 using static Repositories.ModelView.ContactView;
 using static Repositories.ModelView.InteriorView;
 using static Repositories.ModelView.MaterialView;
@@ -33,6 +34,10 @@ namespace Services.Tool
 
             CreateMap<Request, IEnumerable<Request>>().ReverseMap();
             CreateMap<Request, RequestView>().ReverseMap();
+
+            CreateMap<Cart, AddCartView>().ReverseMap();
+
+            CreateMap<RequestDetail, AddCartView>().ReverseMap();
         }
     }
 }

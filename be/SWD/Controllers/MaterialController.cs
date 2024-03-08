@@ -18,52 +18,40 @@ namespace SWD.Controllers
         }
 
         [Authorize(Roles = "Staff")]
-        [HttpPost("Get-Paging-Material-List")]
+        [HttpPost("Staff/Get-Paging-Material-List")]
         public async Task<object> GetPagingMaterialList([FromBody] PagingMaterialView paging)
         {
             var status = await _Service.GetPagingMaterial(paging);
-            return Ok(new
-            {
-                Message = status
-            });
+            return Ok(status);
         }
 
         [Authorize(Roles = "Staff")]
-        [HttpPost("Add-One-Material")]
+        [HttpPost("Staff/Add-One-Material")]
         public async Task<IActionResult> AddOneMaterial([FromBody] AddMaterialView add)
         {
             string status = await _Service.AddOneMaterial(add);
-            return Ok(new
-            {
-                Message = status
-            });
+            return Ok(status);
         }
 
         [Authorize(Roles = "Staff")]
-        [HttpPut("Update-Material")]
+        [HttpPut("Staff/Update-Material")]
         public async Task<IActionResult> UpdateMaterial([FromBody] UpdateMaterialView update)
         {
             string status = await _Service.UpdateMaterial(update);
-            return Ok(new
-            {
-                Message = status
-            });
+            return Ok(status);
         }
 
         [Authorize(Roles = "Staff")]
-        [HttpDelete("Delete-Material")]
+        [HttpDelete("Staff/Delete-Material")]
         public async Task<IActionResult> DeleteMaterial([FromBody] DeleteMaterialView delete)
         {
             string status = await _Service.DeleteMaterial(delete);
-            return Ok(new
-            {
-                Message = status
-            });
+            return Ok(status);
         }
 
         //httpget chỉ hỗ trợ những kiểu có thể parse sang string
         [Authorize]
-        [HttpPost("Optional-Product-Quote")]
+        [HttpPost("Authorize/Optional-Product-Quote")]
         public async Task<IActionResult> OptionalInteriorQuote(string[] arrMaterialId)
         {
             double totalPrice = await _Service.OptionalProductQuote(arrMaterialId);
