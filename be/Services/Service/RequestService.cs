@@ -10,7 +10,10 @@ using Services.Interface;
 using Services.Tool;
 using Services.Tools;
 using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Security.Cryptography;
+using ZstdSharp.Unsafe;
 using static Repositories.ModelView.CartView;
 namespace Services.Service
 {
@@ -56,17 +59,20 @@ namespace Services.Service
         }
         public async Task<string> CheckPayment(string url)
         {
+
+            //long vnp_Amount = Convert.ToInt64(Utils.ExtractUrlParam(url, "vnp_Amount")) / 100;
+            //long vnpayTranId = Convert.ToInt64(Utils.ExtractUrlParam(url, "vnp_TransactionNo"));
+         
+            //string terminalId = Utils.ExtractUrlParam(url, "vnp_TmnCode");
+            //string bankCode = Utils.ExtractUrlParam(url, "vnp_BankCode");
+
             var query = Utils.GetQueryString(url);
 
             string vnp_SecureHash = Utils.ExtractUrlParam(url, "vnp_SecureHash");
             string _id = Utils.ExtractUrlParam(url, "vnp_TxnRef").Substring(0, Utils.ExtractUrlParam(url, "vnp_TxnRef").Length - 5);
-            long vnp_Amount = Convert.ToInt64(Utils.ExtractUrlParam(url, "vnp_Amount")) / 100;
-            long vnpayTranId = Convert.ToInt64(Utils.ExtractUrlParam(url, "vnp_TransactionNo"));
             string vnp_ResponseCode = Utils.ExtractUrlParam(url, "vnp_ResponseCode");
             string vnp_TransactionStatus = Utils.ExtractUrlParam(url, "vnp_TransactionStatus");
 
-            string terminalId = Utils.ExtractUrlParam(url, "vnp_TmnCode");
-            string bankCode = Utils.ExtractUrlParam(url, "vnp_BankCode");
 
             IEnumerable<Request> item = await _unit.RequestRepo.GetFieldsByFilterAsync(["RequestStatus"],a => a.RequestId.Equals(_id));
 
@@ -80,6 +86,7 @@ namespace Services.Service
                     if (item.FirstOrDefault().RequestStatus.Equals("Pending")) 
                     {
                         await UpdateStatusRequest(_id, "Processing");
+                        await UpdateInteriorQuantity(_id);
                     }
                     if (item.FirstOrDefault().RequestStatus.Equals("Processing")) 
                     {
@@ -89,7 +96,10 @@ namespace Services.Service
                 }
                 else
                 {
-                    await UpdateStatusRequest(_id, "Canceled");
+                    if (item.FirstOrDefault().RequestStatus.Equals("Pending"))
+                    {
+                        await DeleteRequest(_id);
+                    }
                     return "Failed";
                
                 }
@@ -120,7 +130,7 @@ namespace Services.Service
             {
                 return null;
             }
-       
+
             Request request = new Request
             {
                 RequestId = ObjectId.GenerateNewId().ToString(),
@@ -128,22 +138,89 @@ namespace Services.Service
                 AccountId = _id,
                 CreatedAt = DateTime.UtcNow,
                 UpdatedAt = DateTime.UtcNow,
+                ExpiredDate = DateTime.UtcNow.AddMonths(1),
                 RequestDetail = _mapper.Map<RequestDetail[]>(cartViews),
                 TotalPrice = TotalPrice,
                 RemainPrice = TotalPrice * 7 / 10
             };
             await _unit.RequestRepo.AddOneItem(request);
-            await UpdateInteriorQuantity(request.RequestId, cartViews);
+  
             return request.RequestId;
         }
 
+        public async Task<string> UpdateRequestDetail(string _id, AddCartView[] cartviews)
+        {
 
+            IEnumerable<Request> items = await _unit.RequestRepo.GetByFilterAsync(a => a.RequestId.Equals(_id) && a.RequestStatus.Equals("Pending"));
+            if (!items.Any()) 
+            {
+                return "Request does not exist";
+            }
+            RequestDetail[] details = items.FirstOrDefault().RequestDetail;
+            RequestDetail[] newDetails = _mapper.Map<RequestDetail[]>(cartviews);
+            details = details.Concat(newDetails)
+                .GroupBy(item => item.InteriorId) // Group by product ID
+                .Select(group => new RequestDetail { InteriorId = group.Key, Quantity = group.Sum(p => p.Quantity) }) // Sum quantities for each product
+                .ToArray();
+             
+            int TotalPrice = await CalculateTotalPrice(_mapper.Map<AddCartView[]>(details));
+            
+            Request request = _mapper.Map<Request>(items);
+            request.RequestId = _id;
+            request.AccountId = items.FirstOrDefault().AccountId;
+            request.CreatedAt = items.FirstOrDefault().CreatedAt;
+            request.UpdatedAt = DateTime.UtcNow;
+            request.RequestDetail = details;
+            request.ExpiredDate = DateTime.UtcNow.AddMonths(1);
+            request.TotalPrice = TotalPrice;
+            request.RemainPrice = TotalPrice * 7 / 10;
+
+            await _unit.RequestRepo.UpdateItemByValue("RequestId", _id, request);
+            return "Add Item Successful";
+        }
+        public async Task<int> CalculateDeposit(string _id)
+        {
+            IEnumerable<Request> item = await _unit.RequestRepo.GetFieldsByFilterAsync(["TotalPrice"], a => a.RequestId.Equals(_id));
+            int deposit = item.FirstOrDefault().TotalPrice * 3 / 10;
+            return deposit;
+        }
+        public async Task<string> DeleteRequest(string _id)
+        {
+            IEnumerable<Request> item = await _unit.RequestRepo.GetFieldsByFilterAsync(["_id", "RequestStatus"], a => a.RequestId.Equals(_id) && a.RequestStatus.Equals("Pending"));
+            if (item.Any())
+            {
+                await _unit.RequestRepo.RemoveItemByValue("RequestId", _id);
+                return "Delete Successful";
+            }
+            return "Item does not exist";
+        }
+        public async Task<string> DeleteExpiredRequest(string[] _ids)
+        {
+            foreach (string _id in _ids)
+            {
+                IEnumerable<Request> item = await _unit.RequestRepo.GetFieldsByFilterAsync(["_id", "ExpiredDate"], a => a.RequestId.Equals(_id));
+                if (!item.Any()) 
+                {
+                    return "Request does not exist";
+                }
+            }
+            foreach (string _id in _ids)
+            {
+                IEnumerable<Request> item = await _unit.RequestRepo.GetFieldsByFilterAsync(["_id", "ExpiredDate"], a => a.RequestId.Equals(_id));
+                if (item.Any() && DateTime.UtcNow > item.FirstOrDefault().ExpiredDate)
+                {
+                    await _unit.RequestRepo.RemoveItemByValue("RequestId", _id);
+                }         
+            }
+            return "Delete Succesful";
+        }
         //----------------------------------------------------End Interface---------------------------------------------------------------------//
         //--------------------------------------------------------------------------------------------------------------------------------------//
-        
-        public async Task UpdateInteriorQuantity(string _id,AddCartView[] cartviews) 
+
+        public async Task UpdateInteriorQuantity(string _id) 
         {
             IEnumerable<Request> items = await _unit.RequestRepo.GetFieldsByFilterAsync(["RequestDetail"], a => a.RequestId.Equals(_id));
+          
             foreach (RequestDetail item in items.FirstOrDefault().RequestDetail )
             {
                var interior = await _unit.InteriorRepo.GetByFilterAsync(i => i.InteriorId.Equals(item.InteriorId));
@@ -163,6 +240,9 @@ namespace Services.Service
 
                 if (item.FirstOrDefault().RequestStatus.Equals("Processing")) newItem.RemainPrice = 0;
                 else newItem.RemainPrice = item.FirstOrDefault().RemainPrice;
+
+                if (item.FirstOrDefault().RequestStatus.Equals("Pending")) newItem.ExpiredDate = DateTime.UtcNow.AddMonths(1);
+                if (item.FirstOrDefault().RequestStatus.Equals("Processing")) newItem.ExpiredDate = DateTime.UtcNow.AddYears(1);
 
                 newItem.RequestId = _id;
                 newItem.AccountId = item.FirstOrDefault().AccountId;
@@ -190,23 +270,9 @@ namespace Services.Service
 
             return TotalPrice;
         }
-        public async Task<int> CalculateDeposit(string _id) 
-        {
-            IEnumerable<Request> item = await _unit.RequestRepo.GetFieldsByFilterAsync(["TotalPrice"], a => a.RequestId.Equals(_id));
-            int deposit = item.FirstOrDefault().TotalPrice * 3 / 10;
-            return deposit;
-        }
         
-        public async Task<string> DeleteRequest(string _id)
-        {
-            //IEnumerable<Request> item = await _repos.GetFieldsByFilterAsync(["_id","RequestStatus"], a=>a.RequestsId.Equals(_id) && a.RequestStatus.Equals("Pending") );
-            //if (item.Any()) 
-            //{
-            //    await _repos.RemoveItemByValue("RequestID",_id);
-            //    return "Delete Successful";
-            //}
-            return "Item does not exist";
-        }
+        
+ 
 
         public async Task<int> GetRemainPrice(string _id)
         {
