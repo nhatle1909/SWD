@@ -63,7 +63,7 @@ namespace Services.Service
             if (material is not null)
             {
                 material.MaterialName = update.MaterialName;
-                material.MaterialType = update.MaterialType;
+                //material.MaterialType = update.MaterialType;
                 material.Price = update.Price;
                 material.UpdatedAt = System.DateTime.UtcNow;
                 await _unit.MaterialRepo.UpdateItemByValue("MaterialId", update.MaterialId, material);
