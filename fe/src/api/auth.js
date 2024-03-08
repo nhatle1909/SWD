@@ -1,7 +1,8 @@
 import baseClient from "./baseClient";
 export const login = (email, password) => {
+    console.log(email, password);
     const response = baseClient.post('/account/login-by-email-password', { email, password });
-    console.log("response", response);
+    console.log("respone", response);
     return response;
 };
 

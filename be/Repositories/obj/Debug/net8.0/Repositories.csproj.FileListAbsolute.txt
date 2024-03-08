@@ -63,3 +63,16 @@ D:\DevTools\repository\SWD\be\Repositories\obj\Debug\net8.0\Repositories.dll
 D:\DevTools\repository\SWD\be\Repositories\obj\Debug\net8.0\refint\Repositories.dll
 D:\DevTools\repository\SWD\be\Repositories\obj\Debug\net8.0\Repositories.pdb
 D:\DevTools\repository\SWD\be\Repositories\obj\Debug\net8.0\ref\Repositories.dll
+D:\SWD\be\Repositories\bin\Debug\net8.0\Repositories.deps.json
+D:\SWD\be\Repositories\bin\Debug\net8.0\Repositories.dll
+D:\SWD\be\Repositories\bin\Debug\net8.0\Repositories.pdb
+D:\SWD\be\Repositories\obj\Debug\net8.0\Repositories.csproj.AssemblyReference.cache
+D:\SWD\be\Repositories\obj\Debug\net8.0\Repositories.GeneratedMSBuildEditorConfig.editorconfig
+D:\SWD\be\Repositories\obj\Debug\net8.0\Repositories.AssemblyInfoInputs.cache
+D:\SWD\be\Repositories\obj\Debug\net8.0\Repositories.AssemblyInfo.cs
+D:\SWD\be\Repositories\obj\Debug\net8.0\Repositories.csproj.CoreCompileInputs.cache
+D:\SWD\be\Repositories\obj\Debug\net8.0\Repositories.sourcelink.json
+D:\SWD\be\Repositories\obj\Debug\net8.0\Repositories.dll
+D:\SWD\be\Repositories\obj\Debug\net8.0\refint\Repositories.dll
+D:\SWD\be\Repositories\obj\Debug\net8.0\Repositories.pdb
+D:\SWD\be\Repositories\obj\Debug\net8.0\ref\Repositories.dll
