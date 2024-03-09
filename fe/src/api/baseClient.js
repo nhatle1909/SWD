@@ -1,7 +1,6 @@
 
 import axios from "axios";
 import { toast } from 'react-toastify';
-import {setAuthUser} from '../store/auth/slice'
 import { getLocalStorage, setLocalStorage } from "../utils/common";
 
 let store;
