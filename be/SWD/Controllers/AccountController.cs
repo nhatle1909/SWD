@@ -217,7 +217,7 @@ namespace SWD.Controllers
         }
 
         [Authorize(Roles = "Admin")]
-        [HttpDelete("Admin/Remove-Account")]
+        [HttpPost("Admin/Remove-Account")]
         public async Task<IActionResult> RemoveAnAccount([FromBody] DeleteAccountView delete)
         {
             try

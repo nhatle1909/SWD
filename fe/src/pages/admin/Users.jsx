@@ -2,9 +2,11 @@ import { PlusCircleOutlined } from "@ant-design/icons";
 import PageHeader from "../../components/PageHeader";
 import ListAccount from "../../components/account/ListAccount";
 import { Button, Flex } from "antd";
-import CreateAccountModel from "../../components/account/CreateAccountModel";
+import CreateAccountModel from "../../components/account/CreateAccountModal";
+import { useState } from "react";
 
 const Users = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
   return (
     <>
       <div className="h-[90vh] w-[100vw] flex justify-center items-center" style={{
@@ -23,7 +25,7 @@ const Users = () => {
               type="primary"
               danger
               className="blue mb-2"
-              onClick={() => { }}
+              onClick={() => { setIsModalOpen(true); }}
               icon={<PlusCircleOutlined />}
             >
               Create New Account
@@ -31,7 +33,7 @@ const Users = () => {
           </Flex>
 
           <ListAccount />
-          <CreateAccountModel />
+          <CreateAccountModel isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />
         </div>
       </div >
     </>

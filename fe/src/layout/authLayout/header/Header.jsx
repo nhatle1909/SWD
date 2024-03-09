@@ -56,7 +56,12 @@ const Header = () => {
 					getItem(<a onClick={() => {
 						navigator('/admin/users')
 					}}>Users</a>, null, null),
-
+					getItem(<a onClick={() => {
+						navigator('/admin/reports')
+					}}>Reports</a>, null, null),
+					// getItem(<a onClick={() => {
+					// 	navigator('/admin/contracts')
+					// }}>Contracts</a>, null, null),
 				] :
 				auth?.role === 'Staff' ?
 					[
@@ -64,6 +69,9 @@ const Header = () => {
 						getItem(<a onClick={() => {
 							navigator('/staff/blogs')
 						}}>Blogs</a>, null, null),
+						// getItem(<a onClick={() => {
+						// 	navigator('/admin/contracts')
+						// }}>Contracts</a>, null, null),
 					]
 					:
 					[]

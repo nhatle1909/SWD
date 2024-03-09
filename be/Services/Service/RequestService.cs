@@ -280,5 +280,10 @@ namespace Services.Service
     
             return item.FirstOrDefault().RemainPrice;
         }
+
+        Task<(bool, object)> IRequestService.DeleteExpiredRequest(string[] _ids)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
