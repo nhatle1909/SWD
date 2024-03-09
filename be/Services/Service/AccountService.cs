@@ -63,6 +63,7 @@ namespace Services.Service
                 Account account = _mapper.Map<Account>(register);
                 account.AccountId = id;
                 account.Email = register.Email.Trim();
+                account.PhoneNumber = register.PhoneNumber;
                 account.Password = SomeTool.HashPassword(register.Password);
                 account.Picture = fileBytes;
                 await _unit.AccountRepo.AddOneItem(account);
@@ -97,6 +98,7 @@ namespace Services.Service
                 string id = ObjectId.GenerateNewId().ToString();
                 Account account = _mapper.Map<Account>(registerForStaff);
                 account.AccountId = id;
+                account.PhoneNumber = registerForStaff.PhoneNumber;
                 account.Email = registerForStaff.Email.Trim();
                 account.Password = SomeTool.HashPassword(registerForStaff.Password);
                 account.Picture = fileBytes;
@@ -374,7 +376,7 @@ namespace Services.Service
 
         public async Task<object> GetPagingAccount(PagingAccountView paging)
         {
-            const int pageSize = 5;
+            const int pageSize = 100;
             const string sortField = "Email";
             List<string> searchFields = ["Email", "PhoneNumber"];
             List<string> returnFields = ["Email", "PhoneNumber"];
@@ -384,15 +386,15 @@ namespace Services.Service
 
             var responses = new List<object>();
 
-            foreach (var item in items)
-            {
-                responses.Add(new 
-                { 
-                    Email = item.Email, 
-                    Phone = item.PhoneNumber 
-                });
-            }
-            return responses;
+            //foreach (var item in items)
+            //{
+            //    responses.Add(new 
+            //    { 
+            //        Email = item.Email, 
+            //        Phone = item.PhoneNumber 
+            //    });
+            //}
+            return items;
         }
 
 
