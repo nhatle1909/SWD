@@ -26,8 +26,10 @@ namespace SWD.Controllers
             try
             {
                 var id = (HttpContext.User.FindFirst("id")?.Value) ?? "";
-                var status = await _blogService.AddBlog(id, add);
-                return Ok(status);
+                (bool, string) status = await _blogService.AddBlog(id, add);
+                if (status.Item1)
+                    return Ok(status.Item2);
+                else return BadRequest(status.Item2);
             }
             catch (Exception ex)
             {
@@ -43,7 +45,9 @@ namespace SWD.Controllers
             {
                 var id = (HttpContext.User.FindFirst("id")?.Value) ?? "";
                 var status = await _blogService.UpdateBlog(id, update);
-                return Ok(status);
+                if (status.Item1)
+                    return Ok(status.Item2);
+                else return BadRequest(status.Item2);
             }
             catch (Exception ex)
             {
@@ -59,7 +63,9 @@ namespace SWD.Controllers
             {
                 var id = (HttpContext.User.FindFirst("id")?.Value) ?? "";
                 var status = await _blogService.RemoveBlog(id, remove);
-                return Ok(status);
+                if (status.Item1)
+                    return Ok(status.Item2);
+                else return BadRequest(status.Item2);
             }
             catch (Exception ex)
             {

@@ -31,7 +31,9 @@ namespace SWD.Controllers
             try
             {
                 var status = await _ser.AddAnAccountForCustomer(register);
-                return Ok(status);
+                if (status.Item1)
+                    return Ok(status.Item2);
+                else return BadRequest(status.Item2);
             }
             catch (Exception ex)
             {
@@ -46,7 +48,9 @@ namespace SWD.Controllers
             try
             {
                 var status = await _ser.AddAnAccountForStaff(registerForStaff);
-                return Ok(status);
+                if (status.Item1)
+                    return Ok(status.Item2);
+                else return BadRequest(status.Item2);
             }
             catch (Exception ex)
             {
@@ -59,8 +63,10 @@ namespace SWD.Controllers
         {
             try
             {
-                var result = await _ser.LoginByEmailAndPassword(login);
-                return Ok(result);
+                var status = await _ser.LoginByEmailAndPassword(login);
+                if (status.Item1)
+                    return Ok(status.Item2);
+                else return BadRequest(status.Item2);
             }
             catch (Exception ex)
             {
@@ -72,7 +78,9 @@ namespace SWD.Controllers
         public async Task<IActionResult> GoogleLogin(string id_token)
         {
             var status = await _ser.GoogleAuthorizeUser(id_token);
-            return Ok(status);
+            if (status.Item1)
+                return Ok(status.Item2);
+            else return BadRequest(status.Item2);
         }
 
         //[HttpPost("Renew-Token")]
@@ -98,7 +106,9 @@ namespace SWD.Controllers
                 // Lấy ID từ JWT
                 var id = (HttpContext.User.FindFirst("id")?.Value) ?? "";
                 var status = await _ser.UpdateAnAccount(id, update);
-                return Ok(status);
+                if (status.Item1)
+                    return Ok(status.Item2);
+                else return BadRequest(status.Item2);
             }
             catch (Exception ex)
             {
@@ -128,7 +138,9 @@ namespace SWD.Controllers
             try
             {
                 var status = await _ser.SendEmailToResetPassword(email);
-                return Ok(status);
+                if (status.Item1)
+                    return Ok(status.Item2);
+                else return BadRequest(status.Item2);
             }
             catch (Exception ex)
             {
@@ -142,7 +154,9 @@ namespace SWD.Controllers
             try
             {
                 var status = await _ser.ResetPassword(resetPassword);
-                return Ok(status);
+                if (status.Item1)
+                    return Ok(status.Item2);
+                else return BadRequest(status.Item2);
             }
             catch (Exception ex)
             {
@@ -156,8 +170,10 @@ namespace SWD.Controllers
         {
             try
             {
-                var profile = await _ser.ViewProfile(email);
-                return Ok(profile);
+                var status = await _ser.ViewProfile(email);
+                if (status.Item1)
+                    return Ok(status.Item2);
+                else return BadRequest(status.Item2);
             }
             catch (Exception ex)
             {
@@ -173,7 +189,9 @@ namespace SWD.Controllers
             {
                 var id = (HttpContext.User.FindFirst("id")?.Value) ?? "";
                 var status = await _ser.ChangePassword(id, changePassword);
-                return Ok(status);
+                if (status.Item1)
+                    return Ok(status.Item2);
+                else return BadRequest(status.Item2);
             }
             catch (Exception ex)
             {
@@ -188,7 +206,9 @@ namespace SWD.Controllers
             try
             {
                 var status = await _ser.BanAnAccount(ban);
-                return Ok(status);
+                if (status.Item1)
+                    return Ok(status.Item2);
+                else return BadRequest(status.Item2);
             }
             catch (Exception ex)
             {
@@ -197,13 +217,15 @@ namespace SWD.Controllers
         }
 
         [Authorize(Roles = "Admin")]
-        [HttpDelete("Admin/Remove-Account")]
+        [HttpPost("Admin/Remove-Account")]
         public async Task<IActionResult> RemoveAnAccount([FromBody] DeleteAccountView delete)
         {
             try
             {
                 var status = await _ser.DeleteAnAccount(delete);
-                return Ok(status);
+                if (status.Item1)
+                    return Ok(status.Item2);
+                else return BadRequest(status.Item2);
             }
             catch (Exception ex)
             {
@@ -248,7 +270,9 @@ namespace SWD.Controllers
             try
             {
                 var status = await _ser.GetAccountDetail(detail);
-                return Ok(status);
+                if (status.Item1)
+                    return Ok(status.Item2);
+                else return BadRequest(status.Item2);
             }
             catch (Exception ex)
             {

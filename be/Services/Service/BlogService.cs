@@ -34,7 +34,7 @@ namespace Services.Service
             _logger = logger;
         }
 
-        public async Task<string> AddBlog(string id, AddBlogView add)
+        public async Task<(bool, string)> AddBlog(string id, AddBlogView add)
         {
             var getUser = (await _unit.AccountStatusRepo.GetFieldsByFilterAsync(["Email"],
                             g => g.AccountId.Equals(id))).FirstOrDefault();
@@ -57,14 +57,14 @@ namespace Services.Service
                     blog.Email = getUser.Email;
                     blog.Pictures = picturesBytesList;
                     await _unit.BlogRepo.AddOneItem(blog);
-                    return "Add Blog successfully";
+                    return (true, "Add Blog successfully");
                 }
-                return "Missing the Pictures";
+                return (false, "Missing the Pictures");
             }
-            return "Account is not existed";
+            return (true, "Account is not existed");
         }
 
-        public async Task<string> UpdateBlog(string id, UpdateBlogView update)
+        public async Task<(bool, string)> UpdateBlog(string id, UpdateBlogView update)
         {
             var getUser = (await _unit.AccountStatusRepo.GetFieldsByFilterAsync(["Email"],
                             g => g.AccountId.Equals(id))).FirstOrDefault();
@@ -93,17 +93,17 @@ namespace Services.Service
                         blog.Pictures = picturesBytesList;
                         blog.UpdatedAt = DateTime.UtcNow;
                         await _unit.BlogRepo.UpdateItemByValue("BlogId", update.BlogId, blog);
-                        return "Update Blog successfully";
+                        return (true, "Update Blog successfully");
 
                     }
-                    return "Missing the Pictures";
+                    return (false, "Missing the Pictures");
                 }
-                return "Blog is not existed";
+                return (false, "Blog is not existed");
             }
-            return "Account is not existed";
+            return (false, "Account is not existed");
         }
 
-        public async Task<string> RemoveBlog(string id, RemoveBlogView remove)
+        public async Task<(bool, string)> RemoveBlog(string id, RemoveBlogView remove)
         {
             var getUser = (await _unit.AccountStatusRepo.GetFieldsByFilterAsync(["Email"],
                             g => g.AccountId.Equals(id))).FirstOrDefault();
@@ -115,11 +115,11 @@ namespace Services.Service
                 if (blog is not null && blog.Email.Equals(getUser.Email))
                 {
                     await _unit.BlogRepo.RemoveItemByValue("BlogId", remove.BlogId);
-                    return "Remove Blog successfully";
+                    return (true, "Remove Blog successfully");
                 }
-                return "Blog is not existed";
+                return (false, "Blog is not existed");
             }
-            return "Account is not existed";
+            return (false, "Account is not existed");
         }
 
         public async Task<object> GetPagingBlog(int pageIndex, bool isAsc, string? searchValue)

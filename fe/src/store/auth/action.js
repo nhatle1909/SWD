@@ -14,10 +14,10 @@ export const actionLogin = (
 ) => {
   return async (dispatch) => {
     try {
-      const { data } = await login(email, password);  
+      const { data } = await login(email, password);
       const info = jwtDecode(data);
-      dispatch(setAuthUser({token:data, email: email, role: info.role}));
-      setLocalStorage('auth', {token: data, email: email, role: info.role});
+      dispatch(setAuthUser({ token: data, email: email, role: info.role }));
+      setLocalStorage('auth', { token: data, email: email, role: info.role });
     } catch (error) {
       console.log(error)
       throw error;
