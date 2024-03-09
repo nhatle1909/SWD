@@ -1,5 +1,5 @@
 
-import { sendMailResetPassword, signUpUser } from "../../api/auth";
+import { changePassword, sendMailResetPassword, signUpUser } from "../../api/auth";
 import {
   setAuthUser,
 } from "./slice";
@@ -8,6 +8,7 @@ import {
 } from "@/api/auth";
 import { setLocalStorage } from "../../utils/common";
 import { jwtDecode } from "jwt-decode";
+import {toast} from 'react-toastify'
 export const actionLogin = (
   { email, password }
 ) => {
@@ -44,7 +45,25 @@ export const actionSendMailToResetPassword = (email) => {
   return async (dispatch) => {
     try {
       await sendMailResetPassword(email);
+      toast('Link reset password sent to your email, pls check it!', {
+        type: 'success'
+      })
+      return
+    } catch (error) {
+      console.log(error)
+      throw error;
+    }
+  };
+}
 
+export const actionChangePassword = (oldPass, newPass) => {
+  return async () => {
+    try {
+      await changePassword(oldPass, newPass)
+      toast('New password updated!', {
+        type:'success'
+      })
+      return 'success'
     } catch (error) {
       console.log(error)
       throw error;
