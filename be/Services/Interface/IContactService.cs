@@ -10,9 +10,9 @@ namespace Services.Interface
     public interface IContactService
     {
         Task<string> AddContact(AddContactView add);
-        Task<string> AddressTheContact(AddressContactView address);
-        Task<string> DeleteContact(DeleteContactView delete);
+        Task<(bool, string)> AddressTheContact(AddressContactView address);
+        Task<(bool, string)> DeleteContact(DeleteContactView delete);
         Task<object> GetPagingContact(PagingContactView paging);
-        Task<object?> GetContactDetail(DetailContactView detail);
+        Task<(bool, object)> GetContactDetail(DetailContactView detail);
     }
 }

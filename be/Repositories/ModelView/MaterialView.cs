@@ -10,7 +10,7 @@ namespace Repositories.ModelView
         {
             [StringLength(50, MinimumLength = 1)]
             public required string MaterialName { get; set; }
-            public required ClassifyMaterial MaterialType { get; set; }
+            //public required ClassifyMaterial MaterialType { get; set; }
             [Range(0, double.MaxValue)]
             public required double Price { get; set; }
         }
@@ -21,7 +21,7 @@ namespace Repositories.ModelView
 
             [StringLength(50, MinimumLength = 1)]
             public required string MaterialName { get; set; }
-            public required ClassifyMaterial MaterialType { get; set; }
+            //public required ClassifyMaterial MaterialType { get; set; }
 
             [Range(0, double.MaxValue)]
             public required double Price { get; set; }

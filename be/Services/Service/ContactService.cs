@@ -57,7 +57,7 @@ namespace Services.Service
             return "The contact have been sent";
         }
 
-        public async Task<string> AddressTheContact(AddressContactView address)
+        public async Task<(bool, string)> AddressTheContact(AddressContactView address)
         {
             var getContact = (await _unit.ContactRepo.GetFieldsByFilterAsync([],
                     g => g.ContactId.Equals(address.ContactId))).FirstOrDefault();
@@ -70,21 +70,21 @@ namespace Services.Service
                 string subject = "Interior quotation system";
                 string body = $"<h3><strong>{address.ResponseOfStaff}</strong></h3>";
                 await _emailSender.SendEmailAsync(getContact.Email, subject, body);
-                return $"You have addressed the contact of email: {getContact.Email}";
+                return (true, $"You have addressed the contact of email: {getContact.Email}");
             }
-            return "The contact is not existed";
+            return (false, "The contact is not existed");
         }
 
-        public async Task<string> DeleteContact(DeleteContactView delete)
+        public async Task<(bool, string)> DeleteContact(DeleteContactView delete)
         {
             var getContact = (await _unit.ContactRepo.GetFieldsByFilterAsync([],
                     g => g.ContactId.Equals(delete.ContactId))).FirstOrDefault();
             if (getContact != null && getContact.Status == Contact.State.Completed)
             {
                 await _unit.ContactRepo.RemoveItemByValue("ContactId", getContact.ContactId);
-                return "Delete the contact successfully";
+                return (true, "Delete the contact successfully");
             }
-            return "The Contact does not exist or the Contact in progress cannot be deleted";
+            return (false, "The Contact does not exist or the Contact in progress cannot be deleted");
         }
 
         public async Task<object> GetPagingContact(PagingContactView paging)
@@ -112,7 +112,7 @@ namespace Services.Service
             return responses;
         }
 
-        public async Task<object?> GetContactDetail(DetailContactView detail)
+        public async Task<(bool, object)> GetContactDetail(DetailContactView detail)
         {
             var getContact = (await _unit.ContactRepo.GetFieldsByFilterAsync([],
                     g => g.ContactId.Equals(detail.ContactId))).FirstOrDefault();
@@ -128,9 +128,9 @@ namespace Services.Service
                     }
                     getContact.Pictures = pictures;
                 }
-                return getContact;
+                return (true, getContact);
             }
-            return null;
+            return (false, "Contact is not existed");
         }
     }
 }

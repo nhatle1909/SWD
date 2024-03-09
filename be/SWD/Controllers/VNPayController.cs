@@ -52,6 +52,26 @@ namespace SWD.Controllers
 
             return Ok(_vnpayService.Payment(requestId,remainPrice).Result);
         }
+        [Authorize(Roles = "Customer")]
+        [HttpPost("Customer/Update-Request-Item")]
+        public async Task<IActionResult> UpdateRequestDetail(string _id, AddCartView[] cartviews)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest("Invalid Data");
+            }
+            return Ok(await _vnpayService.UpdateRequestDetail(_id,cartviews));
+        }
+        [Authorize(Roles = "Customer")]
+        [HttpPost("Customer/Delete-Expired-Request")]
+        public async Task<IActionResult> DeleteExpiredRequest(string[] _id) 
+        {
+            if (!ModelState.IsValid) 
+            {
+                return BadRequest("Invalid Data");
+            }
+            return Ok(await _vnpayService.DeleteExpiredRequest(_id));
+        }
 
 
 

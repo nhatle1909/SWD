@@ -744,6 +744,43 @@
   },
   {
     "ContainingType": "SWD.Controllers.VNPayController",
+    "Method": "DeleteExpiredRequest",
+    "RelativePath": "api/VNPay/Customer/Delete-Expired-Request",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "_id",
+        "Type": "System.String[]",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SWD.Controllers.VNPayController",
+    "Method": "UpdateRequestDetail",
+    "RelativePath": "api/VNPay/Customer/Update-Request-Item",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "_id",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "cartviews",
+        "Type": "Repositories.ModelView.CartView\u002BAddCartView[]",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SWD.Controllers.VNPayController",
     "Method": "VNPayPaymentDeposit",
     "RelativePath": "api/VNPay/Customer/VNPay-Deposit-Payment",
     "HttpMethod": "POST",

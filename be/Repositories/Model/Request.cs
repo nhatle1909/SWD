@@ -11,7 +11,9 @@ namespace Repositories.Model
         [BsonElement] public required string RequestStatus { get; set; }
         [BsonElement] public required int TotalPrice { get; set; }
         [BsonElement] public required RequestDetail[] RequestDetail { get; set; }
-        [BsonElement] public required int RemainPrice { get; set; } 
+        [BsonElement] public required int RemainPrice { get; set; }
+        [BsonElement] public required DateTime ExpiredDate { get; set; } 
+        
         
     }
     public class RequestDetail 
