@@ -109,14 +109,14 @@ namespace Repositories.Repository
                 return _contactRepo;
             }
         }
-        private IRepository<Request> _requestRepo;
-        public IRepository<Request> RequestRepo
+        private IRepository<Transaction> _contractRepo;
+        public IRepository<Transaction> ContractRepo
         {
             get
             {
-                if (_requestRepo is null)
-                    _requestRepo = new Repository<Request>(_mongoClient);
-                return _requestRepo;
+                if (_contractRepo is null)
+                    _contractRepo = new Repository<Transaction>(_mongoClient);
+                return _contractRepo;
             }
         }
 
