@@ -101,7 +101,7 @@ const Header = () => {
 					<ul className="navbar-nav ml-auto">
 						<li className={`nav-item ${location.pathname === '/' ? 'active' : ''}`}><a href='/' className="nav-link">Home</a></li>
 						<li className={`nav-item ${location.pathname === '/about' ? 'active' : ''} `}><a href="/about" className="nav-link">About</a></li>
-
+						<li className={`nav-item ${location.pathname === '/blog' ? 'active' : ''} `}><a href="/blog" className="nav-link">Blog</a></li>
 
 						<Dropdown
 							menu={{
