@@ -32,12 +32,12 @@ namespace Services.Tool
             CreateMap<Contact, AddContactView>().ReverseMap()
                                           .ForMember(a => a.Pictures, a => a.Ignore());
 
-            CreateMap<Request, IEnumerable<Request>>().ReverseMap();
-            CreateMap<Request, RequestView>().ReverseMap();
+            CreateMap<Transaction, IEnumerable<Transaction>>().ReverseMap();
+            CreateMap<Transaction, RequestView>().ReverseMap();
 
             CreateMap<Cart, AddCartView>().ReverseMap();
 
-            CreateMap<RequestDetail, AddCartView>().ReverseMap();
+            CreateMap<TransactionDetail, AddCartView>().ReverseMap();
         }
     }
 }

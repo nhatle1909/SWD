@@ -1,12 +1,12 @@
-import { useState } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
-import { Dropdown, Space } from 'antd';
+import { useEffect, useState } from 'react';
+import { useNavigate, useLocation, useParams } from 'react-router-dom';
+import { Dropdown, Space, Menu } from 'antd';
 import { CaretDownOutlined, CaretUpOutlined } from '@ant-design/icons'
 import { useAppSelector, useAppDispatch } from '@/store';
 import Login from '@/pages/auth/Auth';
 import { getLocalStorage, setLocalStorage } from '@/utils/common';
 import { setAuthUser } from '../../../store/auth/slice';
-import { Menu } from 'antd';
+
 function getItem(label, key, icon, children, type) {
 	return {
 		key,
@@ -38,13 +38,25 @@ const Header = () => {
 	// auth
 	const [typeAuth, setTypeAuth] = useState('login')
 	const [openAuth, setOpenAuth] = useState(false);
+	const [changePass, setChangePass] = useState(false);
 	const handleLogout = () => {
 		setLocalStorage('auth', {});
 		window.location.reload();
 	}
+	useEffect(() => {
+		console.log('check reset pass::', window.location.search.slice(16))
+		if(openAuth){
+			setOpenAuth(false)
+		}
+		if(window.location.search.slice(0, 16)){
+			setOpenAuth(true);
+			setTypeAuth('resetPass')
+		}
+	}, [location.pathname])
+	
 	const items = [
 		{
-			label: <Login type={typeAuth} setType={setTypeAuth} setOpenAuth={setOpenAuth} />,
+			label: <Login setChangePass={setChangePass} type={typeAuth} setType={setTypeAuth} setOpenAuth={setOpenAuth} />,
 		}
 	];
 
@@ -80,7 +92,14 @@ const Header = () => {
 			label: <Menu style={{ width: 256 }} mode="vertical" items={itemsDashboard} />
 		} : null,
 		{
-			label: <a>Change Password</a>
+			label: <a onClick={() => {
+				setOpenAuth(false);
+				setTimeout(() => {
+					setChangePass(true)
+					setOpenAuth(true);
+					setTypeAuth('changePass')
+				}, 300)
+			}}>Change Password</a>
 		},
 		{
 			label: <a onClick={() => handleLogout()}>Logout</a>
@@ -105,7 +124,11 @@ const Header = () => {
 
 						<Dropdown
 							menu={{
-								items: auth?.token ? itemsProfile : items
+								items: auth?.token 
+								? changePass 
+									? items 
+									: itemsProfile 
+								: items
 							}}
 							open={openAuth}
 							placement='topRight'
@@ -115,6 +138,8 @@ const Header = () => {
 									<Space>
 										<li onClick={() => {
 											setOpenAuth(pre => !pre)
+											setChangePass(false)
+											setTypeAuth('login')
 										}} className={`nav-item hover:cursor-pointer flex`}><div className="nav-link !underline">
 												{auth.email}
 											</div>

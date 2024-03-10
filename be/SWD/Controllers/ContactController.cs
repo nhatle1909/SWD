@@ -37,8 +37,10 @@ namespace SWD.Controllers
         {
             try
             {
-                var status = await _contactService.AddressTheContact(address);
-                return Ok(status);
+                (bool, string) status = await _contactService.AddressTheContact(address);
+                if (status.Item1)
+                    return Ok(status.Item2);
+                else return BadRequest(status.Item2);
             }
             catch (Exception ex)
             {
@@ -53,7 +55,9 @@ namespace SWD.Controllers
             try
             {
                 var status = await _contactService.DeleteContact(delete);
-                return Ok(status);
+                if (status.Item1)
+                    return Ok(status.Item2);
+                else return BadRequest(status.Item2);
             }
             catch (Exception ex)
             {
@@ -83,7 +87,9 @@ namespace SWD.Controllers
             try
             {
                 var status = await _contactService.GetContactDetail(detail);
-                return Ok(status);
+                if (status.Item1)
+                    return Ok(status.Item2);
+                else return BadRequest(status.Item2);
             }
             catch (Exception ex)
             {

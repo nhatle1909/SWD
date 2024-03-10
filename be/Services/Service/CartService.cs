@@ -17,7 +17,7 @@ namespace Services.Service
     public class CartService : ICartService
     {
         private readonly IUnitOfWork _unit;
-        private IMapper _mapper;
+        private readonly IMapper _mapper;
         public CartService(IUnitOfWork unit, IMapper mapper)
         {
             _unit = unit;
@@ -25,23 +25,31 @@ namespace Services.Service
         }
         public async Task<string> AddProductFromCart(string accountId, AddCartView add)
         {
-            var getInterior = (await _unit.InteriorRepo.GetFieldsByFilterAsync(["InteriorId"],
+            var getInterior = (await _unit.InteriorRepo.GetFieldsByFilterAsync(["InteriorId", "Quantity"],
                             g => g.InteriorId.Equals(add.InteriorId))).FirstOrDefault();
             if (getInterior is not null)
             {
-                var getInteriorFromcart = (await _unit.CartRepo.GetFieldsByFilterAsync([],
-                            g => g.InteriorId.Equals(add.InteriorId))).FirstOrDefault();
-                if (getInteriorFromcart is not null)
+                if (add.Quantity <= getInterior.Quantity)
                 {
-                    var quantity = getInteriorFromcart.Quantity + add.Quantity;
-                    getInteriorFromcart.Quantity = quantity;
-                    await _unit.CartRepo.UpdateItemByValue("InteriorId", getInteriorFromcart.InteriorId, getInteriorFromcart);
+                    var getInteriorFromcart = (await _unit.CartRepo.GetFieldsByFilterAsync([],
+                            g => g.InteriorId.Equals(add.InteriorId))).FirstOrDefault();
+                    if (getInteriorFromcart is not null)
+                    {
+                        var quantity = getInteriorFromcart.Quantity + add.Quantity;
+                        if (quantity <= getInterior.Quantity)
+                        {
+                            getInteriorFromcart.Quantity = quantity;
+                            await _unit.CartRepo.UpdateItemByValue("InteriorId", getInteriorFromcart.InteriorId, getInteriorFromcart);
+                            return "Add product to cart success";
+                        }
+                        return "The number of products you want to add to the cart exceeds the number of available products";
+                    }
+                    Cart cart = _mapper.Map<Cart>(add);
+                    cart.AccountId = accountId;
+                    await _unit.CartRepo.AddOneItem(cart);
                     return "Add product to cart success";
                 }
-                Cart cart = _mapper.Map<Cart>(add);
-                cart.AccountId = accountId;
-                await _unit.CartRepo.AddOneItem(cart);
-                return "Add product to cart success";
+                return "The number of products you want to add to the cart exceeds the number of available products";
             }
             return "Product is not existed";
         }
@@ -76,10 +84,11 @@ namespace Services.Service
                     }
                     responses.Add(new
                     {
-                        CartId = product.CartId,
+                        InteriorId = getProduct.InteriorId,
+                        Quantity = product.Quantity,
                         InteriorName = getProduct.InteriorName,
-                        Image = SomeTool.GetImage(Convert.ToBase64String(getProduct.Image)),
-                        Price = getProduct.Price
+                        Price = getProduct.Price,
+                        Image = SomeTool.GetImage(Convert.ToBase64String(getProduct.Image))
                     });
                 }
                 return responses;
