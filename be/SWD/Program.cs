@@ -26,7 +26,7 @@ namespace SWD
             builder.Services.AddScoped<IMaterialService, MaterialService>();
             builder.Services.AddScoped<IInteriorService, InteriorService>();
             builder.Services.AddScoped<IBlogService, BlogService>();
-            builder.Services.AddScoped<IRequestService,RequestService>();
+            builder.Services.AddScoped<ITransactionService,TransactionService>();
             builder.Services.AddScoped<IContactService, ContactService>();
             builder.Services.AddScoped<ICartService, CartService>();
             builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
@@ -122,24 +122,24 @@ namespace SWD
 
             // Configure the HTTP request pipeline.
             // run local
-            if (app.Environment.IsDevelopment())
-            {
-                app.UseSwagger();
-                app.UseSwaggerUI();
-            }
+            //if (app.Environment.IsDevelopment())
+            //{
+            //    app.UseSwagger();
+            //    app.UseSwaggerUI();
+            //}
             //publish api
 
-            //app.UseSwagger(options =>
-            //{
-            //    options.RouteTemplate = "swagger/{documentName}/swagger.json";
-            //});
-            //app.UseSwaggerUI(c =>
-            //{
-            //    c.SwaggerEndpoint("/swagger/v1/swagger.json", "SWD API");
+            app.UseSwagger(options =>
+            {
+                options.RouteTemplate = "swagger/{documentName}/swagger.json";
+            });
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "SWD API");
 
-            //    c.RoutePrefix = "";
-            //    c.EnableTryItOutByDefault();
-            //});
+                c.RoutePrefix = "";
+                c.EnableTryItOutByDefault();
+            });
             app.UseHttpsRedirection();
             app.UseCors();
             app.UseStaticFiles();
