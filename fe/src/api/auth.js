@@ -1,8 +1,6 @@
 import baseClient from "./baseClient";
 export const login = (email, password) => {
-    const response = baseClient.post('/account/login-by-email-password', { email, password });
-    console.log("response", response);
-    return response;
+    return baseClient.post('/account/login-by-email-password', { email, password });;
 };
 
 export const signUpUser = (email, password) => {
@@ -14,5 +12,13 @@ export const signUpSeller = (email, password) => {
 };
 
 export const sendMailResetPassword = (email) => {
-    return baseClient.post('/account/send-mail-to-reset-password', { email });
+    return baseClient.post(`/account/send-mail-to-reset-password?email=${email}`);
+};
+
+export const changePassword = (oldPass, newPass) => {
+    return baseClient.patch('/account/authorize/change-password', {
+        oldPassword: oldPass,
+        password: newPass,
+        confirmPassword: newPass
+      });
 };
