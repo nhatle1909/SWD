@@ -39,15 +39,18 @@ const Header = () => {
 	const [typeAuth, setTypeAuth] = useState('login')
 	const [openAuth, setOpenAuth] = useState(false);
 	const [changePass, setChangePass] = useState(false);
-	const params = useParams();
-	
 	const handleLogout = () => {
 		setLocalStorage('auth', {});
 		window.location.reload();
 	}
 	useEffect(() => {
+		console.log('check reset pass::', window.location.search.slice(16))
 		if(openAuth){
 			setOpenAuth(false)
+		}
+		if(window.location.search.slice(0, 16)){
+			setOpenAuth(true);
+			setTypeAuth('resetPass')
 		}
 	}, [location.pathname])
 	
@@ -65,12 +68,7 @@ const Header = () => {
 					getItem(<a onClick={() => {
 						navigator('/admin/users')
 					}}>Users</a>, null, null),
-					getItem(<a onClick={() => {
-						navigator('/admin/reports')
-					}}>Reports</a>, null, null),
-					// getItem(<a onClick={() => {
-					// 	navigator('/admin/contracts')
-					// }}>Contracts</a>, null, null),
+
 				] :
 				auth?.role === 'Staff' ?
 					[
@@ -78,9 +76,6 @@ const Header = () => {
 						getItem(<a onClick={() => {
 							navigator('/staff/blogs')
 						}}>Blogs</a>, null, null),
-						// getItem(<a onClick={() => {
-						// 	navigator('/admin/contracts')
-						// }}>Contracts</a>, null, null),
 					]
 					:
 					[]

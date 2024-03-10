@@ -13,8 +13,6 @@ import Users from '@/pages/admin/Users'
 import Profile from '../pages/profile/Profile';
 import StaffRoute from './guard/StaffRoute';
 import ManageBlog from '../pages/staff/blog/ManageBlog';
-import Reports from '../pages/admin/Reports';
-import Contracts from '../pages/admin/Contracts';
 const unauthRoutes = {
   path: '/',
   element: <MainLayout />,
@@ -45,14 +43,6 @@ const adminRoutes = {
       path: 'users',
       element: <Users />,
     },
-    // {
-    //   path: 'contracts',
-    //   element: <Contracts />,
-    // },
-    {
-      path: 'reports',
-      element: <Reports />,
-    },
   ],
 };
 
@@ -65,10 +55,6 @@ const staffRoutes = {
       path: 'blogs',
       element: <ManageBlog />,
     },
-    // {
-    //   path: 'contracts',
-    //   element: <Contracts />,
-    // },
   ],
 };
 

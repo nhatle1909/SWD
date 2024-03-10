@@ -1,8 +1,10 @@
-import { actionGetAccounts, actionRemoveAccount } from "../../store/user/action";
+import { actionGetAccounts } from "../../store/user/action";
 import { useAppDispatch, useAppSelector } from "../../store";
 import React, { useRef, useState } from "react";
-import { Button, Space, Table, Input, Modal } from 'antd';
+import { Button, Space, Table, Input } from 'antd';
 import { SearchOutlined } from "@ant-design/icons";
+import CreateAccountModel from "./CreateAccountModel";
+import ViewAccountModel from "./ViewAccountModel";
 import Highlighter from 'react-highlight-words';
 
 
@@ -127,53 +129,10 @@ const ListAccount = () => {
             ),
     });
 
-    const handleDelete = (record) => {
-        dispatch(actionRemoveAccount({ Email: record.email, Comments: "delete account " + record.email }));
-    }
-
-    const handleConfirmDelete = (record) => {
-        console.log("record", record);
-        setAccount(record);
+    const handleConfirmDelete = () => {
         Modal.confirm({
-            onOk: () => handleDelete(record),
             title: 'Confirm',
             content: 'Are you sure you want to delete this account?',
-            footer: (_, { OkBtn, CancelBtn }) => (
-                <>
-                    <CancelBtn />
-                    <OkBtn type="primary" className="blue" />
-                </>
-            ),
-        });
-    }
-
-    const handleShowAccount = (record, index) => {
-        console.log("record", record);
-        setAccount(record);
-        Modal.info({
-            title: 'Account Details',
-            content: <>
-                <span><span style={{ fontWeight: "bold" }}>
-                    Email:
-                </span>
-                    <span>{" " + record.email}</span>
-                </span>
-                <br />
-                <span>
-                    <span style={{ fontWeight: "bold", marginTop: "10px;", display: "inline-block" }}>
-                        Phone Number:
-                    </span>
-                    {record.phoneNumber !== null && (<span>{" " + record.phoneNumber}</span>)}
-                </span>
-                <br />
-                <span>
-                    <span style={{ fontWeight: "bold", marginTop: "10px;", display: "inline-block" }}>
-                        Role:
-                    </span>
-                    {(index % 2 === 0 || index % 3 === 0) && (<span>{" Staff"}</span>)}
-                    {(index % 2 !== 0 && index % 3 !== 0) && (<span>{" Customer"}</span>)}
-                </span>
-            </>,
             footer: (_, { OkBtn, CancelBtn }) => (
                 <>
                     <CancelBtn />
@@ -199,20 +158,13 @@ const ListAccount = () => {
         },
         {
             title: 'Phone Number',
-            dataIndex: 'phoneNumber',
+            dataIndex: 'phone',
             width: '20%',
         },
         {
             title: 'Role',
             dataIndex: 'role',
             width: '10%',
-            render: (text, record, index) => {
-                if (index % 2 === 0 || index % 3 === 0) {
-                    return <span span > Staff</span >;
-                } else {
-                    return <span>Customer</span>;
-                }
-            }
         },
         {
             title: 'Action',
@@ -220,12 +172,10 @@ const ListAccount = () => {
             align: 'center',
             key: 'x',
             width: '20%',
-            render: (text, record, index) => {
-                return (<>
-                    <Button onClick={() => handleShowAccount(record, index)} type="primary" className="blue">View</Button>
-                    <Button onClick={() => handleConfirmDelete(record)} type="primary" danger className="red ms-2">Delete</Button>
-                </>)
-            },
+            render: () => <>
+                <Button type="primary" className="blue">View</Button>
+                <Button onClick={handleConfirmDelete} type="primary" danger className="red ms-2">Delete</Button>
+            </>,
         },
     ];
 
@@ -238,8 +188,8 @@ const ListAccount = () => {
         <Table
             columns={columns}
             dataSource={accounts}
-            pagination={{ pageSize: 5 }}
         />
+        <ViewAccountModel />
     </>);
 }
 

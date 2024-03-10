@@ -18,6 +18,7 @@ export const injectStore = (_store) =>
 baseClient.interceptors.response.use((response) => {
    return response;
 }, error => {
+  console.log('chekc token::', error)
   if( error.response.status === 401) {
     setLocalStorage('auth', {})
     toast('Token is expired, Please login again!', {
