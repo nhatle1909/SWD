@@ -5,23 +5,22 @@ export const getInfo = () => {
 };
 
 export const getAccounts = (request) => {
-    return baseClient.post('/Account/Admin/Get-Paging-Account-List', request);
+    console.log(request);
+    return baseClient.post('/Account/Get-Paging-Account-List', request);
 };
 
 export const viewAccount = (request) => {
-    return baseClient.get('/Account/Admin/View-Profile?email=' + request);
+    return baseClient.get('/Account/View-Profile?email=' + request);
 };
 
 export const createAccountStaff = (request) => {
-    return baseClient.post('/Account/Admin/Create-Staff-Account', request);
+    return baseClient.post('/Account/Register-Staff-Account', request);
 };
 
 export const createAccountCustomer = (request) => {
-    return baseClient.post('/Account/Create-Customer-Account', request);
+    return baseClient.post('/Account/Register-Customer-Account', request);
 };
 
 export const removeAccount = (request) => {
-    console.log("going to delete: ", request);
-
-    return baseClient.post('/Account/Admin/Remove-Account', request);
+    return baseClient.delete('/Account/Remove-Account', request);
 };

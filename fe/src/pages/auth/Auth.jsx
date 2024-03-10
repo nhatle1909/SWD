@@ -1,12 +1,12 @@
 import './Auth.scss'
 import { useState, useRef } from 'react';
-import { LockOutlined, UserOutlined } from '@ant-design/icons';
-import { Button, Checkbox, Form, Input } from 'antd';
+import { LockOutlined, UserOutlined, PhoneOutlined } from '@ant-design/icons';
+import { Button, Checkbox, Form, Input, InputNumber } from 'antd';
 import { useAppDispatch } from '../../store';
 import Cookies from 'js-cookie';
-import { actionSignUpUser, actionLogin, actionSendMailToResetPassword, actionChangePassword } from '../../store/auth/action'
+import { actionSignUpUser, actionLogin, actionSendMailToResetPassword, actionChangePassword, actionResetPassword } from '../../store/auth/action'
 const actionSubmit = new Map([
-  ['login', 'Log in'], ['register', 'Sign Up'], ['forgot', 'Send'], ['changePass', 'Submit']
+  ['login', 'Log in'], ['register', 'Sign Up'], ['forgot', 'Send'], ['changePass', 'Submit'], ['resetPass', 'Submit']
 ])
 const Auth = ({type, setType, setOpenAuth, setChangePass}) => {
     const dispatch = useAppDispatch();
@@ -24,35 +24,45 @@ const Auth = ({type, setType, setOpenAuth, setChangePass}) => {
         const action = type === 'login' 
         ? dispatch(actionLogin({email:values.email, password:values.password}))
           : type === 'register'
-          ?  dispatch(actionSignUpUser({email:values.email, password:values.password}))
+          ?  dispatch(actionSignUpUser({email:values.email, password:values.password, phoneNumber: values.phoneNumber}))
         : type === 'forgot' 
           ? dispatch(actionSendMailToResetPassword(values.email))
+        : type === 'resetPass'
+          ? dispatch(actionResetPassword(window.location.search.slice(16), values.newPass))
           : dispatch(actionChangePassword(values.oldPass, values.newPass))
 
         try {
-          await action
-          
-          setChangePass(false)
-          setType('login')
-          if(values.remember){
-            Cookies.set('login', JSON.stringify({
-              email: values.email,
-              password: values.password,
-              
-            }), { expires: 30 }); // Expires in 30 days
-            Cookies.set('remember', JSON.stringify(true),{
-              expires:30})
-          }else{
-            Cookies.set('login', JSON.stringify({
-              email: '',
-              password: '',
-            
-            }));
-            Cookies.set('remember', JSON.stringify(false),{
-              expires:30})
+          const payload = await action
+          if(payload === 'reset-password') {
+            setTimeout(() => {
+              window.location.href = '/'
+            }, 1000)
           }
-          setLoading(false);
-          setOpenAuth(pre => !pre)
+          else{
+            setChangePass(false)
+            setType('login')
+            if(values.remember){
+              Cookies.set('login', JSON.stringify({
+                email: values.email,
+                password: values.password,
+                
+              }), { expires: 30 }); // Expires in 30 days
+              Cookies.set('remember', JSON.stringify(true),{
+                expires:30})
+            }else{
+              Cookies.set('login', JSON.stringify({
+                email: '',
+                password: '',
+              
+              }));
+              Cookies.set('remember', JSON.stringify(false),{
+                expires:30})
+            }
+            setLoading(false);
+            setOpenAuth(pre => !pre)
+         
+          }
+        
           
         } catch (error) {
           setLoading(false);
@@ -69,20 +79,23 @@ const Auth = ({type, setType, setOpenAuth, setChangePass}) => {
       initialValues={{ remember: remember ? true : false, email: remember ? email: '', password:remember? password: '' }}
       onFinish={onFinish}
     >
-      {type === 'changePass' ? (
+      {type === 'changePass' || type === 'resetPass' ? (
         <>
-           <Form.Item
+        {type === 'changePass' ? (
+            <Form.Item
          
-         name="oldPass"
-         rules={[{ required: true, message: 'Please input your old password!' }]}
+            name="oldPass"
+            rules={[{ required: true, message: 'Please input your old password!' }]}
+            
+          >
+            <Input.Password
+              prefix={<LockOutlined className="site-form-item-icon" />}
+              placeholder="Old Password"
+              type="password"
+            />
+          </Form.Item>
+        ): (<></>)}
          
-       >
-         <Input.Password
-           prefix={<LockOutlined className="site-form-item-icon" />}
-           placeholder="Old Password"
-           type="password"
-         />
-       </Form.Item>
           <Form.Item
          
          name="newPass"
@@ -127,11 +140,29 @@ const Auth = ({type, setType, setOpenAuth, setChangePass}) => {
          <Form.Item
         name="email"
       
-        rules={[{ required: true, message: 'Please input your Email!' }]}
+        rules={[{ required: true, message: 'Please input your Email!' },{
+          type: "email",
+          message: "The input is not valid E-mail!",
+        }]}
         
       >
         <Input   ref={emailEle} value={email} onChange={(e) => setEmail(e.target.value)}  prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Email" />
       </Form.Item>
+        {type === 'register' ? (
+          <>
+            <Form.Item
+           
+        name="phoneNumber"
+      >
+        <InputNumber  style={{
+              width:'100%'
+            }}   prefix={<PhoneOutlined className="site-form-item-icon" />} placeholder="Phone number" />
+      </Form.Item>
+          </>
+        ): (
+          <></>
+        )}
+    
 
         {type === 'forgot' ? (
           <></>
