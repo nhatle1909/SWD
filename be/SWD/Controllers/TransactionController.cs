@@ -25,11 +25,11 @@ namespace SWD.Controllers
                 return BadRequest("Invalid Data Format");
             }
             var id = (HttpContext.User.FindFirst("id")?.Value) ?? "";
-            string check = await _vnpayService.AddPendingContract(id, cartViews);
+            string check = await _vnpayService.AddPendingTransaction(id, cartViews);
             int deposit = await _vnpayService.CalculateDeposit(check);
             if (check != null)
             {
-                return Ok(_vnpayService.Payment(check,deposit).Result);
+                return Ok(_vnpayService.Payment(check, deposit).Result);
             }
             return BadRequest("Email has not authenticated");
         }
@@ -40,17 +40,17 @@ namespace SWD.Controllers
         {
             return Ok(await _vnpayService.CheckPayment(url));
         }
-        [Authorize(Roles ="Customer")]
+        [Authorize(Roles = "Customer")]
         [HttpPost("Customer/VNPay-RemainPrice-Payment")]
-        public async Task<IActionResult> VNPayPaymentRemainPrice(string requestId) 
+        public async Task<IActionResult> VNPayPaymentRemainPrice(string requestId)
         {
-            if (!ModelState.IsValid) 
+            if (!ModelState.IsValid)
             {
                 return BadRequest("Invalid Data");
             }
             int remainPrice = await _vnpayService.GetRemainPrice(requestId);
 
-            return Ok(_vnpayService.Payment(requestId,remainPrice).Result);
+            return Ok(_vnpayService.Payment(requestId, remainPrice).Result);
         }
         [Authorize(Roles = "Customer")]
         [HttpPost("Customer/Update-Request-Item")]
@@ -60,17 +60,17 @@ namespace SWD.Controllers
             {
                 return BadRequest("Invalid Data");
             }
-            return Ok(await _vnpayService.UpdateContractDetail(_id,cartviews));
+            return Ok(await _vnpayService.UpdateTransactionDetail(_id, cartviews));
         }
         [Authorize(Roles = "Customer")]
         [HttpPost("Customer/Delete-Expired-Request")]
-        public async Task<IActionResult> DeleteExpiredRequest(string[] _id) 
+        public async Task<IActionResult> DeleteExpiredRequest(string[] _id)
         {
-            if (!ModelState.IsValid) 
+            if (!ModelState.IsValid)
             {
                 return BadRequest("Invalid Data");
             }
-            return Ok(await _vnpayService.DeleteExpiredContract(_id));
+            return Ok(await _vnpayService.DeleteExpiredTransaction(_id));
         }
 
 

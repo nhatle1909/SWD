@@ -16,7 +16,7 @@ namespace Repositories.Repository
         private readonly IMongoClient _mongoClient;
         public UnitOfWork(IMongoClient mongoClient)
         {
-            _mongoClient = mongoClient;          
+            _mongoClient = mongoClient;
         }
 
         private IRepository<RefreshToken> _refreshTokenRepo;
@@ -109,14 +109,14 @@ namespace Repositories.Repository
                 return _contactRepo;
             }
         }
-        private IRepository<Transaction> _contractRepo;
-        public IRepository<Transaction> ContractRepo
+        private IRepository<Transaction> _transactionRepo;
+        public IRepository<Transaction> TransactionRepo
         {
             get
             {
-                if (_contractRepo is null)
-                    _contractRepo = new Repository<Transaction>(_mongoClient);
-                return _contractRepo;
+                if (_transactionRepo is null)
+                    _transactionRepo = new Repository<Transaction>(_mongoClient);
+                return _transactionRepo;
             }
         }
 

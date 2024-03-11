@@ -39,7 +39,7 @@ namespace Services.Service
         {
             string random = SomeTool.GenerateId();
             string Tref = TransactionId + random;
-            
+
             pay.AddRequestData("vnp_Version", "2.1.0"); //Phiên bản api mà merchant kết nối. Phiên bản hiện tại là 2.1.0
             pay.AddRequestData("vnp_Command", "pay"); //Mã API sử dụng, mã cho giao dịch thanh toán là 'pay'
             pay.AddRequestData("vnp_TmnCode", tmnCode); //Mã website của merchant trên hệ thống của VNPAY (khi đăng ký tài khoản sẽ có trong mail VNPAY gửi về)
@@ -62,7 +62,7 @@ namespace Services.Service
 
             //long vnp_Amount = Convert.ToInt64(Utils.ExtractUrlParam(url, "vnp_Amount")) / 100;
             //long vnpayTranId = Convert.ToInt64(Utils.ExtractUrlParam(url, "vnp_TransactionNo"));
-         
+
             //string terminalId = Utils.ExtractUrlParam(url, "vnp_TmnCode");
             //string bankCode = Utils.ExtractUrlParam(url, "vnp_BankCode");
 
@@ -74,34 +74,34 @@ namespace Services.Service
             string vnp_TransactionStatus = Utils.ExtractUrlParam(url, "vnp_TransactionStatus");
 
 
-            IEnumerable<Transaction> item = await _unit.ContractRepo.GetFieldsByFilterAsync(["Status"],a => a.TransactionId.Equals(_id));
+            IEnumerable<Transaction> item = await _unit.TransactionRepo.GetFieldsByFilterAsync(["Status"], a => a.TransactionId.Equals(_id));
 
 
-                bool checkSignature = pay.ValidateSignature(query, vnp_SecureHash, hashSecret);
+            bool checkSignature = pay.ValidateSignature(query, vnp_SecureHash, hashSecret);
             if (checkSignature)
             {
                 if (vnp_ResponseCode == "00" && vnp_TransactionStatus == "00")
                 {
                     //Thanh toan thanh cong
-                    if (item.FirstOrDefault().TransactionStatus.Equals("Pending")) 
+                    if (item.FirstOrDefault().TransactionStatus.Equals("Pending"))
                     {
-                        await UpdateStatusContract(_id, "Processing");
+                        await UpdateStatusTransaction(_id, "Processing");
                         await UpdateInteriorQuantity(_id);
                     }
-                    if (item.FirstOrDefault().TransactionStatus.Equals("Processing")) 
+                    if (item.FirstOrDefault().TransactionStatus.Equals("Processing"))
                     {
-                        await UpdateStatusContract(_id, "Success");
+                        await UpdateStatusTransaction(_id, "Success");
                     }
-                        return "Checkout Successfull";
+                    return "Checkout Successfull";
                 }
                 else
                 {
                     if (item.FirstOrDefault().TransactionStatus.Equals("Pending"))
                     {
-                        await DeleteContract(_id);
+                        await DeleteTransaction(_id);
                     }
                     return "Failed";
-               
+
                 }
             }
             else
@@ -109,15 +109,15 @@ namespace Services.Service
                 return "Invalid signature";
             }
         }
-        public Task<object> GetAllContract(int pageIndex, int pageSize, bool isAsc, string sortField, string searchValue, string searchField)
+        public Task<object> GetAllTransaction(int pageIndex, int pageSize, bool isAsc, string sortField, string searchValue, string searchField)
         {
             throw new NotImplementedException();
         }
 
-        public async Task<string> AddPendingContract(string _id, AddCartView[] cartViews)
+        public async Task<string> AddPendingTransaction(string _id, AddCartView[] cartViews)
         {
             int TotalPrice = await CalculateTotalPrice(cartViews);
-         
+
             if (!string.IsNullOrEmpty(_id))
             {
                 IEnumerable<AccountStatus> item = await _unit.AccountStatusRepo.GetFieldsByFilterAsync(["IsAuthenticationEmail"], ass => ass.IsAuthenticationEmail == true && ass.AccountId.Equals(_id));
@@ -131,7 +131,7 @@ namespace Services.Service
                 return null;
             }
 
-            Transaction Contract = new Transaction
+            Transaction Transaction = new Transaction
             {
                 TransactionId = ObjectId.GenerateNewId().ToString(),
                 TransactionStatus = "Pending",
@@ -144,97 +144,97 @@ namespace Services.Service
                 TotalPrice = TotalPrice,
                 RemainPrice = TotalPrice * 7 / 10
             };
-            await _unit.ContractRepo.AddOneItem(Contract);
-  
-            return Contract.TransactionId;
+            await _unit.TransactionRepo.AddOneItem(Transaction);
+
+            return Transaction.TransactionId;
         }
 
-        public async Task<string> UpdateContractDetail(string _id, AddCartView[] cartviews)
+        public async Task<string> UpdateTransactionDetail(string _id, AddCartView[] cartviews)
         {
 
-            //IEnumerable<Contract> items = await _unit.ContractRepo.GetByFilterAsync(a => a.TransactionId.Equals(_id) && a.TransactionStatus.Equals("Pending"));
+            //IEnumerable<Transaction> items = await _unit.TransactionRepo.GetByFilterAsync(a => a.TransactionId.Equals(_id) && a.TransactionStatus.Equals("Pending"));
             //if (!items.Any()) 
             //{
-            //    return "Contract does not exist";
+            //    return "Transaction does not exist";
             //}
-            //ContractDetail[] details = items.FirstOrDefault().ContractDetail;
-            //ContractDetail[] newDetails = _mapper.Map<ContractDetail[]>(cartviews);
+            //TransactionDetail[] details = items.FirstOrDefault().TransactionDetail;
+            //TransactionDetail[] newDetails = _mapper.Map<TransactionDetail[]>(cartviews);
             //details = details.Concat(newDetails)
             //    .GroupBy(item => item.InteriorId) // Group by product ID
-            //    .Select(group => new ContractDetail { InteriorId = group.Key, Quantity = group.Sum(p => p.Quantity) }) // Sum quantities for each product
+            //    .Select(group => new TransactionDetail { InteriorId = group.Key, Quantity = group.Sum(p => p.Quantity) }) // Sum quantities for each product
             //    .ToArray();
-             
-            //int TotalPrice = await CalculateTotalPrice(_mapper.Map<AddCartView[]>(details));
-            
-            //Contract Contract = _mapper.Map<Contract>(items);
-            //Contract.TransactionId = _id;
-            //Contract.AccountId = items.FirstOrDefault().AccountId;
-            //Contract.CreatedAt = items.FirstOrDefault().CreatedAt;
-            //Contract.UpdatedAt = DateTime.UtcNow;
-            //Contract.ContractDetail = details;
-            //Contract.ExpiredDate = DateTime.UtcNow.AddMonths(1);
-            //Contract.TotalPrice = TotalPrice;
-            //Contract.RemainPrice = TotalPrice * 7 / 10;
 
-            //await _unit.ContractRepo.UpdateItemByValue("TransactionId", _id, Contract);
+            //int TotalPrice = await CalculateTotalPrice(_mapper.Map<AddCartView[]>(details));
+
+            //Transaction Transaction = _mapper.Map<Transaction>(items);
+            //Transaction.TransactionId = _id;
+            //Transaction.AccountId = items.FirstOrDefault().AccountId;
+            //Transaction.CreatedAt = items.FirstOrDefault().CreatedAt;
+            //Transaction.UpdatedAt = DateTime.UtcNow;
+            //Transaction.TransactionDetail = details;
+            //Transaction.ExpiredDate = DateTime.UtcNow.AddMonths(1);
+            //Transaction.TotalPrice = TotalPrice;
+            //Transaction.RemainPrice = TotalPrice * 7 / 10;
+
+            //await _unit.TransactionRepo.UpdateItemByValue("TransactionId", _id, Transaction);
             return "Add Item Successful";
         }
         public async Task<int> CalculateDeposit(string _id)
         {
-            IEnumerable<Transaction> item = await _unit.ContractRepo.GetFieldsByFilterAsync(["TotalPrice"], a => a.TransactionId.Equals(_id));
+            IEnumerable<Transaction> item = await _unit.TransactionRepo.GetFieldsByFilterAsync(["TotalPrice"], a => a.TransactionId.Equals(_id));
             int deposit = item.FirstOrDefault().TotalPrice * 3 / 10;
             return deposit;
         }
-        public async Task<string> DeleteContract(string _id)
+        public async Task<string> DeleteTransaction(string _id)
         {
-            IEnumerable<Transaction> item = await _unit.ContractRepo.GetFieldsByFilterAsync(["_id", "TransactionStatus"], a => a.TransactionId.Equals(_id) && a.TransactionStatus.Equals("Pending"));
+            IEnumerable<Transaction> item = await _unit.TransactionRepo.GetFieldsByFilterAsync(["_id", "TransactionStatus"], a => a.TransactionId.Equals(_id) && a.TransactionStatus.Equals("Pending"));
             if (item.Any())
             {
-                await _unit.ContractRepo.RemoveItemByValue("TransactionId", _id);
+                await _unit.TransactionRepo.RemoveItemByValue("TransactionId", _id);
                 return "Delete Successful";
             }
             return "Item does not exist";
         }
-        public async Task<string> DeleteExpiredContract(string[] _ids)
+        public async Task<string> DeleteExpiredTransaction(string[] _ids)
         {
             foreach (string _id in _ids)
             {
-                IEnumerable<Transaction> item = await _unit.ContractRepo.GetFieldsByFilterAsync(["_id", "ExpiredDate"], a => a.TransactionId.Equals(_id));
-                if (!item.Any()) 
+                IEnumerable<Transaction> item = await _unit.TransactionRepo.GetFieldsByFilterAsync(["_id", "ExpiredDate"], a => a.TransactionId.Equals(_id));
+                if (!item.Any())
                 {
-                    return "Contract does not exist";
+                    return "Transaction does not exist";
                 }
             }
             foreach (string _id in _ids)
             {
-                IEnumerable<Transaction> item = await _unit.ContractRepo.GetFieldsByFilterAsync(["_id", "ExpiredDate"], a => a.TransactionId.Equals(_id));
+                IEnumerable<Transaction> item = await _unit.TransactionRepo.GetFieldsByFilterAsync(["_id", "ExpiredDate"], a => a.TransactionId.Equals(_id));
                 if (item.Any() && DateTime.UtcNow > item.FirstOrDefault().ExpiredDate)
                 {
-                    await _unit.ContractRepo.RemoveItemByValue("TransactionId", _id);
-                }         
+                    await _unit.TransactionRepo.RemoveItemByValue("TransactionId", _id);
+                }
             }
             return "Delete Succesful";
         }
         //----------------------------------------------------End Interface---------------------------------------------------------------------//
         //--------------------------------------------------------------------------------------------------------------------------------------//
 
-        public async Task UpdateInteriorQuantity(string _id) 
+        public async Task UpdateInteriorQuantity(string _id)
         {
-            //IEnumerable<Contract> items = await _unit.ContractRepo.GetFieldsByFilterAsync(["ContractDetail"], a => a.TransactionId.Equals(_id));
-          
-            //foreach (ContractDetail item in items.FirstOrDefault().ContractDetail )
-            //{
-            //   var interior = await _unit.InteriorRepo.GetByFilterAsync(i => i.InteriorId.Equals(item.InteriorId));
-            //    Interior newQuantity = interior.First();
-            //    newQuantity.Quantity = newQuantity.Quantity - item.Quantity ;
-            //    await _unit.InteriorRepo.UpdateItemByValue("InteriorId",item.InteriorId,newQuantity);
-            //}
+            IEnumerable<Transaction> items = await _unit.TransactionRepo.GetFieldsByFilterAsync(["TransactionDetail"], a => a.TransactionId.Equals(_id));
+
+            foreach (TransactionDetail item in items.FirstOrDefault().TransactionDetail)
+            {
+                var interior = await _unit.InteriorRepo.GetByFilterAsync(i => i.InteriorId.Equals(item.InteriorId));
+                Interior newQuantity = interior.First();
+                newQuantity.Quantity = newQuantity.Quantity - item.Quantity;
+                await _unit.InteriorRepo.UpdateItemByValue("InteriorId", item.InteriorId, newQuantity);
+            }
             return;
         }
-        public async Task<string> UpdateStatusContract(string _id,string status)
+        public async Task<string> UpdateStatusTransaction(string _id, string status)
         {
-            IEnumerable<Transaction> item = await _unit.ContractRepo.GetByFilterAsync(a => a.TransactionId.Equals(_id) && a.TransactionStatus.Equals("Pending") || a.TransactionStatus.Equals("Processing"));
-            
+            IEnumerable<Transaction> item = await _unit.TransactionRepo.GetByFilterAsync(a => a.TransactionId.Equals(_id) && a.TransactionStatus.Equals("Pending") || a.TransactionStatus.Equals("Processing"));
+
             if (item.Any())
             {
                 Transaction newItem = _mapper.Map<Transaction>(item);
@@ -248,20 +248,20 @@ namespace Services.Service
                 newItem.TransactionId = _id;
                 newItem.AccountId = item.FirstOrDefault().AccountId;
                 newItem.TotalPrice = item.FirstOrDefault().TotalPrice;
-                //newItem.ContractDetail = item.FirstOrDefault().ContractDetail;
+                //newItem.TransactionDetail = item.FirstOrDefault().TransactionDetail;
                 newItem.CreatedAt = item.FirstOrDefault().CreatedAt;
-                
+
                 newItem.UpdatedAt = DateTime.UtcNow;
                 newItem.TransactionStatus = status;
-                await _unit.ContractRepo.UpdateItemByValue("TransactionId", _id, newItem);
+                await _unit.TransactionRepo.UpdateItemByValue("TransactionId", _id, newItem);
                 return "Update Successful";
             }
             return "Item does not exist";
         }
-        public async Task<int> CalculateTotalPrice(AddCartView[] cartViews) 
+        public async Task<int> CalculateTotalPrice(AddCartView[] cartViews)
         {
             int TotalPrice = 0;
-            //// Payment cần truyền tổng giá , Add Pending Contract vào database -> Front end gọi api kèm ContractView, front end phải gửi tổng giá, account id
+            //// Payment cần truyền tổng giá , Add Pending Transaction vào database -> Front end gọi api kèm TransactionView, front end phải gửi tổng giá, account id
             foreach (AddCartView cartView in cartViews)
             {
                 IEnumerable<Interior> item = await _unit.InteriorRepo.GetFieldsByFilterAsync(["Price"], a => a.InteriorId.Equals(cartView.InteriorId));
@@ -271,18 +271,18 @@ namespace Services.Service
 
             return TotalPrice;
         }
-        
-        
- 
+
+
+
 
         public async Task<int> GetRemainPrice(string _id)
         {
-            IEnumerable<Transaction> item = await _unit.ContractRepo.GetFieldsByFilterAsync(["RemainPrice"], a => a.TransactionId.Equals(_id));
-    
+            IEnumerable<Transaction> item = await _unit.TransactionRepo.GetFieldsByFilterAsync(["RemainPrice"], a => a.TransactionId.Equals(_id));
+
             return item.FirstOrDefault().RemainPrice;
         }
 
-        Task<string> ITransactionService.DeleteExpiredContract(string[] _ids)
+        Task<string> ITransactionService.DeleteExpiredTransaction(string[] _ids)
         {
             throw new NotImplementedException();
         }
