@@ -12,7 +12,7 @@ namespace Repositories.ModelView
 
             [StringLength(50, MinimumLength = 5)]
             public required string Password { get; set; }
-            public required string PhoneNumber { get; set; }
+            public string PhoneNumber { get; set; }
         }
 
         public class RegisterForStaffAccountView
