@@ -13,13 +13,13 @@ namespace Repositories.Repository
     {
         IRepository<RefreshToken> RefreshTokenRepo { get; }
         IRepository<Account> AccountRepo { get; }
-        IRepository<AccountStatus> AccountStatusRepo {  get; }
+        IRepository<AccountStatus> AccountStatusRepo { get; }
         IRepository<Material> MaterialRepo { get; }
         IRepository<Interior> InteriorRepo { get; }
         IRepository<Blog> BlogRepo { get; }
         IRepository<BlogComment> BlogCommentRepo { get; }
         IRepository<Contact> ContactRepo { get; }
-        IRepository<Transaction> ContractRepo { get; }
+        IRepository<Transaction> TransactionRepo { get; }
         IRepository<Cart> CartRepo { get; }
     }
 }
