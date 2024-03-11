@@ -9,6 +9,7 @@ import AdminRoute from './guard/AdminRoute';
 import PermissionRoute from './guard/PermissionRoute';
 import Home from '@/pages/home/Home';
 import About from '@/pages/about/About';
+import Blog from '@/pages/blog/Blog';
 import Users from '@/pages/admin/Users'
 import Profile from '../pages/profile/Profile';
 import StaffRoute from './guard/StaffRoute';
@@ -25,6 +26,10 @@ const unauthRoutes = {
     {
       path: 'about',
       element: <About />,
+    },
+    {
+      path: 'blog',
+      element: <Blog />,
     },
     {
       path: 'profile',
