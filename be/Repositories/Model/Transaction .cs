@@ -7,7 +7,7 @@ namespace Repositories.Model
     public class Transaction : DateAndTime
     {
         [BsonId][BsonRepresentation(BsonType.String)] public required string TransactionId { get; set; }
-        [BsonElement][BsonRepresentation(BsonType.String)] public required string AccountId { get; set; }
+        [BsonElement] public required string Email { get; set; }
         [BsonElement] public required string TransactionStatus { get; set; }
         [BsonElement] public required int TotalPrice { get; set; }
         [BsonElement] public required byte[] ContractFile { get; set; }

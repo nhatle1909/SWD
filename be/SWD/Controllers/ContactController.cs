@@ -68,62 +68,13 @@ namespace SWD.Controllers
             }
         }
 
-        //[Authorize(Roles = "Staff")]
-        //[HttpDelete("Staff/Delete-An-Contact")]
-        //public async Task<IActionResult> DeleteAnContact(DeleteContactView delete)
-        //{
-        //    try
-        //    {
-        //        var status = await _contactService.DeleteContact(delete);
-        //        if (status.Item1)
-        //            return Ok(status.Item2);
-        //        else return BadRequest(status.Item2);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        return BadRequest(ex.Message);
-        //    }
-        //}
-
-        //[Authorize(Roles = "Staff")]
-        //[HttpPost("Staff/Get-Paging-Contact-List")]
-        //public async Task<IActionResult> GetPagingContactlList(PagingContactView paging)
-        //{
-        //    try
-        //    {
-        //        var status = await _contactService.GetPagingContact(paging);
-        //        return Ok(status);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        return BadRequest(ex.Message);
-        //    }
-        //}
-
-        //[Authorize(Roles = "Staff")]
-        //[HttpPost("Staff/View-Private-Detail-Contact-From-Paging")]
-        //public async Task<IActionResult> GetContactDetail(DetailContactView detail)
-        //{
-        //    try
-        //    {
-        //        var status = await _contactService.GetContactDetail(detail);
-        //        if (status.Item1)
-        //            return Ok(status.Item2);
-        //        else return BadRequest(status.Item2);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        return BadRequest(ex.Message);
-        //    }
-        //}
-
         [Authorize(Roles = "Staff")]
-        [HttpPost("Staff/PDF")]
-        public async Task<IActionResult> PDF(string staffId, string contactId, ArrayInterior[] array)
+        [HttpDelete("Staff/Delete-An-Contact")]
+        public async Task<IActionResult> DeleteAnContact(DeleteContactView delete)
         {
             try
             {
-                var status = await _contactService.GenerateContractPdf(staffId, contactId, array);
+                var status = await _contactService.DeleteContact(delete);
                 if (status.Item1)
                     return Ok(status.Item2);
                 else return BadRequest(status.Item2);
@@ -135,12 +86,27 @@ namespace SWD.Controllers
         }
 
         [Authorize(Roles = "Staff")]
-        [HttpPost("Staff/Update-Contact")]
-        public async Task<IActionResult> UpdateContact(string contactId, ArrayInterior[] array)
+        [HttpPost("Staff/Get-Paging-Contact-List")]
+        public async Task<IActionResult> GetPagingContactlList(PagingContactView paging)
         {
             try
             {
-                var status = await _contactService.UpdateContact(contactId, array);
+                var status = await _contactService.GetPagingContact(paging);
+                return Ok(status);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [Authorize(Roles = "Staff")]
+        [HttpPost("Staff/View-Private-Detail-Contact-From-Paging")]
+        public async Task<IActionResult> GetContactDetail(DetailContactView detail)
+        {
+            try
+            {
+                var status = await _contactService.GetContactDetail(detail);
                 if (status.Item1)
                     return Ok(status.Item2);
                 else return BadRequest(status.Item2);
@@ -150,5 +116,7 @@ namespace SWD.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
+
     }
 }

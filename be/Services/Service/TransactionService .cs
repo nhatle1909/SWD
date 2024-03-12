@@ -87,6 +87,7 @@ namespace Services.Service
                 if (vnp_ResponseCode == "00" && vnp_TransactionStatus == "00")
                 {
                     //Thanh toan thanh cong
+                    
                     if (item.FirstOrDefault().TransactionStatus.Equals("Pending"))
                     {
                         await UpdateStatusTransaction(_id, "Processing");
@@ -131,12 +132,12 @@ namespace Services.Service
         public async Task<string> AddPendingTransaction(string _id, AddCartView[] cartViews)
         {
             int TotalPrice = await CalculateTotalPrice(cartViews);
-
+            IEnumerable<Contact> contact = await _unit.ContactRepo.GetFieldsByFilterAsync(["Email"], a => a.ContactId.Equals(_id));
             Transaction Transaction = new Transaction
             {
                 TransactionId = ObjectId.GenerateNewId().ToString(),
                 TransactionStatus = "Pending",
-                AccountId = _id,
+                Email = contact.First().Email,
                 CreatedAt = DateTime.UtcNow,
                 UpdatedAt = DateTime.UtcNow,
                 ExpiredDate = DateTime.UtcNow.AddMonths(1),
@@ -220,10 +221,9 @@ namespace Services.Service
         //--------------------------------------------------------------------------------------------------------------------------------------//
         public async Task VNPayPaymentRemain(string Transactionid)
         {
-            IEnumerable<Transaction> trans = await _unit.TransactionRepo.GetFieldsByFilterAsync(["AccountId"], a => a.TransactionId.Equals(Transactionid));
-            IEnumerable<AccountStatus> mail = await _unit.AccountStatusRepo.GetFieldsByFilterAsync(["Email"], a => a.AccountId.Equals(trans.First().AccountId));
+            IEnumerable<Transaction> trans = await _unit.TransactionRepo.GetFieldsByFilterAsync(["Email"], a => a.TransactionId.Equals(Transactionid));
 
-            string email = mail.FirstOrDefault().Email;
+            string email = trans.FirstOrDefault().Email;
             int RemainPrice = await GetRemainPrice(Transactionid);
             string paymentUrl = await Payment(Transactionid, RemainPrice);
 
@@ -238,9 +238,8 @@ namespace Services.Service
         }
         public async Task SendThanksMail(string Transactionid)
         {
-            IEnumerable<Transaction> trans = await _unit.TransactionRepo.GetFieldsByFilterAsync(["AccountId"], a => a.TransactionId.Equals(Transactionid));
-            IEnumerable<AccountStatus> mail = await _unit.AccountStatusRepo.GetFieldsByFilterAsync(["Email"], a => a.AccountId.Equals(trans.First().AccountId));
-            string email = mail.FirstOrDefault().Email;
+            IEnumerable<Transaction> trans = await _unit.TransactionRepo.GetFieldsByFilterAsync(["Email"], a => a.TransactionId.Equals(Transactionid));
+            string email = trans.FirstOrDefault().Email;
             string subject = "Interior quotation system";
             string body = $"Thanks email/n" +
                 $"<h3><strong>Thanks for your payment</strong></h3>" +
@@ -276,7 +275,7 @@ namespace Services.Service
                 if (item.FirstOrDefault().TransactionStatus.Equals("Processing")) newItem.ExpiredDate = DateTime.UtcNow.AddYears(1);
 
                 newItem.TransactionId = _id;
-                newItem.AccountId = item.FirstOrDefault().AccountId;
+                newItem.Email = item.FirstOrDefault().Email;
                 newItem.TotalPrice = item.FirstOrDefault().TotalPrice;
                 newItem.TransactionDetail = item.FirstOrDefault().TransactionDetail;
                 newItem.CreatedAt = item.FirstOrDefault().CreatedAt;
@@ -297,6 +296,7 @@ namespace Services.Service
                 IEnumerable<Interior> item = await _unit.InteriorRepo.GetFieldsByFilterAsync(["Price"], a => a.InteriorId.Equals(cartView.InteriorId));
                 TotalPrice = TotalPrice + item.FirstOrDefault().Price * cartView.Quantity;
             }
+            TotalPrice = (int)Math.Ceiling(TotalPrice + TotalPrice * 0.1 + 100000);
             return TotalPrice;
         }
 

@@ -28,6 +28,7 @@ using QuestPDF.Fluent;
 using QuestPDF.Previewer;
 using QuestPDF.Helpers;
 using static Repositories.ModelView.ContractView;
+using static Repositories.ModelView.CartView;
 namespace Services.Service
 {
     public class ContactService : IContactService
@@ -150,63 +151,52 @@ namespace Services.Service
             return (false, "The contact is not existed");
         }
 
-        //public async Task<(bool, string)> DeleteContact(DeleteContactView delete)
-        //{
-        //    var getContact = (await _unit.ContactRepo.GetFieldsByFilterAsync([],
-        //            g => g.ContactId.Equals(delete.ContactId))).FirstOrDefault();
-        //    if (getContact != null && getContact.StatusOfStaff == Contact.State.Completed)
-        //    {
-        //        await _unit.ContactRepo.RemoveItemByValue("ContactId", getContact.ContactId);
-        //        return (true, "Delete the contact successfully");
-        //    }
-        //    return (false, "The Contact does not exist or the Contact in progress cannot be deleted");
-        //}
+        public async Task<(bool, string)> DeleteContact(DeleteContactView delete)
+        {
+            var getContact = (await _unit.ContactRepo.GetFieldsByFilterAsync([],
+                    g => g.ContactId.Equals(delete.ContactId))).FirstOrDefault();
+            if (getContact != null && getContact.StatusResponseOfStaff == Contact.State.Completed)
+            {
+                await _unit.ContactRepo.RemoveItemByValue("ContactId", getContact.ContactId);
+                return (true, "Delete the contact successfully");
+            }
+            return (false, "The Contact does not exist or the Contact in progress cannot be deleted");
+        }
 
-        //public async Task<object> GetPagingContact(PagingContactView paging)
-        //{
-        //    const int pageSize = 5;
-        //    const string sortField = "CreatedAt";
-        //    List<string> searchFields = ["Email", "Title"];
-        //    List<string> returnFields = ["Email", "Title", "Status", "CreatedAt"];
+        public async Task<object> GetPagingContact(PagingContactView paging)
+        {
+            const int pageSize = 5;
+            const string sortField = "CreatedAt";
+            List<string> searchFields = ["Email"];
+            List<string> returnFields = ["Email", "StatusOfContact", "CreatedAt"];
 
-        //    int skip = (paging.PageIndex - 1) * pageSize;
-        //    var items = (await _unit.ContactRepo.PagingAsync(skip, pageSize, paging.IsAsc, sortField, paging.SearchValue, searchFields, returnFields)).ToList();
-        //    var responses = new List<object>();
+            int skip = (paging.PageIndex - 1) * pageSize;
+            var items = (await _unit.ContactRepo.PagingAsync(skip, pageSize, paging.IsAsc, sortField, paging.SearchValue, searchFields, returnFields)).ToList();
+            var responses = new List<object>();
 
-        //    foreach (var item in items)
-        //    {
-        //        responses.Add(new
-        //        {
-        //            ContactId = item.ContactId,
-        //            Email = item.Email,
-        //            Title = item.Title,
-        //            Status = item.StatusOfStaff,
-        //            CreatedAt = item.CreatedAt
-        //        });
-        //    }
-        //    return responses;
-        //}
+            foreach (var item in items)
+            {
+                responses.Add(new
+                {
+                    ContactId = item.ContactId,
+                    Email = item.Email,
+                    Status = item.StatusOfContact,
+                    CreatedAt = item.CreatedAt
+                });
+            }
+            return responses;
+        }
 
-        //public async Task<(bool, object)> GetContactDetail(DetailContactView detail)
-        //{
-        //    var getContact = (await _unit.ContactRepo.GetFieldsByFilterAsync([],
-        //            g => g.ContactId.Equals(detail.ContactId))).FirstOrDefault();
-        //    if (getContact != null)
-        //    {
-        //        var pictures = new List<byte[]>();
-        //        if (getContact.Pictures != null)
-        //        {
-        //            foreach (var picture in getContact.Pictures)
-        //            {
-        //                var getPicture = SomeTool.GetImage(Convert.ToBase64String(picture));
-        //                pictures.Add(getPicture!);
-        //            }
-        //            getContact.Pictures = pictures;
-        //        }
-        //        return (true, getContact);
-        //    }
-        //    return (false, "Contact is not existed");
-        //}
+        public async Task<(bool, object)> GetContactDetail(DetailContactView detail)
+        {
+            var getContact = (await _unit.ContactRepo.GetFieldsByFilterAsync([],
+                    g => g.ContactId.Equals(detail.ContactId))).FirstOrDefault();
+            if (getContact != null)
+            {
+                return (true, getContact);
+            }
+            return (false, "Contact is not existed");
+        }
 
         //private string GetImageTags(List<byte[]> picturesBytesList)
         //{
@@ -225,7 +215,7 @@ namespace Services.Service
         //    return imageTags.ToString();
         //}
 
-        public async Task<(bool, object)> GenerateContractPdf(string staffId, string contactId, ArrayInterior[] array)
+        public async Task<(bool, object)> GenerateContractPdf(string staffId, string contactId, AddCartView[] array)
         {
             var totalPrice = 0;
             var getContact = (await _unit.ContactRepo.GetFieldsByFilterAsync([],
@@ -321,7 +311,7 @@ namespace Services.Service
             return (false, "The contact is not existed");
         }
 
-        public async Task<(bool, string)> UpdateContact(string contactId, ArrayInterior[] array)
+        public async Task<(bool, string)> UpdateContact(string contactId, AddCartView[] array)
         {
             int count = 0;
             var getContact = (await _unit.ContactRepo.GetFieldsByFilterAsync([],
@@ -349,11 +339,6 @@ namespace Services.Service
             return (false, "The contact is not existed");
         }
 
-        //public async Task<(bool, string)> CreateContractPdfAndPaymentLink(string staffId, string contactId, ArrayInterior[] array)
-        //{
-        //    await GenerateContractPdf(staffId, contactId, array);
-        //    await UpdateContact(contactId, array);
-        //}
     }
 
 }

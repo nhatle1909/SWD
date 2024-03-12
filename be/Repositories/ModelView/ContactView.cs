@@ -56,10 +56,5 @@ namespace Repositories.ModelView
             public required string ContactId { get; set; }
         }
 
-        public class ArrayInterior
-        {
-            public required string InteriorId { get; set; }
-            public int Quantity { get; set;}
-        }
     }
 }

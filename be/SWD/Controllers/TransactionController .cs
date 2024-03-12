@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Repositories.Model;
 using Repositories.ModelView;
 using Services.Interface;
 using System.Security.Claims;
@@ -12,30 +13,41 @@ namespace SWD.Controllers
     public class TransactionController : ControllerBase
     {
         private readonly ITransactionService _vnpayService;
-        public TransactionController(ITransactionService vnpayService)
+        private readonly IContactService _contactService;
+        public TransactionController(ITransactionService vnpayService, IContactService contactService)
         {
             _vnpayService = vnpayService;
+            _contactService = contactService;
         }
         [Authorize(Roles = "Staff")]
         [HttpPost("Staff/VNPay-Deposit-Payment")]
-        public async Task<IActionResult> VNPayPaymentDeposit(AddCartView[] cartViews)
+        public async Task<IActionResult> VNPayPaymentDeposit(string contactId, AddCartView[] cartViews)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest("Invalid Data Format");
             }
             var id = (HttpContext.User.FindFirst("id")?.Value) ?? "";
-            string check = await _vnpayService.AddPendingTransaction(id, cartViews);
+            string check = await _vnpayService.AddPendingTransaction(contactId, cartViews);
             int deposit = await _vnpayService.CalculateDeposit(check);
+            var status1 = await _contactService.GenerateContractPdf(id, contactId, cartViews);
+            var status2 = await _contactService.UpdateContact(contactId, cartViews);
             if (check != null)
             {
-                return Ok(_vnpayService.Payment(check, deposit).Result);
+                if (status1.Item1)
+                {
+                    if (status2.Item1)
+                    {
+                        return Ok(_vnpayService.Payment(check, deposit).Result);
+                    }
+                    return BadRequest(status2.Item2);
+                }
+                return BadRequest(status1.Item2);
             }
             return BadRequest("Invalid Data Format");
         }
 
-        [Authorize(Roles = "Customer")]
-        [HttpGet("Customer/VNPay-Return")]
+        [HttpGet("VNPay-Return")]
         public async Task<IActionResult> VNPayReturn(string url)
         {
             var status = await _vnpayService.CheckPayment(url);
