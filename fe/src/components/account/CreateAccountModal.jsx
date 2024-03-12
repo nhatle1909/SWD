@@ -24,6 +24,7 @@ const CreateAccountModel = ({ isModalOpen, setIsModalOpen }) => {
         console.log('Success:', values);
     };
     const handleRadioChange = (e) => {
+        console.log("e", e.target);
         setAccountType(e.target.value);
     };
     const onFinishFailed = (errorInfo) => {
@@ -81,10 +82,10 @@ const CreateAccountModel = ({ isModalOpen, setIsModalOpen }) => {
                     >
                         <Input.Password onChange={(e) => setPassword(e.target.value)} />
                     </Form.Item>
-                    <Form.Item onChange={(e) => handleRadioChange(e)} initialValue="customer" name={"type"} label="Account Type:  ">
+                    <Form.Item initialValue="customer" name={"type"} label="Account Type:  ">
                         <Radio.Group>
-                            <Radio checked={"checked"} value="customer"> Customer </Radio>
-                            <Radio value="staff"> Staff </Radio>
+                            <Radio onClick={() => setAccountType("customer")} checked={"checked"} value="customer"> Customer </Radio>
+                            <Radio onClick={() => setAccountType("staff")} value="staff"> Staff </Radio>
                         </Radio.Group>
                     </Form.Item>
                 </Form>

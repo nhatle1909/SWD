@@ -14,7 +14,13 @@ import Users from '@/pages/admin/Users'
 import Profile from '../pages/profile/Profile';
 import StaffRoute from './guard/StaffRoute';
 import ManageBlog from '../pages/staff/blog/ManageBlog';
+import Reports from '../pages/admin/Reports';
+import ManageRequest from '../pages/staff/request/ManageRequest';
+import CreateRequest from '../pages/request/CreateRequest';
+import HistoryRequest from '../pages/request/HistoryRequest';
+
 import InteriorDetails from '../pages/interior/InteriorDetails'
+
 const unauthRoutes = {
   path: '/',
   element: <MainLayout />,
@@ -38,6 +44,15 @@ const unauthRoutes = {
       permissions: ['user']
     },
     {
+      path: 'request/create',
+      element: <CreateRequest />,
+      permissions: ['user']
+    },
+    {
+      path: 'request/history',
+      element: <HistoryRequest />,
+      permissions: ['user']
+    },
       path: 'interior/:interiorId',
       element:<InteriorDetails/>
     }
@@ -68,6 +83,10 @@ const staffRoutes = {
     {
       path: 'blogs',
       element: <ManageBlog />,
+    },
+    {
+      path: 'requests',
+      element: <ManageRequest />,
     },
   ],
 };

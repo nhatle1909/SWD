@@ -3,19 +3,18 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   interiors: null,
   interior: null
-
 };
 
 export const interiorsSlice = createSlice({
-  name: "interiors",
+  name: "interior",
   initialState,
   reducers: {
     setInteriors(state, action) {
       state.interiors = action.payload;
     },
-    setDetailInterior(state, action){
+     setDetailInterior(state, action){
       state.interior = action.payload;
-    }
+    },
   },
 });
 

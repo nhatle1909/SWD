@@ -15,7 +15,7 @@ namespace Repositories.Model
         [BsonElement] public required string Phone { get; set; }
         [BsonElement] public required string Address { get; set; }
         [BsonElement] public required string Content { get; set; }
-        [BsonElement] public required byte[] Picture { get; set; }
+        [BsonElement] public byte[]? Picture { get; set; }
         [BsonElement] public string? ResponseOfStaff{ get; set; }
         [BsonElement] public required StateContact StatusOfContact { get; set; }
         [BsonElement] public State? StatusResponseOfStaff { get; set; }

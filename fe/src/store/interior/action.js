@@ -1,3 +1,28 @@
+import { toast } from "react-toastify";
+import { getInteriors } from "../../api/interior";
+import {
+  setInteriors,
+} from "./slice";
+
+export const actionGetInteriors = (request) => {
+  return async (dispatch) => {
+    try {
+      const { data } = await getInteriors(request);
+
+      console.log("data", data);
+
+      dispatch(setInteriors(data));
+
+    } catch (error) {
+      toast(error.response.data, {
+        type: 'error'
+      });
+      console.log(error)
+      throw error;
+    }
+  };
+}
+
 import { getInteriorList } from '@/api/interior';
 import { setDetailInterior, setInteriors } from './slice';
 import { toast } from 'react-toastify';
@@ -30,4 +55,5 @@ export const actionGetDetailInterior = (interiorId) => {
       }
   };
 };
+
 

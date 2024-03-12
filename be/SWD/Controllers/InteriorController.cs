@@ -48,10 +48,10 @@ namespace SWD.Controllers
         }
 
         [AllowAnonymous]
-        [HttpGet("Get-Paging-Interior-List")]
-        public async Task<IActionResult> GetPagingInteriorList(int pageIndex, bool isAsc, string? searchValue)
+        [HttpPost("Get-Paging-Interior-List")]
+        public async Task<IActionResult> GetPagingInteriorList([FromBody] PagingInteriorView data)
         {
-            var status = await _interiorService.GetPagingInterior(pageIndex, isAsc, searchValue);
+            var status = await _interiorService.GetPagingInterior(data.PageIndex, data.IsAsc, data.SearchValue);
             return Ok(status);
         }
 

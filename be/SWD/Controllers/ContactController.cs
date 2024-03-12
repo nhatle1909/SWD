@@ -18,11 +18,11 @@ namespace SWD.Controllers
         }
 
         [HttpPost("Add-An-Contact-For-Guest")]
-        public async Task<IActionResult> AddContactForGuest(string interiorId, AddContactView add)
+        public async Task<IActionResult> AddContactForGuest([FromBody]AddContactView add)
         {
             try
             {
-                var status = await _contactService.AddContactForGuest( interiorId, add);
+                var status = await _contactService.AddContactForGuest(add.Interior, add);
                 if (status.Item1)
                     return Ok(status.Item2);
                 else return BadRequest(status.Item2);
@@ -85,9 +85,8 @@ namespace SWD.Controllers
             }
         }
 
-        [Authorize(Roles = "Staff")]
-        [HttpPost("Staff/Get-Paging-Contact-List")]
-        public async Task<IActionResult> GetPagingContactlList(PagingContactView paging)
+        [HttpPost("Get-Paging-Contact-List")]
+        public async Task<IActionResult> GetPagingContactlList([FromBody] PagingContactView paging)
         {
             try
             {

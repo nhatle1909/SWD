@@ -43,6 +43,10 @@ const Header = () => {
 		setLocalStorage('auth', {});
 		window.location.reload();
 	}
+
+	const handleRequest = () => {
+		window.location.href = "/request";
+	}
 	useEffect(() => {
 		console.log('check reset pass::', window.location.search.slice(16))
 		if (openAuth) {
@@ -78,6 +82,9 @@ const Header = () => {
 						getItem(<a onClick={() => {
 							navigator('/staff/blogs')
 						}}>Blogs</a>, null, null),
+						getItem(<a onClick={() => {
+							navigator('/staff/requests')
+						}}>Requests</a>, null, null),
 					]
 					:
 					[]
@@ -85,6 +92,19 @@ const Header = () => {
 		)
 
 	]
+
+	const itemsRequest = [
+		getItem('Request', null, null,
+			[
+				getItem(<a onClick={() => {
+					navigator('/request/history')
+				}}>History</a>, null, null),
+				getItem(<a onClick={() => {
+					navigator('/request/create')
+				}}>Create New</a>, null, null),
+			]
+		)
+	];
 
 	const itemsProfile = [
 		{
@@ -103,6 +123,9 @@ const Header = () => {
 				}, 300)
 			}}>Change Password</a>
 		},
+		auth?.role !== 'Admin' && auth?.role !== 'Staff' ? {
+			label: <Menu style={{ width: 256 }} mode="vertical" items={itemsRequest} />
+		} : null,
 		{
 			label: <a onClick={() => handleLogout()}>Logout</a>
 		}
