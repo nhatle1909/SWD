@@ -7,7 +7,7 @@ import Highlighter from 'react-highlight-words';
 
 
 
-const ListAccount = () => {
+const ListContract = () => {
     const dispatch = useAppDispatch();
     const accounts = useAppSelector(({ user }) => user?.accounts)
 
@@ -243,4 +243,4 @@ const ListAccount = () => {
     </>);
 }
 
-export default ListAccount;
+export default ListContract;

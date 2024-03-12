@@ -19,6 +19,10 @@ import '@/assets/css/jquery.timepicker.css';
 import '@/assets/css/flaticon.css';
 import '@/assets/css/icomoon.css';
 import '@/assets/css/style.css';
+import '@/assets/css/styles.css';
+// import './css/satoshi.css';
+import 'jsvectormap/dist/css/jsvectormap.css';
+import 'flatpickr/dist/flatpickr.min.css';
 import './index.scss';
 
 // Inject store here to prevent circular import issue
