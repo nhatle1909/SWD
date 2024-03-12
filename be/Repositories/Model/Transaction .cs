@@ -10,7 +10,6 @@ namespace Repositories.Model
         [BsonElement] public required string Email { get; set; }
         [BsonElement] public required string TransactionStatus { get; set; }
         [BsonElement] public required int TotalPrice { get; set; }
-        [BsonElement] public required byte[] ContractFile { get; set; }
         [BsonElement] public required int RemainPrice { get; set; }
         [BsonElement] public required DateTime ExpiredDate { get; set; }
         [BsonElement] public required TransactionDetail[] TransactionDetail { get; set; }

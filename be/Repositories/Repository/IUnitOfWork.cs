@@ -20,7 +20,7 @@ namespace Repositories.Repository
         IRepository<Interior> InteriorRepo { get; }
         IRepository<Blog> BlogRepo { get; }
         IRepository<BlogComment> BlogCommentRepo { get; }
-        IRepository<Contact> ContactRepo { get; }
+        IRepository<Request> ContactRepo { get; }
         IRepository<Transaction> TransactionRepo { get; }
         IRepository<Cart> CartRepo { get; }
         IRepository<Contract> ContractRepo { get; }

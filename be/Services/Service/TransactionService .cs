@@ -62,13 +62,7 @@ namespace Services.Service
             return paymentUrl;
         }
         public async Task<(bool, string)> CheckPayment(string url)
-        {
-
-            //long vnp_Amount = Convert.ToInt64(Utils.ExtractUrlParam(url, "vnp_Amount")) / 100;
-            //long vnpayTranId = Convert.ToInt64(Utils.ExtractUrlParam(url, "vnp_TransactionNo"));
-
-            //string terminalId = Utils.ExtractUrlParam(url, "vnp_TmnCode");
-            //string bankCode = Utils.ExtractUrlParam(url, "vnp_BankCode");
+        { 
 
             var query = Utils.GetQueryString(url);
 
@@ -132,7 +126,7 @@ namespace Services.Service
         public async Task<string> AddPendingTransaction(string _id, AddCartView[] cartViews)
         {
             int TotalPrice = await CalculateTotalPrice(cartViews);
-            IEnumerable<Contact> contact = await _unit.ContactRepo.GetFieldsByFilterAsync(["Email"], a => a.ContactId.Equals(_id));
+            IEnumerable<Request> contact = await _unit.ContactRepo.GetFieldsByFilterAsync(["Email"], a => a.RequestId.Equals(_id));
             Transaction Transaction = new Transaction
             {
                 TransactionId = ObjectId.GenerateNewId().ToString(),
@@ -141,7 +135,6 @@ namespace Services.Service
                 CreatedAt = DateTime.UtcNow,
                 UpdatedAt = DateTime.UtcNow,
                 ExpiredDate = DateTime.UtcNow.AddMonths(1),
-                ContractFile = null,
                 TransactionDetail = _mapper.Map<TransactionDetail[]>(cartViews),
                 TotalPrice = TotalPrice,
                 RemainPrice = TotalPrice * 7 / 10
@@ -151,36 +144,7 @@ namespace Services.Service
             return Transaction.TransactionId;
         }
 
-        public async Task<string> UpdateTransactionDetail(string _id, AddCartView[] cartviews)
-        {
-
-            //IEnumerable<Transaction> items = await _unit.TransactionRepo.GetByFilterAsync(a => a.TransactionId.Equals(_id) && a.TransactionStatus.Equals("Pending"));
-            //if (!items.Any()) 
-            //{
-            //    return "Transaction does not exist";
-            //}
-            //TransactionDetail[] details = items.FirstOrDefault().TransactionDetail;
-            //TransactionDetail[] newDetails = _mapper.Map<TransactionDetail[]>(cartviews);
-            //details = details.Concat(newDetails)
-            //    .GroupBy(item => item.InteriorId) // Group by product ID
-            //    .Select(group => new TransactionDetail { InteriorId = group.Key, Quantity = group.Sum(p => p.Quantity) }) // Sum quantities for each product
-            //    .ToArray();
-
-            //int TotalPrice = await CalculateTotalPrice(_mapper.Map<AddCartView[]>(details));
-
-            //Transaction Transaction = _mapper.Map<Transaction>(items);
-            //Transaction.TransactionId = _id;
-            //Transaction.AccountId = items.FirstOrDefault().AccountId;
-            //Transaction.CreatedAt = items.FirstOrDefault().CreatedAt;
-            //Transaction.UpdatedAt = DateTime.UtcNow;
-            //Transaction.TransactionDetail = details;
-            //Transaction.ExpiredDate = DateTime.UtcNow.AddMonths(1);
-            //Transaction.TotalPrice = TotalPrice;
-            //Transaction.RemainPrice = TotalPrice * 7 / 10;
-
-            //await _unit.TransactionRepo.UpdateItemByValue("TransactionId", _id, Transaction);
-            return "Add Item Successful";
-        }
+ 
         public async Task<int> CalculateDeposit(string _id)
         {
             IEnumerable<Transaction> item = await _unit.TransactionRepo.GetFieldsByFilterAsync(["TotalPrice"], a => a.TransactionId.Equals(_id));
@@ -217,6 +181,10 @@ namespace Services.Service
             }
             return "Delete Succesful";
         }
+        Task<string> ITransactionService.DeleteExpiredTransaction(string[] _ids)
+        {
+            throw new NotImplementedException();
+        }
         //----------------------------------------------------End Interface---------------------------------------------------------------------//
         //--------------------------------------------------------------------------------------------------------------------------------------//
         public async Task VNPayPaymentRemain(string Transactionid)
@@ -227,12 +195,49 @@ namespace Services.Service
             int RemainPrice = await GetRemainPrice(Transactionid);
             string paymentUrl = await Payment(Transactionid, RemainPrice);
 
+            string html = @"<!DOCTYPE html>
+<html>
+<head>
+<title>Your Order Awaits!</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+  .container {
+    width: 600px;
+    margin: 50px auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+  }
+  h1 {
+    font-size: 24px;
+    margin-bottom: 15px;
+  }
+  p {
+    font-size: 16px;
+    line-height: 1.5;
+    margin-bottom: 10px;
+  }
+  a {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: bold;
+  }
+  .important {
+    color: #b32828;
+    font-weight: bold;
+  }
+</style>
+</head>
+<body>" +
+"<div class=\"container\">\r\n    <h1>Thank you for your recent purchase!</h1>\r\n    <p>To complete your order, please proceed to the secure payment portal by clicking the button below:</p>\r\n    <p><a href='"+paymentUrl+"'>Make Payment Now</a></p>\r\n    <p class=\"important\">**Important:** This link will expire in 15 minutes after clicking. If you do not complete the payment within this timeframe, your order may be cancelled. Additionally, your order will be automatically cancelled if not checked out within one month.</p>\r\n    <p>If you have any questions or encounter any issues, please don't hesitate to contact us at <a href=\"\"mailto:support@yourcompany.com\"\">support@yourcompany.com</a>.</p>\r\n    <p>Thank you for your business!</p>\r\n  </div>\r\n</body>\r\n</html>\"";
 
             string subject = "Interior quotation system";
-            string body = $"Test/n" +
-                $"<h3><strong>{paymentUrl}</strong></h3>" +
-                $"";
-            await _emailSender.SendEmailAsync(email, subject, body);
+        
+            await _emailSender.SendEmailAsync(email, subject, html);
             return;
 
         }
@@ -241,9 +246,9 @@ namespace Services.Service
             IEnumerable<Transaction> trans = await _unit.TransactionRepo.GetFieldsByFilterAsync(["Email"], a => a.TransactionId.Equals(Transactionid));
             string email = trans.FirstOrDefault().Email;
             string subject = "Interior quotation system";
-            string body = $"Thanks email/n" +
-                $"<h3><strong>Thanks for your payment</strong></h3>" +
-                $"";
+            string body = $"Thank You for Using Our Service!" +
+                $"<h3><strong>If you have any questions or encounter any issues, please don't hesitate to contact us at support@yourcompany.com.</strong></h3>" +
+                $"Thank you for your business!";
             await _emailSender.SendEmailAsync(email, subject, body);
             return;
         }
@@ -262,7 +267,7 @@ namespace Services.Service
         }
         public async Task<string> UpdateStatusTransaction(string _id, string status)
         {
-            IEnumerable<Transaction> item = await _unit.TransactionRepo.GetByFilterAsync(a => a.TransactionId.Equals(_id) && a.TransactionStatus.Equals("Pending") || a.TransactionStatus.Equals("Processing"));
+            IEnumerable<Transaction> item = await _unit.TransactionRepo.GetByFilterAsync(a => a.TransactionId.Equals(_id) && (a.TransactionStatus.Equals("Pending") || a.TransactionStatus.Equals("Processing")));
 
             if (item.Any())
             {
@@ -299,10 +304,6 @@ namespace Services.Service
             TotalPrice = (int)Math.Ceiling(TotalPrice + TotalPrice * 0.1 + 100000);
             return TotalPrice;
         }
-
-
-
-
         public async Task<int> GetRemainPrice(string _id)
         {
             IEnumerable<Transaction> item = await _unit.TransactionRepo.GetFieldsByFilterAsync(["RemainPrice"], a => a.TransactionId.Equals(_id));
@@ -310,9 +311,36 @@ namespace Services.Service
             return item.FirstOrDefault().RemainPrice;
         }
 
-        Task<string> ITransactionService.DeleteExpiredTransaction(string[] _ids)
+       
+        public async Task<string> UpdateTransactionDetail(string _id, AddCartView[] cartviews)
         {
-            throw new NotImplementedException();
+
+            //IEnumerable<Transaction> items = await _unit.TransactionRepo.GetByFilterAsync(a => a.TransactionId.Equals(_id) && a.TransactionStatus.Equals("Pending"));
+            //if (!items.Any()) 
+            //{
+            //    return "Transaction does not exist";
+            //}
+            //TransactionDetail[] details = items.FirstOrDefault().TransactionDetail;
+            //TransactionDetail[] newDetails = _mapper.Map<TransactionDetail[]>(cartviews);
+            //details = details.Concat(newDetails)
+            //    .GroupBy(item => item.InteriorId) // Group by product ID
+            //    .Select(group => new TransactionDetail { InteriorId = group.Key, Quantity = group.Sum(p => p.Quantity) }) // Sum quantities for each product
+            //    .ToArray();
+
+            //int TotalPrice = await CalculateTotalPrice(_mapper.Map<AddCartView[]>(details));
+
+            //Transaction Transaction = _mapper.Map<Transaction>(items);
+            //Transaction.TransactionId = _id;
+            //Transaction.AccountId = items.FirstOrDefault().AccountId;
+            //Transaction.CreatedAt = items.FirstOrDefault().CreatedAt;
+            //Transaction.UpdatedAt = DateTime.UtcNow;
+            //Transaction.TransactionDetail = details;
+            //Transaction.ExpiredDate = DateTime.UtcNow.AddMonths(1);
+            //Transaction.TotalPrice = TotalPrice;
+            //Transaction.RemainPrice = TotalPrice * 7 / 10;
+
+            //await _unit.TransactionRepo.UpdateItemByValue("TransactionId", _id, Transaction);
+            return "Add Item Successful";
         }
     }
 }

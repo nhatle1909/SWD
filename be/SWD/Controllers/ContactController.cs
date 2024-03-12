@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Repositories.Model;
 using Services.Interface;
+using Twilio.Rest.Video.V1.Room.Participant;
+using static Repositories.ModelView.CartView;
 using static Repositories.ModelView.ContactView;
 
 namespace SWD.Controllers
@@ -18,11 +20,11 @@ namespace SWD.Controllers
         }
 
         [HttpPost("Add-An-Contact-For-Guest")]
-        public async Task<IActionResult> AddContactForGuest([FromBody]AddContactView add)
+        public async Task<IActionResult> AddContactForGuest(string interiorId, AddContactView add)
         {
             try
             {
-                var status = await _contactService.AddContactForGuest(add.Interior, add);
+                var status = await _contactService.AddContactForGuest( interiorId, add);
                 if (status.Item1)
                     return Ok(status.Item2);
                 else return BadRequest(status.Item2);
@@ -85,8 +87,9 @@ namespace SWD.Controllers
             }
         }
 
-        [HttpPost("Get-Paging-Contact-List")]
-        public async Task<IActionResult> GetPagingContactlList([FromBody] PagingContactView paging)
+        [Authorize(Roles = "Staff")]
+        [HttpPost("Staff/Get-Paging-Contact-List")]
+        public async Task<IActionResult> GetPagingContactlList(PagingContactView paging)
         {
             try
             {
@@ -115,6 +118,13 @@ namespace SWD.Controllers
                 return BadRequest(ex.Message);
             }
         }
+        [Authorize(Roles ="Staff")]
+        [HttpPost("Staff/Create-Contract-PDF")]
+        public async Task<IActionResult> Test(string staffId, string contactId, AddCartView[] array) 
+        {
+            return File(_contactService.GenerateContractPdf(staffId, contactId, array).Result.Item2,"application/pdf",contactId+".pdf");
+        }
+
 
 
     }

@@ -41,7 +41,8 @@ namespace SWD.Controllers
             }
         }
 
-        [HttpPost("Create-Staff-Account")]
+        [Authorize(Roles = "Admin")]
+        [HttpPost("Admin/Create-Staff-Account")]
         public async Task<IActionResult> RegisterAnAccountForStaff([FromBody] RegisterForStaffAccountView registerForStaff)
         {
             try
@@ -216,7 +217,7 @@ namespace SWD.Controllers
         }
 
         [Authorize(Roles = "Admin")]
-        [HttpPost("Admin/Remove-Account")]
+        [HttpDelete("Admin/Remove-Account")]
         public async Task<IActionResult> RemoveAnAccount([FromBody] DeleteAccountView delete)
         {
             try
