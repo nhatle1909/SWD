@@ -218,13 +218,13 @@ const Home = () => {
             <div className="carousel-testimony owl-carousel">
               <div className="item">
                 <div className="testimony-wrap p-4 pb-5">
-                  <div className="user-img mb-5" style={{ backgroundImage: `url(${linkImg('person_2.jpg')})` }}>
+                  <div className="user-img mb-5" style={{ backgroundImage: `url(${linkImg('person_1.jpg')})` }}>
                     <span className="quote d-flex align-items-center justify-content-center">
                       <i className="icon-quote-left"></i>
                     </span>
                   </div>
                   <div className="text">
-                    <p className="mb-5 pl-4 line">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
+                    <p className="mb-5 pl-4 line">The service was so quick and easy, meaning we could get on with other renovation projects while our extension design was being drawn up! Being online, we understood how straightforward the process could be and was accessible whenever suited us. Thank you!</p>
                     <p className="name">Garreth Smith</p>
                     <span className="position">Marketing Manager</span>
                   </div>
@@ -238,7 +238,7 @@ const Home = () => {
                     </span>
                   </div>
                   <div className="text">
-                    <p className="mb-5 pl-4 line">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
+                    <p className="mb-5 pl-4 line">When I booked the call it was very tentative and I wasn't sure I wanted to do work at all, by the end of the call I felt cheerful and optimistic. I have already paid the deposit to get the ball rolling. Thank you for making such a difference.</p>
                     <p className="name">Garreth Smith</p>
                     <span className="position">Interface Designer</span>
                   </div>
@@ -252,7 +252,7 @@ const Home = () => {
                     </span>
                   </div>
                   <div className="text">
-                    <p className="mb-5 pl-4 line">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
+                    <p className="mb-5 pl-4 line">Amazing customer care from start to finish. Everyone I dealt with was extremely professional and got back to me quickly. I will definitely be using again for all my design needs!.</p>
                     <p className="name">Garreth Smith</p>
                     <span className="position">UI Designer</span>
                   </div>
@@ -266,7 +266,7 @@ const Home = () => {
                     </span>
                   </div>
                   <div className="text">
-                    <p className="mb-5 pl-4 line">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
+                    <p className="mb-5 pl-4 line">The consultation was so informative and helpful. excellent customer service.</p>
                     <p className="name">Garreth Smith</p>
                     <span className="position">Web Developer</span>
                   </div>
@@ -292,82 +292,98 @@ const Home = () => {
       </div>
     </section>
 			
-		<section className="ftco-section">
-			<div className="container">
-				<div className="row justify-content-center mb-5 pb-3">
-          <div className="col-md-7 heading-section ftco-animate">
-            <h2 className="mb-4">Our Architect Team</h2>
-            <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in</p>
-          </div>
-        </div>	
-				<div className="row">
-					<div className="col-md-6 col-lg-3 ftco-animate">
-						<div className="staff">
-							<div className="img" style={{ backgroundImage: `url(${linkImg('staff_1.jpg')})` }}></div>
-							<div className="text pt-4">
-								<h3>David Smith</h3>
-								<span className="position mb-2">Achitect</span>
-								<p>I am an ambitious workaholic, but apart from that, pretty simple person.</p>
-								<ul className="ftco-social d-flex">
-	                <li className="ftco-animate"><a href="#"><span className="icon-twitter"></span></a></li>
-	                <li className="ftco-animate"><a href="#"><span className="icon-facebook"></span></a></li>
-	                <li className="ftco-animate"><a href="#"><span className="icon-google-plus"></span></a></li>
-	                <li className="ftco-animate"><a href="#"><span className="icon-instagram"></span></a></li>
-	              </ul>
-							</div>
+	<section className="ftco-section">
+		<div className="container">
+			<div className="row justify-content-center mb-5 pb-3">
+				<div className="col-md-7 heading-section ftco-animate">
+					<h2 className="mb-4">Our Architect Team</h2>
+					<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in</p>
+				</div>
+			</div>	
+			<div className="row">
+				<div className="col-md-6 col-lg-3 ftco-animate">
+					<div className="staff">
+						<div className="img" style={{ backgroundImage: `url(${linkImg('Nhat.png')})` }}></div>
+						<div className="text pt-4">
+							<h3>Lê Nguyên Nhật</h3>
+							<span className="position mb-2">Achitect</span>
+							<p>I am an ambitious workaholic, but apart from that, pretty simple person.</p>
+							<ul className="ftco-social d-flex">
+								<li className="ftco-animate"><a href="#"><span className="icon-twitter"></span></a></li>
+								<li className="ftco-animate"><a href="https://www.facebook.com/nguyennhat.le.756859"><span className="icon-facebook"></span></a></li>
+								<li className="ftco-animate"><a href="#"><span className="icon-google-plus"></span></a></li>
+								<li className="ftco-animate"><a href="#"><span className="icon-instagram"></span></a></li>
+							</ul>
 						</div>
 					</div>
-					<div className="col-md-6 col-lg-3 ftco-animate">
-						<div className="staff">
-							<div className="img" style={{ backgroundImage: `url(${linkImg('staff_2.jpg')})` }}></div>
-							<div className="text pt-4">
-								<h3>David Smith</h3>
-								<span className="position mb-2">Achitect</span>
-								<p>I am an ambitious workaholic, but apart from that, pretty simple person.</p>
-								<ul className="ftco-social d-flex">
-	                <li className="ftco-animate"><a href="#"><span className="icon-twitter"></span></a></li>
-	                <li className="ftco-animate"><a href="#"><span className="icon-facebook"></span></a></li>
-	                <li className="ftco-animate"><a href="#"><span className="icon-google-plus"></span></a></li>
-	                <li className="ftco-animate"><a href="#"><span className="icon-instagram"></span></a></li>
-	              </ul>
-							</div>
+				</div>
+				<div className="col-md-6 col-lg-3 ftco-animate">
+					<div className="staff">
+						<div className="img" style={{ backgroundImage: `url(${linkImg('staff-2.jpg')})` }}></div>
+						<div className="text pt-4">
+							<h3>Đoàn Phạm Đăng Khôi</h3>
+							<span className="position mb-2">Achitect</span>
+							<p>I am an ambitious workaholic, but apart from that, pretty simple person.</p>
+							<ul className="ftco-social d-flex">
+								<li className="ftco-animate"><a href="#"><span className="icon-twitter"></span></a></li>
+								<li className="ftco-animate"><a href="#"><span className="icon-facebook"></span></a></li>
+								<li className="ftco-animate"><a href="#"><span className="icon-google-plus"></span></a></li>
+								<li className="ftco-animate"><a href="#"><span className="icon-instagram"></span></a></li>
+							</ul>
 						</div>
 					</div>
-					<div className="col-md-6 col-lg-3 ftco-animate">
-						<div className="staff">
-							<div className="img" style={{ backgroundImage: `url(${linkImg('staff_3.jpg')})` }}></div>
-							<div className="text pt-4">
-								<h3>David Smith</h3>
-								<span className="position mb-2">Achitect</span>
-								<p>I am an ambitious workaholic, but apart from that, pretty simple person.</p>
-								<ul className="ftco-social d-flex">
-	                <li className="ftco-animate"><a href="#"><span className="icon-twitter"></span></a></li>
-	                <li className="ftco-animate"><a href="#"><span className="icon-facebook"></span></a></li>
-	                <li className="ftco-animate"><a href="#"><span className="icon-google-plus"></span></a></li>
-	                <li className="ftco-animate"><a href="#"><span className="icon-instagram"></span></a></li>
-	              </ul>
-							</div>
+				</div>
+				<div className="col-md-6 col-lg-3 ftco-animate">
+					<div className="staff">
+						<div className="img" style={{ backgroundImage: `url(${linkImg('staff-3.jpg')})` }}></div>
+						<div className="text pt-4">
+							<h3>Bùi Hiểu Khang</h3>
+							<span className="position mb-2">Achitect</span>
+							<p>I am an ambitious workaholic, but apart from that, pretty simple person.</p>
+							<ul className="ftco-social d-flex">
+								<li className="ftco-animate"><a href="#"><span className="icon-twitter"></span></a></li>
+								<li className="ftco-animate"><a href="#"><span className="icon-facebook"></span></a></li>
+								<li className="ftco-animate"><a href="#"><span className="icon-google-plus"></span></a></li>
+								<li className="ftco-animate"><a href="#"><span className="icon-instagram"></span></a></li>
+							</ul>
 						</div>
 					</div>
-					<div className="col-md-6 col-lg-3 ftco-animate">
-						<div className="staff">
-							<div className="img" style={{ backgroundImage: `url(${linkImg('staff_4.jpg')})` }}></div>
-							<div className="text pt-4">
-								<h3>David Smith</h3>
-								<span className="position mb-2">Achitect</span>
-								<p>I am an ambitious workaholic, but apart from that, pretty simple person.</p>
-								<ul className="ftco-social d-flex">
-	                <li className="ftco-animate"><a href="#"><span className="icon-twitter"></span></a></li>
-	                <li className="ftco-animate"><a href="#"><span className="icon-facebook"></span></a></li>
-	                <li className="ftco-animate"><a href="#"><span className="icon-google-plus"></span></a></li>
-	                <li className="ftco-animate"><a href="#"><span className="icon-instagram"></span></a></li>
-	              </ul>
-							</div>
+				</div>
+				<div className="col-md-6 col-lg-3 ftco-animate">
+					<div className="staff">
+						<div className="img" style={{ backgroundImage: `url(${linkImg('staff-4.jpg')})` }}></div>
+						<div className="text pt-4">
+							<h3>Trần Dương Thảo Uyên</h3>
+							<span className="position mb-2">Achitect</span>
+							<p>I am an ambitious workaholic, but apart from that, pretty simple person.</p>
+							<ul className="ftco-social d-flex">
+								<li className="ftco-animate"><a href="#"><span className="icon-twitter"></span></a></li>
+								<li className="ftco-animate"><a href="#"><span className="icon-facebook"></span></a></li>
+								<li className="ftco-animate"><a href="#"><span className="icon-google-plus"></span></a></li>
+								<li className="ftco-animate"><a href="#"><span className="icon-instagram"></span></a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<div className="col-md-6 col-lg-3 ftco-animate">
+					<div className="staff">
+						<div className="img" style={{ backgroundImage: `url(${linkImg('Nang.jpg')})` }}></div>
+						<div className="text pt-4">
+							<h3>Lê Nguyễn Toàn Năng</h3>
+							<span className="position mb-2">Achitect</span>
+							<p>I am an ambitious workaholic, but apart from that, pretty simple person.</p>
+							<ul className="ftco-social d-flex">
+								<li className="ftco-animate"><a href="#"><span className="icon-twitter"></span></a></li>
+								<li className="ftco-animate"><a href="https://www.facebook.com/nang.lee.503"><span className="icon-facebook"></span></a></li>
+								<li className="ftco-animate"><a href="#"><span className="icon-google-plus"></span></a></li>
+								<li className="ftco-animate"><a href="#"><span className="icon-instagram"></span></a></li>
+							</ul>
 						</div>
 					</div>
 				</div>
 			</div>
-		</section>
+		</div>
+	</section>
 
 		<section className="ftco-section">
 			<div className="container">
