@@ -3,11 +3,15 @@ import { useDispatch, useSelector } from "react-redux";
 
 import authenticationSlice from "./auth/slice";
 import userSlice from "./user/slice";
+import requestSlice from "./request/slice";
+import interiorSlice from "./interior/slice";
 
 export const store = configureStore({
   reducer: {
     authentication: authenticationSlice,
-    user: userSlice
+    user: userSlice,
+    request: requestSlice,
+    interior: interiorSlice,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

@@ -51,25 +51,14 @@ namespace Services.Service
         {
             if (add.Phone.Length == 10)
             {
-                if (add.Picture.Length > 0)
-                {
-                    //Encode picture
-                    byte[] fileBytes;
-                    using (var ms = new MemoryStream())
-                    {
-                        await add.Picture.CopyToAsync(ms);
-                        fileBytes = ms.ToArray();
-                    }
-                    List<string> interiorIdList = [];
-                    interiorIdList.Add(interiorId);
-                    Contact contact = _mapper.Map<Contact>(add);
-                    contact.InteriorId = interiorIdList;
-                    contact.Picture = fileBytes;
-                    contact.StatusOfContact = Contact.StateContact.Processing;
-                    await _unit.ContactRepo.AddOneItem(contact);
-                    return (true, "The contact have been sent");
-                }
-                return (false, "Missing the picture");
+                List<string> interiorIdList = [];
+                interiorIdList.Add(interiorId);
+                Contact contact = _mapper.Map<Contact>(add);
+                contact.InteriorId = interiorIdList;
+                contact.Picture = null;
+                contact.StatusOfContact = Contact.StateContact.Processing;
+                await _unit.ContactRepo.AddOneItem(contact);
+                return (true, "The contact have been sent");
             }
             return (false, "Phone number is not valid");
         }
@@ -165,7 +154,7 @@ namespace Services.Service
 
         public async Task<object> GetPagingContact(PagingContactView paging)
         {
-            const int pageSize = 5;
+            const int pageSize = 100;
             const string sortField = "CreatedAt";
             List<string> searchFields = ["Email"];
             List<string> returnFields = ["Email", "StatusOfContact", "CreatedAt"];

@@ -16,8 +16,14 @@ export const createAccountStaff = (request) => {
     return baseClient.post('/Account/Admin/Create-Staff-Account', request);
 };
 
-export const createAccountCustomer = (request) => {
-    return baseClient.post('/Account/Create-Customer-Account', request);
+export const createAccountCustomer = (accountType, request) => {
+
+    if (accountType === "customer") {
+        return baseClient.post('/Account/Create-Customer-Account', request);
+    }
+
+    return baseClient.post('/Account/Create-Staff-Account', request);
+
 };
 
 export const removeAccount = (request) => {

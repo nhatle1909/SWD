@@ -22,7 +22,8 @@ namespace Repositories.ModelView
             [Phone] public required string Phone { get; set; }
             public required string Address { get; set; }
             public required string Content { get; set; }
-            public required IFormFile Picture { get; set; }
+            public required string Interior { get; set; }
+            public IFormFile? Picture { get; set; }
         }
 
         public class AddForCustomerContactView

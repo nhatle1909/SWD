@@ -55,8 +55,7 @@ export const actionAddAccount = (request) => {
   return async (dispatch) => {
     try {
       console.log("going to add: ", request)
-      const response = await createAccountCustomer({ email: request.email, phoneNumber: request.phoneNumber, password: request.password });
-
+      const response = await createAccountCustomer(request.accountType, { email: request.email, phoneNumber: request.phoneNumber, password: request.password });
       console.log("response", response);
       const { data } = await getAccounts({
         PageIndex: 1,
