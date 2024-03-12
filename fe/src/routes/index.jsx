@@ -53,6 +53,10 @@ const adminRoutes = {
       path: 'users',
       element: <Users />,
     },
+    {
+      path: 'reports',
+      element: <Reports />,
+    },
   ],
 };
 

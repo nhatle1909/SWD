@@ -12,7 +12,7 @@ namespace Repositories.ModelView
 
             [StringLength(50, MinimumLength = 5)]
             public required string Password { get; set; }
-            public required string PhoneNumber { get; set; }
+            public string? PhoneNumber { get; set; }
         }
 
         public class RegisterForStaffAccountView
@@ -22,7 +22,7 @@ namespace Repositories.ModelView
 
             [StringLength(50, MinimumLength = 5)]
             public required string Password { get; set; }
-            public required string PhoneNumber { get; set; }
+            public string? PhoneNumber { get; set; }
         }
 
         public class LoginAccountView
@@ -37,9 +37,9 @@ namespace Repositories.ModelView
         public class UpdateAccountView
         {
             [Phone]
-            public string? PhoneNumber { get; set; }
+            public required string PhoneNumber { get; set; }
 
-            public string? HomeAdress { get; set; }
+            public required string HomeAdress { get; set; }
         }
 
         public class UpdatePictureAccountView

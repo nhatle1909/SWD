@@ -381,62 +381,15 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "SWD.Controllers.CartController",
-    "Method": "AddProductToCart",
-    "RelativePath": "api/Cart/Customer/Add-An-Product-To-Cart",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "add",
-        "Type": "Repositories.ModelView.CartView\u002BAddCartView",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "SWD.Controllers.CartController",
-    "Method": "DeleteProductToCart",
-    "RelativePath": "api/Cart/Customer/Delete-An-Product-To-Cart",
+    "ContainingType": "SWD.Controllers.ContactController",
+    "Method": "AddContactForCustomer",
+    "RelativePath": "api/Contact/Add-An-Contact-For-Customer",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
         "Name": "interiorId",
-        "Type": "System.String",
-        "IsRequired": false
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "SWD.Controllers.CartController",
-    "Method": "GetAllProductToCart",
-    "RelativePath": "api/Cart/Customer/Get-All-Product-To-Cart",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "SWD.Controllers.ContactController",
-    "Method": "AddAnContact",
-    "RelativePath": "api/Contact/Add-An-Contact",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "Email",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "Title",
         "Type": "System.String",
         "IsRequired": false
       },
@@ -446,8 +399,49 @@
         "IsRequired": false
       },
       {
-        "Name": "Pictures",
-        "Type": "Microsoft.AspNetCore.Http.IFormFile[]",
+        "Name": "Picture",
+        "Type": "Microsoft.AspNetCore.Http.IFormFile",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SWD.Controllers.ContactController",
+    "Method": "AddContactForGuest",
+    "RelativePath": "api/Contact/Add-An-Contact-For-Guest",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "interiorId",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Email",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Phone",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Address",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Content",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Picture",
+        "Type": "Microsoft.AspNetCore.Http.IFormFile",
         "IsRequired": false
       }
     ],
@@ -462,9 +456,24 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "address",
-        "Type": "Repositories.ModelView.ContactView\u002BAddressContactView",
-        "IsRequired": true
+        "Name": "ContactId",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "ResponseOfStaff",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "File",
+        "Type": "Microsoft.AspNetCore.Http.IFormFile",
+        "IsRequired": false
+      },
+      {
+        "Name": "StatusResponseOfStaff",
+        "Type": "System.String",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": []
@@ -663,89 +672,19 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "SWD.Controllers.MaterialController",
-    "Method": "OptionalInteriorQuote",
-    "RelativePath": "api/Material/Authorize/Optional-Product-Quote",
-    "HttpMethod": "POST",
+    "ContainingType": "SWD.Controllers.TransactionController",
+    "Method": "TransactionList",
+    "RelativePath": "api/Transaction/Customer/Transaction-List-DO-NOT-USE",
+    "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
-    "Parameters": [
-      {
-        "Name": "arrMaterialId",
-        "Type": "System.String[]",
-        "IsRequired": true
-      }
-    ],
+    "Parameters": [],
     "ReturnTypes": []
   },
   {
-    "ContainingType": "SWD.Controllers.MaterialController",
-    "Method": "AddOneMaterial",
-    "RelativePath": "api/Material/Staff/Add-One-Material",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "add",
-        "Type": "Repositories.ModelView.MaterialView\u002BAddMaterialView",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "SWD.Controllers.MaterialController",
-    "Method": "DeleteMaterial",
-    "RelativePath": "api/Material/Staff/Delete-Material",
-    "HttpMethod": "DELETE",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "delete",
-        "Type": "Repositories.ModelView.MaterialView\u002BDeleteMaterialView",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "SWD.Controllers.MaterialController",
-    "Method": "GetPagingMaterialList",
-    "RelativePath": "api/Material/Staff/Get-Paging-Material-List",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "paging",
-        "Type": "Repositories.ModelView.MaterialView\u002BPagingMaterialView",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "SWD.Controllers.MaterialController",
-    "Method": "UpdateMaterial",
-    "RelativePath": "api/Material/Staff/Update-Material",
-    "HttpMethod": "PUT",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "update",
-        "Type": "Repositories.ModelView.MaterialView\u002BUpdateMaterialView",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "SWD.Controllers.VNPayController",
-    "Method": "DeleteExpiredRequest",
-    "RelativePath": "api/VNPay/Customer/Delete-Expired-Request",
+    "ContainingType": "SWD.Controllers.TransactionController",
+    "Method": "DeleteExpiredTransaction",
+    "RelativePath": "api/Transaction/Staff/Delete-Expired-Request",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
@@ -759,34 +698,18 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "SWD.Controllers.VNPayController",
-    "Method": "UpdateRequestDetail",
-    "RelativePath": "api/VNPay/Customer/Update-Request-Item",
+    "ContainingType": "SWD.Controllers.TransactionController",
+    "Method": "VNPayPaymentDeposit",
+    "RelativePath": "api/Transaction/Staff/VNPay-Deposit-Payment",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "_id",
+        "Name": "contactId",
         "Type": "System.String",
         "IsRequired": false
       },
-      {
-        "Name": "cartviews",
-        "Type": "Repositories.ModelView.CartView\u002BAddCartView[]",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "SWD.Controllers.VNPayController",
-    "Method": "VNPayPaymentDeposit",
-    "RelativePath": "api/VNPay/Customer/VNPay-Deposit-Payment",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
       {
         "Name": "cartViews",
         "Type": "Repositories.ModelView.CartView\u002BAddCartView[]",
@@ -796,25 +719,9 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "SWD.Controllers.VNPayController",
-    "Method": "VNPayPaymentRemainPrice",
-    "RelativePath": "api/VNPay/Customer/VNPay-RemainPrice-Payment",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "requestId",
-        "Type": "System.String",
-        "IsRequired": false
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "SWD.Controllers.VNPayController",
+    "ContainingType": "SWD.Controllers.TransactionController",
     "Method": "VNPayReturn",
-    "RelativePath": "api/VNPay/Customer/VNPay-Return",
+    "RelativePath": "api/Transaction/VNPay-Return",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,

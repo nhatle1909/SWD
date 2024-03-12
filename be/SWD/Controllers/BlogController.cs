@@ -26,7 +26,7 @@ namespace SWD.Controllers
             try
             {
                 var id = (HttpContext.User.FindFirst("id")?.Value) ?? "";
-                (bool, string) status = await _blogService.AddBlog(id, add);
+                var status = await _blogService.AddBlog(id, add);
                 if (status.Item1)
                     return Ok(status.Item2);
                 else return BadRequest(status.Item2);

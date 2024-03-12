@@ -45,15 +45,15 @@ const Header = () => {
 	}
 	useEffect(() => {
 		console.log('check reset pass::', window.location.search.slice(16))
-		if(openAuth){
+		if (openAuth) {
 			setOpenAuth(false)
 		}
-		if(window.location.search.slice(0, 16)){
+		if (window.location.search.slice(0, 16)) {
 			setOpenAuth(true);
 			setTypeAuth('resetPass')
 		}
 	}, [location.pathname])
-	
+
 	const items = [
 		{
 			label: <Login setChangePass={setChangePass} type={typeAuth} setType={setTypeAuth} setOpenAuth={setOpenAuth} />,
@@ -68,7 +68,9 @@ const Header = () => {
 					getItem(<a onClick={() => {
 						navigator('/admin/users')
 					}}>Users</a>, null, null),
-
+					getItem(<a onClick={() => {
+						navigator('/admin/reports')
+					}}>Reports</a>, null, null),
 				] :
 				auth?.role === 'Staff' ?
 					[
@@ -124,11 +126,11 @@ const Header = () => {
 
 						<Dropdown
 							menu={{
-								items: auth?.token 
-								? changePass 
-									? items 
-									: itemsProfile 
-								: items
+								items: auth?.token
+									? changePass
+										? items
+										: itemsProfile
+									: items
 							}}
 							open={openAuth}
 							placement='topRight'

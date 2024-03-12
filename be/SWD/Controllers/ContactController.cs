@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
+using Repositories.Model;
 using Services.Interface;
 using static Repositories.ModelView.ContactView;
 
@@ -8,22 +9,41 @@ namespace SWD.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ContactController : Controller
+    public class ContactController : ControllerBase
     {
-        private IContactService _contactService;
+        private readonly IContactService _contactService;
         public ContactController(IContactService contactService)
         {
             _contactService = contactService;
         }
 
-        [AllowAnonymous] 
-        [HttpPost("Add-An-Contact")]
-        public async Task<IActionResult> AddAnContact(AddContactView add)
+        [HttpPost("Add-An-Contact-For-Guest")]
+        public async Task<IActionResult> AddContactForGuest(string interiorId, AddContactView add)
         {
             try
             {
-                var status = await _contactService.AddContact(add);
-                return Ok(status);
+                var status = await _contactService.AddContactForGuest( interiorId, add);
+                if (status.Item1)
+                    return Ok(status.Item2);
+                else return BadRequest(status.Item2);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [Authorize(Roles = "Customer")]
+        [HttpPost("Add-An-Contact-For-Customer")]
+        public async Task<IActionResult> AddContactForCustomer(string interiorId, AddForCustomerContactView add)
+        {
+            try
+            {
+                var id = (HttpContext.User.FindFirst("id")?.Value) ?? "";
+                var status = await _contactService.AddContactForCustomer(id, interiorId, add);
+                if (status.Item1)
+                    return Ok(status.Item2);
+                else return BadRequest(status.Item2);
             }
             catch (Exception ex)
             {
@@ -37,7 +57,7 @@ namespace SWD.Controllers
         {
             try
             {
-                (bool, string) status = await _contactService.AddressTheContact(address);
+                var status = await _contactService.AddressTheContact(address);
                 if (status.Item1)
                     return Ok(status.Item2);
                 else return BadRequest(status.Item2);
@@ -96,5 +116,7 @@ namespace SWD.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
+
     }
 }

@@ -8,6 +8,9 @@ using System.Threading.Tasks;
 using static Repositories.Model.Contact;
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Options;
+using System.Runtime.Serialization;
+using System.Runtime.CompilerServices;
 
 namespace Repositories.ModelView
 {
@@ -16,15 +19,24 @@ namespace Repositories.ModelView
         public class AddContactView
         {
             [EmailAddress] public required string Email { get; set; }
-            [StringLength(1000, MinimumLength = 1)] public required string Title { get; set; }
-            [StringLength(10000, MinimumLength = 1)] public required string Content { get; set; }
-            public IFormFile[]? Pictures { get; set; }
+            [Phone] public required string Phone { get; set; }
+            public required string Address { get; set; }
+            public required string Content { get; set; }
+            public required IFormFile Picture { get; set; }
+        }
+
+        public class AddForCustomerContactView
+        {
+            public required string Content { get; set; }
+            public required IFormFile Picture { get; set; }
         }
 
         public class AddressContactView
         {
             public required string ContactId { get; set; }
             public required string ResponseOfStaff { get; set; }
+            public IFormFile? File { get; set; }
+            public required State StatusResponseOfStaff { get; set; }
         }
 
         public class DeleteContactView
@@ -43,5 +55,6 @@ namespace Repositories.ModelView
         {
             public required string ContactId { get; set; }
         }
+
     }
 }

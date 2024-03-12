@@ -64,5 +64,12 @@
     "C:\\Users\\DELL\\.nuget\\packages\\twilio\\6.16.1\\twilio.6.16.1.nupkg.sha512",
     "C:\\Users\\DELL\\.nuget\\packages\\zstdsharp.port\\0.7.3\\zstdsharp.port.0.7.3.nupkg.sha512"
   ],
-  "logs": []
+  "logs": [
+    {
+      "code": "Undefined",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Problem reading the cache file D:\\SWD\\be\\Repositories\\obj\\project.nuget.cache : Invalid property identifier character: <. Path 'version', line 3, position 0."
+    }
+  ]
 }

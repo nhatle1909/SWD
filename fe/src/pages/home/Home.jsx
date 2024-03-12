@@ -318,7 +318,7 @@ const Home = () => {
 								<div className="blog-entry">
 									<div className="text d-flex py-4">
 										<div className="meta">
-										<div><a href="#">{item.price}</a></div>
+											<div><a href="#">{item.price}</a></div>
 										</div>
 										<div className="desc pl-3">
 											<h3 className="heading"><a href="#">{item.interiorName}</a></h3>
