@@ -16,22 +16,22 @@ namespace Repositories.ModelView
             public required IFormFile Image { get; set; }
             [Range(0, int.MaxValue)]
             public required int Quantity { get; set; }
-            [Range(0, double.MaxValue)]
-            public required double Price { get; set; }
+            [Range(0, int.MaxValue)]
+            public required int Price { get; set; }
         }
 
         public class UpdateInteriorView
         {
-            [StringLength(50, MinimumLength = 1)]
             public required string InteriorId { get; set; }
+            [StringLength(50, MinimumLength = 1)]
             public required string InteriorName { get; set; }
             public required ClassifyInterior InteriorType { get; set; }
             public string? Description { get; set; }
             public required IFormFile Image { get; set; }
             [Range(1, int.MaxValue)]
             public required int Quantity { get; set; }
-            [Range(0, double.MaxValue)]
-            public required double Price { get; set; }
+            [Range(0, int.MaxValue)]
+            public required int Price { get; set; }
         }
 
         public class DeleteInteriorView

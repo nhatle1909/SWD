@@ -76,7 +76,6 @@ namespace Repositories.Repository
             }
         }
 
-
         private IRepository<Blog> _blogRepo;
         public IRepository<Blog> BlogRepo
         {
@@ -128,6 +127,17 @@ namespace Repositories.Repository
                 if (_cartRepo is null)
                     _cartRepo = new Repository<Cart>(_mongoClient);
                 return _cartRepo;
+            }
+        }
+
+        private IRepository<Contract> _contractRepo;
+        public IRepository<Contract> ContractRepo
+        {
+            get
+            {
+                if (_contractRepo is null)
+                    _contractRepo = new Repository<Contract>(_mongoClient);
+                return _contractRepo;
             }
         }
     }

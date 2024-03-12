@@ -17,59 +17,47 @@ namespace SWD.Controllers
             _Service = Service;
         }
 
-        [Authorize(Roles = "Staff")]
-        [HttpPost("Staff/Get-Paging-Material-List")]
-        public async Task<object> GetPagingMaterialList([FromBody] PagingMaterialView paging)
-        {
-            var status = await _Service.GetPagingMaterial(paging);
-            return Ok(new
-            {
-                Message = status
-            });
-        }
+        //[Authorize(Roles = "Staff")]
+        //[HttpPost("Staff/Get-Paging-Material-List")]
+        //public async Task<object> GetPagingMaterialList([FromBody] PagingMaterialView paging)
+        //{
+        //    var status = await _Service.GetPagingMaterial(paging);
+        //    return Ok(status);
+        //}
 
-        [Authorize(Roles = "Staff")]
-        [HttpPost("Staff/Add-One-Material")]
-        public async Task<IActionResult> AddOneMaterial([FromBody] AddMaterialView add)
-        {
-            string status = await _Service.AddOneMaterial(add);
-            return Ok(new
-            {
-                Message = status
-            });
-        }
+        //[Authorize(Roles = "Staff")]
+        //[HttpPost("Staff/Add-One-Material")]
+        //public async Task<IActionResult> AddOneMaterial([FromBody] AddMaterialView add)
+        //{
+        //    string status = await _Service.AddOneMaterial(add);
+        //    return Ok(status);
+        //}
 
-        [Authorize(Roles = "Staff")]
-        [HttpPut("Staff/Update-Material")]
-        public async Task<IActionResult> UpdateMaterial([FromBody] UpdateMaterialView update)
-        {
-            string status = await _Service.UpdateMaterial(update);
-            return Ok(new
-            {
-                Message = status
-            });
-        }
+        //[Authorize(Roles = "Staff")]
+        //[HttpPut("Staff/Update-Material")]
+        //public async Task<IActionResult> UpdateMaterial([FromBody] UpdateMaterialView update)
+        //{
+        //    string status = await _Service.UpdateMaterial(update);
+        //    return Ok(status);
+        //}
 
-        [Authorize(Roles = "Staff")]
-        [HttpDelete("Staff/Delete-Material")]
-        public async Task<IActionResult> DeleteMaterial([FromBody] DeleteMaterialView delete)
-        {
-            string status = await _Service.DeleteMaterial(delete);
-            return Ok(new
-            {
-                Message = status
-            });
-        }
+        //[Authorize(Roles = "Staff")]
+        //[HttpDelete("Staff/Delete-Material")]
+        //public async Task<IActionResult> DeleteMaterial([FromBody] DeleteMaterialView delete)
+        //{
+        //    string status = await _Service.DeleteMaterial(delete);
+        //    return Ok(status);
+        //}
 
-        //httpget chỉ hỗ trợ những kiểu có thể parse sang string
-        [Authorize]
-        [HttpPost("Authorize/Optional-Product-Quote")]
-        public async Task<IActionResult> OptionalInteriorQuote(string[] arrMaterialId)
-        {
-            double totalPrice = await _Service.OptionalProductQuote(arrMaterialId);
+        ////httpget chỉ hỗ trợ những kiểu có thể parse sang string
+        //[Authorize]
+        //[HttpPost("Authorize/Optional-Product-Quote")]
+        //public async Task<IActionResult> OptionalInteriorQuote(string[] arrMaterialId)
+        //{
+        //    double totalPrice = await _Service.OptionalProductQuote(arrMaterialId);
 
-            return Ok(totalPrice);
-        }
+        //    return Ok(totalPrice);
+        //}
 
     }
 }

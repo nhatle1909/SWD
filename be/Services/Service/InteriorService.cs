@@ -22,7 +22,7 @@ namespace Services.Service
             _mapper = mapper;
         }
 
-        public async Task<string> AddOneInterior(AddInteriorView add)
+        public async Task<(bool, string)> AddOneInterior(AddInteriorView add)
         {
             if (add.Image.Length > 0)
             {
@@ -36,12 +36,12 @@ namespace Services.Service
                 Interior interior = _mapper.Map<Interior>(add);
                 interior.Image = fileBytes;
                 await _unit.InteriorRepo.AddOneItem(interior);
-                return "Add Interior successfully";
+                return (true, "Add Interior successfully");
             }
-            return "Missing the Image";
+            return (false, "Missing the Image");
         }
 
-        public async Task<string> DeleteInterior(DeleteInteriorView delete)
+        public async Task<(bool, string)> DeleteInterior(DeleteInteriorView delete)
         {
             IEnumerable<Interior> getInterior = await _unit.InteriorRepo.GetFieldsByFilterAsync([],
                        g => g.InteriorId.Equals(delete.InteriorId));
@@ -49,9 +49,9 @@ namespace Services.Service
             if (interior is not null)
             {
                 await _unit.InteriorRepo.RemoveItemByValue("InteriorId", delete.InteriorId);
-                return "Delete Interior successfully";
+                return (true, "Delete Interior successfully");
             }
-            return "Interior is not existed";
+            return (false, "Interior is not existed");
         }
 
         public async Task<object> GetPagingInterior(int pageIndex, bool isAsc, string? searchValue)
@@ -81,19 +81,19 @@ namespace Services.Service
             return responses;
         }
 
-        public async Task<Interior?> GetInteriorDetail(string interiorId)
+        public async Task<(bool, object)> GetInteriorDetail(string interiorId)
         {
             var getInterior = (await _unit.InteriorRepo.GetFieldsByFilterAsync([],
                             g => g.InteriorId.Equals(interiorId))).FirstOrDefault();
             if (getInterior is not null)
             {
                 getInterior.Image = SomeTool.GetImage(Convert.ToBase64String(getInterior.Image))!;
-                return getInterior;
+                return (true, getInterior);
             }
-            return null;
+            return (false, "Interior is not existed");
         }
 
-        public async Task<string> UpdateInterior(UpdateInteriorView update)
+        public async Task<(bool, string)> UpdateInterior(UpdateInteriorView update)
         {
             IEnumerable<Interior> getInterior = await _unit.InteriorRepo.GetFieldsByFilterAsync([],
                        g => g.InteriorId.Equals(update.InteriorId));
@@ -117,11 +117,11 @@ namespace Services.Service
                     interior.Price = update.Price;
                     interior.UpdatedAt = System.DateTime.UtcNow;
                     await _unit.InteriorRepo.UpdateItemByValue("InteriorId", update.InteriorId, interior);
-                    return "Update interior successfully";
+                    return (true, "Update interior successfully");
                 }
-                return "Missing the Image";
+                return (false, "Missing the Image");
             }
-            return "Interior is not existed";
-        }
+            return (false, "Interior is not existed");
+        }       
     }
 }

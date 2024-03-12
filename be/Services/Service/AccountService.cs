@@ -42,7 +42,7 @@ namespace Services.Service
             _httpContextAccessor = httpContextAccessor;
         }
 
-        public async Task<string> AddAnAccountForCustomer(RegisterAccountView register)
+        public async Task<(bool, string)> AddAnAccountForCustomer(RegisterAccountView register)
         {
             IEnumerable<Account> check = await _unit.AccountRepo.GetFieldsByFilterAsync(["Email"],
                             c => c.Email.Equals(register.Email.Trim()));
@@ -72,12 +72,12 @@ namespace Services.Service
                 accountStatus.Email = register.Email.Trim();
                 accountStatus.IsRole = AccountStatus.Role.Customer;
                 await _unit.AccountStatusRepo.AddOneItem(accountStatus);
-                return "Account is registed successfully";
+                return (true, "Account is registed successfully");
             }
-            return "Email is existed";
+            return (false, "Email is existed");
         }
 
-        public async Task<string> AddAnAccountForStaff(RegisterForStaffAccountView registerForStaff)
+        public async Task<(bool, string)> AddAnAccountForStaff(RegisterForStaffAccountView registerForStaff)
         {
             IEnumerable<Account> checkEmail = await _unit.AccountRepo.GetFieldsByFilterAsync(["Email"],
                     c => c.Email.Equals(registerForStaff.Email.Trim()));
@@ -107,12 +107,12 @@ namespace Services.Service
                 accountStatus.Email = registerForStaff.Email.Trim();
                 accountStatus.IsRole = AccountStatus.Role.Staff;
                 await _unit.AccountStatusRepo.AddOneItem(accountStatus);
-                return "Staff Account is registed successfully";
+                return (true, "Staff Account is registed successfully");
             }
-            return "Email is existed";
+            return (false, "Email is existed");
         }
 
-        public async Task<string> LoginByEmailAndPassword(LoginAccountView login)
+        public async Task<(bool, string)> LoginByEmailAndPassword(LoginAccountView login)
         {
             var check = await _unit.AccountRepo.GetFieldsByFilterAsync(["_id"],
                 u => u.Email.Equals(login.Email.Trim()) &&
@@ -127,14 +127,14 @@ namespace Services.Service
                 {
                     AuthenticationJwtTool authenticationJwtBearer = new(_configuration);
                     var jwt = authenticationJwtBearer.GenerateJwtToken(accountStatus.AccountId, accountStatus.IsRole.ToString());
-                    return jwt;
+                    return (true, jwt);
                 }
-                return accountStatus.Comments ??= "Thích thì khóa";
+                return (false, accountStatus.Comments ??= "Thích thì khóa");
             }
-            return "Email or Password is invalid";
+            return (false, "Email or Password is invalid");
         }
 
-        public async Task<string> GoogleAuthorizeUser(string id_token)
+        public async Task<(bool, string)> GoogleAuthorizeUser(string id_token)
         {
             string accountId;
             AccountStatus.Role role;
@@ -185,7 +185,7 @@ namespace Services.Service
             {
                 if (getUserStatus.IsBanned)
                 {
-                    return getUserStatus.Comments ??= "Thích thì khóa";
+                    return (false, getUserStatus.Comments ??= "Thích thì khóa");
                 }
                 if (!getUserStatus.IsAuthenticationEmail)
                 {
@@ -197,7 +197,7 @@ namespace Services.Service
             }
             AuthenticationJwtTool authenticationJwtBearer = new(_configuration);
             var jwt = authenticationJwtBearer.GenerateJwtToken(accountId, role.ToString());
-            return jwt;
+            return (true, jwt);
         }
 
 
@@ -208,7 +208,7 @@ namespace Services.Service
         //    return result;
         //}
 
-        public async Task<string> UpdateAnAccount(string id, UpdateAccountView update)
+        public async Task<(bool, string)> UpdateAnAccount(string id, UpdateAccountView update)
         {
             var check = await _unit.AccountRepo.GetFieldsByFilterAsync([],
                             c => c.AccountId.Equals(id));
@@ -225,22 +225,22 @@ namespace Services.Service
                 AccountStatus accountStatus = check_status.First();
                 accountStatus.UpdatedAt = DateTime.UtcNow;
                 await _unit.AccountStatusRepo.UpdateItemByValue("AccountId", id, accountStatus);
-                return "Update Account successfully";
+                return (true, "Update Account successfully");
             }
-            return "Phone number is not valid";
+            return (false, "Phone number is not valid");
         }
 
-        public async Task<string> SendEmailToResetPassword(string email)
+        public async Task<(bool, string)> SendEmailToResetPassword(string email)
         {
-            string resetPasswordLink = $"http://127.0.0.1:5500/ResetPassword.html?token={SomeTool.EncryptEmail(email)}";
+            string resetPasswordLink = $"http://localhost:3000/?reset-password={SomeTool.EncryptEmail(email)}";
             string subject = "Reset Password";
             string body = $"<p>Click here to reset your password:</p>" +
                 $"<a href=\"{resetPasswordLink}\" style=\"padding: 10px; color: white; background-color: #007BFF; text-decoration: none;\">Reset password</a>";
             await _emailSender.SendEmailAsync(email, subject, body);
-            return "Send Email successfully";
+            return (true, "Send Email successfully");
         }
 
-        public async Task<string> ResetPassword(ResetPasswordAccountView resetPassword)
+        public async Task<(bool, string)> ResetPassword(ResetPasswordAccountView resetPassword)
         {
             var email = SomeTool.DecryptEmail(resetPassword.Token);
             IEnumerable<Account> check_email = await _unit.AccountRepo.GetFieldsByFilterAsync([],
@@ -257,12 +257,12 @@ namespace Services.Service
                 accountStatus.IsAuthenticationEmail = true;
                 accountStatus.UpdatedAt = System.DateTime.UtcNow;
                 await _unit.AccountStatusRepo.UpdateItemByValue("Email", email, accountStatus);
-                return "Reset password successfully";
+                return (true, "Reset password successfully");
             }
-            return "You haven't registed account yet!!!";
+            return (false, "You haven't registed account yet!!!");
         }
 
-        public async Task<string> ChangePassword(string id, ChangePasswordAccountView changePassword)
+        public async Task<(bool, string)> ChangePassword(string id, ChangePasswordAccountView changePassword)
         {
             IEnumerable<Account> check = await _unit.AccountRepo.GetFieldsByFilterAsync([],
                             c => c.AccountId.Equals(id) &&
@@ -278,12 +278,12 @@ namespace Services.Service
 
                 account.Password = SomeTool.HashPassword(changePassword.Password);
                 await _unit.AccountRepo.UpdateItemByValue("AccountId", account.AccountId, account);
-                return "Change password successfully";
+                return (true, "Change password successfully");
             }
-            return "Invalid old password";
+            return (false, "Invalid old password");
         }
 
-        public async Task<string> BanAnAccount(BanAccountView ban)
+        public async Task<(bool, string)> BanAnAccount(BanAccountView ban)
         {
             IEnumerable<AccountStatus> check_email = await _unit.AccountStatusRepo.GetFieldsByFilterAsync([],
                     c => c.Email.Equals(ban.Email.Trim()));
@@ -293,12 +293,12 @@ namespace Services.Service
                 accountStatus.IsBanned = true;
                 accountStatus.Comments = ban.Comments;
                 await _unit.AccountStatusRepo.UpdateItemByValue("Email", accountStatus.Email, accountStatus);
-                return "Ban account successfully";
+                return (true, "Ban account successfully");
             }
-            return "Unexisted Email";
+            return (false, "Unexisted Email");
         }
 
-        public async Task<string> DeleteAnAccount(DeleteAccountView delete)
+        public async Task<(bool, string)> DeleteAnAccount(DeleteAccountView delete)
         {
             IEnumerable<AccountStatus> check_emailStatus = await _unit.AccountStatusRepo.GetFieldsByFilterAsync([],
                     c => c.Email.Equals(delete.Email.Trim()));
@@ -309,9 +309,9 @@ namespace Services.Service
                 string subject = "Notice";
                 string body = $"<h3><strong>Your SWD Account haven't been deleted by {delete.Comments}</strong></h3>";
                 await _emailSender.SendEmailAsync(delete.Email, subject, body);
-                return "Remove account successfully";
+                return (true, "Remove account successfully");
             }
-            return "Unexisted Email";
+            return (false, "Unexisted Email");
         }
 
 
@@ -320,7 +320,7 @@ namespace Services.Service
             await _httpContextAccessor.HttpContext!.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
         }
 
-        public async Task<object> ViewProfile(string email)
+        public async Task<(bool, object)> ViewProfile(string email)
         {
             IEnumerable<Account> getUser = await _unit.AccountRepo.GetFieldsByFilterAsync([],
                             g => g.Email.Equals(email));
@@ -340,9 +340,9 @@ namespace Services.Service
                     CreatedAt = getProfileStatus.CreatedAt,
                     UpdatedAt = getProfileStatus.UpdatedAt
                 };
-                return reponse;
+                return (true, reponse);
             }
-            return "null";
+            return (false, "null");
         }
 
         public async Task UpdatePictureAccount(string id, UpdatePictureAccountView updatePicture)
@@ -386,17 +386,17 @@ namespace Services.Service
 
             foreach (var item in items)
             {
-                responses.Add(new 
-                { 
-                    Email = item.Email, 
-                    Phone = item.PhoneNumber 
+                responses.Add(new
+                {
+                    Email = item.Email,
+                    Phone = item.PhoneNumber
                 });
             }
             return responses;
         }
 
 
-        public async Task<object> GetAccountDetail(DetailAccountView detail)
+        public async Task<(bool, object)> GetAccountDetail(DetailAccountView detail)
         {
             var getUserAccount = (await _unit.AccountRepo.GetFieldsByFilterAsync([],
                              g => g.Email.Equals(detail.Email))).FirstOrDefault();
@@ -417,9 +417,9 @@ namespace Services.Service
                     IsBanned = getUserStatus.IsBanned,
                     Comments = getUserStatus.Comments
                 };
-                return response;
+                return (true, response);
             }
-            return " Unexisted Email";
+            return (false, "Unexisted Email");
         }
 
     }

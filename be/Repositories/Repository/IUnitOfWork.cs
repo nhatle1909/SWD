@@ -21,5 +21,6 @@ namespace Repositories.Repository
         IRepository<Contact> ContactRepo { get; }
         IRepository<Request> RequestRepo { get; }
         IRepository<Cart> CartRepo { get; }
+        IRepository<Contract> ContractRepo { get; }
     }
 }

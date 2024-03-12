@@ -381,25 +381,9 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "SWD.Controllers.CartController",
-    "Method": "AddProductToCart",
-    "RelativePath": "api/Cart/Customer/Add-An-Product-To-Cart",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "add",
-        "Type": "Repositories.ModelView.CartView\u002BAddCartView",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "SWD.Controllers.CartController",
-    "Method": "DeleteProductToCart",
-    "RelativePath": "api/Cart/Customer/Delete-An-Product-To-Cart",
+    "ContainingType": "SWD.Controllers.ContactController",
+    "Method": "AddContactForCustomer",
+    "RelativePath": "api/Contact/Add-An-Contact-For-Customer",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
@@ -408,47 +392,32 @@
         "Name": "interiorId",
         "Type": "System.String",
         "IsRequired": false
+      },
+      {
+        "Name": "add",
+        "Type": "Repositories.ModelView.ContactView\u002BAddForCustomerContactView",
+        "IsRequired": true
       }
     ],
     "ReturnTypes": []
   },
   {
-    "ContainingType": "SWD.Controllers.CartController",
-    "Method": "GetAllProductToCart",
-    "RelativePath": "api/Cart/Customer/Get-All-Product-To-Cart",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [],
-    "ReturnTypes": []
-  },
-  {
     "ContainingType": "SWD.Controllers.ContactController",
-    "Method": "AddAnContact",
-    "RelativePath": "api/Contact/Add-An-Contact",
+    "Method": "AddContactForGuest",
+    "RelativePath": "api/Contact/Add-An-Contact-For-Guest",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "Email",
+        "Name": "interiorId",
         "Type": "System.String",
         "IsRequired": false
       },
       {
-        "Name": "Title",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "Content",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "Pictures",
-        "Type": "Microsoft.AspNetCore.Http.IFormFile[]",
-        "IsRequired": false
+        "Name": "add",
+        "Type": "Repositories.ModelView.ContactView\u002BAddContactView",
+        "IsRequired": true
       }
     ],
     "ReturnTypes": []
@@ -462,57 +431,24 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "address",
-        "Type": "Repositories.ModelView.ContactView\u002BAddressContactView",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "SWD.Controllers.ContactController",
-    "Method": "DeleteAnContact",
-    "RelativePath": "api/Contact/Staff/Delete-An-Contact",
-    "HttpMethod": "DELETE",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
+        "Name": "ContactId",
+        "Type": "System.String",
+        "IsRequired": false
+      },
       {
-        "Name": "delete",
-        "Type": "Repositories.ModelView.ContactView\u002BDeleteContactView",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "SWD.Controllers.ContactController",
-    "Method": "GetPagingContactlList",
-    "RelativePath": "api/Contact/Staff/Get-Paging-Contact-List",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
+        "Name": "ResponseOfStaff",
+        "Type": "System.String",
+        "IsRequired": false
+      },
       {
-        "Name": "paging",
-        "Type": "Repositories.ModelView.ContactView\u002BPagingContactView",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "SWD.Controllers.ContactController",
-    "Method": "GetContactDetail",
-    "RelativePath": "api/Contact/Staff/View-Private-Detail-Contact-From-Paging",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
+        "Name": "File",
+        "Type": "Microsoft.AspNetCore.Http.IFormFile",
+        "IsRequired": false
+      },
       {
-        "Name": "detail",
-        "Type": "Repositories.ModelView.ContactView\u002BDetailContactView",
-        "IsRequired": true
+        "Name": "StatusResponseOfStaff",
+        "Type": "System.String",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": []
@@ -578,7 +514,7 @@
       },
       {
         "Name": "Price",
-        "Type": "System.Double",
+        "Type": "System.Int32",
         "IsRequired": false
       }
     ],
@@ -640,7 +576,7 @@
       },
       {
         "Name": "Price",
-        "Type": "System.Double",
+        "Type": "System.Int32",
         "IsRequired": false
       }
     ],
@@ -663,15 +599,15 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "SWD.Controllers.MaterialController",
-    "Method": "OptionalInteriorQuote",
-    "RelativePath": "api/Material/Authorize/Optional-Product-Quote",
+    "ContainingType": "SWD.Controllers.VNPayController",
+    "Method": "DeleteExpiredRequest",
+    "RelativePath": "api/VNPay/Customer/Delete-Expired-Request",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "arrMaterialId",
+        "Name": "_id",
         "Type": "System.String[]",
         "IsRequired": true
       }
@@ -679,64 +615,21 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "SWD.Controllers.MaterialController",
-    "Method": "AddOneMaterial",
-    "RelativePath": "api/Material/Staff/Add-One-Material",
+    "ContainingType": "SWD.Controllers.VNPayController",
+    "Method": "UpdateRequestDetail",
+    "RelativePath": "api/VNPay/Customer/Update-Request-Item",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "add",
-        "Type": "Repositories.ModelView.MaterialView\u002BAddMaterialView",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "SWD.Controllers.MaterialController",
-    "Method": "DeleteMaterial",
-    "RelativePath": "api/Material/Staff/Delete-Material",
-    "HttpMethod": "DELETE",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
+        "Name": "_id",
+        "Type": "System.String",
+        "IsRequired": false
+      },
       {
-        "Name": "delete",
-        "Type": "Repositories.ModelView.MaterialView\u002BDeleteMaterialView",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "SWD.Controllers.MaterialController",
-    "Method": "GetPagingMaterialList",
-    "RelativePath": "api/Material/Staff/Get-Paging-Material-List",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "paging",
-        "Type": "Repositories.ModelView.MaterialView\u002BPagingMaterialView",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "SWD.Controllers.MaterialController",
-    "Method": "UpdateMaterial",
-    "RelativePath": "api/Material/Staff/Update-Material",
-    "HttpMethod": "PUT",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "update",
-        "Type": "Repositories.ModelView.MaterialView\u002BUpdateMaterialView",
+        "Name": "cartviews",
+        "Type": "Repositories.ModelView.CartView\u002BAddCartView[]",
         "IsRequired": true
       }
     ],
@@ -744,15 +637,31 @@
   },
   {
     "ContainingType": "SWD.Controllers.VNPayController",
-    "Method": "VNPayPayment",
-    "RelativePath": "api/VNPay/Customer/VNPay-Payment",
+    "Method": "VNPayPaymentDeposit",
+    "RelativePath": "api/VNPay/Customer/VNPay-Deposit-Payment",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "totalPrice",
-        "Type": "System.Int32",
+        "Name": "cartViews",
+        "Type": "Repositories.ModelView.CartView\u002BAddCartView[]",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SWD.Controllers.VNPayController",
+    "Method": "VNPayPaymentRemainPrice",
+    "RelativePath": "api/VNPay/Customer/VNPay-RemainPrice-Payment",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "requestId",
+        "Type": "System.String",
         "IsRequired": false
       }
     ],
