@@ -13,6 +13,7 @@ import Users from '@/pages/admin/Users'
 import Profile from '../pages/profile/Profile';
 import StaffRoute from './guard/StaffRoute';
 import ManageBlog from '../pages/staff/blog/ManageBlog';
+import Reports from '../pages/admin/Reports';
 const unauthRoutes = {
   path: '/',
   element: <MainLayout />,
@@ -42,6 +43,10 @@ const adminRoutes = {
     {
       path: 'users',
       element: <Users />,
+    },
+    {
+      path: 'reports',
+      element: <Reports />,
     },
   ],
 };
