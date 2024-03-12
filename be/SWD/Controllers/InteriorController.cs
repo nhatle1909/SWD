@@ -64,6 +64,5 @@ namespace SWD.Controllers
                 return Ok(status.Item2);
             else return BadRequest(status.Item2);
         }
-
     }
 }

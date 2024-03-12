@@ -63,7 +63,6 @@ namespace Services.Service
                 Account account = _mapper.Map<Account>(register);
                 account.AccountId = id;
                 account.Email = register.Email.Trim();
-                account.PhoneNumber = register.PhoneNumber;
                 account.Password = SomeTool.HashPassword(register.Password);
                 account.Picture = fileBytes;
                 await _unit.AccountRepo.AddOneItem(account);
@@ -98,7 +97,6 @@ namespace Services.Service
                 string id = ObjectId.GenerateNewId().ToString();
                 Account account = _mapper.Map<Account>(registerForStaff);
                 account.AccountId = id;
-                account.PhoneNumber = registerForStaff.PhoneNumber;
                 account.Email = registerForStaff.Email.Trim();
                 account.Password = SomeTool.HashPassword(registerForStaff.Password);
                 account.Picture = fileBytes;
@@ -217,7 +215,7 @@ namespace Services.Service
             var check_status = await _unit.AccountStatusRepo.GetFieldsByFilterAsync([],
                             c => c.AccountId.Equals(id));
 
-            if (update.PhoneNumber == null || update.PhoneNumber.Length == 10)
+            if (update.PhoneNumber.Length == 10)
             {
                 Account account = check.First();
                 account.PhoneNumber = update.PhoneNumber;
@@ -227,6 +225,19 @@ namespace Services.Service
                 AccountStatus accountStatus = check_status.First();
                 accountStatus.UpdatedAt = DateTime.UtcNow;
                 await _unit.AccountStatusRepo.UpdateItemByValue("AccountId", id, accountStatus);
+
+                var getContact = (await _unit.ContactRepo.GetFieldsByFilterAsync([],
+                    g => g.Email.Equals(account.Email)));
+                if (getContact.Any())
+                {
+                    foreach (var contact in getContact)
+                    {
+                        contact.Address = update.HomeAdress;
+                        contact.Phone = update.PhoneNumber;
+                        contact.UpdatedAt = DateTime.UtcNow;
+                        await _unit.ContactRepo.UpdateItemByValue("ContactId", contact.ContactId, contact);
+                    }
+                }
                 return (true, "Update Account successfully");
             }
             return (false, "Phone number is not valid");
@@ -376,7 +387,7 @@ namespace Services.Service
 
         public async Task<object> GetPagingAccount(PagingAccountView paging)
         {
-            const int pageSize = 100;
+            const int pageSize = 5;
             const string sortField = "Email";
             List<string> searchFields = ["Email", "PhoneNumber"];
             List<string> returnFields = ["Email", "PhoneNumber"];
@@ -386,15 +397,15 @@ namespace Services.Service
 
             var responses = new List<object>();
 
-            //foreach (var item in items)
-            //{
-            //    responses.Add(new 
-            //    { 
-            //        Email = item.Email, 
-            //        Phone = item.PhoneNumber 
-            //    });
-            //}
-            return items;
+            foreach (var item in items)
+            {
+                responses.Add(new
+                {
+                    Email = item.Email,
+                    Phone = item.PhoneNumber
+                });
+            }
+            return responses;
         }
 
 
