@@ -396,7 +396,7 @@ const Home = () => {
 					{interiors?.map((item) => (
                             <div>
                                 <div key={item.interiorId} className="col-md-4 ftco-animate fadeInUp ftco-animated">
-                                    <a href="blog-single.html" className="block-20" style={{
+                                    <a href={`/interior/${item.interiorId}`} className="block-20" style={{
                                         backgroundImage: `url(data:image/jpeg;base64,${item.image})`,
                                         backgroundSize: 'cover',
                                         backgroundPosition: 'center',

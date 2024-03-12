@@ -14,6 +14,7 @@ import Users from '@/pages/admin/Users'
 import Profile from '../pages/profile/Profile';
 import StaffRoute from './guard/StaffRoute';
 import ManageBlog from '../pages/staff/blog/ManageBlog';
+import InteriorDetails from '../pages/interior/InteriorDetails'
 const unauthRoutes = {
   path: '/',
   element: <MainLayout />,
@@ -36,6 +37,10 @@ const unauthRoutes = {
       element: <Profile />,
       permissions: ['user']
     },
+    {
+      path: 'interior/:interiorId',
+      element:<InteriorDetails/>
+    }
   ]
 };
 
