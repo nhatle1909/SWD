@@ -1,6 +1,9 @@
 import baseClient from "./baseClient";
 export const login = (email, password) => {
-    return baseClient.post('/account/login-by-email-password', { email, password });;
+    console.log(email, password);
+    const response = baseClient.post('/account/login-by-email-password', { email, password });
+    console.log("respone", response);
+    return response;
 };
 
 export const signUpUser = (email, password, phoneNumber) => {

@@ -1,21 +1,26 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  interiors: [],
+  interiors: null,
+  interior: null
 };
 
-export const interiorSlice = createSlice({
+export const interiorsSlice = createSlice({
   name: "interior",
   initialState,
   reducers: {
     setInteriors(state, action) {
       state.interiors = action.payload;
     },
+     setDetailInterior(state, action){
+      state.interior = action.payload;
+    },
   },
 });
 
-export const {
-  setInteriors
-} = interiorSlice.actions;
+export const { 
+  setInteriors,
+  setDetailInterior
+} = interiorsSlice.actions;
 
-export default interiorSlice.reducer;
+export default interiorsSlice.reducer;

@@ -1,4 +1,3 @@
-
 import { toast } from "react-toastify";
 import { getInteriors } from "../../api/interior";
 import {
@@ -24,31 +23,37 @@ export const actionGetInteriors = (request) => {
   };
 }
 
+import { getInteriorList } from '@/api/interior';
+import { setDetailInterior, setInteriors } from './slice';
+import { toast } from 'react-toastify';
+import { getDetailInterior } from '../../api/interior';
 
+export const actionGetInteriosList = ({pageIndex, isAsc, searchValue}) => {
+    return async (dispatch) => {
+        try {
+            const {data} = await getInteriorList({ pageIndex, isAsc, searchValue });
+            dispatch(setInteriors(data));
+        } catch (error) {
+            toast('Something went wrong, pls contact admin!', {
+                type: 'error'
+            })
+            console.error('Error fetching blogs:', error);
+        }
+    };
+};
 
-// export const actionAddAccount = (request) => {
-//   return async (dispatch) => {
-//     try {
-//       console.log("going to add: ", request)
-//       const response = await createAccountCustomer({ email: request.email, phoneNumber: request.phoneNumber, password: request.password });
+export const actionGetDetailInterior = (interiorId) => {
+  return async (dispatch) => {
+      try {
+          const {data} = await getDetailInterior(interiorId);
+          dispatch(setDetailInterior(data));
+      } catch (error) {
+          toast('Something went wrong, pls contact admin!', {
+              type: 'error'
+          })
+          console.error('Error fetching blogs:', error);
+      }
+  };
+};
 
-//       console.log("response", response);
-//       const { data } = await getAccounts({
-//         PageIndex: 1,
-//         IsAsc: true,
-//         SearchValue: "",
-//       });
-
-//       dispatch(setAccounts(data));
-//       toast('Add new account successful', {
-//         type: 'success'
-//       });
-//     } catch (error) {
-//       toast(error.response.data, {
-//         type: 'error'
-//       });
-//       throw error;
-//     }
-//   };
-// }
 
