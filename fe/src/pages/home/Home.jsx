@@ -175,9 +175,6 @@ const Home = () => {
 						<div className="col-md-6 col-lg-3 ftco-animate">
 							<div className="project">
 								<img src="/src/assets/images/work-1.jpg" className="img-fluid" alt="Colorlib Template" />
-								<div className="text">
-									<h3>Office Interior Design in Paris</h3>
-								</div>
 								<a href="images/work-1.jpg" className="icon image-popup d-flex justify-content-center align-items-center">
 									<span className="icon-expand"></span>
 								</a>
@@ -186,9 +183,6 @@ const Home = () => {
 						<div className="col-md-6 col-lg-3 ftco-animate">
 							<div className="project">
 								<img src="/src/assets/images/work-2.jpg" className="img-fluid" alt="Colorlib Template" />
-								<div className="text">
-									<h3>Office Interior Design in Paris</h3>
-								</div>
 								<a href="images/work-2.jpg" className="icon image-popup d-flex justify-content-center align-items-center">
 									<span className="icon-expand"></span>
 								</a>
@@ -197,9 +191,6 @@ const Home = () => {
 						<div className="col-md-6 col-lg-3 ftco-animate">
 							<div className="project">
 								<img src="/src/assets/images/work-3.jpg" className="img-fluid" alt="Colorlib Template" />
-								<div className="text">
-									<h3>Office Interior Design in Paris</h3>
-								</div>
 								<a href="images/work-3.jpg" className="icon image-popup d-flex justify-content-center align-items-center">
 									<span className="icon-expand"></span>
 								</a>
@@ -208,9 +199,6 @@ const Home = () => {
 						<div className="col-md-6 col-lg-3 ftco-animate">
 							<div className="project">
 								<img src={linkImg('work-4.jpg')} className="img-fluid" alt="Colorlib Template" />
-								<div className="text">
-									<h3>Office Interior Design in Paris</h3>
-								</div>
 								<a href="images/work-4.jpg" className="icon image-popup d-flex justify-content-center align-items-center">
 									<span className="icon-expand"></span>
 								</a>
@@ -311,111 +299,34 @@ const Home = () => {
 				<div className="container">
 					<div className="row justify-content-center mb-5 pb-3">
 						<div className="col-md-7 heading-section ftco-animate">
-							<h2 className="mb-4">Our Architect Team</h2>
-							<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in</p>
-						</div>
-					</div>
-					<div className="row">
-						<div className="col-md-6 col-lg-3 ftco-animate">
-							<div className="staff">
-								<div className="img" style={{ backgroundImage: `url(${linkImg('staff_1.jpg')})` }}></div>
-								<div className="text pt-4">
-									<h3>David Smith</h3>
-									<span className="position mb-2">Achitect</span>
-									<p>I am an ambitious workaholic, but apart from that, pretty simple person.</p>
-									<ul className="ftco-social d-flex">
-										<li className="ftco-animate"><a href="#"><span className="icon-twitter"></span></a></li>
-										<li className="ftco-animate"><a href="#"><span className="icon-facebook"></span></a></li>
-										<li className="ftco-animate"><a href="#"><span className="icon-google-plus"></span></a></li>
-										<li className="ftco-animate"><a href="#"><span className="icon-instagram"></span></a></li>
-									</ul>
-								</div>
-							</div>
-						</div>
-						<div className="col-md-6 col-lg-3 ftco-animate">
-							<div className="staff">
-								<div className="img" style={{ backgroundImage: `url(${linkImg('staff_2.jpg')})` }}></div>
-								<div className="text pt-4">
-									<h3>David Smith</h3>
-									<span className="position mb-2">Achitect</span>
-									<p>I am an ambitious workaholic, but apart from that, pretty simple person.</p>
-									<ul className="ftco-social d-flex">
-										<li className="ftco-animate"><a href="#"><span className="icon-twitter"></span></a></li>
-										<li className="ftco-animate"><a href="#"><span className="icon-facebook"></span></a></li>
-										<li className="ftco-animate"><a href="#"><span className="icon-google-plus"></span></a></li>
-										<li className="ftco-animate"><a href="#"><span className="icon-instagram"></span></a></li>
-									</ul>
-								</div>
-							</div>
-						</div>
-						<div className="col-md-6 col-lg-3 ftco-animate">
-							<div className="staff">
-								<div className="img" style={{ backgroundImage: `url(${linkImg('staff_3.jpg')})` }}></div>
-								<div className="text pt-4">
-									<h3>David Smith</h3>
-									<span className="position mb-2">Achitect</span>
-									<p>I am an ambitious workaholic, but apart from that, pretty simple person.</p>
-									<ul className="ftco-social d-flex">
-										<li className="ftco-animate"><a href="#"><span className="icon-twitter"></span></a></li>
-										<li className="ftco-animate"><a href="#"><span className="icon-facebook"></span></a></li>
-										<li className="ftco-animate"><a href="#"><span className="icon-google-plus"></span></a></li>
-										<li className="ftco-animate"><a href="#"><span className="icon-instagram"></span></a></li>
-									</ul>
-								</div>
-							</div>
-						</div>
-						<div className="col-md-6 col-lg-3 ftco-animate">
-							<div className="staff">
-								<div className="img" style={{ backgroundImage: `url(${linkImg('staff_4.jpg')})` }}></div>
-								<div className="text pt-4">
-									<h3>David Smith</h3>
-									<span className="position mb-2">Achitect</span>
-									<p>I am an ambitious workaholic, but apart from that, pretty simple person.</p>
-									<ul className="ftco-social d-flex">
-										<li className="ftco-animate"><a href="#"><span className="icon-twitter"></span></a></li>
-										<li className="ftco-animate"><a href="#"><span className="icon-facebook"></span></a></li>
-										<li className="ftco-animate"><a href="#"><span className="icon-google-plus"></span></a></li>
-										<li className="ftco-animate"><a href="#"><span className="icon-instagram"></span></a></li>
-									</ul>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</section>
-
-			<section className="ftco-section">
-				<div className="container">
-					<div className="row justify-content-center mb-5 pb-3">
-						<div className="col-md-7 heading-section ftco-animate">
 							<h2 className="mb-4">Our Interior</h2>
 							<p></p>
 						</div>
 					</div>
 					<div className="row">
-					{interiors?.map((item) => (
-                            <div>
-                                <div key={item.interiorId} className="col-md-4 ftco-animate fadeInUp ftco-animated">
-                                    <a href={`/interior/${item.interiorId}`} className="block-20" style={{
-                                        backgroundImage: `url(data:image/jpeg;base64,${item.image})`,
-                                        backgroundSize: 'cover',
-                                        backgroundPosition: 'center',
-                                        backgroundRepeat: 'no-repeat',
-                                        height: '200px',
-                                        width: '100%', 
-                                    }}></a>
-                                    <div className="blog-entry">
-                                        <div className="text d-flex py-4">
-                                            <div className="meta">
-
-                                                <h3 className="heading"><a href="#">{item.interiorName}</a></h3>
-                                                <div><a href="#">{item.price}</a></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        ))}
+						{interiors?.map((item) => (
+							<div key={item.interiorId} className="col-md-4 ftco-animate fadeInUp ftco-animated">
+								<a href={`/interior/${item.interiorId}`} className="block-20" style={{
+									backgroundImage: `url(data:image/jpeg;base64,${item.image})`,
+									backgroundSize: 'cover',
+									backgroundPosition: 'center',
+									backgroundRepeat: 'no-repeat',
+									height: '300px',
+									width: '70%',
+									borderRadius: '5%',
+								}}></a>
+								<div className="blog-entry">
+									<div className="text d-flex py-4">
+										<div className="meta">
+										<div><a href="#">{item.price}</a></div>
+										</div>
+										<div className="desc pl-3">
+											<h3 className="heading"><a href="#">{item.interiorName}</a></h3>
+										</div>
+									</div>
+								</div>
+							</div>
+						))}
 					</div>
 				</div>
 			</section>

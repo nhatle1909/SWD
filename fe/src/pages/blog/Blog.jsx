@@ -50,7 +50,7 @@ export const Blog = () => {
                                         backgroundPosition: 'center',
                                         backgroundRepeat: 'no-repeat',
                                         height: '200px',
-                                        width: '100%', 
+                                        width: '300%', 
                                     }}></a>
                                     <div className="blog-entry">
                                         <div className="text d-flex py-4">

@@ -17,7 +17,7 @@ export const actionGetInteriosList = ({pageIndex, isAsc, searchValue}) => {
     };
 };
 
-export const actionGetDetailInterio = (interiorId) => {
+export const actionGetDetailInterior = (interiorId) => {
   return async (dispatch) => {
       try {
           const {data} = await getDetailInterior(interiorId);
