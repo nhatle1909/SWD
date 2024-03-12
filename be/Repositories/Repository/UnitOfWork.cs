@@ -8,6 +8,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Transactions;
+using Transaction = Repositories.Model.Transaction;
 
 namespace Repositories.Repository
 {
@@ -16,7 +18,7 @@ namespace Repositories.Repository
         private readonly IMongoClient _mongoClient;
         public UnitOfWork(IMongoClient mongoClient)
         {
-            _mongoClient = mongoClient;
+            _mongoClient = mongoClient;          
         }
 
         private IRepository<RefreshToken> _refreshTokenRepo;
@@ -76,7 +78,6 @@ namespace Repositories.Repository
             }
         }
 
-
         private IRepository<Blog> _blogRepo;
         public IRepository<Blog> BlogRepo
         {
@@ -128,6 +129,17 @@ namespace Repositories.Repository
                 if (_cartRepo is null)
                     _cartRepo = new Repository<Cart>(_mongoClient);
                 return _cartRepo;
+            }
+        }
+
+        private IRepository<Contract> _contractRepo;
+        public IRepository<Contract> ContractRepo
+        {
+            get
+            {
+                if (_contractRepo is null)
+                    _contractRepo = new Repository<Contract>(_mongoClient);
+                return _contractRepo;
             }
         }
     }

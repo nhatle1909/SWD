@@ -22,8 +22,8 @@ namespace Repositories.ModelView
 
         public class UpdateInteriorView
         {
-            [StringLength(50, MinimumLength = 1)]
             public required string InteriorId { get; set; }
+            [StringLength(50, MinimumLength = 1)]
             public required string InteriorName { get; set; }
             public required ClassifyInterior InteriorType { get; set; }
             public string? Description { get; set; }
