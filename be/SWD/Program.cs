@@ -136,8 +136,17 @@ namespace SWD
             //}
             //publish api
 
-            app.UseSwagger();
-            app.UseSwaggerUI();
+            app.UseSwagger(options =>
+            {
+                options.RouteTemplate = "swagger/{documentName}/swagger.json";
+            });
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "SWD API");
+
+                c.RoutePrefix = "";
+                c.EnableTryItOutByDefault();
+            });
             app.UseHttpsRedirection();
             app.UseCors();
             app.UseStaticFiles();

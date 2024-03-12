@@ -235,7 +235,7 @@ namespace Services.Service
                         contact.Address = update.HomeAdress;
                         contact.Phone = update.PhoneNumber;
                         contact.UpdatedAt = DateTime.UtcNow;
-                        await _unit.ContactRepo.UpdateItemByValue("ContactId", contact.ContactId, contact);
+                        await _unit.ContactRepo.UpdateItemByValue("RequestId", contact.RequestId, contact);
                     }
                 }
                 return (true, "Update Account successfully");
@@ -387,14 +387,25 @@ namespace Services.Service
 
         public async Task<object> GetPagingAccount(PagingAccountView paging)
         {
-            const int pageSize = 100;
+            const int pageSize = 5;
             const string sortField = "Email";
             List<string> searchFields = ["Email", "PhoneNumber"];
             List<string> returnFields = ["Email", "PhoneNumber"];
 
             int skip = (paging.PageIndex - 1) * pageSize;
             var items = (await _unit.AccountRepo.PagingAsync(skip, pageSize, paging.IsAsc, sortField, paging.SearchValue, searchFields, returnFields)).ToList();
-            return items;
+
+            var responses = new List<object>();
+
+            foreach (var item in items)
+            {
+                responses.Add(new
+                {
+                    Email = item.Email,
+                    Phone = item.PhoneNumber
+                });
+            }
+            return responses;
         }
 
 

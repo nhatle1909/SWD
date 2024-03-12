@@ -30,19 +30,17 @@ namespace SWD.Controllers
             var id = (HttpContext.User.FindFirst("id")?.Value) ?? "";
             string check = await _vnpayService.AddPendingTransaction(contactId, cartViews);
             int deposit = await _vnpayService.CalculateDeposit(check);
-            var status1 = await _contactService.GenerateContractPdf(id, contactId, cartViews);
+        
             var status2 = await _contactService.UpdateContact(contactId, cartViews);
             if (check != null)
             {
-                if (status1.Item1)
-                {
-                    if (status2.Item1)
+                 if (status2.Item1)
                     {
                         return Ok(_vnpayService.Payment(check, deposit).Result);
                     }
                     return BadRequest(status2.Item2);
-                }
-                return BadRequest(status1.Item2);
+               
+               
             }
             return BadRequest("Invalid Data Format");
         }

@@ -100,13 +100,13 @@ namespace Repositories.Repository
             }
         }
 
-        private IRepository<Contact> _contactRepo;
-        public IRepository<Contact> ContactRepo
+        private IRepository<Request> _contactRepo;
+        public IRepository<Request> ContactRepo
         {
             get
             {
                 if (_contactRepo is null)
-                    _contactRepo = new Repository<Contact>(_mongoClient);
+                    _contactRepo = new Repository<Request>(_mongoClient);
                 return _contactRepo;
             }
         }
