@@ -394,9 +394,14 @@
         "IsRequired": false
       },
       {
-        "Name": "add",
-        "Type": "Repositories.ModelView.ContactView\u002BAddForCustomerContactView",
-        "IsRequired": true
+        "Name": "Content",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Picture",
+        "Type": "Microsoft.AspNetCore.Http.IFormFile",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": []
@@ -415,9 +420,29 @@
         "IsRequired": false
       },
       {
-        "Name": "add",
-        "Type": "Repositories.ModelView.ContactView\u002BAddContactView",
-        "IsRequired": true
+        "Name": "Email",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Phone",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Address",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Content",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Picture",
+        "Type": "Microsoft.AspNetCore.Http.IFormFile",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": []
@@ -449,6 +474,53 @@
         "Name": "StatusResponseOfStaff",
         "Type": "System.String",
         "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SWD.Controllers.ContactController",
+    "Method": "PDF",
+    "RelativePath": "api/Contact/Staff/PDF",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "staffId",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "contactId",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "array",
+        "Type": "Repositories.ModelView.ContactView\u002BArrayInterior[]",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SWD.Controllers.ContactController",
+    "Method": "UpdateContact",
+    "RelativePath": "api/Contact/Staff/Update-Contact",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "contactId",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "array",
+        "Type": "Repositories.ModelView.ContactView\u002BArrayInterior[]",
+        "IsRequired": true
       }
     ],
     "ReturnTypes": []
@@ -599,9 +671,25 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "SWD.Controllers.VNPayController",
+    "ContainingType": "SWD.Controllers.TransactionController",
+    "Method": "VNPayReturn",
+    "RelativePath": "api/Transaction/Customer/VNPay-Return",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "url",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SWD.Controllers.TransactionController",
     "Method": "DeleteExpiredRequest",
-    "RelativePath": "api/VNPay/Customer/Delete-Expired-Request",
+    "RelativePath": "api/Transaction/Staff/Delete-Expired-Request",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
@@ -615,9 +703,9 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "SWD.Controllers.VNPayController",
+    "ContainingType": "SWD.Controllers.TransactionController",
     "Method": "UpdateRequestDetail",
-    "RelativePath": "api/VNPay/Customer/Update-Request-Item",
+    "RelativePath": "api/Transaction/Staff/Update-Request-Item",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
@@ -636,9 +724,9 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "SWD.Controllers.VNPayController",
+    "ContainingType": "SWD.Controllers.TransactionController",
     "Method": "VNPayPaymentDeposit",
-    "RelativePath": "api/VNPay/Customer/VNPay-Deposit-Payment",
+    "RelativePath": "api/Transaction/Staff/VNPay-Deposit-Payment",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
@@ -652,31 +740,15 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "SWD.Controllers.VNPayController",
+    "ContainingType": "SWD.Controllers.TransactionController",
     "Method": "VNPayPaymentRemainPrice",
-    "RelativePath": "api/VNPay/Customer/VNPay-RemainPrice-Payment",
+    "RelativePath": "api/Transaction/Staff/VNPay-RemainPrice-Payment",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
         "Name": "requestId",
-        "Type": "System.String",
-        "IsRequired": false
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "SWD.Controllers.VNPayController",
-    "Method": "VNPayReturn",
-    "RelativePath": "api/VNPay/Customer/VNPay-Return",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "url",
         "Type": "System.String",
         "IsRequired": false
       }

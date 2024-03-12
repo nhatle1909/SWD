@@ -20,7 +20,7 @@ namespace Repositories.Model
         public required State Status { get; set; }
         public enum State
         {
-            Pending = 1, Complete = 2
+            Pending = 1, Completed = 2, Cancelled = 3
         }
     }
 }

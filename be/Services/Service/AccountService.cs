@@ -215,7 +215,7 @@ namespace Services.Service
             var check_status = await _unit.AccountStatusRepo.GetFieldsByFilterAsync([],
                             c => c.AccountId.Equals(id));
 
-            if (update.PhoneNumber == null || update.PhoneNumber.Length == 10)
+            if (update.PhoneNumber.Length == 10)
             {
                 Account account = check.First();
                 account.PhoneNumber = update.PhoneNumber;
@@ -225,6 +225,19 @@ namespace Services.Service
                 AccountStatus accountStatus = check_status.First();
                 accountStatus.UpdatedAt = DateTime.UtcNow;
                 await _unit.AccountStatusRepo.UpdateItemByValue("AccountId", id, accountStatus);
+
+                var getContact = (await _unit.ContactRepo.GetFieldsByFilterAsync([],
+                    g => g.Email.Equals(account.Email)));
+                if (getContact.Any())
+                {
+                    foreach (var contact in getContact)
+                    {
+                        contact.Address = update.HomeAdress;
+                        contact.Phone = update.PhoneNumber;
+                        contact.UpdatedAt = DateTime.UtcNow;
+                        await _unit.ContactRepo.UpdateItemByValue("ContactId", contact.ContactId, contact);
+                    }
+                }
                 return (true, "Update Account successfully");
             }
             return (false, "Phone number is not valid");

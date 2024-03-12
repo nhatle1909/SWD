@@ -8,6 +8,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Transactions;
+using Transaction = Repositories.Model.Transaction;
 
 namespace Repositories.Repository
 {
@@ -108,14 +110,14 @@ namespace Repositories.Repository
                 return _contactRepo;
             }
         }
-        private IRepository<Request> _requestRepo;
-        public IRepository<Request> RequestRepo
+        private IRepository<Transaction> _transactionRepo;
+        public IRepository<Transaction> TransactionRepo
         {
             get
             {
-                if (_requestRepo is null)
-                    _requestRepo = new Repository<Request>(_mongoClient);
-                return _requestRepo;
+                if (_transactionRepo is null)
+                    _transactionRepo = new Repository<Transaction>(_mongoClient);
+                return _transactionRepo;
             }
         }
 

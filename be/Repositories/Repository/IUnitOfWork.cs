@@ -6,6 +6,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Transactions;
+using Transaction = Repositories.Model.Transaction;
 
 namespace Repositories.Repository
 {
@@ -19,7 +21,7 @@ namespace Repositories.Repository
         IRepository<Blog> BlogRepo { get; }
         IRepository<BlogComment> BlogCommentRepo { get; }
         IRepository<Contact> ContactRepo { get; }
-        IRepository<Request> RequestRepo { get; }
+        IRepository<Transaction> TransactionRepo { get; }
         IRepository<Cart> CartRepo { get; }
         IRepository<Contract> ContractRepo { get; }
     }

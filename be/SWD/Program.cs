@@ -27,7 +27,7 @@ namespace SWD
             builder.Services.AddScoped<IMaterialService, MaterialService>();
             builder.Services.AddScoped<IInteriorService, InteriorService>();
             builder.Services.AddScoped<IBlogService, BlogService>();
-            builder.Services.AddScoped<IRequestService, RequestService>();
+            builder.Services.AddScoped<ITransactionService, TransactionService>();
             builder.Services.AddScoped<IContactService, ContactService>();
             builder.Services.AddScoped<ICartService, CartService>();
             builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();

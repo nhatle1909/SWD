@@ -225,7 +225,7 @@ namespace Services.Service
         //    return imageTags.ToString();
         //}
 
-        private async Task<(bool, object)> GenerateContractPdf(string staffId, string contactId, ArrayInterior[] array)
+        public async Task<(bool, object)> GenerateContractPdf(string staffId, string contactId, ArrayInterior[] array)
         {
             var totalPrice = 0;
             var getContact = (await _unit.ContactRepo.GetFieldsByFilterAsync([],
@@ -253,6 +253,7 @@ namespace Services.Service
                             list.Add(contract);
                             count++;
                             if (count == array.Length) break;
+                            else continue;
                         }
                         return (false, "The quantity of product available is less than the quantity you want");
                     }
@@ -266,7 +267,7 @@ namespace Services.Service
                         p.Size(PageSizes.A4);
                         p.Margin(3, Unit.Centimetre);
                         p.PageColor(Colors.White);
-                        p.DefaultTextStyle(x => x.FontSize(20));
+                        p.DefaultTextStyle(x => x.FontSize(20).FontFamily("Arial"));
 
                         p.Header().Text("Contract")
                                   .SemiBold().FontSize(30).FontColor(Colors.Black);
@@ -284,7 +285,7 @@ namespace Services.Service
                                         x.Item().Text($"Buyer Email: {getContact.Email}");
                                         foreach (var item in list)
                                         {
-                                            totalPrice = +item.TotalCostOfPoduct;
+                                            totalPrice = totalPrice + item.TotalCostOfPoduct;
                                             x.Item().Text($"InteriorId: {item.ProductId}, Name: {item.ProductName}, Unit Price: {item.UnitPrice}, Quantity: {item.Quantity}, Total of product: {item.TotalCostOfPoduct}");
                                         }
                                         x.Item().Text("Tax: 10%");
@@ -293,7 +294,7 @@ namespace Services.Service
                                     });
                     });
                 })
-                    .GeneratePdf("Contract.pdf");
+                    .GeneratePdf($"{contactId}_Contract.pdf");
                 Contract ct = new()
                 {
                     ContractId = ObjectId.GenerateNewId().ToString(),
@@ -310,18 +311,19 @@ namespace Services.Service
                                     Buyer Email: {getContact.Email}
                                     Tax: 10%
                                     Ship: 100.000
-                                    The total amount includes the above fee items: {totalPrice + totalPrice * 0.1 + 100000}
+                                    The total amount includes the above fee items: {Math.Ceiling(totalPrice + totalPrice * 0.1 + 100000)}
                                     ",
                     Status = Contract.State.Pending
                 };
                 await _unit.ContractRepo.AddOneItem(ct);
-                return (true, "Contract created successfully");
+                return (true, $"File contract pdf is {contactId}_Contract.pdf");
             }
             return (false, "The contact is not existed");
         }
 
-        private async Task<(bool, string)> UpdateContact(string contactId, ArrayInterior[] array)
+        public async Task<(bool, string)> UpdateContact(string contactId, ArrayInterior[] array)
         {
+            int count = 0;
             var getContact = (await _unit.ContactRepo.GetFieldsByFilterAsync([],
                     g => g.ContactId.Equals(contactId))).FirstOrDefault();
             if (getContact != null)
@@ -334,15 +336,24 @@ namespace Services.Service
                     if (getInterior != null)
                     {
                         interiorIdList.Add(getInterior.InteriorId);
+                        count++;
+                        if (count == array.Length) break;
+                        else continue;
                     }
                     return (false, $"The product with ID: {item.InteriorId} does not exist");
                 }
                 getContact.InteriorId = interiorIdList;
                 await _unit.ContactRepo.UpdateItemByValue("ContactId", contactId, getContact);
+                return (true, "Update Contact success");
             }
             return (false, "The contact is not existed");
         }
 
+        //public async Task<(bool, string)> CreateContractPdfAndPaymentLink(string staffId, string contactId, ArrayInterior[] array)
+        //{
+        //    await GenerateContractPdf(staffId, contactId, array);
+        //    await UpdateContact(contactId, array);
+        //}
     }
 
 }
