@@ -283,6 +283,22 @@
   },
   {
     "ContainingType": "SWD.Controllers.BlogController",
+    "Method": "ViewBlogDetail",
+    "RelativePath": "api/Blog/Get-Blog-Detail",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "_id",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SWD.Controllers.BlogController",
     "Method": "GetPagingBlogList",
     "RelativePath": "api/Blog/Get-Paging-Blog-List",
     "HttpMethod": "GET",
@@ -449,6 +465,16 @@
   },
   {
     "ContainingType": "SWD.Controllers.ContactController",
+    "Method": "GetAllRequestCustomer",
+    "RelativePath": "api/Contact/Customer/Get-Customer-Request-List",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SWD.Controllers.ContactController",
     "Method": "AddressAnContact",
     "RelativePath": "api/Contact/Staff/Address-An-Contact",
     "HttpMethod": "PUT",
@@ -456,7 +482,7 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "ContactId",
+        "Name": "RequestId",
         "Type": "System.String",
         "IsRequired": false
       },
@@ -474,6 +500,32 @@
         "Name": "StatusResponseOfStaff",
         "Type": "System.String",
         "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SWD.Controllers.ContactController",
+    "Method": "Test",
+    "RelativePath": "api/Contact/Staff/Create-Contract-PDF",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "staffId",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "contactId",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "array",
+        "Type": "Repositories.ModelView.CartView\u002BAddCartView[]",
+        "IsRequired": true
       }
     ],
     "ReturnTypes": []
@@ -674,7 +726,7 @@
   {
     "ContainingType": "SWD.Controllers.TransactionController",
     "Method": "TransactionList",
-    "RelativePath": "api/Transaction/Customer/Transaction-List-DO-NOT-USE",
+    "RelativePath": "api/Transaction/Customer/Get-Transaction-List",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,

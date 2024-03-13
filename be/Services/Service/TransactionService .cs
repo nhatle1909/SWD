@@ -274,6 +274,20 @@ namespace Services.Service
         {
             IEnumerable<Transaction> trans = await _unit.TransactionRepo.GetFieldsByFilterAsync(["Email"], a => a.TransactionId.Equals(Transactionid));
             string email = trans.FirstOrDefault().Email;
+            var getContact = (await _unit.ContactRepo.GetFieldsByFilterAsync([],
+                    g => g.Email.Equals(email)));
+            if (getContact.Any())
+            {
+                foreach (var contact in getContact)
+                {
+                    if (contact.StatusResponseOfStaff == Request.State.Awaiting_Payment)
+                    {
+                        contact.StatusResponseOfStaff = Request.State.Completed;
+                        await _unit.ContactRepo.UpdateItemByValue("RequestId", contact.RequestId, contact);
+                    }
+                }
+            }
+
             string subject = "Interior quotation system";
             string body = $"Thank You for Using Our Service!" +
                 $"<h3><strong>If you have any questions or encounter any issues, please don't hesitate to contact us at support@yourcompany.com.</strong></h3>" +
