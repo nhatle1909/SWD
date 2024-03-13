@@ -154,7 +154,7 @@ const Auth = ({type, setType, setOpenAuth, setChangePass}) => {
            
         name="phoneNumber"
       >
-        <InputNumber  style={{
+        <Input  style={{
               width:'100%'
             }}   prefix={<PhoneOutlined className="site-form-item-icon" />} placeholder="Phone number" />
       </Form.Item>

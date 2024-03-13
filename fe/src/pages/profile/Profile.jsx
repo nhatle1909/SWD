@@ -32,6 +32,8 @@ const Profile = () => {
   useEffect(() => {
     dispatch(actionGetUserInfo()).then((data) => {
       setProfile(data);
+      setAddress(data?.address)
+      setPhoneNumber(data?.phoneNumber)
     })
   }, [])
 
@@ -39,13 +41,16 @@ const Profile = () => {
     setLoading(true)
     dispatch(actionUpdateProfile(phoneNumber, address)).then(() => {
       setLoading(false)
+      setDisabled(true);
     }).catch(() => {
       setLoading(false)
     })
   }
 
   const handleResetField = () => {
-
+    setAddress(profile?.address)
+    setPhoneNumber(profile?.phoneNumber)
+    setDisabled(true)
   }
 
   return (
