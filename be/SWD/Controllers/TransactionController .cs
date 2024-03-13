@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Repositories.Model;
 using Repositories.ModelView;
 using Services.Interface;
+using System.Net.NetworkInformation;
 using System.Security.Claims;
 using static Repositories.ModelView.CartView;
 
@@ -52,10 +53,18 @@ namespace SWD.Controllers
             if (status.Item1 == true) return Ok(status.Item2);
             else return BadRequest(status.Item2);
         }
-        [HttpGet("Customer/Transaction-List-DO-NOT-USE")]
-        public async Task<IActionResult> TransactionList()
+        [HttpGet("Customer/Get-Paged-Transaction-List")]
+        public async Task<IActionResult> TransactionList(int pageIndex,bool isArc, string searchValue)
         {
-            return Ok();
+            try
+            {
+                var status = await _vnpayService.GetAllTransaction(pageIndex,isArc,searchValue);
+                return Ok(status);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
         //[Authorize(Roles = "Staff")]
         //[HttpPost("Staff/Update-Request-Item")]
