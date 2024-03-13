@@ -53,6 +53,7 @@ const unauthRoutes = {
       element: <HistoryRequest />,
       permissions: ['user']
     },
+    {
       path: 'interior/:interiorId',
       element:<InteriorDetails/>
     }

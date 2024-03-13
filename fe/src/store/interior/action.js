@@ -4,6 +4,11 @@ import {
   setInteriors,
 } from "./slice";
 
+import { getInteriorList } from '@/api/interior';
+import { setDetailInterior } from './slice';
+import { getDetailInterior } from '../../api/interior';
+
+
 export const actionGetInteriors = (request) => {
   return async (dispatch) => {
     try {
@@ -22,11 +27,6 @@ export const actionGetInteriors = (request) => {
     }
   };
 }
-
-import { getInteriorList } from '@/api/interior';
-import { setDetailInterior, setInteriors } from './slice';
-import { toast } from 'react-toastify';
-import { getDetailInterior } from '../../api/interior';
 
 export const actionGetInteriosList = ({pageIndex, isAsc, searchValue}) => {
     return async (dispatch) => {
