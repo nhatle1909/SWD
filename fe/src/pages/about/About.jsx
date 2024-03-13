@@ -1,74 +1,89 @@
-import {linkImg} from '@/utils/common'
-const About = () => {
-  return (
-  <>
-  <section className="home-slider js-fullheight owl-carousel">
-  <div className="slider-item js-fullheight" style={{ backgroundImage: `url(${linkImg('bg_1.jpg')})` }}>
-    <div className="overlay"></div>
-    <div className="container">
-      <div className="row no-gutters slider-text js-fullheight align-items-center justify-content-end" data-scrollax-parent="true">
-        <div className="col-md-7 text ftco-animate" data-scrollax=" properties: { translateY: '70%' }">
-          <h1 className="mb-4" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">We Create Amazing Architecture Designs</h1>
-          <p data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.</p>
-          <p><a href="#" className="btn btn-white btn-outline-white px-4 py-3 mt-3">View our works</a></p>
-        </div>
-      </div>
-    </div>
-  </div>
+import React, { useEffect } from 'react';
+import {linkImg} from '@/utils/common';
+import { useAppDispatch, useAppSelector } from '../../store';
+import { actionGetBlogList } from '../../store/blog/action';
 
-  <div className="slider-item js-fullheight" style={{ backgroundImage: `url(${linkImg('bg_2.jpg')})` }}>
-    <div className="overlay"></div>
-    <div className="container">
-      <div className="row no-gutters slider-text js-fullheight align-items-center justify-content-end" data-scrollax-parent="true">
-        <div className="col-md-7 text ftco-animate" data-scrollax=" properties: { translateY: '70%' }">
-          <h1 className="mb-4" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Virtually Build Your House</h1>
-          <p data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.</p>
-          <p><a href="#" className="btn btn-white btn-outline-white px-4 py-3 mt-3">View our works</a></p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-		
-<section className="ftco-services bg-light">
-  <div className="container">
-    <div className="row">
-      <div className="col-md-4 d-flex align-self-stretch ftco-animate">
-        <div className="media block-6 services d-block">
-          <div className="icon d-flex justify-content-center align-items-center">
-            <span className="flaticon-idea"></span>
-          </div>
-          <div className="media-body p-2 mt-3">
-            <h3 className="heading">Perfectly Design</h3>
-            <p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic.</p>
-          </div>
-        </div>
-      </div>
-      <div className="col-md-4 d-flex align-self-stretch ftco-animate">
-        <div className="media block-6 services d-block">
-          <div className="icon d-flex justify-content-center align-items-center">
-            <span className="flaticon-compass-symbol"></span>
-          </div>
-          <div className="media-body p-2 mt-3">
-            <h3 className="heading">Carefully Planned</h3>
-            <p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic.</p>
-          </div>
-        </div>
-      </div>
-      <div className="col-md-4 d-flex align-self-stretch ftco-animate">
-        <div className="media block-6 services d-block">
-          <div className="icon d-flex justify-content-center align-items-center">
-            <span className="flaticon-layers"></span>
-          </div>
-          <div className="media-body p-2 mt-3">
-            <h3 className="heading">Smartly Execute</h3>
-            <p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+export const About = () => {
+	const dispatch = useAppDispatch();
+    const blogs = useAppSelector(({ blogs }) => blogs.blogs);
+    console.log('blogs::', blogs)
+    useEffect(() => {
+        dispatch(actionGetBlogList({
+            pageIndex: 1,
+            isAsc: true,
+            searchValue: ''
+        }))
+    }, []);
+
+  	return (
+	<>
+		<section className="home-slider js-fullheight owl-carousel">
+		<div className="slider-item js-fullheight" style={{ backgroundImage: `url(${linkImg('about-1.jpg')})` }}>
+			<div className="overlay"></div>
+			<div className="container">
+			<div className="row no-gutters slider-text js-fullheight align-items-center justify-content-end" data-scrollax-parent="true">
+				<div className="col-md-7 text ftco-animate" data-scrollax=" properties: { translateY: '70%' }">
+				<h1 className="mb-4" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">We Create Amazing Architecture Designs</h1>
+				<p data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.</p>
+				<p><a href="#" className="btn btn-white btn-outline-white px-4 py-3 mt-3">View our works</a></p>
+				</div>
+			</div>
+			</div>
+		</div>
+
+		<div className="slider-item js-fullheight" style={{ backgroundImage: `url(${linkImg('about-2.jpg')})` }}>
+			<div className="overlay"></div>
+			<div className="container">
+			<div className="row no-gutters slider-text js-fullheight align-items-center justify-content-end" data-scrollax-parent="true">
+				<div className="col-md-7 text ftco-animate" data-scrollax=" properties: { translateY: '70%' }">
+				<h1 className="mb-4" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Virtually Build Your House</h1>
+				<p data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.</p>
+				<p><a href="#" className="btn btn-white btn-outline-white px-4 py-3 mt-3">View our works</a></p>
+				</div>
+			</div>
+			</div>
+		</div>
+		</section>
+				
+		<section className="ftco-services bg-light">
+		<div className="container">
+			<div className="row">
+			<div className="col-md-4 d-flex align-self-stretch ftco-animate">
+				<div className="media block-6 services d-block">
+				<div className="icon d-flex justify-content-center align-items-center">
+					<span className="flaticon-idea"></span>
+				</div>
+				<div className="media-body p-2 mt-3">
+					<h3 className="heading">Perfectly Design</h3>
+					<p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic.</p>
+				</div>
+				</div>
+			</div>
+			<div className="col-md-4 d-flex align-self-stretch ftco-animate">
+				<div className="media block-6 services d-block">
+				<div className="icon d-flex justify-content-center align-items-center">
+					<span className="flaticon-compass-symbol"></span>
+				</div>
+				<div className="media-body p-2 mt-3">
+					<h3 className="heading">Carefully Planned</h3>
+					<p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic.</p>
+				</div>
+				</div>
+			</div>
+			<div className="col-md-4 d-flex align-self-stretch ftco-animate">
+				<div className="media block-6 services d-block">
+				<div className="icon d-flex justify-content-center align-items-center">
+					<span className="flaticon-layers"></span>
+				</div>
+				<div className="media-body p-2 mt-3">
+					<h3 className="heading">Smartly Execute</h3>
+					<p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic.</p>
+				</div>
+				</div>
+			</div>
+			</div>
+		</div>
+		</section>
 
 		<section className="ftco-section ftc-no-pb">
 			<div className="container">
@@ -203,164 +218,94 @@ const About = () => {
     	</div>
     </section> 
 
-    <section className="ftco-section testimony-section">
-      <div className="container">
-        <div className="row justify-content-center mb-5 pb-3">
-          <div className="col-md-7 heading-section ftco-animate">
-            <h2 className="mb-4">Our satisfied customer says</h2>
-            <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in</p>
-          </div>
-        </div>
-        <div className="row ftco-animate">
-          <div className="col-md-12">
-            <div className="carousel-testimony owl-carousel">
-              <div className="item">
-                <div className="testimony-wrap p-4 pb-5">
-                  <div className="user-img mb-5" style={{ backgroundImage: `url(${linkImg('person_2.jpg')})` }}>
-                    <span className="quote d-flex align-items-center justify-content-center">
-                      <i className="icon-quote-left"></i>
-                    </span>
-                  </div>
-                  <div className="text">
-                    <p className="mb-5 pl-4 line">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-                    <p className="name">Garreth Smith</p>
-                    <span className="position">Marketing Manager</span>
-                  </div>
-                </div>
-              </div>
-              <div className="item">
-                <div className="testimony-wrap p-4 pb-5">
-                  <div className="user-img mb-5" style={{ backgroundImage: `url(${linkImg('person_2.jpg')})` }}>
-                    <span className="quote d-flex align-items-center justify-content-center">
-                      <i className="icon-quote-left"></i>
-                    </span>
-                  </div>
-                  <div className="text">
-                    <p className="mb-5 pl-4 line">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-                    <p className="name">Garreth Smith</p>
-                    <span className="position">Interface Designer</span>
-                  </div>
-                </div>
-              </div>
-              <div className="item">
-                <div className="testimony-wrap p-4 pb-5">
-                  <div className="user-img mb-5" style={{ backgroundImage: `url(${linkImg('person_3.jpg')})` }}>
-                    <span className="quote d-flex align-items-center justify-content-center">
-                      <i className="icon-quote-left"></i>
-                    </span>
-                  </div>
-                  <div className="text">
-                    <p className="mb-5 pl-4 line">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-                    <p className="name">Garreth Smith</p>
-                    <span className="position">UI Designer</span>
-                  </div>
-                </div>
-              </div>
-              <div className="item">
-                <div className="testimony-wrap p-4 pb-5">
-                  <div className="user-img mb-5" style={{ backgroundImage: `url(${linkImg('person_1.jpg')})` }}>
-                    <span className="quote d-flex align-items-center justify-content-center">
-                      <i className="icon-quote-left"></i>
-                    </span>
-                  </div>
-                  <div className="text">
-                    <p className="mb-5 pl-4 line">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-                    <p className="name">Garreth Smith</p>
-                    <span className="position">Web Developer</span>
-                  </div>
-                </div>
-              </div>
-              <div className="item">
-                <div className="testimony-wrap p-4 pb-5">
-                  <div className="user-img mb-5" style={{ backgroundImage: `url(${linkImg('person_3.jpg')})` }}>
-                    <span className="quote d-flex align-items-center justify-content-center">
-                      <i className="icon-quote-left"></i>
-                    </span>
-                  </div>
-                  <div className="text">
-                    <p className="mb-5 pl-4 line">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-                    <p className="name">Garreth Smith</p>
-                    <span className="position">System Analyst</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-			
-		<section className="ftco-section">
-			<div className="container">
-				<div className="row justify-content-center mb-5 pb-3">
-          <div className="col-md-7 heading-section ftco-animate">
-            <h2 className="mb-4">Our Architect Team</h2>
-            <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in</p>
-          </div>
-        </div>	
-				<div className="row">
-					<div className="col-md-6 col-lg-3 ftco-animate">
-						<div className="staff">
-							<div className="img" style={{ backgroundImage: `url(${linkImg('staff_1.jpg')})` }}></div>
-							<div className="text pt-4">
-								<h3>David Smith</h3>
-								<span className="position mb-2">Achitect</span>
-								<p>I am an ambitious workaholic, but apart from that, pretty simple person.</p>
-								<ul className="ftco-social d-flex">
-	                <li className="ftco-animate"><a href="#"><span className="icon-twitter"></span></a></li>
-	                <li className="ftco-animate"><a href="#"><span className="icon-facebook"></span></a></li>
-	                <li className="ftco-animate"><a href="#"><span className="icon-google-plus"></span></a></li>
-	                <li className="ftco-animate"><a href="#"><span className="icon-instagram"></span></a></li>
-	              </ul>
-							</div>
+    		
+	<section className="ftco-section">
+		<div className="container">
+			<div className="row justify-content-center mb-5 pb-3">
+          		<div className="col-md-7 heading-section ftco-animate">
+					<h2 className="mb-4">Our Architect Team</h2>
+					<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in</p>
+          		</div>
+			</div>	
+			<div className="row">
+				<div className="col-md-6 col-lg-3 ftco-animate">
+					<div className="staff">
+						<div className="img" style={{ backgroundImage: `url(${linkImg('staff-1.jpg')})` }}></div>
+						<div className="text pt-4">
+							<h3>Lê Nguyên Nhật</h3>
+							<span className="position mb-2">Achitect</span>
+							<p>I am an ambitious workaholic, but apart from that, pretty simple person.</p>
+							<ul className="ftco-social d-flex">
+								<li className="ftco-animate"><a href="#"><span className="icon-twitter"></span></a></li>
+								<li className="ftco-animate"><a href="#"><span className="icon-facebook"></span></a></li>
+								<li className="ftco-animate"><a href="#"><span className="icon-google-plus"></span></a></li>
+								<li className="ftco-animate"><a href="#"><span className="icon-instagram"></span></a></li>
+							</ul>
 						</div>
 					</div>
-					<div className="col-md-6 col-lg-3 ftco-animate">
-						<div className="staff">
-							<div className="img" style={{ backgroundImage: `url(${linkImg('staff_2.jpg')})` }}></div>
-							<div className="text pt-4">
-								<h3>David Smith</h3>
-								<span className="position mb-2">Achitect</span>
-								<p>I am an ambitious workaholic, but apart from that, pretty simple person.</p>
-								<ul className="ftco-social d-flex">
-	                <li className="ftco-animate"><a href="#"><span className="icon-twitter"></span></a></li>
-	                <li className="ftco-animate"><a href="#"><span className="icon-facebook"></span></a></li>
-	                <li className="ftco-animate"><a href="#"><span className="icon-google-plus"></span></a></li>
-	                <li className="ftco-animate"><a href="#"><span className="icon-instagram"></span></a></li>
-	              </ul>
-							</div>
+				</div>
+				<div className="col-md-6 col-lg-3 ftco-animate">
+					<div className="staff">
+						<div className="img" style={{ backgroundImage: `url(${linkImg('staff-2.jpg')})` }}></div>
+						<div className="text pt-4">
+							<h3>Đoàn Phạm Đăng Khôi</h3>
+							<span className="position mb-2">Achitect</span>
+							<p>I am an ambitious workaholic, but apart from that, pretty simple person.</p>
+							<ul className="ftco-social d-flex">
+								<li className="ftco-animate"><a href="#"><span className="icon-twitter"></span></a></li>
+								<li className="ftco-animate"><a href="#"><span className="icon-facebook"></span></a></li>
+								<li className="ftco-animate"><a href="#"><span className="icon-google-plus"></span></a></li>
+								<li className="ftco-animate"><a href="#"><span className="icon-instagram"></span></a></li>
+							</ul>
 						</div>
 					</div>
-					<div className="col-md-6 col-lg-3 ftco-animate">
-						<div className="staff">
-							<div className="img" style={{ backgroundImage: `url(${linkImg('staff_3.jpg')})` }}></div>
-							<div className="text pt-4">
-								<h3>David Smith</h3>
-								<span className="position mb-2">Achitect</span>
-								<p>I am an ambitious workaholic, but apart from that, pretty simple person.</p>
-								<ul className="ftco-social d-flex">
-	                <li className="ftco-animate"><a href="#"><span className="icon-twitter"></span></a></li>
-	                <li className="ftco-animate"><a href="#"><span className="icon-facebook"></span></a></li>
-	                <li className="ftco-animate"><a href="#"><span className="icon-google-plus"></span></a></li>
-	                <li className="ftco-animate"><a href="#"><span className="icon-instagram"></span></a></li>
-	              </ul>
-							</div>
+				</div>
+				<div className="col-md-6 col-lg-3 ftco-animate">
+					<div className="staff">
+						<div className="img" style={{ backgroundImage: `url(${linkImg('staff-3.jpg')})` }}></div>
+						<div className="text pt-4">
+							<h3>Bùi Hiểu Khang</h3>
+							<span className="position mb-2">Achitect</span>
+							<p>I am an ambitious workaholic, but apart from that, pretty simple person.</p>
+							<ul className="ftco-social d-flex">
+				<li className="ftco-animate"><a href="#"><span className="icon-twitter"></span></a></li>
+				<li className="ftco-animate"><a href="#"><span className="icon-facebook"></span></a></li>
+				<li className="ftco-animate"><a href="#"><span className="icon-google-plus"></span></a></li>
+				<li className="ftco-animate"><a href="#"><span className="icon-instagram"></span></a></li>
+				</ul>
 						</div>
 					</div>
-					<div className="col-md-6 col-lg-3 ftco-animate">
-						<div className="staff">
-							<div className="img" style={{ backgroundImage: `url(${linkImg('staff_4.jpg')})` }}></div>
-							<div className="text pt-4">
-								<h3>David Smith</h3>
-								<span className="position mb-2">Achitect</span>
-								<p>I am an ambitious workaholic, but apart from that, pretty simple person.</p>
-								<ul className="ftco-social d-flex">
-	                <li className="ftco-animate"><a href="#"><span className="icon-twitter"></span></a></li>
-	                <li className="ftco-animate"><a href="#"><span className="icon-facebook"></span></a></li>
-	                <li className="ftco-animate"><a href="#"><span className="icon-google-plus"></span></a></li>
-	                <li className="ftco-animate"><a href="#"><span className="icon-instagram"></span></a></li>
-	              </ul>
-							</div>
+				</div>
+				<div className="col-md-6 col-lg-3 ftco-animate">
+					<div className="staff">
+						<div className="img" style={{ backgroundImage: `url(${linkImg('staff-4.jpg')})` }}></div>
+						<div className="text pt-4">
+							<h3>Trần Dương Thảo Uyên</h3>
+							<span className="position mb-2">Achitect</span>
+							<p>I am an ambitious workaholic, but apart from that, pretty simple person.</p>
+							<ul className="ftco-social d-flex">
+								<li className="ftco-animate"><a href="#"><span className="icon-twitter"></span></a></li>
+								<li className="ftco-animate"><a href="#"><span className="icon-facebook"></span></a></li>
+								<li className="ftco-animate"><a href="#"><span className="icon-google-plus"></span></a></li>
+								<li className="ftco-animate"><a href="#"><span className="icon-instagram"></span></a></li>
+							</ul>
+						</div>
+						</div>
+					</div>
+				</div>
+				<div className="col-md-6 col-lg-3 ftco-animate">
+					<div className="staff">
+						<div className="img" style={{ backgroundImage: `url(${linkImg('staff-4.jpg')})` }}></div>
+						<div className="text pt-4">
+							<h3>Lê Nguyễn Toàn Năng</h3>
+							<span className="position mb-2">Achitect</span>
+							<p>I am an ambitious workaholic, but apart from that, pretty simple person.</p>
+							<ul className="ftco-social d-flex">
+								<li className="ftco-animate"><a href="#"><span className="icon-twitter"></span></a></li>
+								<li className="ftco-animate"><a href="#"><span className="icon-facebook"></span></a></li>
+								<li className="ftco-animate"><a href="#"><span className="icon-google-plus"></span></a></li>
+								<li className="ftco-animate"><a href="#"><span className="icon-instagram"></span></a></li>
+							</ul>
 						</div>
 					</div>
 				</div>
@@ -370,62 +315,35 @@ const About = () => {
 		<section className="ftco-section">
 			<div className="container">
 				<div className="row justify-content-center mb-5 pb-3">
-          <div className="col-md-7 heading-section ftco-animate">
-            <h2 className="mb-4">Recent Blog</h2>
-            <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in</p>
-          </div>
-        </div>	
+					<div className="col-md-7 heading-section ftco-animate">
+						<h2 className="mb-4">Recent Blog</h2>
+						<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in</p>
+					</div>
+        		</div>
 				<div className="row">
-          <div className="col-md-4 ftco-animate">
-            <div className="blog-entry">
-              <a href="blog-single.html" className="block-20" style={{ backgroundImage: `url(${linkImg('image_2.jpg')})` }}>
-              </a>
-              <div className="text d-flex py-4">
-                <div className="meta mb-3">
-                  <div><a href="#">Sep. 20, 2018</a></div>
-                  <div><a href="#">Admin</a></div>
-                  <div><a href="#" className="meta-chat"><span className="icon-chat"></span> 3</a></div>
-                </div>
-                <div className="desc pl-3">
-	                <h3 className="heading"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>
-	              </div>
-              </div>
-            </div>
-          </div>
-          <div className="col-md-4 ftco-animate">
-            <div className="blog-entry" data-aos-delay="100">
-              <a href="blog-single.html" className="block-20" style={{ backgroundImage: `url(${linkImg('image_2.jpg')})` }}>
-              </a>
-              <div className="text d-flex py-4">
-                <div className="meta mb-3">
-                  <div><a href="#">Sep. 20, 2018</a></div>
-                  <div><a href="#">Admin</a></div>
-                  <div><a href="#" className="meta-chat"><span className="icon-chat"></span> 3</a></div>
-                </div>
-                <div className="desc pl-3">
-	                <h3 className="heading"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>
-	              </div>
-              </div>
-            </div>
-          </div>
-          <div className="col-md-4 ftco-animate">
-            <div className="blog-entry" data-aos-delay="200">
-              <a href="blog-single.html" className="block-20" style={{ backgroundImage: `url(${linkImg('image_3.jpg')})` }}>
-              </a>
-              <div className="text d-flex py-4">
-                <div className="meta mb-3">
-                  <div><a href="#">Sep. 20, 2018</a></div>
-                  <div><a href="#">Admin</a></div>
-                  <div><a href="#" className="meta-chat"><span className="icon-chat"></span> 3</a></div>
-                </div>
-                <div className="desc pl-3">
-	                <h3 className="heading"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>
-	              </div>
-              </div>
-            </div>
-          </div>
-        </div>
-			</div>
+					{blogs?.map((item) => (
+						<div className='col-md-4' key={item.blogId}>
+							<div className="blog-entry">
+								<a href="blog-single.html" className="block-20" 
+									style={{
+										backgroundImage: `url(data:image/jpeg;base64,${item.pictures})`
+									}}>
+								</a>
+								<div className="text d-flex py-4">
+									<div className="meta mb-3">
+										<div>{item.createdAt.split('T')[0]}</div>
+										<div>Staff</div>
+										<div className="meta-chat"><span className="icon-chat"></span> 3</div>
+									</div>
+									<div className="desc pl-3">
+										<h3 className="heading"><a href="#">{item.title}</a></h3>
+									</div>
+								</div>
+							</div>
+						</div>
+					))}
+				</div>
+          	</div>
 		</section>
 
 		<section className="ftco-section ftc-no-pb">
@@ -449,7 +367,7 @@ const About = () => {
 				</div>
 			</div>
 		</section>
-</>
+	</>
     )
 }
 

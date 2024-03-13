@@ -221,13 +221,13 @@ const Home = () => {
 							<div className="carousel-testimony owl-carousel">
 								<div className="item">
 									<div className="testimony-wrap p-4 pb-5">
-										<div className="user-img mb-5" style={{ backgroundImage: `url(${linkImg('person_2.jpg')})` }}>
+										<div className="user-img mb-5" style={{ backgroundImage: `url(${linkImg('person_1.jpg')})` }}>
 											<span className="quote d-flex align-items-center justify-content-center">
 												<i className="icon-quote-left"></i>
 											</span>
 										</div>
 										<div className="text">
-											<p className="mb-5 pl-4 line">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
+											<p className="mb-5 pl-4 line">The service was so quick and easy, meaning we could get on with other renovation projects while our extension design was being drawn up! Being online, we understood how straightforward the process could be and was accessible whenever suited us. Thank you!</p>
 											<p className="name">Garreth Smith</p>
 											<span className="position">Marketing Manager</span>
 										</div>
@@ -241,7 +241,7 @@ const Home = () => {
 											</span>
 										</div>
 										<div className="text">
-											<p className="mb-5 pl-4 line">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
+											<p className="mb-5 pl-4 line">When I booked the call it was very tentative and I wasn't sure I wanted to do work at all, by the end of the call I felt cheerful and optimistic. I have already paid the deposit to get the ball rolling. Thank you for making such a difference.</p>
 											<p className="name">Garreth Smith</p>
 											<span className="position">Interface Designer</span>
 										</div>
@@ -255,7 +255,7 @@ const Home = () => {
 											</span>
 										</div>
 										<div className="text">
-											<p className="mb-5 pl-4 line">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
+											<p className="mb-5 pl-4 line">Amazing customer care from start to finish. Everyone I dealt with was extremely professional and got back to me quickly. I will definitely be using again for all my design needs!.</p>
 											<p className="name">Garreth Smith</p>
 											<span className="position">UI Designer</span>
 										</div>
@@ -263,13 +263,13 @@ const Home = () => {
 								</div>
 								<div className="item">
 									<div className="testimony-wrap p-4 pb-5">
-										<div className="user-img mb-5" style={{ backgroundImage: `url(${linkImg('person_1.jpg')})` }}>
+										<div className="user-img mb-5" style={{ backgroundImage: `url(${linkImg('person_4.jpg')})` }}>
 											<span className="quote d-flex align-items-center justify-content-center">
 												<i className="icon-quote-left"></i>
 											</span>
 										</div>
 										<div className="text">
-											<p className="mb-5 pl-4 line">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
+											<p className="mb-5 pl-4 line">The consultation was so informative and helpful. excellent customer service.</p>
 											<p className="name">Garreth Smith</p>
 											<span className="position">Web Developer</span>
 										</div>
@@ -277,7 +277,7 @@ const Home = () => {
 								</div>
 								<div className="item">
 									<div className="testimony-wrap p-4 pb-5">
-										<div className="user-img mb-5" style={{ backgroundImage: `url(${linkImg('person_3.jpg')})` }}>
+										<div className="user-img mb-5" style={{ backgroundImage: `url(${linkImg('person_1.jpg')})` }}>
 											<span className="quote d-flex align-items-center justify-content-center">
 												<i className="icon-quote-left"></i>
 											</span>
