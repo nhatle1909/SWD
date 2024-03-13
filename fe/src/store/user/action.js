@@ -102,7 +102,7 @@ export const actionUpdateProfile = (phoneNumber, homeAddress) => {
       toast('The profile updated!', {type: 'success'})
       return data
     } catch (error) {
-      toast(error?.response?.data?.errors?.$[0] || 'Phone number is invalid!', {type: 'error'})
+      toast(error?.response?.data?.errors?.HomeAdress[0] || 'Phone number is invalid!', {type: 'error'})
       console.log(error)
       throw error;
     }
