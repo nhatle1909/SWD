@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Repositories.Model;
 using Repositories.ModelView;
 using Services.Interface;
+using System.Net.NetworkInformation;
 using System.Security.Claims;
 using static Repositories.ModelView.CartView;
 
@@ -30,19 +31,17 @@ namespace SWD.Controllers
             var id = (HttpContext.User.FindFirst("id")?.Value) ?? "";
             string check = await _vnpayService.AddPendingTransaction(contactId, cartViews);
             int deposit = await _vnpayService.CalculateDeposit(check);
-            var status1 = await _contactService.GenerateContractPdf(id, contactId, cartViews);
+        
             var status2 = await _contactService.UpdateContact(contactId, cartViews);
             if (check != null)
             {
-                if (status1.Item1)
-                {
-                    if (status2.Item1)
+                 if (status2.Item1)
                     {
                         return Ok(_vnpayService.Payment(check, deposit).Result);
                     }
                     return BadRequest(status2.Item2);
-                }
-                return BadRequest(status1.Item2);
+               
+               
             }
             return BadRequest("Invalid Data Format");
         }
@@ -54,10 +53,15 @@ namespace SWD.Controllers
             if (status.Item1 == true) return Ok(status.Item2);
             else return BadRequest(status.Item2);
         }
-        [HttpGet("Customer/Transaction-List-DO-NOT-USE")]
+        [HttpGet("Customer/Get-Transaction-List")]
         public async Task<IActionResult> TransactionList()
         {
-            return Ok();
+
+            var id = (HttpContext.User.FindFirst("id")?.Value) ?? "";
+         
+                var status = await _vnpayService.GetAllTransaction(id);
+            if (status.Item1 == false) return BadRequest("Account does not exist | Invalid Token");
+            else return Ok(status.Item2);
         }
         //[Authorize(Roles = "Staff")]
         //[HttpPost("Staff/Update-Request-Item")]

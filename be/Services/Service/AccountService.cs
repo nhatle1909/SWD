@@ -235,7 +235,7 @@ namespace Services.Service
                         contact.Address = update.HomeAdress;
                         contact.Phone = update.PhoneNumber;
                         contact.UpdatedAt = DateTime.UtcNow;
-                        await _unit.ContactRepo.UpdateItemByValue("ContactId", contact.ContactId, contact);
+                        await _unit.ContactRepo.UpdateItemByValue("RequestId", contact.RequestId, contact);
                     }
                 }
                 return (true, "Update Account successfully");

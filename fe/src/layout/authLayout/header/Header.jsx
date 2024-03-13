@@ -56,17 +56,21 @@ const Header = () => {
 		setLocalStorage('auth', {});
 		window.location.reload();
 	}
+
+	const handleRequest = () => {
+		window.location.href = "/request";
+	}
 	useEffect(() => {
 		console.log('check reset pass::', window.location.search.slice(16))
-		if(openAuth){
+		if (openAuth) {
 			setOpenAuth(false)
 		}
-		if(window.location.search.slice(0, 16)){
+		if (window.location.search.slice(0, 16)) {
 			setOpenAuth(true);
 			setTypeAuth('resetPass')
 		}
 	}, [location.pathname])
-	
+
 	const items = [
 		{
 			label: <Login setChangePass={setChangePass} type={typeAuth} setType={setTypeAuth} setOpenAuth={setOpenAuth} />,
@@ -81,7 +85,9 @@ const Header = () => {
 					getItem(<a onClick={() => {
 						navigator('/admin/users')
 					}}>Users</a>, null, null),
-
+					getItem(<a onClick={() => {
+						navigator('/admin/reports')
+					}}>Reports</a>, null, null),
 				] :
 				auth?.role === 'Staff' ?
 					[
@@ -89,6 +95,9 @@ const Header = () => {
 						getItem(<a onClick={() => {
 							navigator('/staff/blogs')
 						}}>Blogs</a>, null, null),
+						getItem(<a onClick={() => {
+							navigator('/staff/requests')
+						}}>Requests</a>, null, null),
 					]
 					:
 					[]
@@ -96,6 +105,19 @@ const Header = () => {
 		)
 
 	]
+
+	const itemsRequest = [
+		getItem('Request', null, null,
+			[
+				getItem(<a onClick={() => {
+					navigator('/request/history')
+				}}>History</a>, null, null),
+				getItem(<a onClick={() => {
+					navigator('/request/create')
+				}}>Create New</a>, null, null),
+			]
+		)
+	];
 
 	const itemsProfile = [
 		{
@@ -114,6 +136,9 @@ const Header = () => {
 				}, 300)
 			}}>Change Password</a>
 		},
+		auth?.role !== 'Admin' && auth?.role !== 'Staff' ? {
+			label: <Menu style={{ width: 256 }} mode="vertical" items={itemsRequest} />
+		} : null,
 		{
 			label: <a onClick={() => handleLogout()}>Logout</a>
 		}
@@ -122,7 +147,7 @@ const Header = () => {
 	return (
 		<nav className={`navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light`} id="ftco-navbar">
 			<div className="container">
-				<a className="navbar-brand" href="/">SWD</a>
+				<a className="navbar-brand" href="/">Interior Construction Quotation</a>
 				<button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
 					<span className="oi oi-menu"></span> Menu
 				</button>
@@ -132,16 +157,16 @@ const Header = () => {
 				}} id="ftco-nav">
 					<ul className="navbar-nav ml-auto">
 						<li className={`nav-item ${location.pathname === '/' ? 'active' : ''}`}><a href='/' className="nav-link">Home</a></li>
-						<li className={`nav-item ${location.pathname === '/about' ? 'active' : ''} `}><a onClick={() => navigator('/about')} className="nav-link">About</a></li>
-
+						<li className={`nav-item ${location.pathname === '/about' ? 'active' : ''} `}><a href="/about" className="nav-link">About</a></li>
+						<li className={`nav-item ${location.pathname === '/blog' ? 'active' : ''} `}><a href="/blog" className="nav-link">Blog</a></li>
 
 						<Dropdown
 							menu={{
-								items: auth?.token 
-								? changePass 
-									? items 
-									: itemsProfile 
-								: items
+								items: auth?.token
+									? changePass
+										? items
+										: itemsProfile
+									: items
 							}}
 							open={openAuth}
 							placement='topRight'

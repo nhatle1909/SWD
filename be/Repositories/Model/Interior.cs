@@ -16,7 +16,7 @@ namespace Repositories.Model
         [BsonElement] public required int Price { get; set; }
         public enum ClassifyInterior
         {
-            Chair = 1, Desk = 2
+            Chair = 1, Desk = 2, Cabinet = 3, Clock = 4
         }
     }
 }

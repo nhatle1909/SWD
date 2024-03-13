@@ -9,10 +9,18 @@ import AdminRoute from './guard/AdminRoute';
 import PermissionRoute from './guard/PermissionRoute';
 import Home from '@/pages/home/Home';
 import About from '@/pages/about/About';
+import Blog from '@/pages/blog/Blog';
 import Users from '@/pages/admin/Users'
 import Profile from '../pages/profile/Profile';
 import StaffRoute from './guard/StaffRoute';
 import ManageBlog from '../pages/staff/blog/ManageBlog';
+import Reports from '../pages/admin/Reports';
+import ManageRequest from '../pages/staff/request/ManageRequest';
+import CreateRequest from '../pages/request/CreateRequest';
+import HistoryRequest from '../pages/request/HistoryRequest';
+
+import InteriorDetails from '../pages/interior/InteriorDetails'
+
 const unauthRoutes = {
   path: '/',
   element: <MainLayout />,
@@ -27,10 +35,27 @@ const unauthRoutes = {
       element: <About />,
     },
     {
+      path: 'blog',
+      element: <Blog />,
+    },
+    {
       path: 'profile',
       element: <Profile />,
       permissions: ['user']
     },
+    {
+      path: 'request/create',
+      element: <CreateRequest />,
+      permissions: ['user']
+    },
+    {
+      path: 'request/history',
+      element: <HistoryRequest />,
+      permissions: ['user']
+    },
+      path: 'interior/:interiorId',
+      element:<InteriorDetails/>
+    }
   ]
 };
 
@@ -43,6 +68,10 @@ const adminRoutes = {
       path: 'users',
       element: <Users />,
     },
+    {
+      path: 'reports',
+      element: <Reports />,
+    },
   ],
 };
 
@@ -54,6 +83,10 @@ const staffRoutes = {
     {
       path: 'blogs',
       element: <ManageBlog />,
+    },
+    {
+      path: 'requests',
+      element: <ManageRequest />,
     },
   ],
 };

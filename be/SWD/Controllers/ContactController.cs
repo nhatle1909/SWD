@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Repositories.Model;
 using Services.Interface;
+using Twilio.Rest.Video.V1.Room.Participant;
+using static Repositories.ModelView.CartView;
 using static Repositories.ModelView.ContactView;
 
 namespace SWD.Controllers
@@ -115,6 +117,23 @@ namespace SWD.Controllers
             {
                 return BadRequest(ex.Message);
             }
+        }
+        [Authorize(Roles ="Staff")]
+        [HttpPost("Staff/Create-Contract-PDF")]
+        public async Task<IActionResult> Test(string staffId, string contactId, AddCartView[] array) 
+        {
+            var status = await _contactService.GenerateContractPdf(staffId, contactId, array);
+            if (status.Item1 == false) return BadRequest("Error");
+            else return Ok(status.Item3);
+        }
+        [Authorize(Roles = "Customer")]
+        [HttpGet("Customer/Get-Customer-Request-List")]
+        public async Task<IActionResult> GetAllRequestCustomer() 
+        {
+            var _id = (HttpContext.User.FindFirst("id")?.Value) ?? "";
+            var status = await _contactService.GetCustomerContactList(_id);
+            if (status.Item1 == false) return BadRequest("Invalid Token || Mail does not exist");
+            else return Ok(status.Item2);
         }
 
 

@@ -14,11 +14,12 @@ namespace Services.Interface
         Task<(bool, string)> AddContactForGuest(string interiorId, AddContactView add);
         Task<(bool, string)> AddContactForCustomer(string id, string interiorId, AddForCustomerContactView add);
         Task<(bool, string)> AddressTheContact(AddressContactView address);
-        Task<(bool, object)> GenerateContractPdf(string staffId, string contactId, AddCartView[] cartViews);
+        Task<(bool, string, byte[])> GenerateContractPdf(string staffId, string contactId, AddCartView[] cartViews);
         Task<(bool, string)> UpdateContact(string contactId, AddCartView[] cartViews);
 
         Task<(bool, string)> DeleteContact(DeleteContactView delete);
         Task<object> GetPagingContact(PagingContactView paging);
         Task<(bool, object)> GetContactDetail(DetailContactView detail);
+        Task<(bool, object)> GetCustomerContactList(string _id);
     }
 }

@@ -56,7 +56,7 @@ namespace Services.Service
 
         public async Task<object> GetPagingInterior(int pageIndex, bool isAsc, string? searchValue)
         {
-            const int pageSize = 5;
+            const int pageSize = 20;
             const string sortField = "CreatedAt";
             List<string> searchFields = ["InteriorName", "Description", "Price"];
             List<string> returnFields = ["InteriorName", "Image", "Price", "CreatedAt"];

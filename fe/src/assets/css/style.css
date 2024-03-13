@@ -8714,3 +8714,12 @@ textarea.form-control {
   100% {
     stroke-dasharray: 89, 200;
     stroke-dashoffset: -136px; } }
+    .interior-image-block {
+      /* background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      height: 200px;
+      width: 100%;
+      margin-bottom: 20px; or any other value for spacing */
+      object-fit: cover;
+    }

@@ -20,9 +20,7 @@ const Footer = () => {
                 <ul className="list-unstyled">
                   <li><a href="#">Home</a></li>
                   <li><a href="#">About</a></li>
-                  <li><a href="#">Services</a></li>
-                  <li><a href="#">Projects</a></li>
-                  <li><a href="#">Contact</a></li>
+                  <li><a href="/blog">Blog</a></li>
                 </ul>
               </div>
             </div>
@@ -30,11 +28,7 @@ const Footer = () => {
                <div className="ftco-footer-widget mb-4">
                 <h2 className="ftco-heading-2">Services</h2>
                 <ul className="list-unstyled">
-                  <li><a href="#">Architectural Design</a></li>
-                  <li><a href="#">Interior Design</a></li>
-                  <li><a href="#">Exterior Design</a></li>
-                  <li><a href="#">Lighting Design</a></li>
-                  <li><a href="#">AutoCAD Service</a></li>
+                  <li><a href="#">Interior Construction Design</a></li>
                 </ul>
               </div>
             </div>
@@ -43,9 +37,9 @@ const Footer = () => {
                   <h2 className="ftco-heading-2">Have a Questions?</h2>
                   <div className="block-23 mb-3">
                     <ul>
-                      <li><span className="icon icon-map-marker"></span><span className="text">203 Fake St. Mountain View, San Francisco, California, USA</span></li>
-                      <li><a href="#"><span className="icon icon-phone"></span><span className="text">+2 392 3929 210</span></a></li>
-                      <li><a href="#"><span className="icon icon-envelope"></span><span className="text">info@yourdomain.com</span></a></li>
+                      <li><span className="icon icon-map-marker"></span><span className="text">Lưu Hữu Phước, Đông Hòa, Dĩ An, Bình Dương, Thành phố Thủ Đức</span></li>
+                      <li><a href="#"><span className="icon icon-phone"></span><span className="text">+84 123 456 789</span></a></li>
+                      <li><a href="#"><span className="icon icon-envelope"></span><span className="text">info@interiorconstructionquotation.com</span></a></li>
                     </ul>
                   </div>
               </div>
@@ -55,7 +49,7 @@ const Footer = () => {
             <div className="col-md-12 text-center">
   
               <p>
-    Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i className="icon-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+    Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved   <i className="icon-heart" aria-hidden="true"></i>
   </p>
             </div>
           </div>

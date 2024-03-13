@@ -29,6 +29,8 @@ using QuestPDF.Previewer;
 using QuestPDF.Helpers;
 using static Repositories.ModelView.ContractView;
 using static Repositories.ModelView.CartView;
+using Org.BouncyCastle.Utilities;
+using Microsoft.AspNetCore.Mvc;
 namespace Services.Service
 {
     public class ContactService : IContactService
@@ -62,10 +64,10 @@ namespace Services.Service
                     }
                     List<string> interiorIdList = [];
                     interiorIdList.Add(interiorId);
-                    Contact contact = _mapper.Map<Contact>(add);
+                    Request contact = _mapper.Map<Request>(add);
                     contact.InteriorId = interiorIdList;
                     contact.Picture = fileBytes;
-                    contact.StatusOfContact = Contact.StateContact.Processing;
+                   
                     await _unit.ContactRepo.AddOneItem(contact);
                     return (true, "The contact have been sent");
                 }
@@ -93,13 +95,13 @@ namespace Services.Service
                         }
                         List<string> interiorIdList = [];
                         interiorIdList.Add(interiorId);
-                        Contact contact = _mapper.Map<Contact>(add);
+                        Request contact = _mapper.Map<Request>(add);
                         contact.Email = getUser.Email;
                         contact.Phone = getUser.PhoneNumber;
                         contact.Address = getUser.Address;
                         contact.InteriorId = interiorIdList;
                         contact.Picture = fileBytes;
-                        contact.StatusOfContact = Contact.StateContact.Processing;
+               
                         await _unit.ContactRepo.AddOneItem(contact);
                         return (true, "The contact have been sent");
                     }
@@ -113,16 +115,16 @@ namespace Services.Service
         public async Task<(bool, string)> AddressTheContact(AddressContactView address)
         {
             var getContact = (await _unit.ContactRepo.GetFieldsByFilterAsync([],
-                    g => g.ContactId.Equals(address.ContactId))).FirstOrDefault();
+                    g => g.RequestId.Equals(address.RequestId))).FirstOrDefault();
             if (getContact != null)
             {
-                if (address.StatusResponseOfStaff == Contact.State.Completed)
+                if (address.StatusResponseOfStaff == Request.State.Completed)
                 {
                     getContact.ResponseOfStaff = address.ResponseOfStaff;
                     getContact.StatusResponseOfStaff = address.StatusResponseOfStaff;
-                    getContact.StatusOfContact = Contact.StateContact.Completed;
+        
                     getContact.UpdatedAt = DateTime.UtcNow;
-                    await _unit.ContactRepo.UpdateItemByValue("ContactId", getContact.ContactId, getContact);
+                    await _unit.ContactRepo.UpdateItemByValue("RequestId", getContact.RequestId, getContact);
                     string subject = "Interior quotation system";
                     string body = $@"
                     <h3><strong>
@@ -131,13 +133,13 @@ namespace Services.Service
                     await _emailSender.SendEmailAsync(getContact.Email, subject, body);
                     return (true, $"You have addressed the contact of email: {getContact.Email}");
                 }
-                else if (address.StatusResponseOfStaff == Contact.State.Awaiting_Payment)
+                else if (address.StatusResponseOfStaff == Request.State.Awaiting_Payment)
                 {
                     getContact.ResponseOfStaff = address.ResponseOfStaff;
                     getContact.StatusResponseOfStaff = address.StatusResponseOfStaff;
-                    getContact.StatusOfContact = Contact.StateContact.Processing;
+
                     getContact.UpdatedAt = DateTime.UtcNow;
-                    await _unit.ContactRepo.UpdateItemByValue("ContactId", getContact.ContactId, getContact);
+                    await _unit.ContactRepo.UpdateItemByValue("RequestId", getContact.RequestId, getContact);
                     string subject = "Interior quotation system";
                     string body = $@"
                     <h3><strong>
@@ -154,10 +156,10 @@ namespace Services.Service
         public async Task<(bool, string)> DeleteContact(DeleteContactView delete)
         {
             var getContact = (await _unit.ContactRepo.GetFieldsByFilterAsync([],
-                    g => g.ContactId.Equals(delete.ContactId))).FirstOrDefault();
-            if (getContact != null && getContact.StatusResponseOfStaff == Contact.State.Completed)
+                    g => g.RequestId.Equals(delete.RequestId))).FirstOrDefault();
+            if (getContact != null && getContact.StatusResponseOfStaff == Request.State.Completed)
             {
-                await _unit.ContactRepo.RemoveItemByValue("ContactId", getContact.ContactId);
+                await _unit.ContactRepo.RemoveItemByValue("RequestId", getContact.RequestId);
                 return (true, "Delete the contact successfully");
             }
             return (false, "The Contact does not exist or the Contact in progress cannot be deleted");
@@ -178,9 +180,9 @@ namespace Services.Service
             {
                 responses.Add(new
                 {
-                    ContactId = item.ContactId,
+                    RequestId = item.RequestId,
                     Email = item.Email,
-                    Status = item.StatusOfContact,
+                    Status = item.StatusResponseOfStaff,
                     CreatedAt = item.CreatedAt
                 });
             }
@@ -190,7 +192,7 @@ namespace Services.Service
         public async Task<(bool, object)> GetContactDetail(DetailContactView detail)
         {
             var getContact = (await _unit.ContactRepo.GetFieldsByFilterAsync([],
-                    g => g.ContactId.Equals(detail.ContactId))).FirstOrDefault();
+                    g => g.RequestId.Equals(detail.RequestId))).FirstOrDefault();
             if (getContact != null)
             {
                 return (true, getContact);
@@ -215,11 +217,11 @@ namespace Services.Service
         //    return imageTags.ToString();
         //}
 
-        public async Task<(bool, object)> GenerateContractPdf(string staffId, string contactId, AddCartView[] array)
+        public async Task<(bool,string, byte[])> GenerateContractPdf(string staffId, string RequestId, AddCartView[] array)
         {
             var totalPrice = 0;
             var getContact = (await _unit.ContactRepo.GetFieldsByFilterAsync([],
-                    g => g.ContactId.Equals(contactId))).FirstOrDefault();
+                    g => g.RequestId.Equals(RequestId))).FirstOrDefault();
             if (getContact != null)
             {
                 List<ContractViewList> list = [];
@@ -245,12 +247,12 @@ namespace Services.Service
                             if (count == array.Length) break;
                             else continue;
                         }
-                        return (false, "The quantity of product available is less than the quantity you want");
+                        return (false,"The quantity of product available is less than the quantity you want",null);
                     }
-                    return (false, $"The product with ID: {item.InteriorId} does not exist");
+                    return (false,$"The product with ID: {item.InteriorId} does not exist",null);
                 }
                 QuestPDF.Settings.License = LicenseType.Community;
-                Document.Create(container =>
+                var pdf = Document.Create(container =>
                 {
                     container.Page(p =>
                     {
@@ -284,7 +286,7 @@ namespace Services.Service
                                     });
                     });
                 })
-                    .GeneratePdf($"{contactId}_Contract.pdf");
+                    .GeneratePdf();
                 Contract ct = new()
                 {
                     ContractId = ObjectId.GenerateNewId().ToString(),
@@ -303,19 +305,22 @@ namespace Services.Service
                                     Ship: 100.000
                                     The total amount includes the above fee items: {Math.Ceiling(totalPrice + totalPrice * 0.1 + 100000)}
                                     ",
-                    Status = Contract.State.Pending
+                    Status = Contract.State.Pending,
+                    ContractFile = pdf
                 };
+                var pdfstream = new MemoryStream();
+             
                 await _unit.ContractRepo.AddOneItem(ct);
-                return (true, $"File contract pdf is {contactId}_Contract.pdf");
+                return (true, "",pdf);
             }
-            return (false, "The contact is not existed");
+            return (false,"The contact is not existed",null);
         }
 
-        public async Task<(bool, string)> UpdateContact(string contactId, AddCartView[] array)
+        public async Task<(bool, string)> UpdateContact(string RequestId, AddCartView[] array)
         {
             int count = 0;
             var getContact = (await _unit.ContactRepo.GetFieldsByFilterAsync([],
-                    g => g.ContactId.Equals(contactId))).FirstOrDefault();
+                    g => g.RequestId.Equals(RequestId))).FirstOrDefault();
             if (getContact != null)
             {
                 List<string> interiorIdList = [];
@@ -333,12 +338,40 @@ namespace Services.Service
                     return (false, $"The product with ID: {item.InteriorId} does not exist");
                 }
                 getContact.InteriorId = interiorIdList;
-                await _unit.ContactRepo.UpdateItemByValue("ContactId", contactId, getContact);
+                await _unit.ContactRepo.UpdateItemByValue("RequestId", RequestId, getContact);
                 return (true, "Update Contact success");
             }
             return (false, "The contact is not existed");
         }
 
+        public async Task<(bool, object)> GetCustomerContactList(string _id)
+        {
+            var responses = new List<object>();
+            var email = (await _unit.AccountRepo.GetFieldsByFilterAsync(["Email"], a => a.AccountId.Equals(_id))).FirstOrDefault().Email;
+            if (email != null) 
+            {
+                IEnumerable<Request> requestList = await _unit.ContactRepo.GetByFilterAsync(a => a.Email.Equals(email));
+                
+                foreach (var request in requestList)
+                {
+                    var name = (await _unit.InteriorRepo.GetFieldsByFilterAsync(["InteriorName"], i => i.InteriorId.Equals(request.InteriorId.FirstOrDefault()))).FirstOrDefault().InteriorName;
+                    responses.Add(new 
+                    {
+                        RequestId = request.RequestId,
+                        InteriorId = request.InteriorId.FirstOrDefault(),
+                        InteriorName = name,
+                        CreateAt = request.CreatedAt,
+
+                        Status = request.StatusResponseOfStaff
+                    });
+                }
+                    return (true,responses);
+            }
+            else 
+            {
+                return (false, null);
+            }
+        }
     }
 
 }

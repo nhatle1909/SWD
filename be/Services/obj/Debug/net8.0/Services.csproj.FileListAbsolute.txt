@@ -94,3 +94,35 @@ D:\DevTools\repository\New folder\SWD\be\Services\obj\Debug\net8.0\Services.dll
 D:\DevTools\repository\New folder\SWD\be\Services\obj\Debug\net8.0\refint\Services.dll
 D:\DevTools\repository\New folder\SWD\be\Services\obj\Debug\net8.0\Services.pdb
 D:\DevTools\repository\New folder\SWD\be\Services\obj\Debug\net8.0\ref\Services.dll
+D:\DevTools\repository\New folder (2)\SWD-main\be\Services\bin\Debug\net8.0\Services.deps.json
+D:\DevTools\repository\New folder (2)\SWD-main\be\Services\bin\Debug\net8.0\Services.dll
+D:\DevTools\repository\New folder (2)\SWD-main\be\Services\bin\Debug\net8.0\Services.pdb
+D:\DevTools\repository\New folder (2)\SWD-main\be\Services\bin\Debug\net8.0\Repositories.dll
+D:\DevTools\repository\New folder (2)\SWD-main\be\Services\bin\Debug\net8.0\Repositories.pdb
+D:\DevTools\repository\New folder (2)\SWD-main\be\Services\obj\Debug\net8.0\Services.csproj.AssemblyReference.cache
+D:\DevTools\repository\New folder (2)\SWD-main\be\Services\obj\Debug\net8.0\Services.GeneratedMSBuildEditorConfig.editorconfig
+D:\DevTools\repository\New folder (2)\SWD-main\be\Services\obj\Debug\net8.0\Services.AssemblyInfoInputs.cache
+D:\DevTools\repository\New folder (2)\SWD-main\be\Services\obj\Debug\net8.0\Services.AssemblyInfo.cs
+D:\DevTools\repository\New folder (2)\SWD-main\be\Services\obj\Debug\net8.0\Services.csproj.CoreCompileInputs.cache
+D:\DevTools\repository\New folder (2)\SWD-main\be\Services\obj\Debug\net8.0\Services.sourcelink.json
+D:\DevTools\repository\New folder (2)\SWD-main\be\Services\obj\Debug\net8.0\Services.csproj.CopyComplete
+D:\DevTools\repository\New folder (2)\SWD-main\be\Services\obj\Debug\net8.0\Services.dll
+D:\DevTools\repository\New folder (2)\SWD-main\be\Services\obj\Debug\net8.0\refint\Services.dll
+D:\DevTools\repository\New folder (2)\SWD-main\be\Services\obj\Debug\net8.0\Services.pdb
+D:\DevTools\repository\New folder (2)\SWD-main\be\Services\obj\Debug\net8.0\ref\Services.dll
+D:\DevTools\repository\New folder (2)\SWD\be\Services\bin\Debug\net8.0\Services.deps.json
+D:\DevTools\repository\New folder (2)\SWD\be\Services\bin\Debug\net8.0\Services.dll
+D:\DevTools\repository\New folder (2)\SWD\be\Services\bin\Debug\net8.0\Services.pdb
+D:\DevTools\repository\New folder (2)\SWD\be\Services\bin\Debug\net8.0\Repositories.dll
+D:\DevTools\repository\New folder (2)\SWD\be\Services\bin\Debug\net8.0\Repositories.pdb
+D:\DevTools\repository\New folder (2)\SWD\be\Services\obj\Debug\net8.0\Services.csproj.AssemblyReference.cache
+D:\DevTools\repository\New folder (2)\SWD\be\Services\obj\Debug\net8.0\Services.GeneratedMSBuildEditorConfig.editorconfig
+D:\DevTools\repository\New folder (2)\SWD\be\Services\obj\Debug\net8.0\Services.AssemblyInfoInputs.cache
+D:\DevTools\repository\New folder (2)\SWD\be\Services\obj\Debug\net8.0\Services.AssemblyInfo.cs
+D:\DevTools\repository\New folder (2)\SWD\be\Services\obj\Debug\net8.0\Services.csproj.CoreCompileInputs.cache
+D:\DevTools\repository\New folder (2)\SWD\be\Services\obj\Debug\net8.0\Services.sourcelink.json
+D:\DevTools\repository\New folder (2)\SWD\be\Services\obj\Debug\net8.0\Services.csproj.CopyComplete
+D:\DevTools\repository\New folder (2)\SWD\be\Services\obj\Debug\net8.0\Services.dll
+D:\DevTools\repository\New folder (2)\SWD\be\Services\obj\Debug\net8.0\refint\Services.dll
+D:\DevTools\repository\New folder (2)\SWD\be\Services\obj\Debug\net8.0\Services.pdb
+D:\DevTools\repository\New folder (2)\SWD\be\Services\obj\Debug\net8.0\ref\Services.dll

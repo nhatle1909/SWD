@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static Repositories.Model.Contact;
+using static Repositories.Model.Request;
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Options;
@@ -33,7 +33,7 @@ namespace Repositories.ModelView
 
         public class AddressContactView
         {
-            public required string ContactId { get; set; }
+            public required string RequestId { get; set; }
             public required string ResponseOfStaff { get; set; }
             public IFormFile? File { get; set; }
             public required State StatusResponseOfStaff { get; set; }
@@ -41,7 +41,7 @@ namespace Repositories.ModelView
 
         public class DeleteContactView
         {
-            public required string ContactId { get; set; }
+            public required string RequestId { get; set; }
         }
 
         public class PagingContactView
@@ -53,7 +53,7 @@ namespace Repositories.ModelView
 
         public class DetailContactView
         {
-            public required string ContactId { get; set; }
+            public required string RequestId { get; set; }
         }
 
     }
