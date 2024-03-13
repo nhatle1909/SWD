@@ -42,7 +42,3 @@ export const uploadInfoProfile = (phoneNumber, homeAddress) => {
         homeAdress: homeAddress
     });
 }
-    console.log("going to delete: ", request);
-
-    return baseClient.post('/Account/Admin/Remove-Account', request);
-};
