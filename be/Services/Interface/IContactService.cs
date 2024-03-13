@@ -20,5 +20,6 @@ namespace Services.Interface
         Task<(bool, string)> DeleteContact(DeleteContactView delete);
         Task<object> GetPagingContact(PagingContactView paging);
         Task<(bool, object)> GetContactDetail(DetailContactView detail);
+        Task<(bool, object)> GetCustomerContactList(string _id);
     }
 }

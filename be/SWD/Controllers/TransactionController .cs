@@ -53,18 +53,15 @@ namespace SWD.Controllers
             if (status.Item1 == true) return Ok(status.Item2);
             else return BadRequest(status.Item2);
         }
-        [HttpGet("Customer/Get-Paged-Transaction-List")]
-        public async Task<IActionResult> TransactionList(int pageIndex,bool isArc, string searchValue)
+        [HttpGet("Customer/Get-Transaction-List")]
+        public async Task<IActionResult> TransactionList()
         {
-            try
-            {
-                var status = await _vnpayService.GetAllTransaction(pageIndex,isArc,searchValue);
-                return Ok(status);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+
+            var id = (HttpContext.User.FindFirst("id")?.Value) ?? "";
+         
+                var status = await _vnpayService.GetAllTransaction(id);
+            if (status.Item1 == false) return BadRequest("Account does not exist | Invalid Token");
+            else return Ok(status.Item2);
         }
         //[Authorize(Roles = "Staff")]
         //[HttpPost("Staff/Update-Request-Item")]

@@ -9,7 +9,7 @@ namespace Services.Interface
         public Task<int> CalculateDeposit(string TransactionID);
         public Task<int> CalculateTotalPrice(AddCartView[] cartViews);
         public Task<int> GetRemainPrice(string TransactionID);
-        public Task<object> GetAllTransaction(int pageIndex, bool isAsc, string searchValue);
+        public Task<(bool,object)> GetAllTransaction( string id);
         public Task<string> AddPendingTransaction(string _id, AddCartView[] cartViews);
         public Task<string> UpdateStatusTransaction(string _id, string status);
         public Task<string> DeleteTransaction(string _id);

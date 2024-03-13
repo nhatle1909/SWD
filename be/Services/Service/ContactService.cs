@@ -67,7 +67,7 @@ namespace Services.Service
                     Request contact = _mapper.Map<Request>(add);
                     contact.InteriorId = interiorIdList;
                     contact.Picture = fileBytes;
-                    contact.StatusOfRequest = Request.StateContact.Processing;
+                   
                     await _unit.ContactRepo.AddOneItem(contact);
                     return (true, "The contact have been sent");
                 }
@@ -101,7 +101,7 @@ namespace Services.Service
                         contact.Address = getUser.Address;
                         contact.InteriorId = interiorIdList;
                         contact.Picture = fileBytes;
-                        contact.StatusOfRequest = Request.StateContact.Processing;
+               
                         await _unit.ContactRepo.AddOneItem(contact);
                         return (true, "The contact have been sent");
                     }
@@ -122,7 +122,7 @@ namespace Services.Service
                 {
                     getContact.ResponseOfStaff = address.ResponseOfStaff;
                     getContact.StatusResponseOfStaff = address.StatusResponseOfStaff;
-                    getContact.StatusOfRequest = Request.StateContact.Completed;
+        
                     getContact.UpdatedAt = DateTime.UtcNow;
                     await _unit.ContactRepo.UpdateItemByValue("RequestId", getContact.RequestId, getContact);
                     string subject = "Interior quotation system";
@@ -137,7 +137,7 @@ namespace Services.Service
                 {
                     getContact.ResponseOfStaff = address.ResponseOfStaff;
                     getContact.StatusResponseOfStaff = address.StatusResponseOfStaff;
-                    getContact.StatusOfRequest = Request.StateContact.Processing;
+
                     getContact.UpdatedAt = DateTime.UtcNow;
                     await _unit.ContactRepo.UpdateItemByValue("RequestId", getContact.RequestId, getContact);
                     string subject = "Interior quotation system";
@@ -182,7 +182,7 @@ namespace Services.Service
                 {
                     RequestId = item.RequestId,
                     Email = item.Email,
-                    Status = item.StatusOfRequest,
+                    Status = item.StatusResponseOfStaff,
                     CreatedAt = item.CreatedAt
                 });
             }
@@ -305,7 +305,8 @@ namespace Services.Service
                                     Ship: 100.000
                                     The total amount includes the above fee items: {Math.Ceiling(totalPrice + totalPrice * 0.1 + 100000)}
                                     ",
-                    Status = Contract.State.Pending
+                    Status = Contract.State.Pending,
+                    ContractFile = pdf
                 };
                 var pdfstream = new MemoryStream();
              
@@ -343,6 +344,34 @@ namespace Services.Service
             return (false, "The contact is not existed");
         }
 
+        public async Task<(bool, object)> GetCustomerContactList(string _id)
+        {
+            var responses = new List<object>();
+            var email = (await _unit.AccountRepo.GetFieldsByFilterAsync(["Email"], a => a.AccountId.Equals(_id))).FirstOrDefault().Email;
+            if (email != null) 
+            {
+                IEnumerable<Request> requestList = await _unit.ContactRepo.GetByFilterAsync(a => a.Email.Equals(email));
+                
+                foreach (var request in requestList)
+                {
+                    var name = (await _unit.InteriorRepo.GetFieldsByFilterAsync(["InteriorName"], i => i.InteriorId.Equals(request.InteriorId.FirstOrDefault()))).FirstOrDefault().InteriorName;
+                    responses.Add(new 
+                    {
+                        RequestId = request.RequestId,
+                        InteriorId = request.InteriorId.FirstOrDefault(),
+                        InteriorName = name,
+                        CreateAt = request.CreatedAt,
+
+                        Status = request.StatusResponseOfStaff
+                    });
+                }
+                    return (true,responses);
+            }
+            else 
+            {
+                return (false, null);
+            }
+        }
     }
 
 }

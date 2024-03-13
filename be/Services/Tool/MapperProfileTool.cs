@@ -28,7 +28,7 @@ namespace Services.Tool
                                           .ForMember(a => a.Pictures, a => a.Ignore());
 
             CreateMap<BlogComment, AddCommentBlogView>().ReverseMap();
-
+            CreateMap<Blog,IEnumerable<Blog>>().ReverseMap();
             CreateMap<Request, AddContactView>().ReverseMap()
                 .ForMember(p => p.Picture, p => p.Ignore());
             CreateMap<Request, AddForCustomerContactView>().ReverseMap()

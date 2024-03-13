@@ -128,5 +128,12 @@ namespace SWD.Controllers
                 return BadRequest(ex.Message);
             }
         }
+        [HttpGet("Get-Blog-Detail")]
+        public async Task<IActionResult> ViewBlogDetail(string _id) 
+        {
+            var status = await _blogService.ViewBlogDetail(_id);
+            if (status.Item1 == false) return BadRequest("Blog does not exist");
+            else return Ok(status.Item2);
+        }
     }
 }

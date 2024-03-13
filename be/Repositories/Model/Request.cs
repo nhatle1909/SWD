@@ -17,15 +17,12 @@ namespace Repositories.Model
         [BsonElement] public required string Content { get; set; }
         [BsonElement] public required byte[] Picture { get; set; }
         [BsonElement] public string? ResponseOfStaff{ get; set; }
-        [BsonElement] public required StateContact StatusOfRequest { get; set; }
+
         [BsonElement] public State? StatusResponseOfStaff { get; set; }
         public enum State
         {
             Awaiting_Payment = 1, Completed = 2
         }
-        public enum StateContact
-        {
-            Processing = 1, Completed = 2
-        }
+
     }
 }
