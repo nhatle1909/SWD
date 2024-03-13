@@ -39,6 +39,14 @@ export const actionSignUpUser = ({ email, password, phoneNumber }) => {
 
     } catch (error) {
       console.log(error)
+      let textError = error.response.data
+      
+      if(error?.response?.data?.title){
+        textError = 'Phone number is invalid!'
+      }
+      toast(textError, {
+        type:'error'
+      })
       throw error;
     }
   };
@@ -103,10 +111,6 @@ export const actionGetUserInfo = () => {
       const {data} = await getUserInfo()
       return data
     } catch (error) {
-      console.log(error)
-      toast('Something went wrong!, please try again!', {
-        type:'error'
-      })
       throw error;
     }
   };

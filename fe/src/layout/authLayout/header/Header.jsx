@@ -41,10 +41,12 @@ const Header = () => {
 	}) 
 
 	useEffect(() => {
-		dispatch(actionGetUserInfo()).then((data) => {
-			dispatch(setPicture(data?.picture))
-		})
-	}, [])
+		if(auth?.token){
+			dispatch(actionGetUserInfo()).then((data) => {
+				dispatch(setPicture(data?.picture))
+			})
+		}
+	}, [auth?.token])
 
 
 	const location = useLocation();
@@ -56,21 +58,16 @@ const Header = () => {
 		setLocalStorage('auth', {});
 		window.location.reload();
 	}
-
-	const handleRequest = () => {
-		window.location.href = "/request";
-	}
 	useEffect(() => {
-		console.log('check reset pass::', window.location.search.slice(16))
-		if (openAuth) {
+		if(openAuth){
 			setOpenAuth(false)
 		}
-		if (window.location.search.slice(0, 16)) {
+		if(window.location.search.slice(0, 16)){
 			setOpenAuth(true);
 			setTypeAuth('resetPass')
 		}
 	}, [location.pathname])
-
+	
 	const items = [
 		{
 			label: <Login setChangePass={setChangePass} type={typeAuth} setType={setTypeAuth} setOpenAuth={setOpenAuth} />,
@@ -162,11 +159,11 @@ const Header = () => {
 
 						<Dropdown
 							menu={{
-								items: auth?.token
-									? changePass
-										? items
-										: itemsProfile
-									: items
+								items: auth?.token 
+								? changePass 
+									? items 
+									: itemsProfile 
+								: items
 							}}
 							open={openAuth}
 							placement='topRight'
