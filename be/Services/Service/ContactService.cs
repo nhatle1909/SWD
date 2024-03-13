@@ -67,7 +67,7 @@ namespace Services.Service
                     Request contact = _mapper.Map<Request>(add);
                     contact.InteriorId = interiorIdList;
                     contact.Picture = fileBytes;
-                   
+
                     await _unit.ContactRepo.AddOneItem(contact);
                     return (true, "The contact have been sent");
                 }
@@ -101,7 +101,7 @@ namespace Services.Service
                         contact.Address = getUser.Address;
                         contact.InteriorId = interiorIdList;
                         contact.Picture = fileBytes;
-               
+
                         await _unit.ContactRepo.AddOneItem(contact);
                         return (true, "The contact have been sent");
                     }
@@ -122,7 +122,7 @@ namespace Services.Service
                 {
                     getContact.ResponseOfStaff = address.ResponseOfStaff;
                     getContact.StatusResponseOfStaff = address.StatusResponseOfStaff;
-        
+
                     getContact.UpdatedAt = DateTime.UtcNow;
                     await _unit.ContactRepo.UpdateItemByValue("RequestId", getContact.RequestId, getContact);
                     string subject = "Interior quotation system";
@@ -170,7 +170,7 @@ namespace Services.Service
             const int pageSize = 5;
             const string sortField = "CreatedAt";
             List<string> searchFields = ["Email"];
-            List<string> returnFields = ["Email", "StatusOfContact", "CreatedAt"];
+            List<string> returnFields = ["Email", "StatusResponseOfStaff", "CreatedAt"];
 
             int skip = (paging.PageIndex - 1) * pageSize;
             var items = (await _unit.ContactRepo.PagingAsync(skip, pageSize, paging.IsAsc, sortField, paging.SearchValue, searchFields, returnFields)).ToList();
@@ -200,24 +200,8 @@ namespace Services.Service
             return (false, "Contact is not existed");
         }
 
-        //private string GetImageTags(List<byte[]> picturesBytesList)
-        //{
-        //    StringBuilder imageTags = new StringBuilder();
 
-        //    foreach (var pictureBytes in picturesBytesList)
-        //    {
-        //        // Chuyển đổi byte[] thành base64 string
-        //        string base64Image = Convert.ToBase64String(pictureBytes);
-
-        //        // Tạo thẻ <img> với base64 string
-        //        string imgTag = $"<img src='data:image/png;base64,{base64Image}' alt='Interior Product' />";
-        //        imageTags.AppendLine(imgTag);
-        //    }
-
-        //    return imageTags.ToString();
-        //}
-
-        public async Task<(bool,string, byte[])> GenerateContractPdf(string staffId, string RequestId, AddCartView[] array)
+        public async Task<(bool, string, byte[])> GenerateContractPdf(string staffId, string RequestId, AddCartView[] array)
         {
             var totalPrice = 0;
             var getContact = (await _unit.ContactRepo.GetFieldsByFilterAsync([],
@@ -247,46 +231,403 @@ namespace Services.Service
                             if (count == array.Length) break;
                             else continue;
                         }
-                        return (false,"The quantity of product available is less than the quantity you want",null);
+                        return (false, "The quantity of product available is less than the quantity you want", null);
                     }
-                    return (false,$"The product with ID: {item.InteriorId} does not exist",null);
+                    return (false, $"The product with ID: {item.InteriorId} does not exist", null);
                 }
+
+
                 QuestPDF.Settings.License = LicenseType.Community;
                 var pdf = Document.Create(container =>
                 {
                     container.Page(p =>
                     {
                         p.Size(PageSizes.A4);
-                        p.Margin(3, Unit.Centimetre);
+                        p.Margin(1, Unit.Centimetre);
                         p.PageColor(Colors.White);
                         p.DefaultTextStyle(x => x.FontSize(20).FontFamily("Arial"));
 
-                        p.Header().Text("Contract")
-                                  .SemiBold().FontSize(30).FontColor(Colors.Black);
 
-                        p.Content().PaddingVertical(1, Unit.Centimetre)
-                                    .Column(x =>
+                        p.Content()
+                        .Table(
+                            contract =>
+                            {
+                                contract.ColumnsDefinition(cols =>
+                                {
+                                    cols.RelativeColumn();
+                                });
+                                contract.Cell().BorderVertical(3).BorderTop(3).BorderBottom(1).PaddingVertical(1).Column(x =>
+                                {
+                                    x.Item().Row(header =>
                                     {
-                                        x.Spacing(20);
-                                        x.Item().Text("Company Name: Interior Quote System");
-                                        x.Item().Text($"Creation Date: {DateTime.UtcNow}");
-                                        x.Item().Text("Company Address: Thu Duc district, Ho Chi Minh city");
-                                        x.Item().Text("Company Phone: 0123456789");
-                                        x.Item().Text($"Buyer Address: {getContact.Address}");
-                                        x.Item().Text($"Buyer Phone: {getContact.Phone}");
-                                        x.Item().Text($"Buyer Email: {getContact.Email}");
-                                        foreach (var item in list)
+                                        header.RelativeItem().Column(col =>
                                         {
-                                            totalPrice = totalPrice + item.TotalCostOfPoduct;
-                                            x.Item().Text($"InteriorId: {item.ProductId}, Name: {item.ProductName}, Unit Price: {item.UnitPrice}, Quantity: {item.Quantity}, Total of product: {item.TotalCostOfPoduct}");
-                                        }
-                                        x.Item().Text("Tax: 10%");
-                                        x.Item().Text("Ship: 100.000");
-                                        x.Item().Text($"The total amount includes the above fee items: {totalPrice + totalPrice * 0.1 + 100000}");
+                                            col.Item().AlignCenter().Text("CONTRACT").FontSize(16).Italic().FontColor(Colors.Black);
+
+                                            col.Item().AlignCenter().Text(text =>
+                                            {
+                                                text.DefaultTextStyle(x => x.FontSize(12).FontColor(Colors.Black));
+                                                text.Span("Date:");
+                                                text.Span($" {DateTime.UtcNow.Day}").SemiBold();
+                                                text.Span(" month");
+                                                text.Span($" {DateTime.UtcNow.Month}").SemiBold();
+                                                text.Span(" year");
+                                                text.Span($" {DateTime.UtcNow.Year}").SemiBold();
+                                            });
+
+                                        });
+                                    }
+                                    );
+                                });
+
+
+                                contract.Cell().BorderVertical(3).BorderHorizontal(1).PaddingHorizontal(4).Column(
+                                    col =>
+                                    {
+                                        col.Item().Text(text =>
+                                        {
+                                            text.DefaultTextStyle(x => x.FontSize(12).FontColor(Colors.Black));
+                                            text.Span("Company Name: ");
+                                            text.Span("Interior Quote System").SemiBold();
+                                        });
+                                        col.Item().Text(text =>
+                                        {
+                                            text.DefaultTextStyle(x => x.FontSize(12).FontColor(Colors.Black));
+                                            text.Span("Address: ");
+                                            text.Span("Thu Duc district, Ho Chi Minh city");
+                                        });
+                                        col.Item().Text(text =>
+                                        {
+                                            text.DefaultTextStyle(x => x.FontSize(12).FontColor(Colors.Black));
+                                            text.Span("Phone: ");
+                                            text.Span("0123456789");
+                                        });
                                     });
+                                contract.Cell().BorderVertical(3).BorderHorizontal(1).PaddingHorizontal(4).Column(
+                                    col =>
+                                    {
+                                        col.Item().Text(text =>
+                                        {
+                                            text.DefaultTextStyle(x => x.FontSize(12).FontColor(Colors.Black));
+                                            text.Span("Buyer Email: ");
+                                            text.Span($"{getContact.Email}");
+                                        });
+                                        col.Item().Text(text =>
+                                        {
+                                            text.DefaultTextStyle(x => x.FontSize(12).FontColor(Colors.Black));
+                                            text.Span("Buyer Phone: ");
+                                            text.Span($"{getContact.Phone}");
+                                        });
+                                        col.Item().Text(text =>
+                                        {
+                                            text.DefaultTextStyle(x => x.FontSize(12).FontColor(Colors.Black));
+                                            text.Span("Buyer Address: ");
+                                            text.Span($"{getContact.Address}");
+                                        });
+                                    });
+
+
+                                contract.Cell().BorderVertical(3).BorderHorizontal(1).Table(
+                                    table =>
+                                    {
+                                        table.ColumnsDefinition(col =>
+                                        {
+                                            col.ConstantColumn(35);
+                                            col.RelativeColumn();
+                                            col.ConstantColumn(70);
+                                            col.ConstantColumn(70);
+                                            col.ConstantColumn(70);
+                                            col.ConstantColumn(70);
+                                            col.ConstantColumn(70);
+                                        });
+
+                                        table.Cell().Border(1).PaddingHorizontal(4).PaddingVertical(2).AlignCenter().AlignMiddle().Text(text =>
+                                        {
+                                            text.DefaultTextStyle(x => x.FontSize(12).FontColor(Colors.Black));
+                                            text.Span("Interior Id").SemiBold();
+                                            text.Span("(Id)").Italic();
+                                        });
+                                        table.Cell().Border(1).PaddingHorizontal(4).PaddingVertical(2).AlignCenter().AlignMiddle().Text(text =>
+                                        {
+                                            text.DefaultTextStyle(x => x.FontSize(12).FontColor(Colors.Black));
+                                            text.Span("Interior Name").SemiBold();
+                                            text.Span("\r\nName").Italic();
+                                        });
+                                        table.Cell().Border(1).PaddingHorizontal(4).PaddingVertical(2).AlignCenter().AlignMiddle().Text(text =>
+                                        {
+                                            text.DefaultTextStyle(x => x.FontSize(12).FontColor(Colors.Black));
+                                            text.Span("Quantity").SemiBold();
+                                            text.Span("(Quantity)").Italic();
+                                        });
+                                        table.Cell().Border(1).PaddingHorizontal(4).PaddingVertical(2).AlignCenter().AlignMiddle().Text(text =>
+                                        {
+                                            text.DefaultTextStyle(x => x.FontSize(12).FontColor(Colors.Black));
+                                            text.Span("Unit price").SemiBold();
+                                            text.Span("(Unit price)").Italic();
+                                        });
+                                        table.Cell().Border(1).PaddingHorizontal(4).PaddingVertical(2).AlignCenter().AlignMiddle().Text(text =>
+                                        {
+                                            text.DefaultTextStyle(x => x.FontSize(12).FontColor(Colors.Black));
+                                            text.Span("Tax").SemiBold();
+                                            text.Span("(Rate)").Italic();
+                                        });
+                                        table.Cell().Border(1).PaddingHorizontal(4).PaddingVertical(2).AlignCenter().AlignMiddle().Text(text =>
+                                        {
+                                            text.DefaultTextStyle(x => x.FontSize(12).FontColor(Colors.Black));
+                                            text.Span("Tax Section").SemiBold();
+                                            text.Span("(Tax Section)").Italic();
+                                        });
+                                        table.Cell().Border(1).PaddingHorizontal(4).PaddingVertical(2).AlignCenter().AlignMiddle().Text(text =>
+                                        {
+                                            text.DefaultTextStyle(x => x.FontSize(12).FontColor(Colors.Black));
+                                            text.Span("Amount").SemiBold();
+                                            text.Span("(Amount)").Italic();
+                                        });
+
+
+                                        for (var i = 0; i < list.Count; i++)
+                                        {
+                                            var item = list[i];
+
+                                            table.Cell().Border(1).PaddingHorizontal(4).PaddingVertical(2).AlignCenter().AlignMiddle().Text($"{item.ProductId}").FontSize(12).FontColor(Colors.Black);
+                                            table.Cell().Border(1).PaddingHorizontal(4).PaddingVertical(2).AlignMiddle().Text($"{item.ProductName}").FontSize(12).FontColor(Colors.Black);
+                                            table.Cell().Border(1).PaddingHorizontal(4).PaddingVertical(2).AlignMiddle().AlignRight().Text($"{item.Quantity}").FontSize(12).FontColor(Colors.Black);
+                                            table.Cell().Border(1).PaddingHorizontal(4).PaddingVertical(2).AlignMiddle().AlignRight().Text($"{item.UnitPrice}").FontSize(12).FontColor(Colors.Black);
+                                            table.Cell().Border(1).PaddingHorizontal(4).PaddingVertical(2).AlignMiddle().AlignRight().Text("10%").FontSize(12).FontColor(Colors.Black);
+                                            table.Cell().Border(1).PaddingHorizontal(4).PaddingVertical(2).AlignMiddle().AlignRight().Text($"{item.TotalCostOfPoduct * 0.1}").FontSize(12).FontColor(Colors.Black);
+                                            table.Cell().Border(1).PaddingHorizontal(4).PaddingVertical(2).AlignMiddle().AlignRight().Text($"{item.TotalCostOfPoduct * 1.1}").FontSize(12).FontColor(Colors.Black);
+                                        }
+                                        ;
+                                    });
+
+                                contract.Cell().BorderVertical(3).BorderTop(1).BorderBottom(3).Table(
+                                    table =>
+                                    {
+                                        table.ColumnsDefinition(col =>
+                                        {
+                                            col.RelativeColumn();
+                                            col.ConstantColumn(70);
+                                            col.ConstantColumn(70);
+                                            col.ConstantColumn(70);
+                                            col.ConstantColumn(70);
+                                        });
+                                        table.Cell().Border(1).PaddingHorizontal(4).PaddingVertical(2).AlignMiddle().AlignRight().Text("Ship:").FontSize(12).FontColor(Colors.Black);
+                                        table.Cell().Border(1);
+                                        table.Cell().Border(1);
+                                        table.Cell().Border(1);
+                                        table.Cell().Border(1).PaddingHorizontal(4).PaddingVertical(2).AlignMiddle().AlignRight().Text("100.000").FontSize(12).FontColor(Colors.Black);
+
+                                        var total = 0;
+                                        foreach (var product in list)
+                                        {
+                                            total = total + product.TotalCostOfPoduct;
+                                        }
+                                        table.Cell().Border(1).PaddingHorizontal(4).PaddingVertical(2).AlignMiddle().AlignRight().Text("Total amount:").FontSize(12).FontColor(Colors.Black);
+                                        table.Cell().Border(1).PaddingHorizontal(4).PaddingVertical(2).AlignMiddle().AlignRight().Text($"{total}").FontSize(12).FontColor(Colors.Black);
+                                        table.Cell().Border(1);
+                                        table.Cell().Border(1).PaddingHorizontal(4).PaddingVertical(2).AlignMiddle().AlignRight().Text($"{(total) * 0.1}").FontSize(12).FontColor(Colors.Black);
+                                        table.Cell().Border(1).PaddingHorizontal(4).PaddingVertical(2).AlignMiddle().AlignRight().Text($"{Math.Round(total * 1.1 + 100000)}").FontSize(12).FontColor(Colors.Black);
+                                        ;
+                                    });
+                            });
                     });
-                })
-                    .GeneratePdf();
+                }).GeneratePdf();
+
+                //QuestPDF.Settings.License = LicenseType.Community;
+                //Document.Create(container =>
+                //{
+                //    container.Page(p =>
+                //    {
+                //        p.Size(PageSizes.A4);
+                //        p.Margin(1, Unit.Centimetre);
+                //        p.PageColor(Colors.White);
+                //        p.DefaultTextStyle(x => x.FontSize(20).FontFamily("Arial"));
+
+
+                //        p.Content()
+                //        .Table(
+                //            contract =>
+                //            {
+                //                contract.ColumnsDefinition(cols =>
+                //                {
+                //                    cols.RelativeColumn();
+                //                });
+                //                contract.Cell().BorderVertical(3).BorderTop(3).BorderBottom(1).PaddingVertical(1).Column(x =>
+                //                {
+                //                    x.Item().Row(header =>
+                //                    {
+                //                        header.RelativeItem().Column(col =>
+                //                        {
+                //                            col.Item().AlignCenter().Text("CONTRACT").FontSize(16).Italic().FontColor(Colors.Black);
+
+                //                            col.Item().AlignCenter().Text(text =>
+                //                            {
+                //                                text.DefaultTextStyle(x => x.FontSize(12).FontColor(Colors.Black));
+                //                                text.Span("Date:");
+                //                                text.Span($" {DateTime.UtcNow.Day}").SemiBold();
+                //                                text.Span(" month");
+                //                                text.Span($" {DateTime.UtcNow.Month}").SemiBold();
+                //                                text.Span(" year");
+                //                                text.Span($" {DateTime.UtcNow.Year}").SemiBold();
+                //                            });
+
+                //                        });
+                //                    }
+                //                    );
+                //                });
+
+
+                //                contract.Cell().BorderVertical(3).BorderHorizontal(1).PaddingHorizontal(4).Column(
+                //                    col =>
+                //                    {
+                //                        col.Item().Text(text =>
+                //                        {
+                //                            text.DefaultTextStyle(x => x.FontSize(12).FontColor(Colors.Black));
+                //                            text.Span("Company Name: ");
+                //                            text.Span("Interior Quote System").SemiBold();
+                //                        });
+                //                        col.Item().Text(text =>
+                //                        {
+                //                            text.DefaultTextStyle(x => x.FontSize(12).FontColor(Colors.Black));
+                //                            text.Span("Address: ");
+                //                            text.Span("Thu Duc district, Ho Chi Minh city");
+                //                        });
+                //                        col.Item().Text(text =>
+                //                        {
+                //                            text.DefaultTextStyle(x => x.FontSize(12).FontColor(Colors.Black));
+                //                            text.Span("Phone: ");
+                //                            text.Span("0123456789");
+                //                        });
+                //                    });
+                //                contract.Cell().BorderVertical(3).BorderHorizontal(1).PaddingHorizontal(4).Column(
+                //                    col =>
+                //                    {
+                //                        col.Item().Text(text =>
+                //                        {
+                //                            text.DefaultTextStyle(x => x.FontSize(12).FontColor(Colors.Black));
+                //                            text.Span("Buyer Email: ");
+                //                            text.Span($"{getContact.Email}");
+                //                        });
+                //                        col.Item().Text(text =>
+                //                        {
+                //                            text.DefaultTextStyle(x => x.FontSize(12).FontColor(Colors.Black));
+                //                            text.Span("Buyer Phone: ");
+                //                            text.Span($"{getContact.Phone}");
+                //                        });
+                //                        col.Item().Text(text =>
+                //                        {
+                //                            text.DefaultTextStyle(x => x.FontSize(12).FontColor(Colors.Black));
+                //                            text.Span("Buyer Address: ");
+                //                            text.Span($"{getContact.Address}");
+                //                        });
+                //                    });
+
+
+                //                contract.Cell().BorderVertical(3).BorderHorizontal(1).Table(
+                //                    table =>
+                //                    {
+                //                        table.ColumnsDefinition(col =>
+                //                        {
+                //                            col.ConstantColumn(70);
+                //                            col.RelativeColumn();
+                //                            col.ConstantColumn(70);
+                //                            col.ConstantColumn(70);
+                //                            col.ConstantColumn(70);
+                //                            col.ConstantColumn(70);
+                //                            col.ConstantColumn(70);
+                //                        });
+
+                //                        table.Cell().Border(1).PaddingHorizontal(4).PaddingVertical(2).AlignCenter().AlignMiddle().Text(text =>
+                //                        {
+                //                            text.DefaultTextStyle(x => x.FontSize(12).FontColor(Colors.Black));
+                //                            text.Span("Interior Id").SemiBold();
+                //                            text.Span("(Id)").Italic();
+                //                        });
+                //                        table.Cell().Border(1).PaddingHorizontal(4).PaddingVertical(2).AlignCenter().AlignMiddle().Text(text =>
+                //                        {
+                //                            text.DefaultTextStyle(x => x.FontSize(12).FontColor(Colors.Black));
+                //                            text.Span("Interior Name").SemiBold();
+                //                            text.Span("\r\nName").Italic();
+                //                        });
+                //                        table.Cell().Border(1).PaddingHorizontal(4).PaddingVertical(2).AlignCenter().AlignMiddle().Text(text =>
+                //                        {
+                //                            text.DefaultTextStyle(x => x.FontSize(12).FontColor(Colors.Black));
+                //                            text.Span("Quantity").SemiBold();
+                //                            text.Span("(Quantity)").Italic();
+                //                        });
+                //                        table.Cell().Border(1).PaddingHorizontal(4).PaddingVertical(2).AlignCenter().AlignMiddle().Text(text =>
+                //                        {
+                //                            text.DefaultTextStyle(x => x.FontSize(12).FontColor(Colors.Black));
+                //                            text.Span("Unit price").SemiBold();
+                //                            text.Span("(Unit price)").Italic();
+                //                        });
+                //                        table.Cell().Border(1).PaddingHorizontal(4).PaddingVertical(2).AlignCenter().AlignMiddle().Text(text =>
+                //                        {
+                //                            text.DefaultTextStyle(x => x.FontSize(12).FontColor(Colors.Black));
+                //                            text.Span("Tax").SemiBold();
+                //                            text.Span("(Rate)").Italic();
+                //                        });
+                //                        table.Cell().Border(1).PaddingHorizontal(4).PaddingVertical(2).AlignCenter().AlignMiddle().Text(text =>
+                //                        {
+                //                            text.DefaultTextStyle(x => x.FontSize(12).FontColor(Colors.Black));
+                //                            text.Span("Tax Section").SemiBold();
+                //                            text.Span("(Tax Section)").Italic();
+                //                        });
+                //                        table.Cell().Border(1).PaddingHorizontal(4).PaddingVertical(2).AlignCenter().AlignMiddle().Text(text =>
+                //                        {
+                //                            text.DefaultTextStyle(x => x.FontSize(12).FontColor(Colors.Black));
+                //                            text.Span("Amount").SemiBold();
+                //                            text.Span("(Amount)").Italic();
+                //                        });
+
+
+                //                        for (var i = 0; i < list.Count; i++)
+                //                        {
+                //                            var item = list[i];
+
+                //                            table.Cell().Border(1).PaddingHorizontal(4).PaddingVertical(2).AlignCenter().AlignMiddle().Text($"{item.ProductId}").FontSize(12).FontColor(Colors.Black);
+                //                            table.Cell().Border(1).PaddingHorizontal(4).PaddingVertical(2).AlignMiddle().Text($"{item.ProductName}").FontSize(12).FontColor(Colors.Black);
+                //                            table.Cell().Border(1).PaddingHorizontal(4).PaddingVertical(2).AlignMiddle().AlignRight().Text($"{item.Quantity}").FontSize(12).FontColor(Colors.Black);
+                //                            table.Cell().Border(1).PaddingHorizontal(4).PaddingVertical(2).AlignMiddle().AlignRight().Text($"{item.UnitPrice}").FontSize(12).FontColor(Colors.Black);
+                //                            table.Cell().Border(1).PaddingHorizontal(4).PaddingVertical(2).AlignMiddle().AlignRight().Text("10%").FontSize(12).FontColor(Colors.Black);
+                //                            table.Cell().Border(1).PaddingHorizontal(4).PaddingVertical(2).AlignMiddle().AlignRight().Text($"{item.TotalCostOfPoduct * 0.1}").FontSize(12).FontColor(Colors.Black);
+                //                            table.Cell().Border(1).PaddingHorizontal(4).PaddingVertical(2).AlignMiddle().AlignRight().Text($"{item.TotalCostOfPoduct * 1.1}").FontSize(12).FontColor(Colors.Black);
+                //                        }
+                //                        ;
+                //                    });
+
+                //                contract.Cell().BorderVertical(3).BorderTop(1).BorderBottom(3).Table(
+                //                    table =>
+                //                    {
+                //                        table.ColumnsDefinition(col =>
+                //                        {
+                //                            col.RelativeColumn();
+                //                            col.ConstantColumn(70);
+                //                            col.ConstantColumn(70);
+                //                            col.ConstantColumn(70);
+                //                            col.ConstantColumn(70);
+                //                        });
+                //                        table.Cell().Border(1).PaddingHorizontal(4).PaddingVertical(2).AlignMiddle().AlignRight().Text("Ship:").FontSize(12).FontColor(Colors.Black);
+                //                        table.Cell().Border(1);
+                //                        table.Cell().Border(1);
+                //                        table.Cell().Border(1);
+                //                        table.Cell().Border(1).PaddingHorizontal(4).PaddingVertical(2).AlignMiddle().AlignRight().Text("100.000").FontSize(12).FontColor(Colors.Black);
+
+                //                        var total = 0;
+                //                        foreach (var product in list)
+                //                        {
+                //                            total = total + product.TotalCostOfPoduct;
+                //                        }
+                //                        table.Cell().Border(1).PaddingHorizontal(4).PaddingVertical(2).AlignMiddle().AlignRight().Text("Total amount:").FontSize(12).FontColor(Colors.Black);
+                //                        table.Cell().Border(1).PaddingHorizontal(4).PaddingVertical(2).AlignMiddle().AlignRight().Text($"{total}").FontSize(12).FontColor(Colors.Black);
+                //                        table.Cell().Border(1);
+                //                        table.Cell().Border(1).PaddingHorizontal(4).PaddingVertical(2).AlignMiddle().AlignRight().Text($"{(total) * 0.1}").FontSize(12).FontColor(Colors.Black);
+                //                        table.Cell().Border(1).PaddingHorizontal(4).PaddingVertical(2).AlignMiddle().AlignRight().Text($"{Math.Round(total * 1.1 + 100000)}").FontSize(12).FontColor(Colors.Black);
+                //                        ;
+                //                    });
+                //            });
+                //    });
+                //}).GeneratePdf($"{RequestId}_Contract.pdf");
                 Contract ct = new()
                 {
                     ContractId = ObjectId.GenerateNewId().ToString(),
@@ -309,11 +650,11 @@ namespace Services.Service
                     ContractFile = pdf
                 };
                 var pdfstream = new MemoryStream();
-             
+
                 await _unit.ContractRepo.AddOneItem(ct);
-                return (true, "",pdf);
+                return (true, "", pdf);
             }
-            return (false,"The contact is not existed",null);
+            return (false, "The contact is not existed", null);
         }
 
         public async Task<(bool, string)> UpdateContact(string RequestId, AddCartView[] array)
@@ -348,14 +689,14 @@ namespace Services.Service
         {
             var responses = new List<object>();
             var email = (await _unit.AccountRepo.GetFieldsByFilterAsync(["Email"], a => a.AccountId.Equals(_id))).FirstOrDefault().Email;
-            if (email != null) 
+            if (email != null)
             {
                 IEnumerable<Request> requestList = await _unit.ContactRepo.GetByFilterAsync(a => a.Email.Equals(email));
-                
+
                 foreach (var request in requestList)
                 {
                     var name = (await _unit.InteriorRepo.GetFieldsByFilterAsync(["InteriorName"], i => i.InteriorId.Equals(request.InteriorId.FirstOrDefault()))).FirstOrDefault().InteriorName;
-                    responses.Add(new 
+                    responses.Add(new
                     {
                         RequestId = request.RequestId,
                         InteriorId = request.InteriorId.FirstOrDefault(),
@@ -365,9 +706,9 @@ namespace Services.Service
                         Status = request.StatusResponseOfStaff
                     });
                 }
-                    return (true,responses);
+                return (true, responses);
             }
-            else 
+            else
             {
                 return (false, null);
             }
