@@ -6,8 +6,10 @@ import { createRequestAction } from '../../store/request/action';
 import { actionGetInteriors } from '../../store/interior/action';
 
 import PageHeader from '../../components/PageHeader';
+import { useNavigate } from 'react-router-dom';
 const CreateRequest = () => {
     const auth = useAppSelector(({ authentication }) => authentication.authUser);
+    const navigator = useNavigate();
 
     const interiors = useAppSelector(({ interior }) => interior.interiors);
     const dispatch = useDispatch();
@@ -15,10 +17,11 @@ const CreateRequest = () => {
     const [address, setAddress] = useState("");
     const [phone, setPhone] = useState("");
     const [content, setContent] = useState("");
-    const [interiorId, setInteriorId] = useState("");
+    const [interiorId, setInteriorId] = useState("65f04adf953c9051e6f3152f");
 
     const handleOk = () => {
         dispatch(createRequestAction({ Email: email, Address: address, Phone: phone, Content: content, Interior: interiorId }));
+        navigator("/request/history");
     };
 
     React.useEffect(() => {
@@ -28,6 +31,11 @@ const CreateRequest = () => {
             SearchValue: "",
         }));
     }, [])
+
+    const [selectedItems, setSelectedItems] = useState([]);
+    let interiorNamesArray = interiors?.map(item => item.interiorName);
+
+    const filteredOptions = interiorNamesArray?.filter((o) => !selectedItems.includes(o));
 
 
     console.log("interiors", interiors);
@@ -60,7 +68,7 @@ const CreateRequest = () => {
                             },
                         ]}
                     >
-                        <Input value={email} onChange={(e) => setEmail(e.target.value)} />
+                        <Input placeholder='Enter email' value={email} onChange={(e) => setEmail(e.target.value)} />
                     </Form.Item>
                     <Form.Item
                         label="Phone Number"
@@ -68,11 +76,12 @@ const CreateRequest = () => {
                         rules={[
                             {
                                 required: true,
+
                                 message: 'Please input your phone number!',
                             },
                         ]}
                     >
-                        <Input maxLength={10} onChange={(e) => setPhone(e.target.value)} />
+                        <Input placeholder='Enter phone' maxLength={10} onChange={(e) => setPhone(e.target.value)} />
                     </Form.Item>
                     <Form.Item
                         label="Address"
@@ -84,7 +93,7 @@ const CreateRequest = () => {
                             },
                         ]}
                     >
-                        <Input onChange={(e) => setAddress(e.target.value)} />
+                        <Input placeholder='Enter address' onChange={(e) => setAddress(e.target.value)} />
                     </Form.Item>
                     <Form.Item
                         label="Content"
@@ -96,7 +105,7 @@ const CreateRequest = () => {
                             },
                         ]}
                     >
-                        <Input onChange={(e) => setContent(e.target.value)} />
+                        <Input placeholder='Enter content' onChange={(e) => setContent(e.target.value)} />
                     </Form.Item>
 
                     <Form.Item label="Choose interior"
@@ -106,10 +115,17 @@ const CreateRequest = () => {
                                 message: 'Please input your content!',
                             },
                         ]} >
-                        <Select onChange={(value) => {
-                            setInteriorId(value);
-                        }}>
-                            {interiors.map((interior) => <Select.Option value={interior.interiorId}>{interior.interiorName}</Select.Option>)}                        </Select>
+                        <Select
+                            mode="multiple"
+                            placeholder="Choose interior"
+                            value={selectedItems}
+                            onChange={setSelectedItems}
+                            style={{ width: '100%' }}
+                            options={filteredOptions?.map((item) => ({
+                                value: item,
+                                label: item,
+                            }))}
+                        />
                     </Form.Item>
 
                     <Form.Item wrapperCol={{ offset: 6, span: 12 }}>

@@ -56,6 +56,14 @@ namespace SWD.Controllers
         }
 
         [AllowAnonymous]
+        [HttpPost("Get-Paging-Interior")]
+        public async Task<IActionResult> GetPagingInterior(PagingView request)
+        {
+            var status = await _interiorService.GetPagingInterior(request.PageIndex, request.IsAsc, request.SearchValue);
+            return Ok(status);
+        }
+
+        [AllowAnonymous]
         [HttpGet("View-Detail-Interior-From-Paging")]
         public async Task<IActionResult> GetDetailInterior(string interiorId)
         {

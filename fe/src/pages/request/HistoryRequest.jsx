@@ -3,14 +3,15 @@ import React, { useRef, useState } from "react";
 import { Button, Space, Table, Input, Modal } from 'antd';
 import { SearchOutlined } from "@ant-design/icons";
 import Highlighter from 'react-highlight-words';
-import { actionGetRequests } from "../../store/request/action";
+import { actionGetMyRequests, actionGetRequests } from "../../store/request/action";
 
 import PageHeader from '../../components/PageHeader';
+import { paymentLink } from "../../constants/constants";
 
 
 const HistoryRequest = () => {
     const dispatch = useAppDispatch();
-    const requests = useAppSelector(({ request }) => request?.requests)
+    const requests = useAppSelector(({ request }) => request?.requests);
 
     const [request, setRequest] = React.useState({
         PageIndex: 1,
@@ -129,7 +130,7 @@ const HistoryRequest = () => {
     const columns = [
         {
             title: 'Request Id',
-            dataIndex: 'contactId',
+            dataIndex: 'requestId',
             width: '5%',
             align: 'center',
         },
@@ -187,6 +188,8 @@ const HistoryRequest = () => {
                     </span>
                     {record.status !== null && (<span>{" " + record.status}</span>)}
                 </span>
+                <br />
+                <span style={{ fontWeight: "bold" }}>Payment link: <a target="_blank" style={{ fontWeight: "normal", color: "blue", textDecoration: "underline" }} href={paymentLink}>Click here to pay</a></span>
             </>,
             footer: (_, { OkBtn, CancelBtn }) => (
                 <>
@@ -197,7 +200,7 @@ const HistoryRequest = () => {
         });
     }
     React.useEffect(() => {
-        dispatch(actionGetRequests(request));
+        dispatch(actionGetMyRequests(request));
     }, []);
 
     return (<>

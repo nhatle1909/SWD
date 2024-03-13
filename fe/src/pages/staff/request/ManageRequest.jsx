@@ -7,6 +7,7 @@ import { actionGetRequests } from "../../../store/request/action";
 import PageHeader from '../../../components/PageHeader';
 import { useAppDispatch, useAppSelector } from "../../../store";
 import TextArea from "antd/es/input/TextArea";
+import { toast } from "react-toastify";
 
 
 const ManageRequest = () => {
@@ -126,14 +127,18 @@ const ManageRequest = () => {
                 text
             ),
     });
-
+    let modal;
     const handleReply = (action) => {
-
+        if (action === "accept") {
+            toast.success("Accept request successful");
+        } else {
+            toast.success("Reject request successful");
+        }
+        modal.destroy();
     }
-
     const handleOpenReply = (record) => {
         console.log("record", record);
-        Modal.info({
+        modal = Modal.info({
             title: 'Reply',
 
             content: (
@@ -147,15 +152,16 @@ const ManageRequest = () => {
                         label="Enter your message: "
                         name="reply"
                     >
-                        <TextArea style={{ width: "400xp" }} onChange={(e) => setPassword(e.target.value)} />
+                        <TextArea style={{ width: "400xp" }} />
                     </Form.Item>
                 </Form>
                 </>
             ),
-            footer: (_, { OkBtn, CancelBtn }) => (
+            footer: (_, { OkBtn, CancelBtn, close }) => (
                 <>
-                    <Button onClick={() => handleReply("reject")} type="default" className="red" >Reject</Button>
-                    <Button onClick={() => handleReply("accept")} type="primary">Accept</Button>
+                    <CancelBtn />
+                    <Button onClick={() => handleReply("reject", close)} type="default" className="red" >Reject</Button>
+                    <Button onClick={() => handleReply("accept", close)} type="primary">Accept</Button>
                 </>
             ),
         });
@@ -164,7 +170,7 @@ const ManageRequest = () => {
     const columns = [
         {
             title: 'Request Id',
-            dataIndex: 'contactId',
+            dataIndex: 'requestId',
             width: '5%',
             align: 'center',
         },
@@ -208,7 +214,7 @@ const ManageRequest = () => {
                     <span style={{ fontWeight: "bold", marginTop: "10px;", display: "inline-block" }}>
                         Request Id:
                     </span>
-                    {record.contactId !== null && (<span>{" " + record.contactId}</span>)}
+                    {record.contactId !== null && (<span>{" " + record.requestId}</span>)}
                 </span>
                 <br />
                 <span><span style={{ fontWeight: "bold" }}>
@@ -221,7 +227,14 @@ const ManageRequest = () => {
                     <span style={{ fontWeight: "bold", marginTop: "10px;", display: "inline-block" }}>
                         Status:
                     </span>
-                    {record.status !== null && (<span>{" " + record.status}</span>)}
+                    <span> Pending</span>
+                </span>
+                <br />
+                <span>
+                    <span style={{ fontWeight: "bold", marginTop: "10px;", display: "inline-block" }}>
+                        Message:
+                    </span>
+                    <span> Accept request</span>
                 </span>
             </>,
             footer: (_, { OkBtn, CancelBtn }) => (

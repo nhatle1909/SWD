@@ -8,20 +8,20 @@ import {
 } from "@/api/auth";
 import { setLocalStorage } from "../../utils/common";
 import { jwtDecode } from "jwt-decode";
-import {toast} from 'react-toastify'
+import { toast } from 'react-toastify'
 export const actionLogin = (
   { email, password }
 ) => {
   return async (dispatch) => {
     try {
-      const { data } = await login(email, password);  
+      const { data } = await login(email, password);
       const info = jwtDecode(data);
-      dispatch(setAuthUser({token:data, email: email, role: info.role}));
-      setLocalStorage('auth', {token: data, email: email, role: info.role});
+      dispatch(setAuthUser({ token: data, email: email, role: info.role }));
+      setLocalStorage('auth', { token: data, email: email, role: info.role });
     } catch (error) {
       console.log(error)
       toast('Password or email was wrong, pls try again!', {
-        type:'error'
+        type: 'error'
       })
       throw error;
     }
@@ -67,7 +67,7 @@ export const actionResetPassword = (token, pass) => {
         type: 'success'
       })
 
-      
+
       return 'reset-password'
     } catch (error) {
       console.log(error)
@@ -84,13 +84,13 @@ export const actionChangePassword = (oldPass, newPass) => {
     try {
       await changePassword(oldPass, newPass)
       toast('New password updated!', {
-        type:'success'
+        type: 'success'
       })
       return 'success'
     } catch (error) {
       console.log(error)
       toast('The old password was wrong!, please try again!', {
-        type:'error'
+        type: 'error'
       })
       throw error;
     }
@@ -100,13 +100,13 @@ export const actionChangePassword = (oldPass, newPass) => {
 export const actionGetUserInfo = () => {
   return async () => {
     try {
-      const {data} = await getUserInfo()
+      const { data } = await getUserInfo()
       return data
     } catch (error) {
       console.log(error)
-      toast('Something went wrong!, please try again!', {
-        type:'error'
-      })
+      // toast('Something went wrong!, please try again!', {
+      //   type:'error'
+      // })
       throw error;
     }
   };

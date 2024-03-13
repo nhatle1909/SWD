@@ -20,11 +20,11 @@ namespace SWD.Controllers
         }
 
         [HttpPost("Add-An-Contact-For-Guest")]
-        public async Task<IActionResult> AddContactForGuest(string interiorId, AddContactView add)
+        public async Task<IActionResult> AddContactForGuest([FromBody]AddContactView add)
         {
             try
             {
-                var status = await _contactService.AddContactForGuest( interiorId, add);
+                var status = await _contactService.AddContactForGuest(add.Interior, add);
                 if (status.Item1)
                     return Ok(status.Item2);
                 else return BadRequest(status.Item2);
@@ -87,8 +87,7 @@ namespace SWD.Controllers
             }
         }
 
-        [Authorize(Roles = "Staff")]
-        [HttpPost("Staff/Get-Paging-Contact-List")]
+        [HttpPost("Get-Paging-Contact-List")]
         public async Task<IActionResult> GetPagingContactlList(PagingContactView paging)
         {
             try
@@ -118,17 +117,18 @@ namespace SWD.Controllers
                 return BadRequest(ex.Message);
             }
         }
-        [Authorize(Roles ="Staff")]
+        [Authorize(Roles = "Staff")]
         [HttpPost("Staff/Create-Contract-PDF")]
-        public async Task<IActionResult> Test(string staffId, string contactId, AddCartView[] array) 
+        public async Task<IActionResult> Test(string staffId, string contactId, AddCartView[] array)
         {
             var status = await _contactService.GenerateContractPdf(staffId, contactId, array);
             if (status.Item1 == false) return BadRequest("Error");
             else return Ok(status.Item3);
         }
+
         [Authorize(Roles = "Customer")]
         [HttpGet("Customer/Get-Customer-Request-List")]
-        public async Task<IActionResult> GetAllRequestCustomer() 
+        public async Task<IActionResult> GetAllRequestCustomer()
         {
             var _id = (HttpContext.User.FindFirst("id")?.Value) ?? "";
             var status = await _contactService.GetCustomerContactList(_id);

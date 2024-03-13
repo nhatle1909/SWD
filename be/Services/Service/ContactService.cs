@@ -53,25 +53,14 @@ namespace Services.Service
         {
             if (add.Phone.Length == 10)
             {
-                if (add.Picture.Length > 0)
-                {
-                    //Encode picture
-                    byte[] fileBytes;
-                    using (var ms = new MemoryStream())
-                    {
-                        await add.Picture.CopyToAsync(ms);
-                        fileBytes = ms.ToArray();
-                    }
-                    List<string> interiorIdList = [];
-                    interiorIdList.Add(interiorId);
-                    Request contact = _mapper.Map<Request>(add);
-                    contact.InteriorId = interiorIdList;
-                    contact.Picture = fileBytes;
+                List<string> interiorIdList = [];
+                interiorIdList.Add(interiorId);
+                Request contact = _mapper.Map<Request>(add);
+                contact.InteriorId = interiorIdList;
+                contact.Picture = [];
 
-                    await _unit.ContactRepo.AddOneItem(contact);
-                    return (true, "The contact have been sent");
-                }
-                return (false, "Missing the picture");
+                await _unit.ContactRepo.AddOneItem(contact);
+                return (true, "The contact have been sent");
             }
             return (false, "Phone number is not valid");
         }
@@ -167,26 +156,16 @@ namespace Services.Service
 
         public async Task<object> GetPagingContact(PagingContactView paging)
         {
-            const int pageSize = 5;
+            const int pageSize = 20;
             const string sortField = "CreatedAt";
             List<string> searchFields = ["Email"];
             List<string> returnFields = ["Email", "StatusResponseOfStaff", "CreatedAt"];
 
             int skip = (paging.PageIndex - 1) * pageSize;
-            var items = (await _unit.ContactRepo.PagingAsync(skip, pageSize, paging.IsAsc, sortField, paging.SearchValue, searchFields, returnFields)).ToList();
-            var responses = new List<object>();
-
-            foreach (var item in items)
-            {
-                responses.Add(new
-                {
-                    RequestId = item.RequestId,
-                    Email = item.Email,
-                    Status = item.StatusResponseOfStaff,
-                    CreatedAt = item.CreatedAt
-                });
-            }
-            return responses;
+            var items = (await _unit.ContactRepo.PagingAsync(skip, pageSize, paging.IsAsc, sortField, paging.SearchValue, 
+                searchFields, returnFields)).ToList();
+ 
+            return items;
         }
 
         public async Task<(bool, object)> GetContactDetail(DetailContactView detail)

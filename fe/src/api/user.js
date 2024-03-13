@@ -19,15 +19,15 @@ export const createAccountStaff = (request) => {
 export const createAccountCustomer = (accountType, request) => {
 
     if (accountType === "customer") {
-        return baseClient.post('/Account/Create-Customer-Account', request);
+        return baseClient.post('/Account/Admin/Create-Customer-Account', request);
     }
 
-    return baseClient.post('/Account/Create-Staff-Account', request);
+    return baseClient.post('/Account/Admin/Create-Staff-Account', request);
 
 };
 
 export const removeAccount = (request) => {
-    return baseClient.delete('/Account/Remove-Account', request);
+    return baseClient.post('/Account/Admin/Remove-Account', request);
 };
 
 export const changeAvatarProfile = (file) => {

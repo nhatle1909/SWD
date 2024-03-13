@@ -12,3 +12,8 @@ export const createRequest = (request) => {
 export const getRequests = (request) => {
     return baseClient.post('/Contact/Get-Paging-Contact-List', request);
 };
+
+
+export const createContactPDF = (request) => {
+    return baseClient.post('/Contact/Staff/Create-Contract-PDF', request);
+};
