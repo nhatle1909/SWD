@@ -39,5 +39,13 @@ namespace Repositories.ModelView
             public required string InteriorId { get; set; }
         }
 
+        public class PagingView
+        {
+            public int PageIndex { get; set; }
+            public bool IsAsc { get; set; }
+            public string? SearchValue { get; set; }
+        }
+
+
     }
 }

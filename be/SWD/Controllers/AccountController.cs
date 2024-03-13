@@ -24,9 +24,26 @@ namespace SWD.Controllers
             _ser = ser;
         }
 
-        [HttpPost("Create-Customer-Account")]
+        [HttpPost("Admin/Create-Customer-Account")]
         //[FromBody] method lấy data từ body request, nếu ko sài thì method sẽ lấy data từ url
         public async Task<IActionResult> RegisterAnAccountForCustomer([FromBody] RegisterAccountView register)
+        {
+            try
+            {
+                var status = await _ser.AddAnAccountForCustomer(register);
+                if (status.Item1)
+                    return Ok(status.Item2);
+                else return BadRequest(status.Item2);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpPost("Create-Customer-Account")]
+        //[FromBody] method lấy data từ body request, nếu ko sài thì method sẽ lấy data từ url
+        public async Task<IActionResult> RegisterAnAccount([FromBody] RegisterAccountView register)
         {
             try
             {
@@ -217,7 +234,7 @@ namespace SWD.Controllers
         }
 
         [Authorize(Roles = "Admin")]
-        [HttpDelete("Admin/Remove-Account")]
+        [HttpPost("Admin/Remove-Account")]
         public async Task<IActionResult> RemoveAnAccount([FromBody] DeleteAccountView delete)
         {
             try

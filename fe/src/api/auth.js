@@ -5,7 +5,7 @@ export const login = (email, password) => {
 };
 
 export const signUpUser = (email, password, phoneNumber) => {
-    return baseClient.post('/account/create-customer-account',{ email, password, phoneNumber });
+    return baseClient.post('/account/create-customer-account', { email, password, phoneNumber });
 };
 
 export const signUpSeller = (email, password) => {
@@ -27,7 +27,7 @@ export const changePassword = (oldPass, newPass) => {
         oldPassword: oldPass,
         password: newPass,
         confirmPassword: newPass
-      });
+    });
 };
 
 export const getUserInfo = () => {

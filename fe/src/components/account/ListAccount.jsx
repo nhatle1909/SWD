@@ -203,11 +203,6 @@ const ListAccount = () => {
             width: '20%',
         },
         {
-            title: 'Password',
-            dataIndex: 'password',
-            width: '10%',
-        },
-        {
             title: 'Role',
             dataIndex: 'role',
             width: '10%',

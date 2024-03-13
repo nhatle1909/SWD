@@ -16,13 +16,13 @@ export const injectStore = (_store) =>
   (store = _store);
 
 baseClient.interceptors.response.use((response) => {
-   return response;
+  return response;
 }, error => {
   console.log('chekc token::', error)
-  if( error.response.status === 401) {
+  if (error.response.status === 401) {
     setLocalStorage('auth', {})
     toast('Token is expired, Please login again!', {
-      type:'warning'
+      type: 'warning'
     })
     return Promise.reject(error)
   }
@@ -31,7 +31,8 @@ baseClient.interceptors.response.use((response) => {
 
 baseClient.interceptors.request.use((config) => {
   const auth = getLocalStorage('auth')
-  config.headers.Authorization = "Bearer "+auth?.token;
+  console.log("auth", auth);
+  config.headers.Authorization = "Bearer " + auth?.token;
   return config;
 })
 
