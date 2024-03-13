@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity.UI.Services;
+using Microsoft.AspNetCore.Mvc;
 using MongoDB.Bson;
 using MongoDB.Driver;
 using Repositories.Model;
@@ -13,6 +14,7 @@ using Services.Tools;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.NetworkInformation;
+using System.Numerics;
 using System.Runtime.CompilerServices;
 using System.Security.Cryptography;
 using ZstdSharp.Unsafe;
@@ -97,10 +99,7 @@ namespace Services.Service
                 }
                 else
                 {
-                    if (item.FirstOrDefault().TransactionStatus.Equals("Pending"))
-                    {
-                        await DeleteTransaction(_id);
-                    }
+                    await UpdateStatusTransaction(_id, "Canceled");
                     return (false, "Failed");
 
                 }
@@ -110,17 +109,47 @@ namespace Services.Service
                 return (false, "Invalid signature");
             }
         }
-        public async Task<object> GetAllTransaction(int pageIndex, bool isAsc, string searchValue)
+        public async Task<(bool,object)> GetAllTransaction(string id)
         {
-            const int pageSize = 20;
-            const string sortField = "TransactionStatus";
-            List<string> searchFields = ["TransactionStatus", "TotalPrice", "RemainPrice"];
-            List<string> returnFields = ["TransactionId", "CreateAt", "UpdateAt", "TotalPrice", "RemainPrice", "TransactionStatus", "TransactionDetail", "ContractFile"];
-
-            int skip = (pageIndex - 1) * pageSize;
-            var items = (await _unit.AccountRepo.PagingAsync(skip, pageSize, isAsc, sortField, searchValue, searchFields, returnFields)).ToList();
+           
+            string email = (await _unit.AccountRepo.GetFieldsByFilterAsync(["Email"], a => a.AccountId.Equals(id))).FirstOrDefault().Email;
+            if (email == null) return (false, null);
+            IEnumerable<Transaction> trans = await _unit.TransactionRepo.GetByFilterAsync(a => a.Email.Equals(email));
+          
+            IEnumerable<Contract> contract = await _unit.ContractRepo.GetByFilterAsync(a => a.EmailOfCustomer.Equals(email));
+            var transList = trans.OrderByDescending(t => t.CreatedAt).ToArray();
+            var contractList = contract.OrderByDescending(c => c.CreatedAt).ToArray();
+            
+            //Data cần lấy : Transaction ID - TransactionStatus - Total Price - Contract File - Contract Create Date - Transaction Date
+           
             var responses = new List<object>();
-            return responses;
+            for (int i = 0; i < trans.Count(); i++) 
+            {
+                pay.ClearRequestData();
+                var url = "";
+                if (transList[i].TransactionStatus.Equals("Pending"))
+                {
+                     url = Payment(transList[i].TransactionId, transList[i].TotalPrice * 3 /10).Result;
+                }
+                if (transList[i].TransactionStatus.Equals("Processing"))
+                {
+                    url = Payment(transList[i].TransactionId, transList[i].RemainPrice).Result;
+                }
+                responses.Add(new
+                {
+                    TransactionID = transList[i].TransactionId,
+                    TransactionStatus = transList[i].TransactionStatus,
+                    TotalPrice = transList[i].TotalPrice,
+                    ContractDate = contractList[i].CreatedAt,
+                    TransactionDate = transList[i].UpdatedAt,
+                    URL = url,
+                    ContractFile = contractList[i].ContractFile
+                   
+                   
+                });
+
+            }
+            return (true,responses);
         }
 
         public async Task<string> AddPendingTransaction(string _id, AddCartView[] cartViews)

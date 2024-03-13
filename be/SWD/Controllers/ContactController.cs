@@ -122,9 +122,19 @@ namespace SWD.Controllers
         [HttpPost("Staff/Create-Contract-PDF")]
         public async Task<IActionResult> Test(string staffId, string contactId, AddCartView[] array) 
         {
-            return File(_contactService.GenerateContractPdf(staffId, contactId, array).Result.Item2,"application/pdf",contactId+".pdf");
+            var status = await _contactService.GenerateContractPdf(staffId, contactId, array);
+            if (status.Item1 == false) return BadRequest("Error");
+            else return Ok(status.Item3);
         }
-
+        [Authorize(Roles = "Customer")]
+        [HttpGet("Customer/Get-Customer-Request-List")]
+        public async Task<IActionResult> GetAllRequestCustomer() 
+        {
+            var _id = (HttpContext.User.FindFirst("id")?.Value) ?? "";
+            var status = await _contactService.GetCustomerContactList(_id);
+            if (status.Item1 == false) return BadRequest("Invalid Token || Mail does not exist");
+            else return Ok(status.Item2);
+        }
 
 
     }

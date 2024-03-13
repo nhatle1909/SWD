@@ -17,6 +17,7 @@ namespace Repositories.Model
         public required string StaffId { get; set; }
         public required DateTime CreatedAt { get; set; }
         public required string Description { get; set; }
+        public required byte[] ContractFile { get; set; }
         public required State Status { get; set; }
         public enum State
         {

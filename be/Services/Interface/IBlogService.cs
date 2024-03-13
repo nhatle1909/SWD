@@ -18,5 +18,6 @@ namespace Services.Interface
         Task AddBlogComment(string id, AddCommentBlogView addComment);
         Task UpdateCommentBlog(string id, UpdateCommentBlogView updateComment);
         Task RemoveCommentBlog(string id, RemoveCommentBlogView removeComment);
+        Task<(bool, Blog)> ViewBlogDetail(string _id);
     }
 }

@@ -133,6 +133,23 @@ namespace Services.Service
             var items = (await _unit.BlogRepo.PagingAsync(skip, pageSize, isAsc, sortField, searchValue, searchFields, returnFields)).ToList();
             return items;
         }
+        public async Task<(bool, Blog)> ViewBlogDetail(string _id) 
+        {
+            IEnumerable<Blog> blog = await _unit.BlogRepo.GetByFilterAsync(b => b.BlogId.Equals(_id));
+            if (blog.Any()) 
+            {
+                Blog blogDetail = _mapper.Map<Blog>(blog);
+                blogDetail.BlogId = _id;
+                blogDetail.Pictures = blog.FirstOrDefault().Pictures;
+                blogDetail.Title = blog.First().Title;
+                blogDetail.Content = blog.First().Content;
+                blogDetail.CreatedAt = blog.FirstOrDefault().CreatedAt;
+                blogDetail.UpdatedAt = blog.FirstOrDefault().UpdatedAt;
+                blogDetail.Email = blog.FirstOrDefault().Email;
+                return (true, blogDetail);
+            }
+            return (false, null);
+        }
 
         public async Task AddBlogComment(string id, AddCommentBlogView addComment)
         {
