@@ -1,3 +1,4 @@
+import { getLocalStorage } from "../utils/common";
 import baseClient from "./baseClient";
 export const login = (email, password) => {
     return baseClient.post('/account/login-by-email-password', { email, password });;
@@ -27,4 +28,8 @@ export const changePassword = (oldPass, newPass) => {
         password: newPass,
         confirmPassword: newPass
       });
+};
+
+export const getUserInfo = () => {
+    return baseClient.get(`/account/view-public-profile?email=${getLocalStorage('auth').email}`);
 };

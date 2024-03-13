@@ -1,11 +1,13 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useLocation, useParams } from 'react-router-dom';
-import { Dropdown, Space, Menu } from 'antd';
+import { Dropdown, Space, Menu, Avatar } from 'antd';
 import { CaretDownOutlined, CaretUpOutlined } from '@ant-design/icons'
 import { useAppSelector, useAppDispatch } from '@/store';
 import Login from '@/pages/auth/Auth';
 import { getLocalStorage, setLocalStorage } from '@/utils/common';
-import { setAuthUser } from '../../../store/auth/slice';
+import { setAuthUser, setPicture } from '../../../store/auth/slice';
+import { convertBase64Img } from '../../../utils/common';
+import { actionGetUserInfo } from '../../../store/auth/action';
 
 function getItem(label, key, icon, children, type) {
 	return {
@@ -33,6 +35,17 @@ const Header = () => {
 
 		return null;
 	})
+
+	const picture = useAppSelector(({authentication}) => {
+		return authentication.picture
+	}) 
+
+	useEffect(() => {
+		dispatch(actionGetUserInfo()).then((data) => {
+			dispatch(setPicture(data?.picture))
+		})
+	}, [])
+
 
 	const location = useLocation();
 	// auth
@@ -140,9 +153,18 @@ const Header = () => {
 											setOpenAuth(pre => !pre)
 											setChangePass(false)
 											setTypeAuth('login')
-										}} className={`nav-item hover:cursor-pointer flex`}><div className="nav-link !underline">
+										}}  className={`nav-item hover:cursor-pointer flex`}><div className="nav-link !underline">
 												{auth.email}
 											</div>
+										</li>
+										<li>
+										<Avatar onClick={() => {
+											setOpenAuth(pre => !pre)
+											setChangePass(false)
+											setTypeAuth('login')
+										}} size={36}>
+											<img src={convertBase64Img(picture)} />
+										</Avatar>
 										</li>
 									</Space>
 								</>) : (

@@ -13,3 +13,7 @@ export const getLocalStorage = (name) => {
 export const setLocalStorage = (name, data) => {
   localStorage.setItem(name, JSON.stringify(data));
 }
+
+export const convertBase64Img = (base64) => {
+  return `data:image/jpeg;base64,${base64}`
+}
