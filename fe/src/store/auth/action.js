@@ -1,5 +1,5 @@
 
-import { changePassword, sendMailResetPassword, signUpUser, resetPassword } from "../../api/auth";
+import { changePassword, sendMailResetPassword, signUpUser, resetPassword, getUserInfo } from "../../api/auth";
 import {
   setAuthUser,
 } from "./slice";
@@ -96,3 +96,19 @@ export const actionChangePassword = (oldPass, newPass) => {
     }
   };
 }
+
+export const actionGetUserInfo = () => {
+  return async () => {
+    try {
+      const {data} = await getUserInfo()
+      return data
+    } catch (error) {
+      console.log(error)
+      toast('Something went wrong!, please try again!', {
+        type:'error'
+      })
+      throw error;
+    }
+  };
+}
+

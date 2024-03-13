@@ -27,7 +27,18 @@ export const createAccountCustomer = (accountType, request) => {
 };
 
 export const removeAccount = (request) => {
-    console.log("going to delete: ", request);
-
-    return baseClient.post('/Account/Admin/Remove-Account', request);
+    return baseClient.delete('/Account/Remove-Account', request);
 };
+
+export const changeAvatarProfile = (file) => {
+    const formData = new FormData();
+    formData.append('picture', file);
+    return baseClient.patch('/account/authorize/update-picture-account', formData);
+}
+
+export const uploadInfoProfile = (phoneNumber, homeAddress) => {
+    return baseClient.patch('/account/authorize/update-an-account', {
+        phoneNumber,
+        homeAdress: homeAddress
+    });
+}
