@@ -46,7 +46,7 @@ const ListBlog = () => {
     }
 
     const handleDelete = (record) => {
-        dispatch(actionRemoveBlog({blogID: record.blogId}));
+        dispatch(actionRemoveBlog({ interiorId: record.interiorId }));
     }
 
     const handleConfirmDelete = (record) => {
