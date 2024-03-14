@@ -1,5 +1,7 @@
 import React, { useRef, useState } from "react";
+import { PlusCircleOutlined } from "@ant-design/icons";
 import { Button, Space, Table, Input, Modal, Form } from 'antd';
+import { Flex } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
 import Highlighter from 'react-highlight-words';
 import { actionGetRequests } from "../../../store/request/action";
@@ -9,6 +11,7 @@ import { useAppDispatch, useAppSelector } from "../../../store";
 import TextArea from "antd/es/input/TextArea";
 import { toast } from "react-toastify";
 import { actionRemoveInterior } from "../../../store/interior/action";
+import ListInterior from "../../../components/interior/ListInterior";
 const ManageInterior = () => {
     const dispatch = useAppDispatch();
     const interiors = useAppSelector(({ interiors }) => interiors.interior);
@@ -74,13 +77,22 @@ const ManageInterior = () => {
             style={{ background: '#343f4024' }}>
             <div className="h-[65vh] w-[70vw]">
                 <PageHeader message={"List Interior"} />
-
-                <Table
-                    columns={columns}
-                    dataSource={interiors}
-                    pagination={{ pageSize: 5 }}
-                
-                />
+                <Flex
+                    gap="small"
+                    style={{ width: '100%' }}
+                    justify="flex-end"
+                >
+                    <Button
+                        type="primary"
+                        danger
+                        className="blue mb-2"
+                        onClick={() => { setIsModalOpen(true); }}
+                        icon={<PlusCircleOutlined />}
+                    >
+                    Create New Interior
+                    </Button>
+                </Flex>
+                <ListInterior />
             </div>
         </div >
     </>);
