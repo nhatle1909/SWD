@@ -1,5 +1,5 @@
 import { toast } from "react-toastify";
-import { getInteriors } from "../../api/interior";
+import { getInteriors, removeInterior } from "../../api/interior";
 import {
   setInteriors,
 } from "./slice";
@@ -56,4 +56,29 @@ export const actionGetDetailInterior = (interiorId) => {
   };
 };
 
+export const actionRemoveInterior = (request) => {
+  return async (dispatch) => {
+    try {
 
+      await removeInterior(request);
+
+      const { data } = await getInteriors({
+        PageIndex: 1,
+        IsAsc: true,
+        SearchValue: "",
+      });
+
+      dispatch(setInteriors(data));
+      toast('Remove account successful', {
+        type: 'success'
+      });
+
+    } catch (error) {
+      toast(error.response.data, {
+        type: 'error'
+      });
+      console.log(error)
+      throw error;
+    }
+  };
+}

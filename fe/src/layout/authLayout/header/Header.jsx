@@ -95,6 +95,9 @@ const Header = () => {
 						getItem(<a onClick={() => {
 							navigator('/staff/requests')
 						}}>Requests</a>, null, null),
+						getItem(<a onClick={() => {
+							navigator('/staff/interiors')
+						}}>Interiors</a>, null, null),
 					]
 					:
 					[]

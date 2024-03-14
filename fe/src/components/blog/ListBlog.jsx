@@ -3,7 +3,7 @@ import React, { useRef, useState } from "react";
 import { Button, Space, Table, Input, Modal } from 'antd';
 import { SearchOutlined } from "@ant-design/icons";
 import Highlighter from 'react-highlight-words';
-import { actionGetBlogs, actionRemoveBlog } from "../../store/blog/action";
+import { actionGetBlogList, actionGetBlogs, actionRemoveBlog } from "../../store/blog/action";
 
 const ListBlog = () => {
     const dispatch = useAppDispatch();
@@ -17,8 +17,36 @@ const ListBlog = () => {
 
     const [blog, setBlog] = React.useState(null);
 
+    const handleShowBlog = (record, index) => {
+        console.log("record", record);
+        setBlog(record);
+        Modal.info({
+            title: 'Blog Details',
+            content: <>
+                <span><span style={{ fontWeight: "bold" }}>
+                    Title:
+                </span>
+                    <span>{" " + record.title}</span>
+                </span>
+                <br />
+                <span>
+                    <span style={{ fontWeight: "bold", marginTop: "10px;", display: "inline-block" }}>
+                        Content:
+                    </span>
+                    <span>{" " + record.content}</span>
+                </span>
+            </>,
+            footer: (_, { OkBtn, CancelBtn }) => (
+                <>
+                    <CancelBtn />
+                    <OkBtn />
+                </>
+            ),
+        });
+    }
+
     const handleDelete = (record) => {
-        dispatch(actionRemoveBlog({ Email: record.email, Comments: "delete account " + record.email }));
+        dispatch(actionRemoveBlog({blogID: record.blogId}));
     }
 
     const handleConfirmDelete = (record) => {
@@ -69,15 +97,21 @@ const ListBlog = () => {
             align: 'center',
             key: 'x',
             width: '20%',
-            render: () => <>
-            <Button type="primary" className="blue">View</Button>
-            <Button onClick={handleConfirmDelete} type="primary" danger className="red ms-2">Delete</Button>
-            </>,
+            render: (text, record, index) => {
+                return(<>
+                    <Button onClick={() => handleShowBlog(record, index)} type="primary" className="blue">View</Button>
+                    <Button onClick={() => handleConfirmDelete(record)} type="primary" danger className="red ms-2">Delete</Button>
+                </>)
+            }
         },
     ];
 
     React.useEffect(() => {
-        dispatch(actionGetBlogs(request));
+        dispatch(actionGetBlogList({
+            pageIndex: 1,
+            isAsc: true,
+            searchValue: ''
+        }));
     },[]);
     
     return (<>

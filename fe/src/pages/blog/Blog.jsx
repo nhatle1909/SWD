@@ -42,25 +42,20 @@ export const Blog = () => {
 
                     <div className="row">
                         {blogs?.map((item) => (
-                            <div>
-                                <div key={item.blogId} className="col-md-4 ftco-animate fadeInUp ftco-animated">
+                            <div className='col-md-4' key={item.blogId}>
+                                <div className="blog-entry">
                                     <a href="blog-single.html" className="block-20" style={{
-                                        backgroundImage: `url(data:image/jpeg;base64,${item.pictures})`,
-                                        backgroundSize: 'cover',
-                                        backgroundPosition: 'center',
-                                        backgroundRepeat: 'no-repeat',
-                                        height: '200px',
-                                        width: '300%', 
+                                        backgroundImage: `url(data:image/jpeg;base64,${item.pictures})`
                                     }}></a>
-                                    <div className="blog-entry">
+                                    <div >
                                         <div className="text d-flex py-4">
-                                            <div className="meta">
-
-                                                <h3 className="heading"><a href="#">{item.title}</a></h3>
-                                                <div><a href="#">{item.content}</a></div>
+                                            <div className="meta mb-3">
+                                                <div>{item.createdAt.split('T')[0]}</div>
+                                                <div>Staff</div>
+                                                <div className="meta-chat"><span className="icon-chat"></span> 3</div>
                                             </div>
                                             <div className="desc pl-3">
-                                                <div><a href="#">{item.email}</a></div>
+                                                <h3 className="heading"><a href="#">{item.title}</a></h3>
                                             </div>
                                         </div>
                                     </div>
