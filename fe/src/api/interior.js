@@ -19,3 +19,7 @@ export const getInteriorList = ({ pageIndex, isAsc, searchValue }) => {
 export const getDetailInterior = (interiorId) => {
     return baseClient.get(`/interior/view-detail-interior-from-paging?interiorId=${interiorId}`);
 };
+
+export const removeInterior = (interiorId) => {
+    return baseClient.delete(`/interior/staff/delete-interior?interiorId=${interiorId}`);
+}

@@ -20,6 +20,7 @@ import CreateRequest from '../pages/request/CreateRequest';
 import HistoryRequest from '../pages/request/HistoryRequest';
 
 import InteriorDetails from '../pages/interior/InteriorDetails'
+import ManageInterior from '../pages/staff/interior/ManageInterior';
 
 const unauthRoutes = {
   path: '/',
@@ -89,6 +90,10 @@ const staffRoutes = {
       path: 'requests',
       element: <ManageRequest />,
     },
+    {
+      path: 'interiors',
+      element: <ManageInterior />,
+    }
   ],
 };
 
