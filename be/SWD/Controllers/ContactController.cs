@@ -87,8 +87,7 @@ namespace SWD.Controllers
             }
         }
 
-        [Authorize(Roles = "Staff")]
-        [HttpPost("Staff/Get-Paging-Request-List")]
+        [HttpPost("Get-Paging-Request-List")]
         public async Task<IActionResult> GetPagingContactlList(PagingContactView paging)
         {
             try
