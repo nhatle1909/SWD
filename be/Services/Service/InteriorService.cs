@@ -59,7 +59,7 @@ namespace Services.Service
             const int pageSize = 100;
             const string sortField = "CreatedAt";
             List<string> searchFields = ["InteriorName", "Description", "Price"];
-            List<string> returnFields = ["InteriorName", "Image", "Price", "Quantity", "CreatedAt"];
+            List<string> returnFields = [];
 
             int skip = (pageIndex - 1) * pageSize;
             var items = (await _unit.InteriorRepo.PagingAsync(skip, pageSize, isAsc, sortField, searchValue, searchFields, returnFields)).ToList();
@@ -67,19 +67,7 @@ namespace Services.Service
             //int totalPages = (int)Math.Ceiling((double)totalCount / pageSize);
             var responses = new List<object>();
 
-            foreach (var item in items)
-            {
-                responses.Add(new
-                {
-                    InteriorId = item.InteriorId,
-                    InteriorName = item.InteriorName,
-                    Price = item.Price,
-                    CreatedAt = item.CreatedAt,
-                    Quantity = item.Quantity,
-                    Image = SomeTool.GetImage(Convert.ToBase64String(item.Image))
-                });
-            }
-            return responses;
+            return items;
         }
 
         public async Task<(bool, object)> GetInteriorDetail(string interiorId)
