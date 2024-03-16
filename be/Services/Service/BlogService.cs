@@ -91,7 +91,7 @@ namespace Services.Service
                         blog.Title = update.Title;
                         blog.Content = update.Content;
                         blog.Pictures = picturesBytesList;
-                        blog.UpdatedAt = DateTime.UtcNow;
+                        blog.UpdatedAt = DateTime.Now;
                         await _unit.BlogRepo.UpdateItemByValue("BlogId", update.BlogId, blog);
                         return (true, "Update Blog successfully");
 
@@ -175,7 +175,7 @@ namespace Services.Service
                 if (getComment.Email.Equals(getUser.Email))
                 {
                     getComment.Comment = updateComment.Comment;
-                    getComment.UpdatedAt = DateTime.UtcNow;
+                    getComment.UpdatedAt = DateTime.Now;
                     await _unit.BlogCommentRepo.UpdateItemByValue("BlogCommentId", getComment.BlogCommentId, getComment);
                 }
             }

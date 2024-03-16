@@ -116,7 +116,7 @@ namespace Services.Service
                     interior.Image = fileBytes;
                     interior.Quantity = update.Quantity;
                     interior.Price = update.Price;
-                    interior.UpdatedAt = System.DateTime.UtcNow;
+                    interior.UpdatedAt = System.DateTime.Now;
                     await _unit.InteriorRepo.UpdateItemByValue("InteriorId", update.InteriorId, interior);
                     return (true, "Update interior successfully");
                 }

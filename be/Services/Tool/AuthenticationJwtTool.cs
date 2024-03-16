@@ -37,7 +37,7 @@ namespace Services.Tool
                 _configuration["JWT:Issure"],
                 _configuration["JWT:Audience"],
                 claims: claims,
-                expires: DateTime.UtcNow.AddHours(1),
+                expires: DateTime.Now.AddHours(1),
                 signingCredentials: signingCredentials
                 );
             var accessToken = new JwtSecurityTokenHandler().WriteToken(token);
@@ -51,8 +51,8 @@ namespace Services.Tool
             //    JwtId = accessToken,
             //    IsUsed = false,
             //    IsRevoked = false,
-            //    IssuedAt = DateTime.UtcNow,
-            // ExpiredAt = DateTime.UtcNow.AddMonths(1)
+            //    IssuedAt = DateTime.Now,
+            // ExpiredAt = DateTime.Now.AddMonths(1)
             //};
             //await _unit.RefreshTokenRepo.AddOneItem(refreshTokenEntity);
             return accessToken;
@@ -91,7 +91,7 @@ namespace Services.Tool
         //        var utcExpireDate = long.Parse(tokenInverification.Claims.FirstOrDefault(x => 
         //                                       x.Type == JwtRegisteredClaimNames.Exp).Value);
         //        var expireDate = ConvertUnitTimeToDateTime(utcExpireDate);
-        //        if (expireDate > DateTime.UtcNow)
+        //        if (expireDate > DateTime.Now)
         //        {
         //            return "Access token have not expired!";
         //        }

@@ -17,14 +17,16 @@ using System.Net.NetworkInformation;
 using System.Numerics;
 using System.Runtime.CompilerServices;
 using System.Security.Cryptography;
+using Twilio.Http;
 using ZstdSharp.Unsafe;
 using static Repositories.ModelView.CartView;
+using Request = Repositories.Model.Request;
 namespace Services.Service
 {
     public class TransactionService : ITransactionService
     {
         string url = "http://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
-        string returnUrl = "https://localhost:7220/swagger/index.html";
+        string returnUrl = "http://localhost:3000/CheckPayment.html";
         string tmnCode = "8G7V30JH";
         string hashSecret = "KBAOJWHYLHYDNOLUXKUAAKMBILURCGPB";
 
@@ -51,7 +53,7 @@ namespace Services.Service
             pay.AddRequestData("vnp_TmnCode", tmnCode); //Mã website của merchant trên hệ thống của VNPAY (khi đăng ký tài khoản sẽ có trong mail VNPAY gửi về)
             pay.AddRequestData("vnp_Amount", (Price * 100).ToString()); //số tiền cần thanh toán, công thức: số tiền * 100 - ví dụ 10.000 (mười nghìn đồng) --> 1000000
             pay.AddRequestData("vnp_BankCode", ""); //Mã Ngân hàng thanh toán (tham khảo: https://sandbox.vnpayment.vn/apis/danh-sach-ngan-hang/), có thể để trống, người dùng có thể chọn trên cổng thanh toán VNPAY
-            pay.AddRequestData("vnp_CreateDate", DateTime.UtcNow.ToString("yyyyMMddHHmmss")); //ngày thanh toán theo định dạng yyyyMMddHHmmss
+            pay.AddRequestData("vnp_CreateDate", DateTime.Now.ToString("yyyyMMddHHmmss")); //ngày thanh toán theo định dạng yyyyMMddHHmmss
             pay.AddRequestData("vnp_CurrCode", "VND"); //Đơn vị tiền tệ sử dụng thanh toán. Hiện tại chỉ hỗ trợ VND
             pay.AddRequestData("vnp_IpAddr", Utils.GetIpAddress()); //Địa chỉ IP của khách hàng thực hiện giao dịch
             pay.AddRequestData("vnp_Locale", "vn"); //Ngôn ngữ giao diện hiển thị - Tiếng Việt (vn), Tiếng Anh (en)
@@ -161,9 +163,9 @@ namespace Services.Service
                 TransactionId = ObjectId.GenerateNewId().ToString(),
                 TransactionStatus = "Pending",
                 Email = contact.First().Email,
-                CreatedAt = DateTime.UtcNow,
-                UpdatedAt = DateTime.UtcNow,
-                ExpiredDate = DateTime.UtcNow.AddMonths(1),
+                CreatedAt = DateTime.Now,
+                UpdatedAt = DateTime.Now,
+                ExpiredDate = DateTime.Now.AddMonths(1),
                 TransactionDetail = _mapper.Map<TransactionDetail[]>(cartViews),
                 TotalPrice = TotalPrice,
                 RemainPrice = TotalPrice * 7 / 10
@@ -203,7 +205,7 @@ namespace Services.Service
             foreach (string _id in _ids)
             {
                 IEnumerable<Transaction> item = await _unit.TransactionRepo.GetFieldsByFilterAsync(["_id", "ExpiredDate"], a => a.TransactionId.Equals(_id));
-                if (item.Any() && DateTime.UtcNow > item.FirstOrDefault().ExpiredDate)
+                if (item.Any() && DateTime.Now > item.FirstOrDefault().ExpiredDate)
                 {
                     await _unit.TransactionRepo.RemoveItemByValue("TransactionId", _id);
                 }
@@ -280,7 +282,7 @@ namespace Services.Service
             {
                 foreach (var contact in getContact)
                 {
-                    if (contact.StatusResponseOfStaff == Request.State.Awaiting_Payment)
+                    if (contact.StatusResponseOfStaff == Request.State.Accepted)
                     {
                         contact.StatusResponseOfStaff = Request.State.Completed;
                         await _unit.ContactRepo.UpdateItemByValue("RequestId", contact.RequestId, contact);
@@ -319,8 +321,8 @@ namespace Services.Service
                 if (item.FirstOrDefault().TransactionStatus.Equals("Processing")) newItem.RemainPrice = 0;
                 else newItem.RemainPrice = item.FirstOrDefault().RemainPrice;
 
-                if (item.FirstOrDefault().TransactionStatus.Equals("Pending")) newItem.ExpiredDate = DateTime.UtcNow.AddMonths(1);
-                if (item.FirstOrDefault().TransactionStatus.Equals("Processing")) newItem.ExpiredDate = DateTime.UtcNow.AddYears(1);
+                if (item.FirstOrDefault().TransactionStatus.Equals("Pending")) newItem.ExpiredDate = DateTime.Now.AddMonths(1);
+                if (item.FirstOrDefault().TransactionStatus.Equals("Processing")) newItem.ExpiredDate = DateTime.Now.AddYears(1);
 
                 newItem.TransactionId = _id;
                 newItem.Email = item.FirstOrDefault().Email;
@@ -328,7 +330,7 @@ namespace Services.Service
                 newItem.TransactionDetail = item.FirstOrDefault().TransactionDetail;
                 newItem.CreatedAt = item.FirstOrDefault().CreatedAt;
 
-                newItem.UpdatedAt = DateTime.UtcNow;
+                newItem.UpdatedAt = DateTime.Now;
                 newItem.TransactionStatus = status;
                 await _unit.TransactionRepo.UpdateItemByValue("TransactionId", _id, newItem);
                 return "Update Successful";
@@ -376,14 +378,48 @@ namespace Services.Service
             //Transaction.TransactionId = _id;
             //Transaction.AccountId = items.FirstOrDefault().AccountId;
             //Transaction.CreatedAt = items.FirstOrDefault().CreatedAt;
-            //Transaction.UpdatedAt = DateTime.UtcNow;
+            //Transaction.UpdatedAt = DateTime.Now;
             //Transaction.TransactionDetail = details;
-            //Transaction.ExpiredDate = DateTime.UtcNow.AddMonths(1);
+            //Transaction.ExpiredDate = DateTime.Now.AddMonths(1);
             //Transaction.TotalPrice = TotalPrice;
             //Transaction.RemainPrice = TotalPrice * 7 / 10;
 
             //await _unit.TransactionRepo.UpdateItemByValue("TransactionId", _id, Transaction);
             return "Add Item Successful";
+        }
+
+        public async Task<(bool, object)> GetTransactionList(string id)
+        {
+            var getUser = (await _unit.AccountStatusRepo.GetFieldsByFilterAsync([],
+                g => g.AccountId.Equals(id))).First();
+            var getAllTransaction = await _unit.TransactionRepo.GetFieldsByFilterAsync([],
+                g => g.Email.Equals(getUser.Email));
+            if (getAllTransaction.Any())
+            {
+                var responses = new List<object>();
+                foreach (var item in getAllTransaction)
+                {
+                    responses.Add(new
+                    {
+                        TransactionId = item.TransactionId,
+                        Email = item.Email,
+                        TransactionStatus = item.TransactionStatus
+                    });
+                }
+                return (true, responses);
+            }
+            return (true, "You don't have any transactions");
+        }
+
+        public async Task<(bool, object)> GetTransactionDetail(string transactionId)
+        {
+            var getTransaction = (await _unit.TransactionRepo.GetFieldsByFilterAsync([],
+                g => g.TransactionId.Equals(transactionId))).FirstOrDefault();
+            if (getTransaction != null)
+            {
+                return (true, getTransaction);
+            }
+            return (false, "TransactionId is not existed");
         }
     }
 }

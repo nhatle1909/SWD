@@ -20,31 +20,25 @@ namespace SWD.Controllers
             _vnpayService = vnpayService;
             _contactService = contactService;
         }
-        [Authorize(Roles = "Staff")]
-        [HttpPost("Staff/VNPay-Deposit-Payment")]
-        public async Task<IActionResult> VNPayPaymentDeposit(string contactId, AddCartView[] cartViews)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest("Invalid Data Format");
-            }
-            var id = (HttpContext.User.FindFirst("id")?.Value) ?? "";
-            string check = await _vnpayService.AddPendingTransaction(contactId, cartViews);
-            int deposit = await _vnpayService.CalculateDeposit(check);
-        
-            var status2 = await _contactService.UpdateContact(contactId, cartViews);
-            if (check != null)
-            {
-                 if (status2.Item1)
-                    {
-                        return Ok(_vnpayService.Payment(check, deposit).Result);
-                    }
-                    return BadRequest(status2.Item2);
-               
-               
-            }
-            return BadRequest("Invalid Data Format");
-        }
+        //[Authorize(Roles = "Staff")]
+        //[HttpPost("Staff/VNPay-Deposit-Payment")]
+        //public async Task<IActionResult> VNPayPaymentDeposit(string requestId, AddCartView[] cartViews)
+        //{
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return BadRequest("Invalid Data Format");
+        //    }
+        //    var id = (HttpContext.User.FindFirst("id")?.Value) ?? "";
+        //    string check = await _vnpayService.AddPendingTransaction(requestId, cartViews);
+        //    int deposit = await _vnpayService.CalculateDeposit(check);
+
+        //    if (check != null)
+        //    {
+        //        return Ok(_vnpayService.Payment(check, deposit).Result);
+
+        //    }
+        //    return BadRequest("Invalid Data Format");
+        //}
 
         [HttpGet("VNPay-Return")]
         public async Task<IActionResult> VNPayReturn(string url)
@@ -58,8 +52,8 @@ namespace SWD.Controllers
         {
 
             var id = (HttpContext.User.FindFirst("id")?.Value) ?? "";
-         
-                var status = await _vnpayService.GetAllTransaction(id);
+
+            var status = await _vnpayService.GetAllTransaction(id);
             if (status.Item1 == false) return BadRequest("Account does not exist | Invalid Token");
             else return Ok(status.Item2);
         }
@@ -84,7 +78,40 @@ namespace SWD.Controllers
             return Ok(await _vnpayService.DeleteExpiredTransaction(_id));
         }
 
+        [Authorize(Roles = "Customer")]
+        [HttpPost("Customer/Get-All-Transaction")]
+        public async Task<IActionResult> GetAllTransaction()
+        {
+            try
+            {
+                var id = (HttpContext.User.FindFirst("id")?.Value) ?? "";
+                var status = await _vnpayService.GetTransactionList(id);
+                if (status.Item1)
+                    return Ok(status.Item2);
+                else return BadRequest(status.Item2);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
 
+        [Authorize(Roles = "Customer")]
+        [HttpPost("Customer/Get-Transaction-Detail")]
+        public async Task<IActionResult> GetTransactionDetail(string transactionId)
+        {
+            try
+            {
+                var status = await _vnpayService.GetTransactionDetail(transactionId);
+                if (status.Item1)
+                    return Ok(status.Item2);
+                else return BadRequest(status.Item2);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
 
     }
 }

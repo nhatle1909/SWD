@@ -31,6 +31,9 @@ using static Repositories.ModelView.ContractView;
 using static Repositories.ModelView.CartView;
 using Org.BouncyCastle.Utilities;
 using Microsoft.AspNetCore.Mvc;
+using static System.Runtime.InteropServices.JavaScript.JSType;
+using Microsoft.AspNetCore.Http;
+using System.Collections;
 namespace Services.Service
 {
     public class ContactService : IContactService
@@ -40,61 +43,70 @@ namespace Services.Service
         private readonly IEmailSender _emailSender;
         private readonly IOptions<MailSettings> _mailSettings;
         private readonly ILogger<SendEmailTool> _logger;
-        public ContactService(IUnitOfWork unit, IMapper mapper, IEmailSender emailSender, IOptions<MailSettings> mailSettings, ILogger<SendEmailTool> logger)
+        private readonly ITransactionService _vnpayService;
+        public ContactService(ITransactionService vnpayService, IUnitOfWork unit, IMapper mapper, IEmailSender emailSender, IOptions<MailSettings> mailSettings, ILogger<SendEmailTool> logger)
         {
             _unit = unit;
             _mapper = mapper;
             _emailSender = emailSender;
             _logger = logger;
             _mailSettings = mailSettings;
+            _vnpayService = vnpayService;
         }
 
-        public async Task<(bool, string)> AddContactForGuest(string interiorId, AddContactView add)
+        public async Task<(bool, string)> AddContactForGuest(AddContactView add)
         {
             if (add.Phone.Length == 10)
             {
-                List<string> interiorIdList = [];
-                interiorIdList.Add(interiorId);
-                Request contact = _mapper.Map<Request>(add);
-                contact.InteriorId = interiorIdList;
-                contact.Picture = [];
-
-                await _unit.ContactRepo.AddOneItem(contact);
-                return (true, "The contact have been sent");
+                foreach (var item in add.ListInterior)
+                {
+                    var getInterior = (await _unit.InteriorRepo.GetFieldsByFilterAsync([],
+                        g => g.InteriorId.Equals(item.InteriorId))).FirstOrDefault();
+                    if (getInterior != null)
+                    {
+                        if (item.Quantity <= getInterior.Quantity)
+                        {
+                            Request contact = _mapper.Map<Request>(add);
+                            contact.StatusResponseOfStaff = Request.State.Processing;
+                            await _unit.ContactRepo.AddOneItem(contact);
+                            return (true, "The request have been sent");
+                        }
+                        return (false, "The quantity of product available is less than the quantity you want");
+                    }
+                    return (false, $"The product with ID: {item.InteriorId} does not exist");
+                }
             }
             return (false, "Phone number is not valid");
         }
 
-        public async Task<(bool, string)> AddContactForCustomer(string id, string interiorId, AddForCustomerContactView add)
+        public async Task<(bool, string)> AddContactForCustomer(string id, AddForCustomerContactView add)
         {
             var getUser = (await _unit.AccountRepo.GetFieldsByFilterAsync([],
                             c => c.AccountId.Equals(id))).First();
             if (getUser.PhoneNumber != null)
             {
-                if (getUser.Address != null)
+                if (!string.IsNullOrEmpty(getUser.Address))
                 {
-                    if (add.Picture.Length > 0)
+                    foreach (var item in add.ListInterior)
                     {
-                        //Encode picture
-                        byte[] fileBytes;
-                        using (var ms = new MemoryStream())
+                        var getInterior = (await _unit.InteriorRepo.GetFieldsByFilterAsync([],
+                            g => g.InteriorId.Equals(item.InteriorId))).FirstOrDefault();
+                        if (getInterior != null)
                         {
-                            await add.Picture.CopyToAsync(ms);
-                            fileBytes = ms.ToArray();
+                            if (item.Quantity <= getInterior.Quantity)
+                            {
+                                Request contact = _mapper.Map<Request>(add);
+                                contact.Email = getUser.Email;
+                                contact.Phone = getUser.PhoneNumber;
+                                contact.Address = getUser.Address;
+                                contact.StatusResponseOfStaff = Request.State.Processing;
+                                await _unit.ContactRepo.AddOneItem(contact);
+                                return (true, "The contact have been sent");
+                            }
+                            return (false, "The quantity of product available is less than the quantity you want");
                         }
-                        List<string> interiorIdList = [];
-                        interiorIdList.Add(interiorId);
-                        Request contact = _mapper.Map<Request>(add);
-                        contact.Email = getUser.Email;
-                        contact.Phone = getUser.PhoneNumber;
-                        contact.Address = getUser.Address;
-                        contact.InteriorId = interiorIdList;
-                        contact.Picture = fileBytes;
-
-                        await _unit.ContactRepo.AddOneItem(contact);
-                        return (true, "The contact have been sent");
+                        return (false, $"The product with ID: {item.InteriorId} does not exist");
                     }
-                    return (false, "Missing the picture");
                 }
                 return (false, "Address is empty");
             }
@@ -107,27 +119,21 @@ namespace Services.Service
                     g => g.RequestId.Equals(address.RequestId))).FirstOrDefault();
             if (getContact != null)
             {
-                if (address.StatusResponseOfStaff == Request.State.Completed)
+                if (address.StatusResponseOfStaff != Request.State.Consulting)
                 {
+                    byte[]? fileBytes = null;
+                    if (address.ResponseOfStaffInFile != null)
+                    {
+                        using (var ms = new MemoryStream())
+                        {
+                            await address.ResponseOfStaffInFile.CopyToAsync(ms);
+                            fileBytes = ms.ToArray();
+                        }
+                    }
+                    getContact.ResponseOfStaffInFile = fileBytes;
                     getContact.ResponseOfStaff = address.ResponseOfStaff;
                     getContact.StatusResponseOfStaff = address.StatusResponseOfStaff;
-
-                    getContact.UpdatedAt = DateTime.UtcNow;
-                    await _unit.ContactRepo.UpdateItemByValue("RequestId", getContact.RequestId, getContact);
-                    string subject = "Interior quotation system";
-                    string body = $@"
-                    <h3><strong>
-                        {address.ResponseOfStaff}
-                    </strong></h3>";
-                    await _emailSender.SendEmailAsync(getContact.Email, subject, body);
-                    return (true, $"You have addressed the contact of email: {getContact.Email}");
-                }
-                else if (address.StatusResponseOfStaff == Request.State.Awaiting_Payment)
-                {
-                    getContact.ResponseOfStaff = address.ResponseOfStaff;
-                    getContact.StatusResponseOfStaff = address.StatusResponseOfStaff;
-
-                    getContact.UpdatedAt = DateTime.UtcNow;
+                    getContact.UpdatedAt = DateTime.Now;
                     await _unit.ContactRepo.UpdateItemByValue("RequestId", getContact.RequestId, getContact);
                     string subject = "Interior quotation system";
                     string body = $@"
@@ -135,7 +141,37 @@ namespace Services.Service
                         {address.ResponseOfStaff}
                     </strong></h3>";
                     SendEmailTool sendEmail = new SendEmailTool(_mailSettings, _logger);
-                    await sendEmail.SendEmailWithPdfAsync(getContact.Email, subject, body, address.File);
+                    await sendEmail.SendEmailWithPdfAsync(getContact.Email, subject, body, address.ResponseOfStaffInFile);
+                    return (true, $"You have addressed the contact of email: {getContact.Email}");
+                }
+                else
+                {
+                    byte[]? fileBytes = null;
+                    if (address.ResponseOfStaffInFile != null)
+                    {
+                        using (var ms = new MemoryStream())
+                        {
+                            await address.ResponseOfStaffInFile.CopyToAsync(ms);
+                            fileBytes = ms.ToArray();
+                        }
+                    }
+                    getContact.ResponseOfStaffInFile = fileBytes;
+                    getContact.ResponseOfStaff = address.ResponseOfStaff;
+                    getContact.StatusResponseOfStaff = address.StatusResponseOfStaff;
+                    getContact.UpdatedAt = DateTime.Now;
+                    await _unit.ContactRepo.UpdateItemByValue("RequestId", getContact.RequestId, getContact);
+                    string subject = "Interior quotation system";
+                    string acceptButtonLink = $"https://localhost:7220/api/Contact/Accepted?requestId={getContact.RequestId}";
+                    string refuseButtonLink = $"https://localhost:7220/api/Contact/Refused?requestId={getContact.RequestId}";
+                    string body = $@"
+                    <h3><strong>
+                        {address.ResponseOfStaff}
+                    </strong></h3>
+                        <br />
+    <a href='{acceptButtonLink}'>Accept</a>
+    <a href='{refuseButtonLink}'>Refuse</a>";
+                    SendEmailTool sendEmail = new SendEmailTool(_mailSettings, _logger);
+                    await sendEmail.SendEmailWithPdfAsync(getContact.Email, subject, body, address.ResponseOfStaffInFile);
                     return (true, $"You have addressed the contact of email: {getContact.Email}");
                 }
             }
@@ -159,12 +195,11 @@ namespace Services.Service
             const int pageSize = 20;
             const string sortField = "CreatedAt";
             List<string> searchFields = ["Email"];
-            List<string> returnFields = ["Email", "StatusResponseOfStaff", "CreatedAt"];
+            List<string> returnFields = [];
 
             int skip = (paging.PageIndex - 1) * pageSize;
-            var items = (await _unit.ContactRepo.PagingAsync(skip, pageSize, paging.IsAsc, sortField, paging.SearchValue, 
+            var items = (await _unit.ContactRepo.PagingAsync(skip, pageSize, paging.IsAsc, sortField, paging.SearchValue,
                 searchFields, returnFields)).ToList();
- 
             return items;
         }
 
@@ -176,11 +211,11 @@ namespace Services.Service
             {
                 return (true, getContact);
             }
-            return (false, "Contact is not existed");
+            return (false, "Request is not existed");
         }
 
 
-        public async Task<(bool, string, byte[])> GenerateContractPdf(string staffId, string RequestId, AddCartView[] array)
+        public async Task<(bool, string, byte[]?)> GenerateContractPdf(string RequestId, AddCartView[] array)
         {
             var totalPrice = 0;
             var getContact = (await _unit.ContactRepo.GetFieldsByFilterAsync([],
@@ -226,7 +261,6 @@ namespace Services.Service
                         p.PageColor(Colors.White);
                         p.DefaultTextStyle(x => x.FontSize(20).FontFamily("Arial"));
 
-
                         p.Content()
                         .Table(
                             contract =>
@@ -247,11 +281,11 @@ namespace Services.Service
                                             {
                                                 text.DefaultTextStyle(x => x.FontSize(12).FontColor(Colors.Black));
                                                 text.Span("Date:");
-                                                text.Span($" {DateTime.UtcNow.Day}").SemiBold();
+                                                text.Span($" {DateTime.Now.Day}").SemiBold();
                                                 text.Span(" month");
-                                                text.Span($" {DateTime.UtcNow.Month}").SemiBold();
+                                                text.Span($" {DateTime.Now.Month}").SemiBold();
                                                 text.Span(" year");
-                                                text.Span($" {DateTime.UtcNow.Year}").SemiBold();
+                                                text.Span($" {DateTime.Now.Year}").SemiBold();
                                             });
 
                                         });
@@ -412,210 +446,15 @@ namespace Services.Service
                     });
                 }).GeneratePdf();
 
-                //QuestPDF.Settings.License = LicenseType.Community;
-                //Document.Create(container =>
-                //{
-                //    container.Page(p =>
-                //    {
-                //        p.Size(PageSizes.A4);
-                //        p.Margin(1, Unit.Centimetre);
-                //        p.PageColor(Colors.White);
-                //        p.DefaultTextStyle(x => x.FontSize(20).FontFamily("Arial"));
-
-
-                //        p.Content()
-                //        .Table(
-                //            contract =>
-                //            {
-                //                contract.ColumnsDefinition(cols =>
-                //                {
-                //                    cols.RelativeColumn();
-                //                });
-                //                contract.Cell().BorderVertical(3).BorderTop(3).BorderBottom(1).PaddingVertical(1).Column(x =>
-                //                {
-                //                    x.Item().Row(header =>
-                //                    {
-                //                        header.RelativeItem().Column(col =>
-                //                        {
-                //                            col.Item().AlignCenter().Text("CONTRACT").FontSize(16).Italic().FontColor(Colors.Black);
-
-                //                            col.Item().AlignCenter().Text(text =>
-                //                            {
-                //                                text.DefaultTextStyle(x => x.FontSize(12).FontColor(Colors.Black));
-                //                                text.Span("Date:");
-                //                                text.Span($" {DateTime.UtcNow.Day}").SemiBold();
-                //                                text.Span(" month");
-                //                                text.Span($" {DateTime.UtcNow.Month}").SemiBold();
-                //                                text.Span(" year");
-                //                                text.Span($" {DateTime.UtcNow.Year}").SemiBold();
-                //                            });
-
-                //                        });
-                //                    }
-                //                    );
-                //                });
-
-
-                //                contract.Cell().BorderVertical(3).BorderHorizontal(1).PaddingHorizontal(4).Column(
-                //                    col =>
-                //                    {
-                //                        col.Item().Text(text =>
-                //                        {
-                //                            text.DefaultTextStyle(x => x.FontSize(12).FontColor(Colors.Black));
-                //                            text.Span("Company Name: ");
-                //                            text.Span("Interior Quote System").SemiBold();
-                //                        });
-                //                        col.Item().Text(text =>
-                //                        {
-                //                            text.DefaultTextStyle(x => x.FontSize(12).FontColor(Colors.Black));
-                //                            text.Span("Address: ");
-                //                            text.Span("Thu Duc district, Ho Chi Minh city");
-                //                        });
-                //                        col.Item().Text(text =>
-                //                        {
-                //                            text.DefaultTextStyle(x => x.FontSize(12).FontColor(Colors.Black));
-                //                            text.Span("Phone: ");
-                //                            text.Span("0123456789");
-                //                        });
-                //                    });
-                //                contract.Cell().BorderVertical(3).BorderHorizontal(1).PaddingHorizontal(4).Column(
-                //                    col =>
-                //                    {
-                //                        col.Item().Text(text =>
-                //                        {
-                //                            text.DefaultTextStyle(x => x.FontSize(12).FontColor(Colors.Black));
-                //                            text.Span("Buyer Email: ");
-                //                            text.Span($"{getContact.Email}");
-                //                        });
-                //                        col.Item().Text(text =>
-                //                        {
-                //                            text.DefaultTextStyle(x => x.FontSize(12).FontColor(Colors.Black));
-                //                            text.Span("Buyer Phone: ");
-                //                            text.Span($"{getContact.Phone}");
-                //                        });
-                //                        col.Item().Text(text =>
-                //                        {
-                //                            text.DefaultTextStyle(x => x.FontSize(12).FontColor(Colors.Black));
-                //                            text.Span("Buyer Address: ");
-                //                            text.Span($"{getContact.Address}");
-                //                        });
-                //                    });
-
-
-                //                contract.Cell().BorderVertical(3).BorderHorizontal(1).Table(
-                //                    table =>
-                //                    {
-                //                        table.ColumnsDefinition(col =>
-                //                        {
-                //                            col.ConstantColumn(70);
-                //                            col.RelativeColumn();
-                //                            col.ConstantColumn(70);
-                //                            col.ConstantColumn(70);
-                //                            col.ConstantColumn(70);
-                //                            col.ConstantColumn(70);
-                //                            col.ConstantColumn(70);
-                //                        });
-
-                //                        table.Cell().Border(1).PaddingHorizontal(4).PaddingVertical(2).AlignCenter().AlignMiddle().Text(text =>
-                //                        {
-                //                            text.DefaultTextStyle(x => x.FontSize(12).FontColor(Colors.Black));
-                //                            text.Span("Interior Id").SemiBold();
-                //                            text.Span("(Id)").Italic();
-                //                        });
-                //                        table.Cell().Border(1).PaddingHorizontal(4).PaddingVertical(2).AlignCenter().AlignMiddle().Text(text =>
-                //                        {
-                //                            text.DefaultTextStyle(x => x.FontSize(12).FontColor(Colors.Black));
-                //                            text.Span("Interior Name").SemiBold();
-                //                            text.Span("\r\nName").Italic();
-                //                        });
-                //                        table.Cell().Border(1).PaddingHorizontal(4).PaddingVertical(2).AlignCenter().AlignMiddle().Text(text =>
-                //                        {
-                //                            text.DefaultTextStyle(x => x.FontSize(12).FontColor(Colors.Black));
-                //                            text.Span("Quantity").SemiBold();
-                //                            text.Span("(Quantity)").Italic();
-                //                        });
-                //                        table.Cell().Border(1).PaddingHorizontal(4).PaddingVertical(2).AlignCenter().AlignMiddle().Text(text =>
-                //                        {
-                //                            text.DefaultTextStyle(x => x.FontSize(12).FontColor(Colors.Black));
-                //                            text.Span("Unit price").SemiBold();
-                //                            text.Span("(Unit price)").Italic();
-                //                        });
-                //                        table.Cell().Border(1).PaddingHorizontal(4).PaddingVertical(2).AlignCenter().AlignMiddle().Text(text =>
-                //                        {
-                //                            text.DefaultTextStyle(x => x.FontSize(12).FontColor(Colors.Black));
-                //                            text.Span("Tax").SemiBold();
-                //                            text.Span("(Rate)").Italic();
-                //                        });
-                //                        table.Cell().Border(1).PaddingHorizontal(4).PaddingVertical(2).AlignCenter().AlignMiddle().Text(text =>
-                //                        {
-                //                            text.DefaultTextStyle(x => x.FontSize(12).FontColor(Colors.Black));
-                //                            text.Span("Tax Section").SemiBold();
-                //                            text.Span("(Tax Section)").Italic();
-                //                        });
-                //                        table.Cell().Border(1).PaddingHorizontal(4).PaddingVertical(2).AlignCenter().AlignMiddle().Text(text =>
-                //                        {
-                //                            text.DefaultTextStyle(x => x.FontSize(12).FontColor(Colors.Black));
-                //                            text.Span("Amount").SemiBold();
-                //                            text.Span("(Amount)").Italic();
-                //                        });
-
-
-                //                        for (var i = 0; i < list.Count; i++)
-                //                        {
-                //                            var item = list[i];
-
-                //                            table.Cell().Border(1).PaddingHorizontal(4).PaddingVertical(2).AlignCenter().AlignMiddle().Text($"{item.ProductId}").FontSize(12).FontColor(Colors.Black);
-                //                            table.Cell().Border(1).PaddingHorizontal(4).PaddingVertical(2).AlignMiddle().Text($"{item.ProductName}").FontSize(12).FontColor(Colors.Black);
-                //                            table.Cell().Border(1).PaddingHorizontal(4).PaddingVertical(2).AlignMiddle().AlignRight().Text($"{item.Quantity}").FontSize(12).FontColor(Colors.Black);
-                //                            table.Cell().Border(1).PaddingHorizontal(4).PaddingVertical(2).AlignMiddle().AlignRight().Text($"{item.UnitPrice}").FontSize(12).FontColor(Colors.Black);
-                //                            table.Cell().Border(1).PaddingHorizontal(4).PaddingVertical(2).AlignMiddle().AlignRight().Text("10%").FontSize(12).FontColor(Colors.Black);
-                //                            table.Cell().Border(1).PaddingHorizontal(4).PaddingVertical(2).AlignMiddle().AlignRight().Text($"{item.TotalCostOfPoduct * 0.1}").FontSize(12).FontColor(Colors.Black);
-                //                            table.Cell().Border(1).PaddingHorizontal(4).PaddingVertical(2).AlignMiddle().AlignRight().Text($"{item.TotalCostOfPoduct * 1.1}").FontSize(12).FontColor(Colors.Black);
-                //                        }
-                //                        ;
-                //                    });
-
-                //                contract.Cell().BorderVertical(3).BorderTop(1).BorderBottom(3).Table(
-                //                    table =>
-                //                    {
-                //                        table.ColumnsDefinition(col =>
-                //                        {
-                //                            col.RelativeColumn();
-                //                            col.ConstantColumn(70);
-                //                            col.ConstantColumn(70);
-                //                            col.ConstantColumn(70);
-                //                            col.ConstantColumn(70);
-                //                        });
-                //                        table.Cell().Border(1).PaddingHorizontal(4).PaddingVertical(2).AlignMiddle().AlignRight().Text("Ship:").FontSize(12).FontColor(Colors.Black);
-                //                        table.Cell().Border(1);
-                //                        table.Cell().Border(1);
-                //                        table.Cell().Border(1);
-                //                        table.Cell().Border(1).PaddingHorizontal(4).PaddingVertical(2).AlignMiddle().AlignRight().Text("100.000").FontSize(12).FontColor(Colors.Black);
-
-                //                        var total = 0;
-                //                        foreach (var product in list)
-                //                        {
-                //                            total = total + product.TotalCostOfPoduct;
-                //                        }
-                //                        table.Cell().Border(1).PaddingHorizontal(4).PaddingVertical(2).AlignMiddle().AlignRight().Text("Total amount:").FontSize(12).FontColor(Colors.Black);
-                //                        table.Cell().Border(1).PaddingHorizontal(4).PaddingVertical(2).AlignMiddle().AlignRight().Text($"{total}").FontSize(12).FontColor(Colors.Black);
-                //                        table.Cell().Border(1);
-                //                        table.Cell().Border(1).PaddingHorizontal(4).PaddingVertical(2).AlignMiddle().AlignRight().Text($"{(total) * 0.1}").FontSize(12).FontColor(Colors.Black);
-                //                        table.Cell().Border(1).PaddingHorizontal(4).PaddingVertical(2).AlignMiddle().AlignRight().Text($"{Math.Round(total * 1.1 + 100000)}").FontSize(12).FontColor(Colors.Black);
-                //                        ;
-                //                    });
-                //            });
-                //    });
-                //}).GeneratePdf($"{RequestId}_Contract.pdf");
                 Contract ct = new()
                 {
                     ContractId = ObjectId.GenerateNewId().ToString(),
+                    RequestId = RequestId,
                     EmailOfCustomer = getContact.Email,
-                    StaffId = staffId,
-                    CreatedAt = DateTime.UtcNow,
+                    CreatedAt = DateTime.Now,
                     Description = $@"
                                     Company Name: Interior Quote System
-                                    Creation Date: {DateTime.UtcNow}
+                                    Creation Date: {DateTime.Now}
                                     Company Address: Thu Duc district, Ho Chi Minh city
                                     Company Phone: 0123456789
                                     Buyer Address: {getContact.Address}
@@ -625,7 +464,6 @@ namespace Services.Service
                                     Ship: 100.000
                                     The total amount includes the above fee items: {Math.Ceiling(totalPrice + totalPrice * 0.1 + 100000)}
                                     ",
-                    Status = Contract.State.Pending,
                     ContractFile = pdf
                 };
                 var pdfstream = new MemoryStream();
@@ -633,64 +471,103 @@ namespace Services.Service
                 await _unit.ContractRepo.AddOneItem(ct);
                 return (true, "", pdf);
             }
-            return (false, "The contact is not existed", null);
+            return (false, "The request is not existed", null);
         }
 
-        public async Task<(bool, string)> UpdateContact(string RequestId, AddCartView[] array)
-        {
-            int count = 0;
-            var getContact = (await _unit.ContactRepo.GetFieldsByFilterAsync([],
-                    g => g.RequestId.Equals(RequestId))).FirstOrDefault();
-            if (getContact != null)
-            {
-                List<string> interiorIdList = [];
-                foreach (var item in array)
-                {
-                    var getInterior = (await _unit.InteriorRepo.GetFieldsByFilterAsync([],
-                        g => g.InteriorId.Equals(item.InteriorId))).FirstOrDefault();
-                    if (getInterior != null)
-                    {
-                        interiorIdList.Add(getInterior.InteriorId);
-                        count++;
-                        if (count == array.Length) break;
-                        else continue;
-                    }
-                    return (false, $"The product with ID: {item.InteriorId} does not exist");
-                }
-                getContact.InteriorId = interiorIdList;
-                await _unit.ContactRepo.UpdateItemByValue("RequestId", RequestId, getContact);
-                return (true, "Update Contact success");
-            }
-            return (false, "The contact is not existed");
-        }
 
-        public async Task<(bool, object)> GetCustomerContactList(string _id)
+        public async Task<(bool, object?)> GetCustomerContactList(string _id)
         {
             var responses = new List<object>();
-            var email = (await _unit.AccountRepo.GetFieldsByFilterAsync(["Email"], a => a.AccountId.Equals(_id))).FirstOrDefault().Email;
+            var email = (await _unit.AccountRepo.GetFieldsByFilterAsync(["Email"],
+                a => a.AccountId.Equals(_id))).FirstOrDefault();
             if (email != null)
             {
-                IEnumerable<Request> requestList = await _unit.ContactRepo.GetByFilterAsync(a => a.Email.Equals(email));
-
-                foreach (var request in requestList)
+                IEnumerable<Request> requestList = await _unit.ContactRepo.GetByFilterAsync(a => a.Email.Equals(email.Email));
+                if (requestList.Any())
                 {
-                    var name = (await _unit.InteriorRepo.GetFieldsByFilterAsync(["InteriorName"], i => i.InteriorId.Equals(request.InteriorId.FirstOrDefault()))).FirstOrDefault().InteriorName;
-                    responses.Add(new
+                    foreach (var request in requestList)
                     {
-                        RequestId = request.RequestId,
-                        InteriorId = request.InteriorId.FirstOrDefault(),
-                        InteriorName = name,
-                        CreateAt = request.CreatedAt,
-
-                        Status = request.StatusResponseOfStaff
-                    });
+                        responses.Add(new
+                        {
+                            RequestId = request.RequestId,
+                            Email = request.Email,
+                            Phone = request.Phone,
+                            StatusResponseOfStaff = request.StatusResponseOfStaff,
+                            CreateAt = request.CreatedAt
+                        });
+                    }
+                    return (true, responses);
                 }
-                return (true, responses);
+                return (true, "You currently have no requests");
             }
-            else
+            return (false, null);
+        }
+
+        public async Task<(bool, object)> GetCustomerContactDetail(DetailContactView detail)
+        {
+            var getContact = (await _unit.ContactRepo.GetFieldsByFilterAsync([],
+                    g => g.RequestId.Equals(detail.RequestId))).FirstOrDefault();
+            if (getContact != null)
             {
-                return (false, null);
+                return (true, getContact);
             }
+            return (false, "Request is not existed");
+        }
+
+        public async Task<(bool, object)> Accepted(string requestId)
+        {
+            var getContact = (await _unit.ContactRepo.GetFieldsByFilterAsync([],
+                    g => g.RequestId.Equals(requestId))).FirstOrDefault();
+            if (getContact != null)
+            {
+                string check = await _vnpayService.AddPendingTransaction(requestId, getContact.ListInterior);
+                int deposit = await _vnpayService.CalculateDeposit(check);
+                string depositLink;
+                if (check != null)
+                {
+                    depositLink = await _vnpayService.Payment(check, deposit);
+                }
+                else depositLink = "";
+                var pdf = GenerateContractPdf(requestId, getContact.ListInterior).Result.Item3;
+                var stream = new MemoryStream(pdf);
+
+                // Tạo đối tượng IFormFile từ MemoryStream
+                IFormFile file = new FormFile(stream, 0, pdf.Length, "file.pdf", "file.pdf");
+
+                getContact.StatusResponseOfStaff = Request.State.Accepted;
+                getContact.UpdatedAt = DateTime.Now;
+                await _unit.ContactRepo.UpdateItemByValue("RequestId", getContact.RequestId, getContact);
+                string subject = "Interior quotation system";
+                string body = $@"
+                    <h3><strong>
+                        Thank you for accepting, here is the link to deposit 30% of the order value.<br>
+                        {depositLink}
+                    </strong></h3>";
+                SendEmailTool sendEmail = new SendEmailTool(_mailSettings, _logger);
+                await sendEmail.SendEmailWithPdfAsync(getContact.Email, subject, body, file);
+                return (true, $"");
+            }
+            return (false, "Request is not existed");
+        }
+        public async Task<(bool, object)> Refused(string requestId)
+        {
+            var getContact = (await _unit.ContactRepo.GetFieldsByFilterAsync([],
+                    g => g.RequestId.Equals(requestId))).FirstOrDefault();
+            if (getContact != null)
+            {
+                getContact.StatusResponseOfStaff = Request.State.Refused;
+                getContact.UpdatedAt = DateTime.Now;
+                await _unit.ContactRepo.UpdateItemByValue("RequestId", getContact.RequestId, getContact);
+                string subject = "Interior quotation system";
+                string body = $@"
+                    <h3><strong>
+                        We are sorry that you have refused this order. If you need further advice, please contact us via email: ... or phone number: 0000000000
+                    </strong></h3>";
+                SendEmailTool sendEmail = new SendEmailTool(_mailSettings, _logger);
+                await sendEmail.SendEmailWithPdfAsync(getContact.Email, subject, body, null);
+                return (true, $"");
+            }
+            return (false, "Request is not existed");
         }
     }
 

@@ -76,7 +76,7 @@ namespace Services.Tool
             // Đính kèm tệp từ IFormFile (nếu có)
             if (attachment != null)
             {
-                var pdfAttachment = new MimePart(attachment.ContentType)
+                var pdfAttachment = new MimePart()
                 {
                     Content = new MimeContent(attachment.OpenReadStream(), ContentEncoding.Default),
                     ContentDisposition = new ContentDisposition(ContentDisposition.Attachment),
