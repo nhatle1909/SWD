@@ -488,6 +488,22 @@
   },
   {
     "ContainingType": "SWD.Controllers.ContactController",
+    "Method": "GetPagingContactlList",
+    "RelativePath": "api/Contact/Get-Paging-Request-List",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "paging",
+        "Type": "Repositories.ModelView.ContactView\u002BPagingContactView",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SWD.Controllers.ContactController",
     "Method": "RefusedQuote",
     "RelativePath": "api/Contact/Refused",
     "HttpMethod": "GET",
@@ -544,22 +560,6 @@
       {
         "Name": "delete",
         "Type": "Repositories.ModelView.ContactView\u002BDeleteContactView",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "SWD.Controllers.ContactController",
-    "Method": "GetPagingContactlList",
-    "RelativePath": "api/Contact/Staff/Get-Paging-Request-List",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "paging",
-        "Type": "Repositories.ModelView.ContactView\u002BPagingContactView",
         "IsRequired": true
       }
     ],

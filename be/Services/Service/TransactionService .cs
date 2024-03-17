@@ -66,7 +66,7 @@ namespace Services.Service
             return paymentUrl;
         }
         public async Task<(bool, string)> CheckPayment(string url)
-        { 
+        {
 
             var query = Utils.GetQueryString(url);
 
@@ -85,7 +85,7 @@ namespace Services.Service
                 if (vnp_ResponseCode == "00" && vnp_TransactionStatus == "00")
                 {
                     //Thanh toan thanh cong
-                    
+
                     if (item.FirstOrDefault().TransactionStatus.Equals("Pending"))
                     {
                         await UpdateStatusTransaction(_id, "Processing");
@@ -111,27 +111,27 @@ namespace Services.Service
                 return (false, "Invalid signature");
             }
         }
-        public async Task<(bool,object)> GetAllTransaction(string id)
+        public async Task<(bool, object)> GetAllTransaction(string id)
         {
-           
+
             string email = (await _unit.AccountRepo.GetFieldsByFilterAsync(["Email"], a => a.AccountId.Equals(id))).FirstOrDefault().Email;
             if (email == null) return (false, null);
             IEnumerable<Transaction> trans = await _unit.TransactionRepo.GetByFilterAsync(a => a.Email.Equals(email));
-          
+
             IEnumerable<Contract> contract = await _unit.ContractRepo.GetByFilterAsync(a => a.EmailOfCustomer.Equals(email));
             var transList = trans.OrderByDescending(t => t.CreatedAt).ToArray();
             var contractList = contract.OrderByDescending(c => c.CreatedAt).ToArray();
-            
+
             //Data cần lấy : Transaction ID - TransactionStatus - Total Price - Contract File - Contract Create Date - Transaction Date
-           
+
             var responses = new List<object>();
-            for (int i = 0; i < trans.Count(); i++) 
+            for (int i = 0; i < trans.Count(); i++)
             {
                 pay.ClearRequestData();
                 var url = "";
                 if (transList[i].TransactionStatus.Equals("Pending"))
                 {
-                     url = Payment(transList[i].TransactionId, transList[i].TotalPrice * 3 /10).Result;
+                    url = Payment(transList[i].TransactionId, transList[i].TotalPrice * 3 / 10).Result;
                 }
                 if (transList[i].TransactionStatus.Equals("Processing"))
                 {
@@ -146,12 +146,12 @@ namespace Services.Service
                     TransactionDate = transList[i].UpdatedAt,
                     URL = url,
                     ContractFile = contractList[i].ContractFile
-                   
-                   
+
+
                 });
 
             }
-            return (true,responses);
+            return (true, responses);
         }
 
         public async Task<string> AddPendingTransaction(string _id, AddCartView[] cartViews)
@@ -161,6 +161,7 @@ namespace Services.Service
             Transaction Transaction = new Transaction
             {
                 TransactionId = ObjectId.GenerateNewId().ToString(),
+                RequestId = _id,
                 TransactionStatus = "Pending",
                 Email = contact.First().Email,
                 CreatedAt = DateTime.Now,
@@ -175,7 +176,7 @@ namespace Services.Service
             return Transaction.TransactionId;
         }
 
- 
+
         public async Task<int> CalculateDeposit(string _id)
         {
             IEnumerable<Transaction> item = await _unit.TransactionRepo.GetFieldsByFilterAsync(["TotalPrice"], a => a.TransactionId.Equals(_id));
@@ -264,37 +265,30 @@ namespace Services.Service
 </style>
 </head>
 <body>" +
-"<div class=\"container\">\r\n    <h1>Thank you for your recent purchase!</h1>\r\n    <p>To complete your order, please proceed to the secure payment portal by clicking the button below:</p>\r\n    <p><a href='"+paymentUrl+"'>Make Payment Now</a></p>\r\n    <p class=\"important\">**Important:** This link will expire in 15 minutes after clicking. If you do not complete the payment within this timeframe, your order may be cancelled. Additionally, your order will be automatically cancelled if not checked out within one month.</p>\r\n    <p>If you have any questions or encounter any issues, please don't hesitate to contact us at <a href=\"\"mailto:support@yourcompany.com\"\">support@yourcompany.com</a>.</p>\r\n    <p>Thank you for your business!</p>\r\n  </div>\r\n</body>\r\n</html>\"";
+"<div class=\"container\">\r\n    <h1>Thank you for your recent purchase!</h1>\r\n    <p>To complete your order, please proceed to the secure payment portal by clicking the button below:</p>\r\n    <p><a href='" + paymentUrl + "'>Make Payment Now</a></p>\r\n    <p class=\"important\">**Important:** This link will expire in 15 minutes after clicking. If you do not complete the payment within this timeframe, your order may be cancelled. Additionally, your order will be automatically cancelled if not checked out within one month.</p>\r\n    <p>If you have any questions or encounter any issues, please don't hesitate to contact us at <a href=\"\"mailto:support@yourcompany.com\"\">support@yourcompany.com</a>.</p>\r\n    <p>Thank you for your business!</p>\r\n  </div>\r\n</body>\r\n</html>\"";
 
             string subject = "Interior quotation system";
-        
+
             await _emailSender.SendEmailAsync(email, subject, html);
             return;
 
         }
         public async Task SendThanksMail(string Transactionid)
         {
-            IEnumerable<Transaction> trans = await _unit.TransactionRepo.GetFieldsByFilterAsync(["Email"], a => a.TransactionId.Equals(Transactionid));
-            string email = trans.FirstOrDefault().Email;
+            var trans = (await _unit.TransactionRepo.GetFieldsByFilterAsync([], a => a.TransactionId.Equals(Transactionid))).First();
             var getContact = (await _unit.ContactRepo.GetFieldsByFilterAsync([],
-                    g => g.Email.Equals(email)));
-            if (getContact.Any())
-            {
-                foreach (var contact in getContact)
-                {
-                    if (contact.StatusResponseOfStaff == Request.State.Accepted)
-                    {
-                        contact.StatusResponseOfStaff = Request.State.Completed;
-                        await _unit.ContactRepo.UpdateItemByValue("RequestId", contact.RequestId, contact);
-                    }
-                }
-            }
+                    g => g.RequestId.Equals(trans.RequestId))).First();
+
+            getContact.StatusResponseOfStaff = Request.State.Completed;
+            getContact.UpdatedAt = DateTime.Now;
+            await _unit.ContactRepo.UpdateItemByValue("RequestId", getContact.RequestId, getContact);
+
 
             string subject = "Interior quotation system";
             string body = $"Thank You for Using Our Service!" +
                 $"<h3><strong>If you have any questions or encounter any issues, please don't hesitate to contact us at support@yourcompany.com.</strong></h3>" +
                 $"Thank you for your business!";
-            await _emailSender.SendEmailAsync(email, subject, body);
+            await _emailSender.SendEmailAsync(getContact.Email, subject, body);
             return;
         }
         public async Task UpdateInteriorQuantity(string _id)
@@ -356,7 +350,7 @@ namespace Services.Service
             return item.FirstOrDefault().RemainPrice;
         }
 
-       
+
         public async Task<string> UpdateTransactionDetail(string _id, AddCartView[] cartviews)
         {
 
