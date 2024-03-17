@@ -53,7 +53,8 @@ namespace SWD.Controllers
             }
         }
 
-        [HttpPost("Staff/Address-An-Request")]
+        [Authorize(Roles = "Staff")]
+        [HttpPut("Staff/Address-An-Request")]
         public async Task<IActionResult> AddressAnContact(AddressContactView address)
         {
             try
@@ -159,7 +160,7 @@ namespace SWD.Controllers
             {
                 var status = await _contactService.Accepted(requestId);
                 if (status.Item1)
-                    return Content("<html><body><h1>Thank you for visiting our website!</h1></body></html>", "text/html");
+                    return Ok();
                 else return BadRequest(status.Item2);
             }
             catch (Exception ex)
@@ -175,7 +176,7 @@ namespace SWD.Controllers
             {
                 var status = await _contactService.Refused(requestId);
                 if (status.Item1)
-                    return Content("<html><body><h1>Thank you for visiting our website!</h1></body></html>", "text/html");
+                    return Ok();
                 else return BadRequest(status.Item2);
             }
             catch (Exception ex)

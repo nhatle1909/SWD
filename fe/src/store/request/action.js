@@ -1,6 +1,6 @@
 
 import { toast } from "react-toastify";
-import { createRequest, getRequests,responseRequest } from "../../api/request";
+import { createRequest, getRequests } from "../../api/request";
 
 import {
   setRequests,
@@ -11,26 +11,6 @@ export const actionGetRequests = (request) => {
   return async (dispatch) => {
     try {
       const { data } = await getRequests(request);
-
-      console.log("data", data);
-
-      dispatch(setRequests(data));
-
-    } catch (error) {
-      toast(error.response.data, {
-        type: 'error'
-      });
-      console.log(error)
-      throw error;
-    }
-  };
-}
-export const actionResponseRequest = ({id, response, status, file}) =>
-{
-  return async (dispatch) => {
-    try {
-      
-      const { data } = await responseRequest({id, response, status, file:null});
 
       console.log("data", data);
 

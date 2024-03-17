@@ -161,8 +161,6 @@ namespace Services.Service
                     getContact.UpdatedAt = DateTime.Now;
                     await _unit.ContactRepo.UpdateItemByValue("RequestId", getContact.RequestId, getContact);
                     string subject = "Interior quotation system";
-                    //string acceptButtonLink = $"https://swdapi.azurewebsites.net/api/Contact/Accepted?requestId={getContact.RequestId}";
-                    //string refuseButtonLink = $"https://swdapi.azurewebsites.net/api/Contact/Refused?requestId={getContact.RequestId}";
                     string acceptButtonLink = $"https://localhost:7220/api/Contact/Accepted?requestId={getContact.RequestId}";
                     string refuseButtonLink = $"https://localhost:7220/api/Contact/Refused?requestId={getContact.RequestId}";
                     string body = $@"
@@ -522,14 +520,6 @@ namespace Services.Service
                     g => g.RequestId.Equals(requestId))).FirstOrDefault();
             if (getContact != null)
             {
-                if (getContact.StatusResponseOfStaff == Request.State.Completed)
-                {
-                    return (false, $@"
-                    <h3><strong>
-                        You have rejected a previous order, if you want to create a new order, please create a request on our homepage
-                    </strong></h3>"";
-                    ");
-                }
                 string check = await _vnpayService.AddPendingTransaction(requestId, getContact.ListInterior);
                 int deposit = await _vnpayService.CalculateDeposit(check);
                 string depositLink;
@@ -544,7 +534,7 @@ namespace Services.Service
                 // Tạo đối tượng IFormFile từ MemoryStream
                 IFormFile file = new FormFile(stream, 0, pdf.Length, "file.pdf", "file.pdf");
 
-                getContact.StatusResponseOfStaff = Request.State.Consulting;
+                getContact.StatusResponseOfStaff = Request.State.Accepted;
                 getContact.UpdatedAt = DateTime.Now;
                 await _unit.ContactRepo.UpdateItemByValue("RequestId", getContact.RequestId, getContact);
                 string subject = "Interior quotation system";
@@ -565,7 +555,7 @@ namespace Services.Service
                     g => g.RequestId.Equals(requestId))).FirstOrDefault();
             if (getContact != null)
             {
-                getContact.StatusResponseOfStaff = Request.State.Completed;
+                getContact.StatusResponseOfStaff = Request.State.Refused;
                 getContact.UpdatedAt = DateTime.Now;
                 await _unit.ContactRepo.UpdateItemByValue("RequestId", getContact.RequestId, getContact);
                 string subject = "Interior quotation system";

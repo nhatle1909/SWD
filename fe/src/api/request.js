@@ -10,14 +10,10 @@ export const createRequest = (request) => {
 };
 
 export const getRequests = (request) => {
-    return baseClient.post('/Contact/Get-Paging-Request-List', request);
+    return baseClient.post('/Contact/Get-Paging-Contact-List', request);
 };
 
 
 export const createContactPDF = (request) => {
     return baseClient.post('/Contact/Staff/Create-Contract-PDF', request);
-};
-
-export const responseRequest =  ({id, response, status, file}) => {
-    return baseClient.post(`/Contact/Staff/Address-An-Request?RequestId=${id}&ResponseOfStaff=${response}&StatusResponseOfStaff=${status}`,file);
 };
