@@ -1,5 +1,5 @@
 import { toast } from "react-toastify";
-import { createInterior, getInteriors, removeInterior, updateInterior } from "../../api/interior";
+import { getInteriors, removeInterior } from "../../api/interior";
 import {
   setInteriors,
 } from "./slice";
@@ -69,7 +69,7 @@ export const actionRemoveInterior = (request) => {
       });
 
       dispatch(setInteriors(data));
-      toast('Remove interior successful', {
+      toast('Remove account successful', {
         type: 'success'
       });
 
@@ -78,54 +78,6 @@ export const actionRemoveInterior = (request) => {
         type: 'error'
       });
       console.log(error)
-      throw error;
-    }
-  };
-}
-export const actionAddInterior = (request) => {
-  return async (dispatch) => {
-    try {
-      console.log("going to add: ", request)
-      const response = await createInterior(request, request.image);
-      console.log("response", response);
-      const { data } = await getInteriors({
-        PageIndex: 1,
-        IsAsc: true,
-        SearchValue: "",
-      });
-
-      dispatch(setInteriors(data));
-      toast('Add new interior successful', {
-        type: 'success'
-      });
-    } catch (error) {
-      toast(error.response.data, {
-        type: 'error'
-      });
-      throw error;
-    }
-  };
-}
-export const actionUpdateInterior = (request) => {
-  return async (dispatch) => {
-    try {
-      console.log("going to update: ", request)
-      const response = await updateInterior(request, request.image);
-      console.log("response", response);
-      const { data } = await getInteriors({
-        PageIndex: 1,
-        IsAsc: true,
-        SearchValue: "",
-      });
-
-      dispatch(setInteriors(data));
-      toast('Update interior successful', {
-        type: 'success'
-      });
-    } catch (error) {
-      toast(error.response.data, {
-        type: 'error'
-      });
       throw error;
     }
   };
