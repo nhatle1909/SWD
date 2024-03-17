@@ -1,6 +1,6 @@
 import React, {useState, useRef, useEffect} from "react";
 import { SearchOutlined } from "@ant-design/icons";
-import { Form, Button, Space, Table, Input, Modal, Select, message } from 'antd';
+import { Form, Button, Space, Table, Input, Modal, message } from 'antd';
 import Highlighter from 'react-highlight-words';
 import { useAppDispatch, useAppSelector } from "../../store";
 import { actionGetInteriors, actionRemoveInterior, actionUpdateInterior } from "../../store/interior/action";
@@ -369,7 +369,7 @@ const ListInterior = () => {
             },
         },
     ];
-    return(<>   
+    return(<>
         <Table
             rowKey= "interiorId"
             columns={columns}

@@ -11,7 +11,7 @@ const ManageInterior = () => {
     
     return (<>
         <div className="w-[100vw] flex justify-center items-center" style={{
-          background: '#343f4024', paddingTop: '120px'
+          background: 'grey', paddingTop: '120px'
         }}>
           <div className="w-[90vw]">
             <PageHeader message={"Manage Interior"} />

@@ -3,14 +3,15 @@ import { Button, Flex } from "antd";
 import { useState } from "react";
 import PageHeader from "../../../components/PageHeader";
 import ListBlog from "../../../components/blog/ListBlog";
+import CreateBlogModel from "../../../components/blog/CreateBlogModal";
 
 export const ManageBlog = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   return (
     <>
-      <div className="h-[90vh] w-[100vw] flex justify-center items-center"
-          style={{ background: '#343f4024' }}>
-        <div className="h-[65vh] w-[70vw]">
+      <div className="w-[100vw] flex justify-center items-center"
+          style={{ background: 'grey', paddingTop: '120px' }}>
+        <div className=" w-[70vw]">
           <PageHeader message={"Manage Blog"} />
           <Flex
             gap="small"
@@ -30,9 +31,7 @@ export const ManageBlog = () => {
             </Button>
           </Flex>
           <ListBlog />
-            {/*
-          <CreateAccountModel isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />
-            */}
+          <CreateBlogModel isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />
         </div>
       </div >
     </>

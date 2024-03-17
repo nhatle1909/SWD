@@ -14,7 +14,6 @@ const CreateInteriorModel = ({ isModalOpen, setIsModalOpen }) => {
         setIsModalOpen(true);
     };
     const handleOk = () => {
-        console.log(image);
         if (!interiorName) {
             message.error('Please input the interior name!');
             return;

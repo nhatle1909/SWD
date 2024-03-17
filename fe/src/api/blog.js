@@ -6,9 +6,20 @@ export const getBlogList = ({pageIndex, isAsc, searchValue}) => {
 export const getBlogs = (request) => {
     return baseClient.get(`/Blog/Get-Paging-Blog-List`, request);
 };
-export const removeBlog = ({blogId}) => {
-    return baseClient.delete(`/Blog/Staff/Remove-An-Blog?blogId=${blogId}`);
+export const removeBlog = (request) => {
+    console.log("request",request);
+    return baseClient.delete(`/Blog/Staff/Remove-An-Blog`, {data: request});
 };
 export const createBlog = (request) => {
-    return baseClient.post('/Blog/Staff/Add-An-Blog',request);
+    const formData = new FormData();
+    formData.append('Pictures', request.image);
+
+    const title = encodeURIComponent(request.title);
+    const content = encodeURIComponent(request.content);
+
+    return baseClient.post(`/Blog/Staff/Add-An-Blog?Title=${title}&Content=${content}`, formData, {
+        headers: {
+            'Content-Type': 'multipart/form-data'
+        }
+    });
 };

@@ -37,10 +37,10 @@ export const actionRemoveBlog = (request) => {
     return async (dispatch) => {
         try{
             await removeBlog(request);
-            const { data } = await getBlogs({
-                PageIndex: 1,
-                IsAcs: true,
-                SearchValue: ""
+            const { data } = await getBlogList({
+                pageIndex: 1,
+                isAsc: true,
+                searchValue: "",
             });
             dispatch(setBlogs(data));
             toast('Remove blog successful', { type: 'success'});
@@ -58,12 +58,12 @@ export const actionAddBlog = (request) => {
     return async (dispatch) => {
       try {
         console.log("going to add: ", request)
-        const response = await createBlog(request.blogType, { title: request.title, content: request.content });
+        const response = await createBlog(request);
         console.log("response", response);
-        const { data } = await getBlogs({
-          PageIndex: 1,
-          IsAsc: true,
-          SearchValue: "",
+        const { data } = await getBlogList({
+            pageIndex: 1,
+            isAsc: true,
+            searchValue: "",
         });
   
         dispatch(setBlogs(data));
