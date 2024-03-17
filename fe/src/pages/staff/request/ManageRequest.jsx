@@ -1,25 +1,41 @@
+import { linkImg } from '@/utils/common'
 import React, { useRef, useState } from "react";
-import { Button, Space, Table, Input, Modal, Form } from 'antd';
+import { Button, Space, Table, Input, Modal, Form,Select } from 'antd';
 import { SearchOutlined } from "@ant-design/icons";
 import Highlighter from 'react-highlight-words';
 import { actionGetRequests } from "../../../store/request/action";
 
 import PageHeader from '../../../components/PageHeader';
 import { useAppDispatch, useAppSelector } from "../../../store";
+
+import { actionResponseRequest } from '../../../store/request/action';
+
 import TextArea from "antd/es/input/TextArea";
 import { toast } from "react-toastify";
+import { responseRequest } from '../../../api/request';
+
+import { useNavigate } from 'react-router-dom';
 
 
 const ManageRequest = () => {
+    React.useEffect(() => {
+        dispatch(actionGetRequests(request));
+        
+    },[] );
     const dispatch = useAppDispatch();
     const requests = useAppSelector(({ request }) => request?.requests)
-
+    const navigator = useNavigate();
+    const interiors = useAppSelector(({ interior }) => interior.interiors);
     const [request, setRequest] = React.useState({
         PageIndex: 1,
         IsAsc: true,
         SearchValue: "",
     });
-
+    let _id = "";
+    let resStatus ="Consulting";
+    let resReply = "";
+    let datafile = null;
+    
     const [searchText, setSearchText] = useState('');
     const [searchedColumn, setSearchedColumn] = useState('');
     const searchInput = useRef(null);
@@ -28,6 +44,15 @@ const ManageRequest = () => {
         setSearchText(selectedKeys[0]);
         setSearchedColumn(dataIndex);
     };
+
+    const handleDownloadPdf = (base64Pdf) => {
+        const pdfData = `data:application/pdf;base64,${base64Pdf}`;
+        const downloadLink = document.createElement('a');
+        downloadLink.href = pdfData;
+        downloadLink.download = 'download.pdf'; // Set the desired filename
+      };
+   
+
     const handleReset = (clearFilters) => {
         clearFilters();
         setSearchText('');
@@ -131,6 +156,9 @@ const ManageRequest = () => {
     const handleReply = (action) => {
         if (action === "accept") {
             toast.success("Accept request successful");
+            modal.destroy();
+            dispatch(responseRequest({id:_id, response:resReply, status:resStatus, file:null}));
+            navigator("/staff/requests");
         } else {
             toast.success("Reject request successful");
         }
@@ -138,9 +166,9 @@ const ManageRequest = () => {
     }
     const handleOpenReply = (record) => {
         console.log("record", record);
+        _id = record.requestId;
         modal = Modal.info({
             title: 'Reply',
-
             content: (
                 <>  <Form
                     name="basic"
@@ -152,14 +180,27 @@ const ManageRequest = () => {
                         label="Enter your message: "
                         name="reply"
                     >
-                        <TextArea style={{ width: "400xp" }} />
+                        <TextArea  onChange={(e) =>resReply = e.target.value} style={{ width: "400xp" }} />
+                        
                     </Form.Item>
+                    <Form.Item>
+                    <select defaultValue="Consulting" onChange= {(e)=>resStatus=e.target.value}>
+                        <option value="Consulting">Consulting</option>
+                        <option value="Completed">Completed</option>
+                       
+                    </select>
+                    
+                    </Form.Item>
+                  
+                  
+                  
                 </Form>
                 </>
             ),
             footer: (_, { OkBtn, CancelBtn, close }) => (
                 <>
                     <CancelBtn />
+                    
                     <Button onClick={() => handleReply("reject", close)} type="default" className="red" >Reject</Button>
                     <Button onClick={() => handleReply("accept", close)} type="primary">Accept</Button>
                 </>
@@ -167,18 +208,20 @@ const ManageRequest = () => {
         });
     }
 
+ 
+
     const columns = [
         {
             title: 'Request Id',
             dataIndex: 'requestId',
-            width: '5%',
+            width: '10%',
             align: 'center',
         },
         {
             title: 'Email',
             dataIndex: 'email',
             ...getColumnSearchProps('email'),
-            width: '35%',
+            width: '20%',
         },
         {
             title: 'Created At',
@@ -187,19 +230,23 @@ const ManageRequest = () => {
         },
         {
             title: 'Status',
-            dataIndex: 'status',
-            width: '10%',
+            dataIndex: 'statusResponseOfStaff',
+            width: '15%',
         },
         {
             title: 'Action',
             dataIndex: '',
             align: 'center',
             key: 'x',
-            width: '20%',
+            width: '35%',
             render: (text, record, index) => {
                 return (<>
                     <Button onClick={() => handleShowRequest(record, index)} type="primary" className="blue me-2">View</Button>
-                    <Button onClick={() => handleOpenReply(record)} type="primary" className="red">Reply</Button>
+                    {record.statusResponseOfStaff !== 'Completed' && ( // Check for not equal
+        <Button onClick={() => handleOpenReply(record)} type="primary" className="red">
+          Reply
+        </Button>
+      )}
                 </>)
             },
         },
@@ -225,16 +272,23 @@ const ManageRequest = () => {
                 <br />
                 <span>
                     <span style={{ fontWeight: "bold", marginTop: "10px;", display: "inline-block" }}>
-                        Status:
+                        Address:
                     </span>
-                    <span> Pending</span>
+                    <span> {record.address}</span>
                 </span>
                 <br />
                 <span>
                     <span style={{ fontWeight: "bold", marginTop: "10px;", display: "inline-block" }}>
                         Message:
                     </span>
-                    <span> Accept request</span>
+                    <span> {record.content}</span>
+                </span>
+                <br/>
+                <span>
+                    <span style={{ fontWeight: "bold", marginTop: "10px;", display: "inline-block" }}>
+                      Contract file
+                    </span>
+                    <span>  <button style={{ color: 'red', fontSize: '14px' }} onClick={handleDownloadPdf(record.responseOfStaffInFile)}>Download PDF</button></span>
                 </span>
             </>,
             footer: (_, { OkBtn, CancelBtn }) => (
@@ -245,9 +299,7 @@ const ManageRequest = () => {
             ),
         });
     }
-    React.useEffect(() => {
-        dispatch(actionGetRequests(request));
-    }, []);
+
 
     return (<>
         <div className="h-[90vh] w-[100vw] flex justify-center items-center" style={{
