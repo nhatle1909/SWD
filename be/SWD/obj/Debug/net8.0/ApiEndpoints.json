@@ -522,7 +522,7 @@
     "ContainingType": "SWD.Controllers.ContactController",
     "Method": "AddressAnContact",
     "RelativePath": "api/Contact/Staff/Address-An-Request",
-    "HttpMethod": "PUT",
+    "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
     "Parameters": [

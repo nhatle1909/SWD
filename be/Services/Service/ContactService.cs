@@ -161,21 +161,20 @@ namespace Services.Service
                     getContact.UpdatedAt = DateTime.Now;
                     await _unit.ContactRepo.UpdateItemByValue("RequestId", getContact.RequestId, getContact);
                     string subject = "Interior quotation system";
-                    string acceptButtonLink = $"https://swdapi.azurewebsites.net/api/Contact/Accepted?requestId={getContact.RequestId}";
-                    string refuseButtonLink = $"https://swdapi.azurewebsites.net/api/Contact/Refused?requestId={getContact.RequestId}";
-                    //string acceptButtonLink = $"https://localhost:7220/api/Contact/Accepted?requestId={getContact.RequestId}";
-                    //string refuseButtonLink = $"https://localhost:7220/api/Contact/Refused?requestId={getContact.RequestId}";
+                    //string acceptButtonLink = $"https://swdapi.azurewebsites.net/api/Contact/Accepted?requestId={getContact.RequestId}";
+                    //string refuseButtonLink = $"https://swdapi.azurewebsites.net/api/Contact/Refused?requestId={getContact.RequestId}";
+                    string acceptButtonLink = $"https://localhost:7220/api/Contact/Accepted?requestId={getContact.RequestId}";
+                    string refuseButtonLink = $"https://localhost:7220/api/Contact/Refused?requestId={getContact.RequestId}";
                     string body = $@"
                     <h3><strong>
                         {address.ResponseOfStaff}
                     </strong></h3>
-                        <br />
-                    <button style=""background-color: blue; color: white; padding: 10px 20px; border: none; border-radius: 5px; font-size: 16px; cursor: pointer;"" a href='{acceptButtonLink}'>Accept</button>
-                    <button style=""background-color: blue; color: white; padding: 10px 20px; border: none; border-radius: 5px; font-size: 16px; cursor: pointer;"" a href='{refuseButtonLink}'>Refuse</button>
-                    <br/>
-                    <br/>
-                    <p style=""font-weight: bold; color: #c0392b; font-size: 18px; text-decoration: underline;"">**Important:** : Not Impotant, Just test of Dev </p>
-";
+                    <br />
+                    <a href='{acceptButtonLink}' style='text-decoration: none;'><button style='background-color: blue; color: white; padding: 10px 20px; border: none; border-radius: 5px; font-size: 16px; cursor: pointer;'>Accept</button></a>
+                    <a href='{refuseButtonLink}' style='text-decoration: none;'><button style='background-color: blue; color: white; padding: 10px 20px; border: none; border-radius: 5px; font-size: 16px; cursor: pointer;'>Refuse</button></a>
+                    <br/>                    
+                    ";
+
                     SendEmailTool sendEmail = new SendEmailTool(_mailSettings, _logger);
                     await sendEmail.SendEmailWithPdfAsync(getContact.Email, subject, body, address.ResponseOfStaffInFile);
                     return (true, $"You have addressed the contact of email: {getContact.Email}");
@@ -528,11 +527,7 @@ namespace Services.Service
             {
                 if (getContact.StatusResponseOfStaff == Request.State.Completed)
                 {
-                    return (false, $@"
-                    <h3><strong>
-                        You have rejected a previous order, if you want to create a new order, please create a request on our homepage
-                    </strong></h3>"";
-                    ");
+                    return (false, "false");
                 }
                 string check = await _vnpayService.AddPendingTransaction(requestId, getContact.ListInterior);
                 int deposit = await _vnpayService.CalculateDeposit(check);
@@ -555,7 +550,7 @@ namespace Services.Service
                 string body = $@"
                     <h3><strong>
                         Thank you for accepting, here is the link to deposit 30% of the order value.<br>
-                        {depositLink}
+                        <a href='{depositLink}'>Here</a>
                     </strong></h3>";
                 SendEmailTool sendEmail = new SendEmailTool(_mailSettings, _logger);
                 await sendEmail.SendEmailWithPdfAsync(getContact.Email, subject, body, file);
@@ -574,9 +569,9 @@ namespace Services.Service
                 await _unit.ContactRepo.UpdateItemByValue("RequestId", getContact.RequestId, getContact);
                 string subject = "Interior quotation system";
                 string body = $@"
-                    <h3><strong>
-                        We are sorry that you have refused this order. If you need further advice, please contact us via email: ... or phone number: 0000000000
-                    </strong></h3>";
+        <h3><strong>
+            We are sorry that you have refused this order. If you need further advice, please contact us via phone number: 0123456789
+        </strong></h3>";
                 SendEmailTool sendEmail = new SendEmailTool(_mailSettings, _logger);
                 await sendEmail.SendEmailWithPdfAsync(getContact.Email, subject, body, null);
                 return (true, $"");

@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "yLWOyhmPEyFi7pwJAjLTKbqoheYFCoV1o8z3LKq0CGQ=",
+  "Hash": "LO0Iis/Z3PYbs/swaW5PLk4ZJpGBWaGAfGXddNMIMxw=",
   "Source": "SWD",
   "BasePath": "_content/SWD",
   "Mode": "Default",
@@ -10,17 +10,17 @@
     {
       "Name": "SWD\\wwwroot",
       "Source": "SWD",
-      "ContentRoot": "D:\\DevTools\\repository\\SWD\\be\\SWD\\wwwroot\\",
+      "ContentRoot": "D:\\C#\\SWD392\\SWD\\be\\SWD\\wwwroot\\",
       "BasePath": "_content/SWD",
       "Pattern": "**"
     }
   ],
   "Assets": [
     {
-      "Identity": "D:\\DevTools\\repository\\SWD\\be\\SWD\\wwwroot\\AccountPictures\\user_default.png",
+      "Identity": "D:\\C#\\SWD392\\SWD\\be\\SWD\\wwwroot\\AccountPictures\\user_default.png",
       "SourceId": "SWD",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\DevTools\\repository\\SWD\\be\\SWD\\wwwroot\\",
+      "ContentRoot": "D:\\C#\\SWD392\\SWD\\be\\SWD\\wwwroot\\",
       "BasePath": "_content/SWD",
       "RelativePath": "AccountPictures/user_default.png",
       "AssetKind": "All",

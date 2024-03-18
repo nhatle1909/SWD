@@ -159,7 +159,9 @@ namespace SWD.Controllers
             {
                 var status = await _contactService.Accepted(requestId);
                 if (status.Item1)
-                    return Content("<html><body><h1>Thank you for visiting our website!</h1></body></html>", "text/html");
+                    return Content("<html><body style='display: flex; justify-content: center; align-items: center; height: 100vh; color: #333; background-color: white;'><div style=\"background-color: #f0f9ff; border: 1px solid #e0e0e0; border-radius: 5px; padding: 20px; text-align: center; margin: 20px auto; width: 50%;\">\r\n  <h1 style=\"font-size: 24px; color: #333; margin-bottom: 10px;\">Thank you for accepting this order, you will receive a contract file and a deposit link of 30% of the order value.!</h1>\r\n  <p style=\"font-size: 16px; color: #666;\">We appreciate your business and hope you were satisfied with your experience.</p>\r\n</div></body></html>", "text/html");
+                else if (!status.Item1 && status.Item2.Equals("false"))
+                    return Content("<html><body style='display: flex; justify-content: center; align-items: center; height: 100vh; color: #333; background-color: white;'><div style=\"background-color: #f0f9ff; border: 1px solid #e0e0e0; border-radius: 5px; padding: 20px; text-align: center; margin: 20px auto; width: 50%;\">\r\n  <h1 style=\"font-size: 24px; color: #333; margin-bottom: 10px;\">You have rejected this order before, if you want to create another order, go to the Interior quotation system home page to create a new order!</h1>\r\n  <p style=\"font-size: 16px; color: #666;\">We appreciate your business and hope you were satisfied with your experience.</p>\r\n</div></body></html>", "text/html");
                 else return BadRequest(status.Item2);
             }
             catch (Exception ex)
@@ -168,6 +170,7 @@ namespace SWD.Controllers
             }
         }
 
+
         [HttpGet("Refused")]
         public async Task<IActionResult> RefusedQuote([FromQuery] string requestId)
         {
@@ -175,7 +178,7 @@ namespace SWD.Controllers
             {
                 var status = await _contactService.Refused(requestId);
                 if (status.Item1)
-                    return Content("<html><body><div style=\"background-color: #f0f9ff; border: 1px solid #e0e0e0; border-radius: 5px; padding: 20px; text-align: center; margin: 20px auto; width: 50%;\">\r\n  <h1 style=\"font-size: 24px; color: #333; margin-bottom: 10px;\">Thank you for using our service!</h1>\r\n  <p style=\"font-size: 16px; color: #666;\">We appreciate your business and hope you were satisfied with your experience.</p>\r\n</div></body></html>", "text/html");
+                    return Content("<html><body style='display: flex; justify-content: center; align-items: center; height: 100vh; color: #333; background-color: white;'><div style=\"background-color: #f0f9ff; border: 1px solid #e0e0e0; border-radius: 5px; padding: 20px; text-align: center; margin: 20px auto; width: 50%;\">\r\n  <h1 style=\"font-size: 24px; color: #333; margin-bottom: 10px;\">We're sorry you refused the order!</h1>\r\n  <p style=\"font-size: 16px; color: #666;\">We appreciate your business and hope you were satisfied with your experience.</p>\r\n</div></body></html>", "text/html");
                 else return BadRequest(status.Item2);
             }
             catch (Exception ex)
@@ -183,6 +186,7 @@ namespace SWD.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
 
     }
 }
