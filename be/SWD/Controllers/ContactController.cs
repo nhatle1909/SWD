@@ -175,7 +175,7 @@ namespace SWD.Controllers
             {
                 var status = await _contactService.Refused(requestId);
                 if (status.Item1)
-                    return Content("<html><body><h1>Thank you for visiting our website!</h1></body></html>", "text/html");
+                    return Content("<html><body><div style=\"background-color: #f0f9ff; border: 1px solid #e0e0e0; border-radius: 5px; padding: 20px; text-align: center; margin: 20px auto; width: 50%;\">\r\n  <h1 style=\"font-size: 24px; color: #333; margin-bottom: 10px;\">Thank you for using our service!</h1>\r\n  <p style=\"font-size: 16px; color: #666;\">We appreciate your business and hope you were satisfied with your experience.</p>\r\n</div></body></html>", "text/html");
                 else return BadRequest(status.Item2);
             }
             catch (Exception ex)
