@@ -20,7 +20,7 @@ namespace Repositories.Model
         [BsonElement] public required State StatusResponseOfStaff { get; set; }
         public enum State
         {
-            Accepted = 1, Completed = 2, Processing = 3, Refused = 4, Consulting = 5
+            Completed = 1, Processing = 2, Consulting = 3
         }
 
     }
