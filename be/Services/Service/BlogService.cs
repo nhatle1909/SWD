@@ -105,26 +105,22 @@ namespace Services.Service
 
         public async Task<(bool, string)> RemoveBlog(string id, RemoveBlogView remove)
         {
-            var getUser = (await _unit.AccountStatusRepo.GetFieldsByFilterAsync(["Email"],
-                            g => g.AccountId.Equals(id))).FirstOrDefault();
-            if (getUser != null)
-            {
+          
                 var getBlog = await _unit.BlogRepo.GetFieldsByFilterAsync([],
                     g => g.BlogId.Equals(remove.BlogId));
                 Blog blog = getBlog.FirstOrDefault()!;
-                if (blog is not null && blog.Email.Equals(getUser.Email))
+                if (blog is not null)
                 {
                     await _unit.BlogRepo.RemoveItemByValue("BlogId", remove.BlogId);
                     return (true, "Remove Blog successfully");
                 }
                 return (false, "Blog is not existed");
-            }
-            return (false, "Account is not existed");
+        
         }
 
         public async Task<object> GetPagingBlog(int pageIndex, bool isAsc, string? searchValue)
         {
-            const int pageSize = 5;
+            const int pageSize = 30;
             const string sortField = "CreatedAt";
             List<string> searchFields = ["Title", "Content"];
             List<string> returnFields = [];

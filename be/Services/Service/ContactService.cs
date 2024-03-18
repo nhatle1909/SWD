@@ -161,17 +161,21 @@ namespace Services.Service
                     getContact.UpdatedAt = DateTime.Now;
                     await _unit.ContactRepo.UpdateItemByValue("RequestId", getContact.RequestId, getContact);
                     string subject = "Interior quotation system";
-                    //string acceptButtonLink = $"https://swdapi.azurewebsites.net/api/Contact/Accepted?requestId={getContact.RequestId}";
-                    //string refuseButtonLink = $"https://swdapi.azurewebsites.net/api/Contact/Refused?requestId={getContact.RequestId}";
-                    string acceptButtonLink = $"https://localhost:7220/api/Contact/Accepted?requestId={getContact.RequestId}";
-                    string refuseButtonLink = $"https://localhost:7220/api/Contact/Refused?requestId={getContact.RequestId}";
+                    string acceptButtonLink = $"https://swdapi.azurewebsites.net/api/Contact/Accepted?requestId={getContact.RequestId}";
+                    string refuseButtonLink = $"https://swdapi.azurewebsites.net/api/Contact/Refused?requestId={getContact.RequestId}";
+                    //string acceptButtonLink = $"https://localhost:7220/api/Contact/Accepted?requestId={getContact.RequestId}";
+                    //string refuseButtonLink = $"https://localhost:7220/api/Contact/Refused?requestId={getContact.RequestId}";
                     string body = $@"
                     <h3><strong>
                         {address.ResponseOfStaff}
                     </strong></h3>
                         <br />
-    <a href='{acceptButtonLink}'>Accept</a>
-    <a href='{refuseButtonLink}'>Refuse</a>";
+                    <button style=""background-color: blue; color: white; padding: 10px 20px; border: none; border-radius: 5px; font-size: 16px; cursor: pointer;"" a href='{acceptButtonLink}'>Accept</button>
+                    <button style=""background-color: blue; color: white; padding: 10px 20px; border: none; border-radius: 5px; font-size: 16px; cursor: pointer;"" a href='{refuseButtonLink}'>Refuse</button>
+                    <br/>
+                    <br/>
+                    <p style=""font-weight: bold; color: #c0392b; font-size: 18px; text-decoration: underline;"">**Important:** : Not Impotant, Just test of Dev </p>
+";
                     SendEmailTool sendEmail = new SendEmailTool(_mailSettings, _logger);
                     await sendEmail.SendEmailWithPdfAsync(getContact.Email, subject, body, address.ResponseOfStaffInFile);
                     return (true, $"You have addressed the contact of email: {getContact.Email}");
