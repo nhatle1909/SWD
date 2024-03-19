@@ -61,7 +61,7 @@ const TransactionHistory = () => {
         <Space>
           <Button
             type="primary"
-            className="blue mx-2"
+            className="blue"
             onClick={() => handleSearch(selectedKeys, confirm, dataIndex)}
             icon={<SearchOutlined />}
             size="small"
@@ -73,7 +73,7 @@ const TransactionHistory = () => {
           </Button>
           <Button
             onClick={() => clearFilters && handleReset(clearFilters)}
-            size="small"
+            size="big"
             style={{
               width: 90,
             }}
