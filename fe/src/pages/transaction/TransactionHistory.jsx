@@ -61,7 +61,7 @@ const TransactionHistory = () => {
         <Space>
           <Button
             type="primary"
-            className="blue"
+            className="blue mx-2"
             onClick={() => handleSearch(selectedKeys, confirm, dataIndex)}
             icon={<SearchOutlined />}
             size="small"
