@@ -47,7 +47,7 @@ const CreateRequest = () => {
           ListInterior: selectedInteriors,
         })
       );
-      // navigator("/request/history");
+      navigator("/request/history");
     }
   };
 
