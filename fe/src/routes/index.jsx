@@ -1,99 +1,105 @@
-import React from 'react'
+import React from "react";
 import { Route, Routes as ReactRoutes } from "react-router-dom";
-import MainLayout from '../layout/authLayout/MainLayout';
-import Login from '../pages/auth/Auth';
-import NotFound from '../pages/common/NotFound';
+import MainLayout from "../layout/authLayout/MainLayout";
+import Login from "../pages/auth/Auth";
+import NotFound from "../pages/common/NotFound";
 
-import UnauthRoute from './guard/UnauthRoute';
-import AdminRoute from './guard/AdminRoute';
-import PermissionRoute from './guard/PermissionRoute';
-import Home from '@/pages/home/Home';
-import About from '@/pages/about/About';
-import Blog from '@/pages/blog/Blog';
-import Users from '@/pages/admin/Users'
-import Profile from '../pages/profile/Profile';
-import StaffRoute from './guard/StaffRoute';
-import ManageBlog from '../pages/staff/blog/ManageBlog';
-import Reports from '../pages/admin/Reports';
-import ManageRequest from '../pages/staff/request/ManageRequest';
-import CreateRequest from '../pages/request/CreateRequest';
-import HistoryRequest from '../pages/request/HistoryRequest';
+import UnauthRoute from "./guard/UnauthRoute";
+import AdminRoute from "./guard/AdminRoute";
+import PermissionRoute from "./guard/PermissionRoute";
+import Home from "@/pages/home/Home";
+import About from "@/pages/about/About";
+import Blog from "@/pages/blog/Blog";
+import Users from "@/pages/admin/Users";
+import Profile from "../pages/profile/Profile";
+import StaffRoute from "./guard/StaffRoute";
+import ManageBlog from "../pages/staff/blog/ManageBlog";
+import Reports from "../pages/admin/Reports";
+import ManageRequest from "../pages/staff/request/ManageRequest";
+import CreateRequest from "../pages/request/CreateRequest";
+import HistoryRequest from "../pages/request/HistoryRequest";
 
-import InteriorDetails from '../pages/interior/InteriorDetails'
-import ManageInterior from '../pages/staff/interior/ManageInterior';
+import InteriorDetails from "../pages/interior/InteriorDetails";
+import ManageInterior from "../pages/staff/interior/ManageInterior";
+import TransactionHistory from "../pages/transaction/TransactionHistory";
 
 const unauthRoutes = {
-  path: '/',
+  path: "/",
   element: <MainLayout />,
   guard: <UnauthRoute />,
   children: [
     {
-      path: '',
-      element: <Home />
+      path: "",
+      element: <Home />,
     },
     {
-      path: 'about',
+      path: "about",
       element: <About />,
     },
     {
-      path: 'blog',
+      path: "blog",
       element: <Blog />,
     },
     {
-      path: 'profile',
+      path: "profile",
       element: <Profile />,
-      permissions: ['user']
+      permissions: ["user"],
     },
     {
-      path: 'request/create',
+      path: "request/create",
       element: <CreateRequest />,
-      permissions: ['user']
+      permissions: ["user"],
     },
     {
-      path: 'request/history',
+      path: "request/history",
       element: <HistoryRequest />,
-      permissions: ['user']
+      permissions: ["user"],
     },
     {
-      path: 'interior/:interiorId',
-      element:<InteriorDetails/>
-    }
-  ]
+      path: "transaction/history",
+      element: <TransactionHistory />,
+      permissions: ["user"],
+    },
+    {
+      path: "interior/:interiorId",
+      element: <InteriorDetails />,
+    },
+  ],
 };
 
 const adminRoutes = {
-  path: 'admin',
+  path: "admin",
   guard: <AdminRoute />,
   element: <MainLayout />,
   children: [
     {
-      path: 'users',
+      path: "users",
       element: <Users />,
     },
     {
-      path: 'reports',
+      path: "reports",
       element: <Reports />,
     },
   ],
 };
 
 const staffRoutes = {
-  path: 'staff',
+  path: "staff",
   guard: <StaffRoute />,
   element: <MainLayout />,
   children: [
     {
-      path: 'blogs',
+      path: "blogs",
       element: <ManageBlog />,
     },
     {
-      path: 'requests',
+      path: "requests",
       element: <ManageRequest />,
     },
     {
-      path: 'interiors',
+      path: "interiors",
       element: <ManageInterior />,
-    }
+    },
   ],
 };
 
@@ -113,14 +119,14 @@ const Routes = () => {
             <Route path={route.path} element={route?.element}>
               {route.children
                 ? route.children.map(({ element, path, permissions }) => (
-                  <Route key={path} element={route?.guard}>
-                    <Route
-                      element={<PermissionRoute permissions={permissions} />}
-                    >
-                      <Route path={path} element={element} />
+                    <Route key={path} element={route?.guard}>
+                      <Route
+                        element={<PermissionRoute permissions={permissions} />}
+                      >
+                        <Route path={path} element={element} />
+                      </Route>
                     </Route>
-                  </Route>
-                ))
+                  ))
                 : null}
             </Route>
           </Route>
