@@ -253,7 +253,7 @@ const ManageRequest = () => {
             render: (text, record, index) => {
                 return (<>
                     <Button onClick={() => handleShowRequest(record, index)} type="primary" className="blue me-2">View</Button>
-                    {record.statusResponseOfStaff !== 'Completed' && ( // Check for not equal
+                    {record.statusResponseOfStaff !== 'Completed' && record.statusResponseOfStaff !== 'Consulting' &&( // Check for not equal
         <Button onClick={() => handleOpenReply(record)} type="primary" className="red">
           Reply
         </Button>
@@ -265,6 +265,7 @@ const ManageRequest = () => {
 
     const handleShowRequest = (record, index) => {
         console.log("record", record);
+        const listInterior = record.listInterior;
         Modal.info({
             title: 'Request Details',
             content: <>
@@ -293,6 +294,19 @@ const ManageRequest = () => {
                         Message:
                     </span>
                     <span> {record.content}</span>
+                </span>
+                <br/>
+               
+                <span>
+                    <span style={{ fontWeight: "bold", marginTop: "10px;", display: "inline-block" }}>
+                        List Interior Of Request:
+                    </span>
+                    <span><ul>
+                    {listInterior?.map((item) => (
+                        <li key={item.interiorId}><a href={`/interior/${item.interiorId}`}>Item {listInterior.indexOf(item.interiorId) + 2}</a></li>
+                    ))}
+                    </ul>
+                 </span>
                 </span>
                 <br/>
                 <span>
