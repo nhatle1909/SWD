@@ -41,7 +41,7 @@ const TransactionHistory = () => {
     }) => (
       <div
         style={{
-          padding: 8,
+          padding: 10,
         }}
         onKeyDown={(e) => e.stopPropagation()}
       >
@@ -185,9 +185,9 @@ const TransactionHistory = () => {
           <span>
             <span
               style={{
-                fontWeight: "normal",
+                fontWeight: "bold",
                 marginTop: "10px;",
-                display: "block",
+                display: "inline-block",
               }}
             >
               Transaction Id:
