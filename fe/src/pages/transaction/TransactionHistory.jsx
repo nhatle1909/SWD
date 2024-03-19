@@ -41,7 +41,7 @@ const TransactionHistory = () => {
     }) => (
       <div
         style={{
-          padding: 10,
+          padding: 8,
         }}
         onKeyDown={(e) => e.stopPropagation()}
       >
@@ -50,7 +50,7 @@ const TransactionHistory = () => {
           placeholder={`Search ${dataIndex}`}
           value={selectedKeys[0]}
           onChange={(e) =>
-            setSelectedKeys(e.target.value ? [e.target.value] : [])
+            setSelectedKeys(e.target.value ? [e.target?.value] : [])
           }
           onPressEnter={() => handleSearch(selectedKeys, confirm, dataIndex)}
           style={{
