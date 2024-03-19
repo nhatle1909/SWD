@@ -144,14 +144,9 @@ const TransactionHistory = () => {
     },
 
     {
-      title: "Created At",
-      dataIndex: "createdAt",
-      width: "15%",
-    },
-    {
-      title: "Update At",
-      dataIndex: "updatedAt",
-      width: "15%",
+      title: "Email",
+      dataIndex: "email",
+      width: "25%",
     },
     {
       title: "Status",
@@ -258,11 +253,11 @@ const TransactionHistory = () => {
         }}
       >
         <div className="h-[65vh] w-[70vw]">
-          <PageHeader message={"History Transaction"} />
+          <PageHeader message={"Transaction History"} />
 
           <Table
             columns={columns}
-            dataSource={transactions}
+            dataSource={transactions ? transactions : []}
             pagination={{ pageSize: 5 }}
           />
         </div>
