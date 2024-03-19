@@ -110,7 +110,7 @@ export const actionUpdateInterior = (request) => {
   return async (dispatch) => {
     try {
       console.log("going to update: ", request)
-      const response = await updateInterior(request, request.image);
+      const response = await updateInterior(request);
       console.log("response", response);
       const { data } = await getInteriors({
         PageIndex: 1,

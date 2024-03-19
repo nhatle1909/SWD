@@ -1,11 +1,11 @@
 import React, {useState, useRef, useEffect} from "react";
 import { SearchOutlined } from "@ant-design/icons";
-import { Form, Button, Space, Table, Input, Modal, message } from 'antd';
+import { Form, Button, Space, Table, Input, Modal, message, Select } from 'antd';
 import Highlighter from 'react-highlight-words';
 import { useAppDispatch, useAppSelector } from "../../store";
 import { actionGetInteriors, actionRemoveInterior, actionUpdateInterior } from "../../store/interior/action";
 
-const ListInterior = () => {
+const ListInterior = ({ handleEditInterior }) => {
     const dispatch = useAppDispatch();
     const [request] = React.useState({
         PageIndex: 1,
@@ -24,6 +24,8 @@ const ListInterior = () => {
     const [quantity, setQuantity] = useState("");
     const [price, setPrice] = useState("");
     const [image, setImage] = useState("");
+
+    var id, name, type, des, quan, pric, img;
 
     const [searchText, setSearchText] = useState('');
     const [searchedColumn, setSearchedColumn] = useState('');
@@ -153,33 +155,48 @@ const ListInterior = () => {
     }
 
     const handleEditOk = () => {
-        if (!interiorName) {
+        if (!name) {
             message.error('Please input the interior name!');
             return;
         }
-        if (!price){
+        if (!des) {
+            message.error('Please input the interior description!');
+            return;
+        }
+        if (!type) {
+            message.error('Please select the type of interior!');
+            return;
+        }
+        if (!quan){
             message.error('Please input price number!');
             return;
         }
-        if (price<=0){
+        if (quan<=0){
             message.error('Invalid price!');
             return;
         }
-        if (!quantity){
+        if (!pric){
             message.error('Please input price number!');
             return;
         }
-        if (quantity<0){
+        if (pric<0){
             message.error('Invalid price!');
             return;
         }
-        if (!image){
+        if (!img){
             message.error('Please select image for interior!');
             return;
         }
+    {/*
         dispatch(actionUpdateInterior({
-                    interiorId: interiorId,interiorName: interiorName, price: price, image: image
-                }));
+            interiorId: interiorId,interiorName: interiorName, price: price, image: image
+        }));
+    */}
+        dispatch(actionUpdateInterior({
+            interiorId: id, interiorName: name,
+            interiorType: type, description: des, quantity: quan,
+            price: pric, image: img,
+        }));
     };
     const handleImageChange = (event) => {
         console.log("event",event);
@@ -188,98 +205,12 @@ const ListInterior = () => {
             file = data.result;
             console.log("file",file);
             setImage(data.result);
+            img = data.result;
         })
         data.readAsDataURL(event.target.files[0]);
     }
     var file;
-    const handleEditInterior = (record) =>{
-        console.log("record", record);
-        setInteriorId(record.interiorId);
-        setInteriorName(record.interiorName);
-        setPrice(record.price);
-        setQuantity(record.quantity);
-        setImage(record.image);
-        file = record.image;
-        Modal.confirm({
-            title: 'Edit Interior',
-            onOk: () => handleEditOk(),
-            content:
-                <Form
-                    name="basic"
-                    labelCol={{ span: 6 }}
-                    wrapperCol={{ span: 18 }}
-                    autoComplete="off"
-                    initialValues={{
-                        interiorId: record.interiorId,
-                        interiorName: record.interiorName,
-                        price: record.price,
-                        quantity: record.quantity       
-                    }}
-                >
-                    <Form.Item
-                        label="ID"
-                        name = "interiorId"
-                    >
-                        <span>{ record.interiorId }</span>
-                    </Form.Item>
-                    <Form.Item
-                        label="Name"
-                        name = "interiorName"
-                        rules={[
-                            {
-                                required: true,
-                                message: 'Please input the interior name!',
-                            },
-                        ]}
-                    >
-                        <Input onChange={(e) => setInteriorName(e.target.value)} />
-                    </Form.Item>
-                    <Form.Item
-                        label="Price"
-                        name="price"
-                        rules={[
-                            {
-                                required: true,
-                                message: 'Please input price number!',
-                            },
-                        ]}
-                    >
-                        <Input onChange={(e) => setPrice(e.target.value)}/>
-                    </Form.Item>
-                    <Form.Item
-                        label="Quantity"
-                        name="quantity"
-                        rules={[
-                            {
-                                required: true,
-                                message: 'Please input quantity number!',
-                            },
-                        ]}
-                    >
-                        <Input onChange={(e) => setQuantity(e.target.value)}/>
-                    </Form.Item>
-                    <Form.Item
-                        label="Image"
-                        name="image"
-                        rules={[
-                            {
-                                required: true,
-                                message: 'Please select image for interior!',
-                            },
-                        ]}
-                    >
-                        <div>
-                            <a className="block-20" style={{backgroundImage: `url(data:image/jpeg;base64,${file})`}}></a>
-                            <Input type="file" onChange={handleImageChange}/>
-                        </div>
-                    </Form.Item>
-                </Form>,
-                footer: (_, {OkBtn, CancelBtn}) => (<>
-                    <CancelBtn />
-                    <OkBtn />
-                </>),
-        });
-    }
+    
 
     const handleShowInterior = (record) => {
         console.log("record", record);
@@ -294,14 +225,31 @@ const ListInterior = () => {
                 <br />
                 <span><span style={{ fontWeight: "bold" }}>
                     Name:
-                </span>
+                    </span>
                     <span>{" " + record.interiorName}</span>
+                </span>
+                <br />
+                <span>
+                    <span style={{ fontWeight: "bold" }}>Interior Type:</span>
+                    <span>{" " + record.interiorType}</span>
+                </span>
+                <br />
+                <span><span style={{ fontWeight: "bold" }}>
+                    Description:
+                </span><br />
+                    <span>{" " + record.description}</span>
                 </span>
                 <br />
                 <span><span style={{ fontWeight: "bold" }}>
                     Price:
                 </span>
                     <span>{" " + record.price}</span>
+                </span>
+                <br />
+                <span><span style={{ fontWeight: "bold" }}>
+                    Quantity:
+                </span>
+                    <span>{" " + record.quantity}</span>
                 </span>
                 <br />
                 <span>
@@ -315,6 +263,7 @@ const ListInterior = () => {
                     </a></span>
                 </span>
             </>,
+            width: 1200,
             footer: (_, { OkBtn}) => ( <OkBtn />),
         });
     }
@@ -352,7 +301,7 @@ const ListInterior = () => {
             title: 'Created At',
             dataIndex: 'createdAt',
             width: '10%',
-            render: (text, record) => {
+            render: (text) => {
                 return text.split('T')[0];
             }
         },

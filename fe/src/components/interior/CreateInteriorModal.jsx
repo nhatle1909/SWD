@@ -62,7 +62,9 @@ const CreateInteriorModel = ({ isModalOpen, setIsModalOpen }) => {
     
     return (
         <>
-            <Modal title="Add New Interior" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
+            <Modal title="Add New Interior" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}
+                    width={900}
+            >
                 <Form
                     name="basic"
                     labelCol={{
@@ -109,7 +111,8 @@ const CreateInteriorModel = ({ isModalOpen, setIsModalOpen }) => {
                         label="Description"
                         name="description"
                     >
-                        <Input onChange={(e) => setDescription(e.target.value)} />
+                        <Input.TextArea onChange={(e) => setDescription(e.target.value)}
+                                        rows={8}/>
                     </Form.Item>
                     <Form.Item
                         label="Quantity"

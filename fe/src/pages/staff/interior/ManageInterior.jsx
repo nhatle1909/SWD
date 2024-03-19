@@ -4,11 +4,19 @@ import { Button, Flex } from "antd";
 import CreateInteriorModel from "../../../components/interior/CreateInteriorModal";
 import ListInterior from "../../../components/interior/ListInterior";
 import { useState } from "react";
+import EditInteriorModel from "../../../components/interior/EditInteriorModal";
 
 
 const ManageInterior = () => {
     const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
-    
+    const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+    const [selectedInterior, setSelectedInterior] = useState(null);
+
+    const handleEditInterior = (record) => {
+      setSelectedInterior(record);
+      setIsEditModalOpen(true);
+    }
+
     return (<>
         <div className="w-[100vw] flex justify-center items-center" style={{
           background: 'grey', paddingTop: '120px'
@@ -29,13 +37,14 @@ const ManageInterior = () => {
                 onClick={() => { setIsCreateModalOpen(true); }}
                 icon={<PlusCircleOutlined />}
               >
-                Create New Account
+                Create New Interior
               </Button>
             </Flex>
   
-            <ListInterior />
+            <ListInterior handleEditInterior = {handleEditInterior} />
             <CreateInteriorModel isModalOpen={isCreateModalOpen} setIsModalOpen={setIsCreateModalOpen} />
-            
+            <EditInteriorModel isModalOpen={isEditModalOpen} setIsModalOpen={setIsEditModalOpen}
+                                selectedInterior={selectedInterior}/>
           </div>
         </div>
     </>);

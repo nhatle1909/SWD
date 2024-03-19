@@ -38,17 +38,21 @@ export const removeInterior = (request) => {
     return baseClient.delete(`/Interior/Staff/Delete-Interior`, {data: request});
 }
 
-export const updateInterior = (request, file) => {
+export const updateInterior = (request) => {
     const formData = new FormData();
-    formData.append('Image', file);
+    formData.append('Image', request.image);
 
-    const params = new URLSearchParams();
-    params.append('InteriorId', request.interiorId);
-    params.append('InteriorName', request.interiorName);
-    params.append('Quantity', 100)
-    params.append('Price', request.price);
+    const params = {
+        'InteriorId': request.interiorId,
+        'InteriorName': encodeURIComponent(request.interiorName),
+        'InteriorType': encodeURIComponent(request.interiorType),
+        'Description': encodeURIComponent(request.description),
+        'Quantity': encodeURIComponent(request.quantity),
+        'Price': encodeURIComponent(request.price)
+    };
+    const queryString = Object.keys(params).map(key => `${key}=${params[key]}`).join('&');
 
-    return baseClient.put(`/Interior/Staff/Update-Interior?${params.toString()}`, formData, {
+    return baseClient.put(`/Interior/Staff/Update-Interior?${queryString}`, formData, {
         headers: {
             'Content-Type': 'multipart/form-data'
         }

@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Modal, message, Form, Input, Select } from 'antd';
 import { useDispatch } from 'react-redux';
-import { actionAddInterior } from '../../store/interior/action';
-const EditInteriorModel = ({ isModalOpen, setIsModalOpen, interior}) => {
+import { actionAddInterior, actionUpdateInterior } from '../../store/interior/action';
+const EditInteriorModel = ({ isModalOpen, setIsModalOpen, selectedInterior}) => {
     const dispatch = useDispatch();
     const [interiorName, setInteriorName] = useState("");
     const [interiorType, setInteriorType] = useState("");
@@ -12,15 +12,15 @@ const EditInteriorModel = ({ isModalOpen, setIsModalOpen, interior}) => {
     const [image, setImage] = useState("");
 
     useEffect(() => {
-        if (isModalOpen && interior){
-            setInteriorName(interior.interiorName);
-            setInteriorType(interior.interiorType);
-            setDescription(interior.description);
-            setQuantity(interior.quantity);
-            setPrice(interior.price);
-            setImage(interior.image);
+        if (isModalOpen && selectedInterior){
+            setInteriorName(selectedInterior.interiorName);
+            setInteriorType(selectedInterior.interiorType);
+            setDescription(selectedInterior.description);
+            setQuantity(selectedInterior.quantity);
+            setPrice(selectedInterior.price);
+            setImage(selectedInterior.image);
         }
-    },[isModalOpen,interior]);
+    },[selectedInterior]);
     const handleOk = () => {
         if (!interiorName) {
             message.error('Please input the interior name!');
@@ -28,6 +28,10 @@ const EditInteriorModel = ({ isModalOpen, setIsModalOpen, interior}) => {
         }
         if (!interiorType){
             message.error('Please select interior type!');
+            return;
+        }
+        if (!description) {
+            message.error('Please input the interior description!');
             return;
         }
         if (!quantity){
@@ -50,8 +54,9 @@ const EditInteriorModel = ({ isModalOpen, setIsModalOpen, interior}) => {
             message.error('Please select image for interior!');
             return;
         }
-        dispatch(actionAddInterior({ 
-                    interiorName: interiorName, interiorType: interiorType, description: description,
+        dispatch(actionUpdateInterior({ 
+                    interiorId: selectedInterior.interiorId, interiorName: interiorName,
+                    interiorType: interiorType, description: description,
                     quantity: quantity, price: price, image: image
                 }));
         setIsModalOpen(false);
@@ -67,9 +72,123 @@ const EditInteriorModel = ({ isModalOpen, setIsModalOpen, interior}) => {
     const onFinishFailed = (errorInfo) => {
         console.log('Failed:', errorInfo);
     };
-    
+    {/**
+ Modal.confirm({
+            title: 'Edit Interior',
+            onOk: () => handleEditOk(),
+            content:
+                <Form
+                    name="basic"
+                    labelCol={{ span: 6 }}
+                    wrapperCol={{ span: 18 }}
+                    autoComplete="off"
+                    initialValues={{
+                        interiorId: record.interiorId,
+                        interiorName: record.interiorName,
+                        interiorType: record.interiorType,
+                        description: record.description,
+                        price: record.price,
+                        quantity: record.quantity       
+                    }}
+                >
+                    <Form.Item
+                        label="ID"
+                        name = "interiorId"
+                    >
+                        <span>{ record.interiorId }</span>
+                    </Form.Item>
+                    <Form.Item
+                        label="Name"
+                        name = "interiorName"
+                        rules={[
+                            {
+                                required: true,
+                                message: 'Please input the interior name!',
+                            },
+                        ]}
+                    >
+                        <Input onChange={(e) => name = e.target.value} />
+                    </Form.Item>
+                    <Form.Item
+                        label="Interior Type"
+                        name="interiorType"
+                        rules={[
+                            {
+                                required: true,
+                                message: 'Please select interior type!',
+                            },
+                        ]}
+                    >
+                        <Select onChange={(value) => type = value}>
+                            <Option value="Chair">Chair</Option>
+                            <Option value="Desk">Desk</Option>
+                            <Option value="Cabinet">Cabinet</Option>
+                            <Option value="Clock">Clock</Option>
+                        </Select>
+                    </Form.Item>
+                    <Form.Item
+                        label="Description"
+                        name = "description"
+                        rules={[
+                            {
+                                required: true,
+                                message: 'Please input the interior name!',
+                            },
+                        ]}
+                    >
+                        <Input.TextArea onChange={(e) => des = e.target.value}
+                                        rows={8}/>
+                    </Form.Item>
+                    <Form.Item
+                        label="Price"
+                        name="price"
+                        rules={[
+                            {
+                                required: true,
+                                message: 'Please input price number!',
+                            },
+                        ]}
+                    >
+                        <Input onChange={(e) => pric = e.target.value}/>
+                    </Form.Item>
+                    <Form.Item
+                        label="Quantity"
+                        name="quantity"
+                        rules={[
+                            {
+                                required: true,
+                                message: 'Please input quantity number!',
+                            },
+                        ]}
+                    >
+                        <Input onChange={(e) => quan = e.target.value}/>
+                    </Form.Item>
+                    <Form.Item
+                        label="Image"
+                        name="image"
+                        rules={[
+                            {
+                                required: true,
+                                message: 'Please select image for interior!',
+                            },
+                        ]}
+                    >
+                        <div>
+                            <a className="block-20" style={{backgroundImage: `url(data:image/jpeg;base64,${file})`}}></a>
+                            <Input type="file" onChange={handleImageChange}/>
+                        </div>
+                    </Form.Item>
+                </Form>,
+                width: 900,
+                footer: (_, {OkBtn, CancelBtn}) => (<>
+                    <CancelBtn />
+                    <OkBtn />
+                </>),
+        });
+    */}
     return (
         <>
+        {console.log("selectedInterior", selectedInterior)}
             <Modal title="Edit Interior" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
                 <Form
                     name="basic"
@@ -79,7 +198,15 @@ const EditInteriorModel = ({ isModalOpen, setIsModalOpen, interior}) => {
                     wrapperCol={{
                         span: 18,
                     }}
-
+                    key={ selectedInterior? selectedInterior.interiorId : 'empty'}
+                    initialValues={{
+                        interiorId: selectedInterior?.interiorId,
+                        interiorName: selectedInterior?.interiorName,
+                        interiorType: selectedInterior?.interiorType,
+                        description: selectedInterior?.description,
+                        price: selectedInterior?.price,
+                        quantity: selectedInterior?.quantity       
+                    }}
                     onFinish={onFinish}
                     onFinishFailed={onFinishFailed}
                     autoComplete="off"
@@ -94,7 +221,7 @@ const EditInteriorModel = ({ isModalOpen, setIsModalOpen, interior}) => {
                             },
                         ]}
                     >
-                        <Input value={interiorName} onChange={(e) => setInteriorName(e.target.value)} />
+                        <Input onChange={(e) => setInteriorName(e.target.value)} />
                     </Form.Item>
                     <Form.Item
                         label="Interior Type"
