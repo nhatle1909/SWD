@@ -185,9 +185,9 @@ const TransactionHistory = () => {
           <span>
             <span
               style={{
-                fontWeight: "bold",
+                fontWeight: "normal",
                 marginTop: "10px;",
-                display: "inline-block",
+                display: "block",
               }}
             >
               Transaction Id:

@@ -3253,11 +3253,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\DevTools\\repository\\New folder (2)\\SWD\\be\\Repositories\\Repositories.csproj",
+      "projectUniqueName": "C:\\Users\\ADMIN\\Downloads\\New\\SWD\\be\\Repositories\\Repositories.csproj",
       "projectName": "Repositories",
-      "projectPath": "D:\\DevTools\\repository\\New folder (2)\\SWD\\be\\Repositories\\Repositories.csproj",
+      "projectPath": "C:\\Users\\ADMIN\\Downloads\\New\\SWD\\be\\Repositories\\Repositories.csproj",
       "packagesPath": "C:\\Users\\ADMIN\\.nuget\\packages\\",
-      "outputPath": "D:\\DevTools\\repository\\New folder (2)\\SWD\\be\\Repositories\\obj\\",
+      "outputPath": "C:\\Users\\ADMIN\\Downloads\\New\\SWD\\be\\Repositories\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -3272,7 +3272,6 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -3285,6 +3284,11 @@
         "warnAsError": [
           "NU1605"
         ]
+      },
+      "restoreAuditProperties": {
+        "enableAudit": "true",
+        "auditLevel": "low",
+        "auditMode": "direct"
       }
     },
     "frameworks": {
@@ -3336,7 +3340,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.101/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.201/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

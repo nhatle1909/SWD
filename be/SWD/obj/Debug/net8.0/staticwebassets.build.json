@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "GAOjnAXkFDRiVHzrjE7xy6z4KQg+KxnnC6YLF+f7XRE=",
+  "Hash": "bgx8fXu+iJ+Jl/MBRQ4FUdFOUZ9UYYNl1AqolKM74tA=",
   "Source": "SWD",
   "BasePath": "_content/SWD",
   "Mode": "Default",
@@ -10,17 +10,17 @@
     {
       "Name": "SWD\\wwwroot",
       "Source": "SWD",
-      "ContentRoot": "D:\\DevTools\\repository\\New folder (2)\\SWD\\be\\SWD\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\ADMIN\\Downloads\\New\\SWD\\be\\SWD\\wwwroot\\",
       "BasePath": "_content/SWD",
       "Pattern": "**"
     }
   ],
   "Assets": [
     {
-      "Identity": "D:\\DevTools\\repository\\New folder (2)\\SWD\\be\\SWD\\wwwroot\\AccountPictures\\user_default.png",
+      "Identity": "C:\\Users\\ADMIN\\Downloads\\New\\SWD\\be\\SWD\\wwwroot\\AccountPictures\\user_default.png",
       "SourceId": "SWD",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\DevTools\\repository\\New folder (2)\\SWD\\be\\SWD\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\ADMIN\\Downloads\\New\\SWD\\be\\SWD\\wwwroot\\",
       "BasePath": "_content/SWD",
       "RelativePath": "AccountPictures/user_default.png",
       "AssetKind": "All",
