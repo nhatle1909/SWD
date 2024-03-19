@@ -134,20 +134,20 @@ const HistoryRequest = () => {
             width: '5%',
             align: 'center',
         },
-        {
-            title: 'Email',
-            dataIndex: 'email',
-            ...getColumnSearchProps('email'),
-            width: '35%',
-        },
+      
         {
             title: 'Created At',
             dataIndex: 'createdAt',
-            width: '20%',
+            width: '15%',
+        },
+        {
+            title: 'Update At',
+            dataIndex: 'updatedAt',
+            width: '15%',
         },
         {
             title: 'Status',
-            dataIndex: 'status',
+            dataIndex: 'statusResponseOfStaff',
             width: '10%',
         },
         {
@@ -166,6 +166,7 @@ const HistoryRequest = () => {
 
     const handleShowRequest = (record, index) => {
         console.log("record", record);
+        const listInterior = record.listInterior;
         Modal.info({
             title: 'Request Details',
             content: <>
@@ -173,23 +174,35 @@ const HistoryRequest = () => {
                     <span style={{ fontWeight: "bold", marginTop: "10px;", display: "inline-block" }}>
                         Request Id:
                     </span>
-                    {record.contactId !== null && (<span>{" " + record.contactId}</span>)}
+                    {record.requestId !== null && (<span>{" " + record.requestId}</span>)}
                 </span>
                 <br />
                 <span><span style={{ fontWeight: "bold" }}>
-                    Email:
+                    Response of Staff:
                 </span>
-                    <span>{" " + record.email}</span>
+                    <span>{" " + record.responseOfStaff}</span>
                 </span>
                 <br />
                 <span>
                     <span style={{ fontWeight: "bold", marginTop: "10px;", display: "inline-block" }}>
-                        Status:
+                        List Interior Of Request:
                     </span>
-                    {record.status !== null && (<span>{" " + record.status}</span>)}
+                    <span><ul>
+                    {listInterior?.map((item) => (
+                        <li key={item.interiorId}><a href={`/interior/${item.interiorId}`}>Item {listInterior.indexOf(item.interiorId) + 2}</a></li>
+                    ))}
+                    </ul>
+                 </span>
+                </span>
+                <br/>
+                <span><span style={{ fontWeight: "bold" }}>
+                   Image : 
+                </span>
+                    <span>{" " + record.responseOfStaff}</span>
                 </span>
                 <br />
-                <span style={{ fontWeight: "bold" }}>Payment link: <a target="_blank" style={{ fontWeight: "normal", color: "blue", textDecoration: "underline" }} href={paymentLink}>Click here to pay</a></span>
+                               
+             
             </>,
             footer: (_, { OkBtn, CancelBtn }) => (
                 <>
