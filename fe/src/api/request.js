@@ -6,7 +6,7 @@ export const getInfo = () => {
 
 export const createRequest = (request) => {
     console.log("going to add", request);
-    return baseClient.post('/Contact/Add-An-Contact-For-Guest', request);
+    return baseClient.post('/Contact/Add-An-Request-For-Guest', request);
 };
 
 export const getRequests = (request) => {
