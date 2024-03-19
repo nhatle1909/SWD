@@ -13,8 +13,11 @@ export const actionGetMyTransactions = (request) => {
 
       console.log("data", data);
 
-      dispatch(setTransactions(data));
+      if (Array.isArray(data)) {
+        dispatch(setTransactions(data));
+      }
 
+  
     } catch (error) {
       toast(error.response.data, {
         type: 'error'
