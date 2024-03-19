@@ -161,10 +161,10 @@ namespace Services.Service
                     getContact.UpdatedAt = DateTime.Now;
                     await _unit.ContactRepo.UpdateItemByValue("RequestId", getContact.RequestId, getContact);
                     string subject = "Interior quotation system";
-                    //string acceptButtonLink = $"https://swdapi.azurewebsites.net/api/Contact/Accepted?requestId={getContact.RequestId}";
-                    //string refuseButtonLink = $"https://swdapi.azurewebsites.net/api/Contact/Refused?requestId={getContact.RequestId}";
-                    string acceptButtonLink = $"https://localhost:7220/api/Contact/Accepted?requestId={getContact.RequestId}";
-                    string refuseButtonLink = $"https://localhost:7220/api/Contact/Refused?requestId={getContact.RequestId}";
+                    string acceptButtonLink = $"https://swdapi.azurewebsites.net/api/Contact/Accepted?requestId={getContact.RequestId}";
+                    string refuseButtonLink = $"https://swdapi.azurewebsites.net/api/Contact/Refused?requestId={getContact.RequestId}";
+                    //string acceptButtonLink = $"https://localhost:7220/api/Contact/Accepted?requestId={getContact.RequestId}";
+                    //string refuseButtonLink = $"https://localhost:7220/api/Contact/Refused?requestId={getContact.RequestId}";
                     string body = $@"
                     <h3><strong>
                         {address.ResponseOfStaff}

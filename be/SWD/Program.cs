@@ -129,11 +129,11 @@ namespace SWD
 
             // Configure the HTTP request pipeline.
             // run local
-            //if (app.Environment.IsDevelopment())
-            //{
-            //    app.UseSwagger();
-            //    app.UseSwaggerUI();
-            //}
+            if (app.Environment.IsDevelopment())
+            {
+                app.UseSwagger();
+                app.UseSwaggerUI();
+            }
             //publish api
 
             app.UseSwagger(options =>
