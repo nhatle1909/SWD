@@ -73,7 +73,7 @@ const TransactionHistory = () => {
           </Button>
           <Button
             onClick={() => clearFilters && handleReset(clearFilters)}
-            size="big"
+            size="small"
             style={{
               width: 90,
             }}
@@ -146,7 +146,7 @@ const TransactionHistory = () => {
     {
       title: "Email",
       dataIndex: "email",
-      width: "25%",
+      width: "30%",
     },
     {
       title: "Status",
