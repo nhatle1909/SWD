@@ -83,7 +83,7 @@ const Header = () => {
 						navigator('/admin/users')
 					}}>Users</a>, null, null),
 					getItem(<a onClick={() => {
-						navigator('/admin/reports')
+						navigator('https://sandbox.vnpayment.vn/merchantv2/Users/Login.htm?ReturnUrl=%2fmerchantv2%2fHome%2fDashboard.htm')
 					}}>Reports</a>, null, null),
 				] :
 				auth?.role === 'Staff' ?
