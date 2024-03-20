@@ -175,7 +175,7 @@ namespace Services.Service
                     IsRole = AccountStatus.Role.Customer,
                     IsBanned = false,
                     Comments = null,
-                    CreatedAt = DateTime.UtcNow,
+                    CreatedAt = DateTime.Now,
                     UpdatedAt = null
                 };
                 await _unit.AccountRepo.AddOneItem(account);
@@ -223,7 +223,7 @@ namespace Services.Service
                 await _unit.AccountRepo.UpdateItemByValue("AccountId", id, account);
 
                 AccountStatus accountStatus = check_status.First();
-                accountStatus.UpdatedAt = DateTime.UtcNow;
+                accountStatus.UpdatedAt = DateTime.Now;
                 await _unit.AccountStatusRepo.UpdateItemByValue("AccountId", id, accountStatus);
 
                 var getContact = (await _unit.ContactRepo.GetFieldsByFilterAsync([],
@@ -234,7 +234,7 @@ namespace Services.Service
                     {
                         contact.Address = update.HomeAdress;
                         contact.Phone = update.PhoneNumber;
-                        contact.UpdatedAt = DateTime.UtcNow;
+                        contact.UpdatedAt = DateTime.Now;
                         await _unit.ContactRepo.UpdateItemByValue("RequestId", contact.RequestId, contact);
                     }
                 }
@@ -268,7 +268,7 @@ namespace Services.Service
                                 c => c.Email.Equals(account.Email));
                 AccountStatus accountStatus = check_isAuthen.First();
                 accountStatus.IsAuthenticationEmail = true;
-                accountStatus.UpdatedAt = System.DateTime.UtcNow;
+                accountStatus.UpdatedAt = System.DateTime.Now;
                 await _unit.AccountStatusRepo.UpdateItemByValue("Email", email, accountStatus);
                 return (true, "Reset password successfully");
             }
@@ -286,7 +286,7 @@ namespace Services.Service
                 IEnumerable<AccountStatus> check_status = await _unit.AccountStatusRepo.GetFieldsByFilterAsync([],
                             c => c.AccountId.Equals(id));
                 AccountStatus accountStatus = check_status.First();
-                accountStatus.UpdatedAt = System.DateTime.UtcNow;
+                accountStatus.UpdatedAt = System.DateTime.Now;
                 await _unit.AccountStatusRepo.UpdateItemByValue("AccountId", accountStatus.AccountId, accountStatus);
 
                 account.Password = SomeTool.HashPassword(changePassword.Password);
@@ -378,7 +378,7 @@ namespace Services.Service
                             c => c.AccountId.Equals(id));
                     var accountStatus = getUserStatus.First();
                     getFieldsUser.Picture = fileBytes;
-                    accountStatus.UpdatedAt = System.DateTime.UtcNow;
+                    accountStatus.UpdatedAt = System.DateTime.Now;
                     await _unit.AccountRepo.UpdateItemByValue("AccountId", getFieldsUser.AccountId, getFieldsUser);
                     await _unit.AccountStatusRepo.UpdateItemByValue("AccountId", getFieldsUser.AccountId, accountStatus);
                 }

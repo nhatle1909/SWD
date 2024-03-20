@@ -3,48 +3,16 @@
   "WorkspaceRootPath": "D:\\C#\\SWD392\\SWD\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{248D8517-9325-45A2-A2AD-18F9E964AA15}|be\\Services\\Services.csproj|d:\\c#\\swd392\\swd\\be\\services\\service\\contactservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{248D8517-9325-45A2-A2AD-18F9E964AA15}|be\\Services\\Services.csproj|solutionrelative:be\\services\\service\\contactservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{4396B005-B2CC-4AFF-BCA7-17E3FF388E79}|be\\SWD\\SWD.csproj|d:\\c#\\swd392\\swd\\be\\swd\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{4396B005-B2CC-4AFF-BCA7-17E3FF388E79}|be\\SWD\\SWD.csproj|solutionrelative:be\\swd\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{248D8517-9325-45A2-A2AD-18F9E964AA15}|be\\Services\\Services.csproj|D:\\C#\\SWD392\\SWD\\be\\services\\service\\transactionservice .cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{248D8517-9325-45A2-A2AD-18F9E964AA15}|be\\Services\\Services.csproj|solutionrelative:be\\services\\service\\transactionservice .cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{4396B005-B2CC-4AFF-BCA7-17E3FF388E79}|be\\SWD\\SWD.csproj|D:\\C#\\SWD392\\SWD\\be\\swd\\controllers\\transactioncontroller .cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4396B005-B2CC-4AFF-BCA7-17E3FF388E79}|be\\SWD\\SWD.csproj|solutionrelative:be\\swd\\controllers\\transactioncontroller .cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{4396B005-B2CC-4AFF-BCA7-17E3FF388E79}|be\\SWD\\SWD.csproj|D:\\C#\\SWD392\\SWD\\be\\swd\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{4396B005-B2CC-4AFF-BCA7-17E3FF388E79}|be\\SWD\\SWD.csproj|d:\\c#\\swd392\\swd\\be\\swd\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{4396B005-B2CC-4AFF-BCA7-17E3FF388E79}|be\\SWD\\SWD.csproj|solutionrelative:be\\swd\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{4396B005-B2CC-4AFF-BCA7-17E3FF388E79}|be\\SWD\\SWD.csproj|D:\\C#\\SWD392\\SWD\\be\\swd\\controllers\\contactcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{4396B005-B2CC-4AFF-BCA7-17E3FF388E79}|be\\SWD\\SWD.csproj|solutionrelative:be\\swd\\controllers\\contactcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{CB9EFCD9-E58D-447C-9FB5-774C96383096}|be\\Repositories\\Repositories.csproj|D:\\C#\\SWD392\\SWD\\be\\repositories\\model\\contract.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CB9EFCD9-E58D-447C-9FB5-774C96383096}|be\\Repositories\\Repositories.csproj|solutionrelative:be\\repositories\\model\\contract.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{CB9EFCD9-E58D-447C-9FB5-774C96383096}|be\\Repositories\\Repositories.csproj|D:\\C#\\SWD392\\SWD\\be\\repositories\\model\\transaction .cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CB9EFCD9-E58D-447C-9FB5-774C96383096}|be\\Repositories\\Repositories.csproj|solutionrelative:be\\repositories\\model\\transaction .cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{CB9EFCD9-E58D-447C-9FB5-774C96383096}|be\\Repositories\\Repositories.csproj|D:\\C#\\SWD392\\SWD\\be\\repositories\\model\\request.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CB9EFCD9-E58D-447C-9FB5-774C96383096}|be\\Repositories\\Repositories.csproj|solutionrelative:be\\repositories\\model\\request.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{CB9EFCD9-E58D-447C-9FB5-774C96383096}|be\\Repositories\\Repositories.csproj|D:\\C#\\SWD392\\SWD\\be\\repositories\\modelview\\contactview.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CB9EFCD9-E58D-447C-9FB5-774C96383096}|be\\Repositories\\Repositories.csproj|solutionrelative:be\\repositories\\modelview\\contactview.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{248D8517-9325-45A2-A2AD-18F9E964AA15}|be\\Services\\Services.csproj|D:\\C#\\SWD392\\SWD\\be\\services\\interface\\icontactservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{248D8517-9325-45A2-A2AD-18F9E964AA15}|be\\Services\\Services.csproj|solutionrelative:be\\services\\interface\\icontactservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|d:\\c#\\swd392\\swd\\be\\repositories\\model\\contact.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:be\\repositories\\model\\contact.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -54,7 +22,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 17,
+          "SelectedChildIndex": 8,
           "Children": [
             {
               "$type": "Bookmark",
@@ -90,136 +58,41 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "Contract.cs",
-              "DocumentMoniker": "D:\\C#\\SWD392\\SWD\\be\\Repositories\\Model\\Contract.cs",
-              "RelativeDocumentMoniker": "be\\Repositories\\Model\\Contract.cs",
-              "ToolTip": "D:\\C#\\SWD392\\SWD\\be\\Repositories\\Model\\Contract.cs",
-              "RelativeToolTip": "be\\Repositories\\Model\\Contract.cs",
-              "ViewState": "AQIAAAkAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-13T09:58:58.689Z"
+              "DocumentIndex": 0,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "D:\\C#\\SWD392\\SWD\\be\\SWD\\appsettings.json",
+              "RelativeDocumentMoniker": "be\\SWD\\appsettings.json",
+              "ToolTip": "D:\\C#\\SWD392\\SWD\\be\\SWD\\appsettings.json",
+              "RelativeToolTip": "be\\SWD\\appsettings.json",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAAKAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2024-03-20T14:27:08.857Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "Request.cs",
-              "DocumentMoniker": "D:\\C#\\SWD392\\SWD\\be\\Repositories\\Model\\Request.cs",
-              "RelativeDocumentMoniker": "be\\Repositories\\Model\\Request.cs",
-              "ToolTip": "D:\\C#\\SWD392\\SWD\\be\\Repositories\\Model\\Request.cs",
-              "RelativeToolTip": "be\\Repositories\\Model\\Request.cs",
-              "ViewState": "AQIAAAgAAAAAAAAAAAAQwBQAAAA5AAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-13T09:37:19.956Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "Program.cs",
-              "DocumentMoniker": "D:\\C#\\SWD392\\SWD\\be\\SWD\\Program.cs",
-              "RelativeDocumentMoniker": "be\\SWD\\Program.cs",
-              "ToolTip": "D:\\C#\\SWD392\\SWD\\be\\SWD\\Program.cs",
-              "RelativeToolTip": "be\\SWD\\Program.cs",
-              "ViewState": "AQIAAH8AAAAAAAAAAAAgwIkAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-12T07:19:20.123Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "Transaction .cs",
-              "DocumentMoniker": "D:\\C#\\SWD392\\SWD\\be\\Repositories\\Model\\Transaction .cs",
-              "RelativeDocumentMoniker": "be\\Repositories\\Model\\Transaction .cs",
-              "ToolTip": "D:\\C#\\SWD392\\SWD\\be\\Repositories\\Model\\Transaction .cs",
-              "RelativeToolTip": "be\\Repositories\\Model\\Transaction .cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAABCAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-12T06:39:18.231Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "Contact.cs",
-              "DocumentMoniker": "D:\\C#\\SWD392\\SWD\\be\\Repositories\\Model\\Contact.cs",
-              "RelativeDocumentMoniker": "be\\Repositories\\Model\\Contact.cs",
-              "ToolTip": "D:\\C#\\SWD392\\SWD\\be\\Repositories\\Model\\Contact.cs",
-              "RelativeToolTip": "be\\Repositories\\Model\\Contact.cs",
-              "ViewState": "AQIAAAwAAAAAAAAAAAA5wBMAAABCAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-12T06:06:34.052Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 2,
               "Title": "ContactController.cs",
               "DocumentMoniker": "D:\\C#\\SWD392\\SWD\\be\\SWD\\Controllers\\ContactController.cs",
               "RelativeDocumentMoniker": "be\\SWD\\Controllers\\ContactController.cs",
               "ToolTip": "D:\\C#\\SWD392\\SWD\\be\\SWD\\Controllers\\ContactController.cs",
               "RelativeToolTip": "be\\SWD\\Controllers\\ContactController.cs",
-              "ViewState": "AQIAAHMAAAAAAAAAAAAQwHUAAAAJAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAEoAAAAJAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-12T06:04:19.894Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "ContactView.cs",
-              "DocumentMoniker": "D:\\C#\\SWD392\\SWD\\be\\Repositories\\ModelView\\ContactView.cs",
-              "RelativeDocumentMoniker": "be\\Repositories\\ModelView\\ContactView.cs",
-              "ToolTip": "D:\\C#\\SWD392\\SWD\\be\\Repositories\\ModelView\\ContactView.cs",
-              "RelativeToolTip": "be\\Repositories\\ModelView\\ContactView.cs",
-              "ViewState": "AQIAADEAAAAAAAAAAAAswDcAAAA6AAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-12T05:54:33.236Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "IContactService.cs",
-              "DocumentMoniker": "D:\\C#\\SWD392\\SWD\\be\\Services\\Interface\\IContactService.cs",
-              "RelativeDocumentMoniker": "be\\Services\\Interface\\IContactService.cs",
-              "ToolTip": "D:\\C#\\SWD392\\SWD\\be\\Services\\Interface\\IContactService.cs",
-              "RelativeToolTip": "be\\Services\\Interface\\IContactService.cs",
-              "ViewState": "AQIAAAYAAAAAAAAAAAAAABUAAAAIAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-12T05:51:56.361Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "TransactionController .cs",
-              "DocumentMoniker": "D:\\C#\\SWD392\\SWD\\be\\SWD\\Controllers\\TransactionController .cs",
-              "RelativeDocumentMoniker": "be\\SWD\\Controllers\\TransactionController .cs",
-              "ToolTip": "D:\\C#\\SWD392\\SWD\\be\\SWD\\Controllers\\TransactionController .cs",
-              "RelativeToolTip": "be\\SWD\\Controllers\\TransactionController .cs",
-              "ViewState": "AQIAABkAAAAAAAAAAAAAwCIAAAAwAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-12T05:51:00.511Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "ContactService.cs",
-              "DocumentMoniker": "D:\\C#\\SWD392\\SWD\\be\\Services\\Service\\ContactService.cs",
-              "RelativeDocumentMoniker": "be\\Services\\Service\\ContactService.cs",
-              "ToolTip": "D:\\C#\\SWD392\\SWD\\be\\Services\\Service\\ContactService.cs",
-              "RelativeToolTip": "be\\Services\\Service\\ContactService.cs",
-              "ViewState": "AQIAAJ8BAAAAAAAAAAAAAHUCAAA+AAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-12T05:49:03.055Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-03-20T02:12:38.609Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "TransactionService .cs",
-              "DocumentMoniker": "D:\\C#\\SWD392\\SWD\\be\\Services\\Service\\TransactionService .cs",
-              "RelativeDocumentMoniker": "be\\Services\\Service\\TransactionService .cs",
-              "ToolTip": "D:\\C#\\SWD392\\SWD\\be\\Services\\Service\\TransactionService .cs",
-              "RelativeToolTip": "be\\Services\\Service\\TransactionService .cs",
-              "ViewState": "AQIAAA0BAAAAAAAAAAAMwBgBAAAzAAAA",
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\C#\\SWD392\\SWD\\be\\SWD\\Program.cs",
+              "RelativeDocumentMoniker": "be\\SWD\\Program.cs",
+              "ToolTip": "D:\\C#\\SWD392\\SWD\\be\\SWD\\Program.cs",
+              "RelativeToolTip": "be\\SWD\\Program.cs",
+              "ViewState": "AQIAAIUAAAAAAAAAAAAQwIwAAABMAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-12T05:47:13.972Z"
+              "WhenOpened": "2024-03-19T15:52:42.803Z",
+              "EditorCaption": ""
             }
           ]
         }

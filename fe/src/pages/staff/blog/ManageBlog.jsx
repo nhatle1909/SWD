@@ -3,14 +3,24 @@ import { Button, Flex } from "antd";
 import { useState } from "react";
 import PageHeader from "../../../components/PageHeader";
 import ListBlog from "../../../components/blog/ListBlog";
+import CreateBlogModel from "../../../components/blog/CreateBlogModal";
+import EditBlogModel from "../../../components/blog/EditBlogModal";
 
 export const ManageBlog = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [selectedBlog, setSelectedBlog] = useState(null);
+
+  const handleEditBlog = (record) => {
+    setSelectedBlog(record);
+    setIsEditModalOpen(true);
+  }
+
   return (
     <>
-      <div className="h-[90vh] w-[100vw] flex justify-center items-center"
-          style={{ background: '#343f4024' }}>
-        <div className="h-[65vh] w-[70vw]">
+      <div className="w-[100vw] flex justify-center items-center"
+          style={{ background: 'grey', paddingTop: '120px' }}>
+        <div className=" w-[70vw]">
           <PageHeader message={"Manage Blog"} />
           <Flex
             gap="small"
@@ -23,16 +33,16 @@ export const ManageBlog = () => {
               type="primary"
               danger
               className="blue mb-2"
-              onClick={() => { setIsModalOpen(true); }}
+              onClick={() => { setIsCreateModalOpen(true); }}
               icon={<PlusCircleOutlined />}
             >
               Create New Blog
             </Button>
           </Flex>
-          <ListBlog />
-            {/*
-          <CreateAccountModel isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />
-            */}
+          <ListBlog handleEditBlog={handleEditBlog}/>
+          <CreateBlogModel isModalOpen={isCreateModalOpen} setIsModalOpen={setIsCreateModalOpen} />
+          <EditBlogModel isModalOpen={isEditModalOpen} setIsModalOpen={setIsEditModalOpen}
+                selectedBlog={selectedBlog}/>
         </div>
       </div >
     </>

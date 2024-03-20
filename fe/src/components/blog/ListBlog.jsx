@@ -1,57 +1,170 @@
 import { useAppDispatch, useAppSelector } from "../../store";
-import React, { useRef, useState } from "react";
-import { Button, Space, Table, Input, Modal } from 'antd';
+import React, {useState, useRef} from "react";
 import { SearchOutlined } from "@ant-design/icons";
 import Highlighter from 'react-highlight-words';
-import { actionGetBlogList, actionGetBlogs, actionRemoveBlog } from "../../store/blog/action";
+import { Button, Table,  Modal, Input, Space } from 'antd';
+import { actionGetBlogList, actionRemoveBlog } from "../../store/blog/action";
 
-const ListBlog = () => {
+const ListBlog = ({handleEditBlog}) => {
     const dispatch = useAppDispatch();
     const blogs = useAppSelector(({ blogs }) => blogs.blogs);
 
-    const [request, setRequest] = React.useState({
-        PageIndex: 1,
-        IsAsc: true,
-        SearchValue: "",
+    const [searchText, setSearchText] = useState('');
+    const [searchedColumn, setSearchedColumn] = useState('');
+    const searchInput = useRef(null);
+    const handleSearch = (selectedKeys, confirm, dataIndex) => {
+        confirm();
+        setSearchText(selectedKeys[0]);
+        setSearchedColumn(dataIndex);
+    };
+    const handleReset = (clearFilters) => {
+        clearFilters();
+        setSearchText('');
+    };
+    const getColumnSearchProps = (dataIndex) => ({
+        filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters, close }) => (
+            <div
+                style={{
+                    padding: 8,
+                }}
+                onKeyDown={(e) => e.stopPropagation()}
+            >
+                <Input
+                    ref={searchInput}
+                    placeholder={`Search ${dataIndex}`}
+                    value={selectedKeys[0]}
+                    onChange={(e) => setSelectedKeys(e.target.value ? [e.target.value] : [])}
+                    onPressEnter={() => handleSearch(selectedKeys, confirm, dataIndex)}
+                    style={{
+                        marginBottom: 8,
+                        display: 'block',
+                    }}
+                />
+                <Space>
+                    <Button
+                        type="primary"
+                        className="blue"
+                        onClick={() => handleSearch(selectedKeys, confirm, dataIndex)}
+                        icon={<SearchOutlined />}
+                        size="small"
+                        style={{
+                            width: 90,
+                        }}
+                    >
+                        Search
+                    </Button>
+                    <Button
+                        onClick={() => clearFilters && handleReset(clearFilters)}
+                        size="small"
+                        style={{
+                            width: 90,
+                        }}
+                    >
+                        Reset
+                    </Button>
+                    <Button
+                        type="link"
+                        size="small"
+                        onClick={() => {
+                            confirm({
+                                closeDropdown: false,
+                            });
+                            setSearchText(selectedKeys[0]);
+                            setSearchedColumn(dataIndex);
+                        }}
+                    >
+                        Filter
+                    </Button>
+                    <Button
+                        type="link"
+                        size="small"
+                        onClick={() => {
+                            close();
+                        }}
+                    >
+                        close
+                    </Button>
+                </Space>
+            </div>
+        ),
+        filterIcon: (filtered) => (
+            <SearchOutlined
+                style={{
+                    color: filtered ? '#1677ff' : undefined,
+                }}
+            />
+        ),
+        onFilter: (value, record) =>
+            record[dataIndex].toString().toLowerCase().includes(value.toLowerCase()),
+        onFilterDropdownOpenChange: (visible) => {
+            if (visible) {
+                setTimeout(() => searchInput.current?.select(), 100);
+            }
+        },
+        render: (text) =>
+            searchedColumn === dataIndex ? (
+                <Highlighter
+                    highlightStyle={{
+                        backgroundColor: '#ffc069',
+                        padding: 0,
+                    }}
+                    searchWords={[searchText]}
+                    autoEscape
+                    textToHighlight={text ? text.toString() : ''}
+                />
+            ) : (
+                text
+            ),
     });
 
-    const [blog, setBlog] = React.useState(null);
-
-    const handleShowBlog = (record, index) => {
+    const handleShowBlog = (record) => {
         console.log("record", record);
-        setBlog(record);
         Modal.info({
             title: 'Blog Details',
-            content: <>
-                <span><span style={{ fontWeight: "bold" }}>
-                    Title:
-                </span>
-                    <span>{" " + record.title}</span>
-                </span>
-                <br />
-                <span>
-                    <span style={{ fontWeight: "bold", marginTop: "10px;", display: "inline-block" }}>
-                        Content:
+            content: (
+                <div style={{ lineHeight: '1.5', fontSize: '16px' }}>
+                    <div style={{ marginBottom: '10px' }}>
+                        <span style={{ fontWeight: "bold" }}>Title:</span>
+                        <br/>
+                        <span>{" " + record.title}</span>
+                    </div>
+                    <div>
+                        <span style={{ fontWeight: "bold" }}>Content:</span>
+                        <br/>
+                        <span style={{ whiteSpace: "pre-line"}}>{" " + record.content}</span>
+                    </div>
+                    <br/>
+                    <span>
+                        <span style={{ fontWeight: "bold", marginTop: "10px", display: "inline-block" }}>
+                            Image:
+                        </span>
+                        <br/>
+                        <span><a className="block-20"
+                                style={{
+                                    backgroundSize: 'cover',
+                                    backgroundImage: `url(data:image/jpeg;base64,${record.pictures})`
+                                }}>
+                        </a></span>
                     </span>
-                    <span>{" " + record.content}</span>
-                </span>
-            </>,
+                </div>
+            ),
             footer: (_, { OkBtn, CancelBtn }) => (
                 <>
                     <CancelBtn />
                     <OkBtn />
                 </>
             ),
+            width: 1200,
+            
         });
     }
 
     const handleDelete = (record) => {
-        dispatch(actionRemoveBlog({ interiorId: record.interiorId }));
+        dispatch(actionRemoveBlog({ blogId: record.blogId }));
     }
 
     const handleConfirmDelete = (record) => {
         console.log("record", record);
-        setBlog(record);
         Modal.confirm({
             onOk: () => handleDelete(record),
             title: 'Confirm',
@@ -81,27 +194,28 @@ const ListBlog = () => {
         {
             title: 'Tittle',
             dataIndex: 'title',
+            ...getColumnSearchProps('title'),
             width: '45%',
         },
         {
             title: 'Created At',
             dataIndex: 'createdAt',
             width: '15%',
-            render: (text, record) => {
+            render: (text) => {
                 return text.split('T')[0];
             }
         },
         {
             title: 'Action',
-            dataIndex: '',
             align: 'center',
             key: 'x',
-            width: '20%',
-            render: (text, record, index) => {
-                return(<>
-                    <Button onClick={() => handleShowBlog(record, index)} type="primary" className="blue">View</Button>
-                    <Button onClick={() => handleConfirmDelete(record)} type="primary" danger className="red ms-2">Delete</Button>
-                </>)
+            width: '10%',
+            render: (record) => {
+                return(<div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+                    <Button onClick={() => handleShowBlog(record)} type="primary" className="blue">View</Button>
+                    <Button onClick={() => handleEditBlog(record)} type="primary">Edit</Button>
+                    <Button onClick={() => handleConfirmDelete(record)} type="primary" danger className="red">Delete</Button>
+                </div>)
             }
         },
     ];
@@ -113,9 +227,10 @@ const ListBlog = () => {
             searchValue: ''
         }));
     },[]);
-    
+     
     return (<>
         <Table
+            rowKey="blogId"
             columns={columns}
             dataSource={blogs}
             pagination = {{ pageSize: 5 }}

@@ -5,7 +5,7 @@ namespace Repositories.Models
 {
     public class DateAndTime
     {
-        [BsonElement] public required DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+        [BsonElement] public required DateTime CreatedAt { get; set; } = DateTime.Now;
         [BsonElement] public DateTime? UpdatedAt { get; set; }
     }
 

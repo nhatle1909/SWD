@@ -19,12 +19,12 @@ namespace SWD.Controllers
             _contactService = contactService;
         }
 
-        [HttpPost("Add-An-Contact-For-Guest")]
-        public async Task<IActionResult> AddContactForGuest([FromBody]AddContactView add)
+        [HttpPost("Add-An-Request-For-Guest")]
+        public async Task<IActionResult> AddContactForGuest(AddContactView add)
         {
             try
             {
-                var status = await _contactService.AddContactForGuest(add.Interior, add);
+                var status = await _contactService.AddContactForGuest(add);
                 if (status.Item1)
                     return Ok(status.Item2);
                 else return BadRequest(status.Item2);
@@ -36,13 +36,13 @@ namespace SWD.Controllers
         }
 
         [Authorize(Roles = "Customer")]
-        [HttpPost("Add-An-Contact-For-Customer")]
-        public async Task<IActionResult> AddContactForCustomer(string interiorId, AddForCustomerContactView add)
+        [HttpPost("Add-An-Request-For-Customer")]
+        public async Task<IActionResult> AddContactForCustomer(AddForCustomerContactView add)
         {
             try
             {
                 var id = (HttpContext.User.FindFirst("id")?.Value) ?? "";
-                var status = await _contactService.AddContactForCustomer(id, interiorId, add);
+                var status = await _contactService.AddContactForCustomer(id, add);
                 if (status.Item1)
                     return Ok(status.Item2);
                 else return BadRequest(status.Item2);
@@ -53,8 +53,7 @@ namespace SWD.Controllers
             }
         }
 
-        [Authorize(Roles = "Staff")]
-        [HttpPut("Staff/Address-An-Contact")]
+        [HttpPost("Staff/Address-An-Request")]
         public async Task<IActionResult> AddressAnContact(AddressContactView address)
         {
             try
@@ -71,7 +70,7 @@ namespace SWD.Controllers
         }
 
         [Authorize(Roles = "Staff")]
-        [HttpDelete("Staff/Delete-An-Contact")]
+        [HttpDelete("Staff/Delete-An-Request")]
         public async Task<IActionResult> DeleteAnContact(DeleteContactView delete)
         {
             try
@@ -87,7 +86,7 @@ namespace SWD.Controllers
             }
         }
 
-        [HttpPost("Get-Paging-Contact-List")]
+        [HttpPost("Get-Paging-Request-List")]
         public async Task<IActionResult> GetPagingContactlList(PagingContactView paging)
         {
             try
@@ -101,13 +100,48 @@ namespace SWD.Controllers
             }
         }
 
-        [Authorize(Roles = "Staff")]
-        [HttpPost("Staff/View-Private-Detail-Contact-From-Paging")]
-        public async Task<IActionResult> GetContactDetail(DetailContactView detail)
+        //[Authorize(Roles = "Staff")]
+        //[HttpPost("Staff/View-Private-Detail-Request-From-Paging")]
+        //public async Task<IActionResult> GetContactDetail(DetailContactView detail)
+        //{
+        //    try
+        //    {
+        //        var status = await _contactService.GetContactDetail(detail);
+        //        if (status.Item1)
+        //            return Ok(status.Item2);
+        //        else return BadRequest(status.Item2);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return BadRequest(ex.Message);
+        //    }
+        //}
+        //[Authorize(Roles = "Staff")]
+        //[HttpPost("Staff/Create-Contract-PDF")]
+        //public async Task<IActionResult> Test(string contactId, AddCartView[] array)
+        //{
+        //    var status = await _contactService.GenerateContractPdf(contactId, array);
+        //    if (status.Item1 == false) return BadRequest("Error");
+        //    else return Ok(status.Item3);
+        //}
+
+        [Authorize(Roles = "Customer")]
+        [HttpPost("Customer/Get-Customer-Request-List")]
+        public async Task<IActionResult> GetAllRequestCustomer()
+        {
+            var _id = (HttpContext.User.FindFirst("id")?.Value) ?? "";
+            var status = await _contactService.GetCustomerContactList(_id);
+            if (status.Item1 == false) return BadRequest("Invalid Token || Mail does not exist");
+            else return Ok(status.Item2);
+        }
+
+        [Authorize(Roles = "Customer")]
+        [HttpPost("Customer/View-Detail-Customer-Request")]
+        public async Task<IActionResult> ViewDetailRequestCustomer(DetailContactView detail)
         {
             try
             {
-                var status = await _contactService.GetContactDetail(detail);
+                var status = await _contactService.GetCustomerContactDetail(detail);
                 if (status.Item1)
                     return Ok(status.Item2);
                 else return BadRequest(status.Item2);
@@ -117,23 +151,40 @@ namespace SWD.Controllers
                 return BadRequest(ex.Message);
             }
         }
-        [Authorize(Roles = "Staff")]
-        [HttpPost("Staff/Create-Contract-PDF")]
-        public async Task<IActionResult> Test(string staffId, string contactId, AddCartView[] array)
+
+        [HttpGet("Accepted")]
+        public async Task<IActionResult> AcceptedQuote([FromQuery] string requestId)
         {
-            var status = await _contactService.GenerateContractPdf(staffId, contactId, array);
-            if (status.Item1 == false) return BadRequest("Error");
-            else return Ok(status.Item3);
+            try
+            {
+                var status = await _contactService.Accepted(requestId);
+                if (status.Item1)
+                    return Content("<html><body style='display: flex; justify-content: center; align-items: center; height: 100vh; color: #333; background-color: white;'><div style=\"background-color: #f0f9ff; border: 1px solid #e0e0e0; border-radius: 5px; padding: 20px; text-align: center; margin: 20px auto; width: 50%;\">\r\n  <h1 style=\"font-size: 24px; color: #333; margin-bottom: 10px;\">Thank you for accepting this order, you will receive a contract file and a deposit link of 30% of the order value.!</h1>\r\n  <p style=\"font-size: 16px; color: #666;\">We appreciate your business and hope you were satisfied with your experience.</p>\r\n</div></body></html>", "text/html");
+                else if (!status.Item1 && status.Item2.Equals("false"))
+                    return Content("<html><body style='display: flex; justify-content: center; align-items: center; height: 100vh; color: #333; background-color: white;'><div style=\"background-color: #f0f9ff; border: 1px solid #e0e0e0; border-radius: 5px; padding: 20px; text-align: center; margin: 20px auto; width: 50%;\">\r\n  <h1 style=\"font-size: 24px; color: #333; margin-bottom: 10px;\">You have rejected this order before, if you want to create another order, go to the Interior quotation system home page to create a new order!</h1>\r\n  <p style=\"font-size: 16px; color: #666;\">We appreciate your business and hope you were satisfied with your experience.</p>\r\n</div></body></html>", "text/html");
+                else return BadRequest(status.Item2);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
-        [Authorize(Roles = "Customer")]
-        [HttpGet("Customer/Get-Customer-Request-List")]
-        public async Task<IActionResult> GetAllRequestCustomer()
+
+        [HttpGet("Refused")]
+        public async Task<IActionResult> RefusedQuote([FromQuery] string requestId)
         {
-            var _id = (HttpContext.User.FindFirst("id")?.Value) ?? "";
-            var status = await _contactService.GetCustomerContactList(_id);
-            if (status.Item1 == false) return BadRequest("Invalid Token || Mail does not exist");
-            else return Ok(status.Item2);
+            try
+            {
+                var status = await _contactService.Refused(requestId);
+                if (status.Item1)
+                    return Content("<html><body style='display: flex; justify-content: center; align-items: center; height: 100vh; color: #333; background-color: white;'><div style=\"background-color: #f0f9ff; border: 1px solid #e0e0e0; border-radius: 5px; padding: 20px; text-align: center; margin: 20px auto; width: 50%;\">\r\n  <h1 style=\"font-size: 24px; color: #333; margin-bottom: 10px;\">We're sorry you refused the order!</h1>\r\n  <p style=\"font-size: 16px; color: #666;\">We appreciate your business and hope you were satisfied with your experience.</p>\r\n</div></body></html>", "text/html");
+                else return BadRequest(status.Item2);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
 

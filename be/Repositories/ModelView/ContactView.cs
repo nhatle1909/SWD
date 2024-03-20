@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Options;
 using System.Runtime.Serialization;
 using System.Runtime.CompilerServices;
+using static Repositories.ModelView.CartView;
 
 namespace Repositories.ModelView
 {
@@ -22,21 +23,20 @@ namespace Repositories.ModelView
             [Phone] public required string Phone { get; set; }
             public required string Address { get; set; }
             public required string Content { get; set; }
-            public IFormFile? Picture { get; set; }
-            public string? Interior {  get; set; }
+            public required AddCartView[] ListInterior {  get; set; }
         }
 
         public class AddForCustomerContactView
         {
             public required string Content { get; set; }
-            public required IFormFile Picture { get; set; }
+            public required AddCartView[] ListInterior { get; set; }
         }
 
         public class AddressContactView
         {
             public required string RequestId { get; set; }
             public required string ResponseOfStaff { get; set; }
-            public IFormFile? File { get; set; }
+            public IFormFile? ResponseOfStaffInFile { get; set; }
             public required State StatusResponseOfStaff { get; set; }
         }
 

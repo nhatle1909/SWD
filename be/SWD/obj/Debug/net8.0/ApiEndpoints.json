@@ -17,6 +17,22 @@
   },
   {
     "ContainingType": "SWD.Controllers.AccountController",
+    "Method": "RegisterAnAccountForCustomer",
+    "RelativePath": "api/Account/Admin/Create-Customer-Account",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "register",
+        "Type": "Repositories.ModelView.AccountView\u002BRegisterAccountView",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SWD.Controllers.AccountController",
     "Method": "RegisterAnAccountForStaff",
     "RelativePath": "api/Account/Admin/Create-Staff-Account",
     "HttpMethod": "POST",
@@ -51,7 +67,7 @@
     "ContainingType": "SWD.Controllers.AccountController",
     "Method": "RemoveAnAccount",
     "RelativePath": "api/Account/Admin/Remove-Account",
-    "HttpMethod": "DELETE",
+    "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
     "Parameters": [
@@ -139,7 +155,7 @@
   },
   {
     "ContainingType": "SWD.Controllers.AccountController",
-    "Method": "RegisterAnAccountForCustomer",
+    "Method": "RegisterAnAccount",
     "RelativePath": "api/Account/Create-Customer-Account",
     "HttpMethod": "POST",
     "IsController": true,
@@ -398,25 +414,15 @@
   },
   {
     "ContainingType": "SWD.Controllers.ContactController",
-    "Method": "AddContactForCustomer",
-    "RelativePath": "api/Contact/Add-An-Contact-For-Customer",
-    "HttpMethod": "POST",
+    "Method": "AcceptedQuote",
+    "RelativePath": "api/Contact/Accepted",
+    "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "interiorId",
+        "Name": "requestId",
         "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "Content",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "Picture",
-        "Type": "Microsoft.AspNetCore.Http.IFormFile",
         "IsRequired": false
       }
     ],
@@ -424,41 +430,32 @@
   },
   {
     "ContainingType": "SWD.Controllers.ContactController",
-    "Method": "AddContactForGuest",
-    "RelativePath": "api/Contact/Add-An-Contact-For-Guest",
+    "Method": "AddContactForCustomer",
+    "RelativePath": "api/Contact/Add-An-Request-For-Customer",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "interiorId",
-        "Type": "System.String",
-        "IsRequired": false
-      },
+        "Name": "add",
+        "Type": "Repositories.ModelView.ContactView\u002BAddForCustomerContactView",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SWD.Controllers.ContactController",
+    "Method": "AddContactForGuest",
+    "RelativePath": "api/Contact/Add-An-Request-For-Guest",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
       {
-        "Name": "Email",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "Phone",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "Address",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "Content",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "Picture",
-        "Type": "Microsoft.AspNetCore.Http.IFormFile",
-        "IsRequired": false
+        "Name": "add",
+        "Type": "Repositories.ModelView.ContactView\u002BAddContactView",
+        "IsRequired": true
       }
     ],
     "ReturnTypes": []
@@ -467,7 +464,7 @@
     "ContainingType": "SWD.Controllers.ContactController",
     "Method": "GetAllRequestCustomer",
     "RelativePath": "api/Contact/Customer/Get-Customer-Request-List",
-    "HttpMethod": "GET",
+    "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
     "Parameters": [],
@@ -475,72 +472,15 @@
   },
   {
     "ContainingType": "SWD.Controllers.ContactController",
-    "Method": "AddressAnContact",
-    "RelativePath": "api/Contact/Staff/Address-An-Contact",
-    "HttpMethod": "PUT",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "RequestId",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "ResponseOfStaff",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "File",
-        "Type": "Microsoft.AspNetCore.Http.IFormFile",
-        "IsRequired": false
-      },
-      {
-        "Name": "StatusResponseOfStaff",
-        "Type": "System.String",
-        "IsRequired": false
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "SWD.Controllers.ContactController",
-    "Method": "Test",
-    "RelativePath": "api/Contact/Staff/Create-Contract-PDF",
+    "Method": "ViewDetailRequestCustomer",
+    "RelativePath": "api/Contact/Customer/View-Detail-Customer-Request",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "staffId",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "contactId",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "array",
-        "Type": "Repositories.ModelView.CartView\u002BAddCartView[]",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "SWD.Controllers.ContactController",
-    "Method": "DeleteAnContact",
-    "RelativePath": "api/Contact/Staff/Delete-An-Contact",
-    "HttpMethod": "DELETE",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "delete",
-        "Type": "Repositories.ModelView.ContactView\u002BDeleteContactView",
+        "Name": "detail",
+        "Type": "Repositories.ModelView.ContactView\u002BDetailContactView",
         "IsRequired": true
       }
     ],
@@ -549,7 +489,7 @@
   {
     "ContainingType": "SWD.Controllers.ContactController",
     "Method": "GetPagingContactlList",
-    "RelativePath": "api/Contact/Staff/Get-Paging-Contact-List",
+    "RelativePath": "api/Contact/Get-Paging-Request-List",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
@@ -564,15 +504,78 @@
   },
   {
     "ContainingType": "SWD.Controllers.ContactController",
-    "Method": "GetContactDetail",
-    "RelativePath": "api/Contact/Staff/View-Private-Detail-Contact-From-Paging",
+    "Method": "RefusedQuote",
+    "RelativePath": "api/Contact/Refused",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "requestId",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SWD.Controllers.ContactController",
+    "Method": "AddressAnContact",
+    "RelativePath": "api/Contact/Staff/Address-An-Request",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "detail",
-        "Type": "Repositories.ModelView.ContactView\u002BDetailContactView",
+        "Name": "RequestId",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "ResponseOfStaff",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "ResponseOfStaffInFile",
+        "Type": "Microsoft.AspNetCore.Http.IFormFile",
+        "IsRequired": false
+      },
+      {
+        "Name": "StatusResponseOfStaff",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SWD.Controllers.ContactController",
+    "Method": "DeleteAnContact",
+    "RelativePath": "api/Contact/Staff/Delete-An-Request",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "delete",
+        "Type": "Repositories.ModelView.ContactView\u002BDeleteContactView",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SWD.Controllers.InteriorController",
+    "Method": "GetPagingInterior",
+    "RelativePath": "api/Interior/Get-Paging-Interior",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "Repositories.ModelView.InteriorView\u002BPagingView",
         "IsRequired": true
       }
     ],
@@ -725,6 +728,32 @@
   },
   {
     "ContainingType": "SWD.Controllers.TransactionController",
+    "Method": "GetAllTransaction",
+    "RelativePath": "api/Transaction/Customer/Get-All-Transaction",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SWD.Controllers.TransactionController",
+    "Method": "GetTransactionDetail",
+    "RelativePath": "api/Transaction/Customer/Get-Transaction-Detail",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "transactionId",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SWD.Controllers.TransactionController",
     "Method": "TransactionList",
     "RelativePath": "api/Transaction/Customer/Get-Transaction-List",
     "HttpMethod": "GET",
@@ -744,27 +773,6 @@
       {
         "Name": "_id",
         "Type": "System.String[]",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "SWD.Controllers.TransactionController",
-    "Method": "VNPayPaymentDeposit",
-    "RelativePath": "api/Transaction/Staff/VNPay-Deposit-Payment",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "contactId",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "cartViews",
-        "Type": "Repositories.ModelView.CartView\u002BAddCartView[]",
         "IsRequired": true
       }
     ],

@@ -65,7 +65,7 @@ namespace Services.Service
                 material.MaterialName = update.MaterialName;
                 //material.MaterialType = update.MaterialType;
                 material.Price = update.Price;
-                material.UpdatedAt = System.DateTime.UtcNow;
+                material.UpdatedAt = System.DateTime.Now;
                 await _unit.MaterialRepo.UpdateItemByValue("MaterialId", update.MaterialId, material);
                 return "Update material successfully";
             }

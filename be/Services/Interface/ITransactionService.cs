@@ -16,5 +16,7 @@ namespace Services.Interface
         public Task<(bool, string)> CheckPayment(string url);
         public Task<string> UpdateTransactionDetail(string _id, AddCartView[] cartViews);
         public Task<string> DeleteExpiredTransaction(string[] _ids);
+        public Task<(bool, object)> GetTransactionList(string id);
+        public Task<(bool, object)> GetTransactionDetail(string transactionId);
     }
 }

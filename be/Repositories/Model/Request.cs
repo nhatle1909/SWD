@@ -2,6 +2,7 @@
 using MongoDB.Bson.Serialization.Attributes;
 using Repositories.Models;
 using System.ComponentModel.DataAnnotations;
+using static Repositories.ModelView.CartView;
 
 namespace Repositories.Model
 {
@@ -9,19 +10,17 @@ namespace Repositories.Model
     {
         [BsonId][BsonRepresentation(BsonType.String)] 
         public required string RequestId { get; set; } = ObjectId.GenerateNewId().ToString();
-        [BsonElement][BsonRepresentation(BsonType.String)]
-        public required List<string> InteriorId { get; set; }
+        [BsonElement] public required AddCartView[] ListInterior { get; set; }
         [BsonElement] public required string Email { get; set; }
         [BsonElement] public required string Phone { get; set; }
         [BsonElement] public required string Address { get; set; }
         [BsonElement] public required string Content { get; set; }
-        [BsonElement] public required byte[] Picture { get; set; }
         [BsonElement] public string? ResponseOfStaff{ get; set; }
-
-        [BsonElement] public State? StatusResponseOfStaff { get; set; }
+        [BsonElement] public byte[]? ResponseOfStaffInFile { get; set; }
+        [BsonElement] public required State StatusResponseOfStaff { get; set; }
         public enum State
         {
-            Awaiting_Payment = 1, Completed = 2
+            Completed = 1, Processing = 2, Consulting = 3
         }
 
     }

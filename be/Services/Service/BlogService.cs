@@ -66,65 +66,55 @@ namespace Services.Service
 
         public async Task<(bool, string)> UpdateBlog(string id, UpdateBlogView update)
         {
-            var getUser = (await _unit.AccountStatusRepo.GetFieldsByFilterAsync(["Email"],
-                            g => g.AccountId.Equals(id))).FirstOrDefault();
-            if (getUser != null)
+            var getBlog = await _unit.BlogRepo.GetFieldsByFilterAsync([],
+                    g => g.BlogId.Equals(update.BlogId));
+            Blog blog = getBlog.FirstOrDefault()!;
+            if (blog is not null)
             {
-                var getBlog = await _unit.BlogRepo.GetFieldsByFilterAsync([],
-                        g => g.BlogId.Equals(update.BlogId));
-                Blog blog = getBlog.FirstOrDefault()!;
-                if (blog is not null && blog.Email.Equals(getUser.Email))
+                if (update.Pictures.Length > 0)
                 {
-                    if (update.Pictures.Length > 0)
+                    List<byte[]> picturesBytesList = new List<byte[]>();
+                    foreach (var picture in update.Pictures)
                     {
-                        List<byte[]> picturesBytesList = new List<byte[]>();
-                        foreach (var picture in update.Pictures)
+                        //Encode picture
+                        using (var ms = new MemoryStream())
                         {
-                            //Encode picture
-                            using (var ms = new MemoryStream())
-                            {
-                                await picture.CopyToAsync(ms);
-                                byte[] fileBytes = ms.ToArray();
-                                picturesBytesList.Add(fileBytes);
-                            }
+                            await picture.CopyToAsync(ms);
+                            byte[] fileBytes = ms.ToArray();
+                            picturesBytesList.Add(fileBytes);
                         }
-                        blog.Title = update.Title;
-                        blog.Content = update.Content;
-                        blog.Pictures = picturesBytesList;
-                        blog.UpdatedAt = DateTime.UtcNow;
-                        await _unit.BlogRepo.UpdateItemByValue("BlogId", update.BlogId, blog);
-                        return (true, "Update Blog successfully");
-
                     }
-                    return (false, "Missing the Pictures");
+                    blog.Title = update.Title;
+                    blog.Content = update.Content;
+                    blog.Pictures = picturesBytesList;
+                    blog.UpdatedAt = DateTime.Now;
+                    await _unit.BlogRepo.UpdateItemByValue("BlogId", update.BlogId, blog);
+                    return (true, "Update Blog successfully");
+
                 }
-                return (false, "Blog is not existed");
+                return (false, "Missing the Pictures");
             }
-            return (false, "Account is not existed");
+            return (false, "Blog is not existed");
         }
 
         public async Task<(bool, string)> RemoveBlog(string id, RemoveBlogView remove)
         {
-            var getUser = (await _unit.AccountStatusRepo.GetFieldsByFilterAsync(["Email"],
-                            g => g.AccountId.Equals(id))).FirstOrDefault();
-            if (getUser != null)
+
+            var getBlog = await _unit.BlogRepo.GetFieldsByFilterAsync([],
+                g => g.BlogId.Equals(remove.BlogId));
+            Blog blog = getBlog.FirstOrDefault()!;
+            if (blog is not null)
             {
-                var getBlog = await _unit.BlogRepo.GetFieldsByFilterAsync([],
-                    g => g.BlogId.Equals(remove.BlogId));
-                Blog blog = getBlog.FirstOrDefault()!;
-                if (blog is not null && blog.Email.Equals(getUser.Email))
-                {
-                    await _unit.BlogRepo.RemoveItemByValue("BlogId", remove.BlogId);
-                    return (true, "Remove Blog successfully");
-                }
-                return (false, "Blog is not existed");
+                await _unit.BlogRepo.RemoveItemByValue("BlogId", remove.BlogId);
+                return (true, "Remove Blog successfully");
             }
-            return (false, "Account is not existed");
+            return (false, "Blog is not existed");
+
         }
 
         public async Task<object> GetPagingBlog(int pageIndex, bool isAsc, string? searchValue)
         {
-            const int pageSize = 5;
+            const int pageSize = 30;
             const string sortField = "CreatedAt";
             List<string> searchFields = ["Title", "Content"];
             List<string> returnFields = [];
@@ -133,10 +123,10 @@ namespace Services.Service
             var items = (await _unit.BlogRepo.PagingAsync(skip, pageSize, isAsc, sortField, searchValue, searchFields, returnFields)).ToList();
             return items;
         }
-        public async Task<(bool, Blog)> ViewBlogDetail(string _id) 
+        public async Task<(bool, Blog)> ViewBlogDetail(string _id)
         {
             IEnumerable<Blog> blog = await _unit.BlogRepo.GetByFilterAsync(b => b.BlogId.Equals(_id));
-            if (blog.Any()) 
+            if (blog.Any())
             {
                 Blog blogDetail = _mapper.Map<Blog>(blog);
                 blogDetail.BlogId = _id;
@@ -175,7 +165,7 @@ namespace Services.Service
                 if (getComment.Email.Equals(getUser.Email))
                 {
                     getComment.Comment = updateComment.Comment;
-                    getComment.UpdatedAt = DateTime.UtcNow;
+                    getComment.UpdatedAt = DateTime.Now;
                     await _unit.BlogCommentRepo.UpdateItemByValue("BlogCommentId", getComment.BlogCommentId, getComment);
                 }
             }
