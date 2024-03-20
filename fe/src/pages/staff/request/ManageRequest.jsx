@@ -212,7 +212,7 @@ const ManageRequest = () => {
                 <>
                     <CancelBtn />
                     <Button onClick={() => handleReply("close", close)} type="primary">Close</Button>
-                    <Button onClick={() => handleReply("reject", close)} type="default" >Reject</Button>
+                    <Button onClick={() => handleReply("reject", close)} type="primary" >Reject</Button>
                     <Button onClick={() => handleReply("accept", close)} type="primary">Accept</Button>
                 </>
             ),
@@ -303,18 +303,14 @@ const ManageRequest = () => {
                     </span>
                     <span><ul>
                     {listInterior?.map((item) => (
-                        <li key={item.interiorId}><a href={`/interior/${item.interiorId}`}>Item {listInterior.indexOf(item.interiorId) + 2}</a></li>
+                        <li key={item.interiorId}><a href={`/interior/${item.interiorId}`}>Interior</a></li>
+                      
                     ))}
                     </ul>
                  </span>
                 </span>
                 <br/>
-                <span>
-                    <span style={{ fontWeight: "bold", marginTop: "10px;", display: "inline-block" }}>
-                      Contract file
-                    </span>
-                    <span>  <button style={{ color: 'red', fontSize: '14px' }} onClick={handleDownloadPdf(record.responseOfStaffInFile)}>Download PDF</button></span>
-                </span>
+              
             </>,
             footer: (_, { OkBtn, CancelBtn }) => (
                 <>

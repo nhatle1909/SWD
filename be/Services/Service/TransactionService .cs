@@ -323,7 +323,7 @@ namespace Services.Service
                 newItem.TotalPrice = item.FirstOrDefault().TotalPrice;
                 newItem.TransactionDetail = item.FirstOrDefault().TransactionDetail;
                 newItem.CreatedAt = item.FirstOrDefault().CreatedAt;
-
+                newItem.RequestId = item.FirstOrDefault().RequestId;
                 newItem.UpdatedAt = DateTime.Now;
                 newItem.TransactionStatus = status;
                 await _unit.TransactionRepo.UpdateItemByValue("TransactionId", _id, newItem);
