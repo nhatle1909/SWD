@@ -23,3 +23,28 @@ export const createBlog = (request) => {
         }
     });
 };
+
+export const updateBlog = (request) => {
+    console.log("Request",request);
+    const formData = new FormData();
+    if (request.pictures[0] instanceof Blob)
+        formData.append("Pictures", request.pictures[0]);
+    else {
+        var byteString = atob(request.pictures[0]);
+        var arrayBuffer = new ArrayBuffer(byteString.length);
+        var _ia = new Uint8Array(arrayBuffer);
+        for (var i = 0; i < byteString.length; i++)
+            _ia[i] = byteString.charCodeAt(i);
+        var dataView = new DataView(arrayBuffer);
+        var blob = new Blob([dataView], {type: 'image/jpeg'});
+        formData.append('Pictures', blob);
+    }
+    const title = encodeURIComponent(request.title);
+    const content = encodeURIComponent(request.content);
+    return baseClient.patch(`/Blog/Staff/Update-An-Blog?BlogId=${request.blogId}&Title=${title}&Content=${content}`,
+                formData, {
+                    headers: {
+                        'Content-Type': 'multipart/form-data'
+                    }
+            });
+};

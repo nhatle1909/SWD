@@ -4,9 +4,18 @@ import { useState } from "react";
 import PageHeader from "../../../components/PageHeader";
 import ListBlog from "../../../components/blog/ListBlog";
 import CreateBlogModel from "../../../components/blog/CreateBlogModal";
+import EditBlogModel from "../../../components/blog/EditBlogModal";
 
 export const ManageBlog = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [selectedBlog, setSelectedBlog] = useState(null);
+
+  const handleEditBlog = (record) => {
+    setSelectedBlog(record);
+    setIsEditModalOpen(true);
+  }
+
   return (
     <>
       <div className="w-[100vw] flex justify-center items-center"
@@ -24,14 +33,16 @@ export const ManageBlog = () => {
               type="primary"
               danger
               className="blue mb-2"
-              onClick={() => { setIsModalOpen(true); }}
+              onClick={() => { setIsCreateModalOpen(true); }}
               icon={<PlusCircleOutlined />}
             >
               Create New Blog
             </Button>
           </Flex>
-          <ListBlog />
-          <CreateBlogModel isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />
+          <ListBlog handleEditBlog={handleEditBlog}/>
+          <CreateBlogModel isModalOpen={isCreateModalOpen} setIsModalOpen={setIsCreateModalOpen} />
+          <EditBlogModel isModalOpen={isEditModalOpen} setIsModalOpen={setIsEditModalOpen}
+                selectedBlog={selectedBlog}/>
         </div>
       </div >
     </>

@@ -5,7 +5,7 @@ import Highlighter from 'react-highlight-words';
 import { Button, Table,  Modal, Input, Space } from 'antd';
 import { actionGetBlogList, actionRemoveBlog } from "../../store/blog/action";
 
-const ListBlog = () => {
+const ListBlog = ({handleEditBlog}) => {
     const dispatch = useAppDispatch();
     const blogs = useAppSelector(({ blogs }) => blogs.blogs);
 
@@ -131,7 +131,7 @@ const ListBlog = () => {
                     <div>
                         <span style={{ fontWeight: "bold" }}>Content:</span>
                         <br/>
-                        <span>{" " + record.content}</span>
+                        <span style={{ whiteSpace: "pre-line"}}>{" " + record.content}</span>
                     </div>
                     <br/>
                     <span>
@@ -201,7 +201,7 @@ const ListBlog = () => {
             title: 'Created At',
             dataIndex: 'createdAt',
             width: '15%',
-            render: (text, record) => {
+            render: (text) => {
                 return text.split('T')[0];
             }
         },
@@ -209,12 +209,13 @@ const ListBlog = () => {
             title: 'Action',
             align: 'center',
             key: 'x',
-            width: '20%',
+            width: '10%',
             render: (record) => {
-                return(<>
+                return(<div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
                     <Button onClick={() => handleShowBlog(record)} type="primary" className="blue">View</Button>
-                    <Button onClick={() => handleConfirmDelete(record)} type="primary" danger className="red ms-2">Delete</Button>
-                </>)
+                    <Button onClick={() => handleEditBlog(record)} type="primary">Edit</Button>
+                    <Button onClick={() => handleConfirmDelete(record)} type="primary" danger className="red">Delete</Button>
+                </div>)
             }
         },
     ];

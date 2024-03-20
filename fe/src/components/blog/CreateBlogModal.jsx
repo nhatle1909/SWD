@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Modal, message, Form, Input, Select } from 'antd';
+import React, { useState, useRef } from 'react';
+import { Modal, message, Form, Input, Select, Row } from 'antd';
 import { useDispatch } from 'react-redux';
 import { actionAddInterior } from '../../store/interior/action';
 import { actionAddBlog } from '../../store/blog/action';
@@ -8,9 +8,8 @@ const CreateBlogModel = ({ isModalOpen, setIsModalOpen }) => {
     const [title, setTitle] = useState("");
     const [content, setContent] = useState("");
     const [image, setImage] = useState("");
-    const showModal = () => {
-        setIsModalOpen(true);
-    };
+    const formRef = useRef();
+
     const handleOk = () => {
         console.log(image);
         if (!title) {
@@ -28,9 +27,11 @@ const CreateBlogModel = ({ isModalOpen, setIsModalOpen }) => {
         dispatch(actionAddBlog({ 
                     title: title, content: content, image: image
                 }));
+        formRef.current.resetFields();
         setIsModalOpen(false);
     };
     const handleCancel = () => {
+        formRef.current.resetFields();
         setIsModalOpen(false);
     };
 
@@ -44,7 +45,8 @@ const CreateBlogModel = ({ isModalOpen, setIsModalOpen }) => {
     
     return (
         <>
-            <Modal title="Add New Blog" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
+            <Modal title="Add New Blog" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}
+                    width={900}>
                 <Form
                     name="basic"
                     labelCol={{
@@ -53,7 +55,7 @@ const CreateBlogModel = ({ isModalOpen, setIsModalOpen }) => {
                     wrapperCol={{
                         span: 18,
                     }}
-
+                    ref={formRef}
                     onFinish={onFinish}
                     onFinishFailed={onFinishFailed}
                     autoComplete="off"
@@ -80,7 +82,8 @@ const CreateBlogModel = ({ isModalOpen, setIsModalOpen }) => {
                             },
                         ]}
                     >
-                        <Input onChange={(e) => setContent(e.target.value)} />
+                        <Input.TextArea onChange={(e) => setContent(e.target.value)} 
+                                        rows={10}/>
                     </Form.Item>
                     <Form.Item
                         label="Image"
