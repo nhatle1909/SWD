@@ -1,7 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { useDispatch, useSelector } from "react-redux";
 
-import authenticationSlice from "./auth/slice";
+import authenticationSlice from "./auth/slice"; 
 import userSlice from "./user/slice";
 import requestSlice from "./request/slice";
 import interiorSlice from "./interior/slice";

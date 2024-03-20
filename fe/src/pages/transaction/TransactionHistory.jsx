@@ -3,11 +3,22 @@ import React, { useRef, useState } from "react";
 import { Button, Space, Table, Input, Modal } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
 import Highlighter from "react-highlight-words";
+
 import { actionGetMyTransactions } from "../../store/transaction/action";
+import TransactionDetailModal from "../../components/transaction/TransactionDetailModal";
 
 import PageHeader from "../../components/PageHeader";
 
 const TransactionHistory = () => {
+  const [selectedTransaction, setSelectedTransaction] = useState(null);
+  const [isViewDetailTransactionModalOpen,
+     setIsViewDetailTransactionModalOpen] = useState(false);
+
+  const handleViewDetailTransaction = (transactionId) => {
+    setSelectedTransaction(transactionId);
+    setIsViewDetailTransactionModalOpen(true);
+  }
+
   const dispatch = useAppDispatch();
   const transactions = useAppSelector(
     ({ transaction }) => transaction?.transactions
@@ -142,15 +153,9 @@ const TransactionHistory = () => {
       width: "5%",
       align: "center",
     },
-
-    {
-      title: "Email",
-      dataIndex: "email",
-      width: "30%",
-    },
     {
       title: "Status",
-      dataIndex: "statusResponseOfStaff",
+      dataIndex: "transactionStatus",
       width: "10%",
     },
     {
@@ -162,8 +167,11 @@ const TransactionHistory = () => {
       render: (text, record, index) => {
         return (
           <>
+            {/*
+            onClick={() => handleShowTransaction(record, index)}
+          */}
             <Button
-              onClick={() => handleShowTransaction(record, index)}
+              onClick={() => handleViewDetailTransaction(record.transactionId)}
               type="primary"
               className="blue"
             >
@@ -175,7 +183,7 @@ const TransactionHistory = () => {
     },
   ];
 
-  const handleShowTransaction = (record, index) => {
+  const handleShowTransaction = (record) => {
     console.log("record", record);
     const listInterior = record.listInterior;
     Modal.info({
@@ -247,12 +255,13 @@ const TransactionHistory = () => {
   return (
     <>
       <div
-        className="h-[90vh] w-[100vw] flex justify-center items-center"
+        className="w-[100vw] flex justify-center items-center"
         style={{
           background: "#343f4024",
+          paddingTop: "200px"
         }}
       >
-        <div className="h-[65vh] w-[70vw]">
+        <div className="w-[70vw]">
           <PageHeader message={"Transaction History"} />
 
           <Table
@@ -260,6 +269,9 @@ const TransactionHistory = () => {
             dataSource={transactions ? transactions : []}
             pagination={{ pageSize: 5 }}
           />
+          <TransactionDetailModal selectedTransaction={selectedTransaction}
+                isModalOpen={isViewDetailTransactionModalOpen}
+                setIsModalOpen={setIsViewDetailTransactionModalOpen}/>
         </div>
       </div>
     </>
