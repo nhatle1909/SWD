@@ -3,11 +3,15 @@
   "WorkspaceRootPath": "D:\\C#\\SWD392\\SWD\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{4396B005-B2CC-4AFF-BCA7-17E3FF388E79}|be\\SWD\\SWD.csproj|D:\\C#\\SWD392\\SWD\\be\\swd\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{4396B005-B2CC-4AFF-BCA7-17E3FF388E79}|be\\SWD\\SWD.csproj|d:\\c#\\swd392\\swd\\be\\swd\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{4396B005-B2CC-4AFF-BCA7-17E3FF388E79}|be\\SWD\\SWD.csproj|solutionrelative:be\\swd\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4396B005-B2CC-4AFF-BCA7-17E3FF388E79}|be\\SWD\\SWD.csproj|d:\\c#\\swd392\\swd\\be\\swd\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{4396B005-B2CC-4AFF-BCA7-17E3FF388E79}|be\\SWD\\SWD.csproj|solutionrelative:be\\swd\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4396B005-B2CC-4AFF-BCA7-17E3FF388E79}|be\\SWD\\SWD.csproj|d:\\c#\\swd392\\swd\\be\\swd\\controllers\\contactcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{4396B005-B2CC-4AFF-BCA7-17E3FF388E79}|be\\SWD\\SWD.csproj|D:\\C#\\SWD392\\SWD\\be\\swd\\controllers\\contactcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{4396B005-B2CC-4AFF-BCA7-17E3FF388E79}|be\\SWD\\SWD.csproj|solutionrelative:be\\swd\\controllers\\contactcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
@@ -18,7 +22,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 9,
+          "SelectedChildIndex": 8,
           "Children": [
             {
               "$type": "Bookmark",
@@ -54,7 +58,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "D:\\C#\\SWD392\\SWD\\be\\SWD\\appsettings.json",
+              "RelativeDocumentMoniker": "be\\SWD\\appsettings.json",
+              "ToolTip": "D:\\C#\\SWD392\\SWD\\be\\SWD\\appsettings.json",
+              "RelativeToolTip": "be\\SWD\\appsettings.json",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAAKAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2024-03-20T14:27:08.857Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
               "Title": "ContactController.cs",
               "DocumentMoniker": "D:\\C#\\SWD392\\SWD\\be\\SWD\\Controllers\\ContactController.cs",
               "RelativeDocumentMoniker": "be\\SWD\\Controllers\\ContactController.cs",
@@ -62,12 +79,11 @@
               "RelativeToolTip": "be\\SWD\\Controllers\\ContactController.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAEoAAAAJAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-20T02:12:38.609Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-03-20T02:12:38.609Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "Program.cs",
               "DocumentMoniker": "D:\\C#\\SWD392\\SWD\\be\\SWD\\Program.cs",
               "RelativeDocumentMoniker": "be\\SWD\\Program.cs",
