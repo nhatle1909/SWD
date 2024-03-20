@@ -1,9 +1,10 @@
 import React, {useState, useRef, useEffect} from "react";
 import { SearchOutlined } from "@ant-design/icons";
-import { Form, Button, Space, Table, Input, Modal, message, Select } from 'antd';
+import { Button, Space, Table, Input, Modal, Typography, Image, Row } from 'antd';
 import Highlighter from 'react-highlight-words';
 import { useAppDispatch, useAppSelector } from "../../store";
 import { actionGetInteriors, actionRemoveInterior, actionUpdateInterior } from "../../store/interior/action";
+const {Title, Text} = Typography;
 
 const ListInterior = ({ handleEditInterior }) => {
     const dispatch = useAppDispatch();
@@ -17,15 +18,6 @@ const ListInterior = ({ handleEditInterior }) => {
     },[]);
     const interiors = useAppSelector(({interiors}) => interiors?.interiors);
 
-    const [interiorId, setInteriorId] = useState("");
-    const [interiorName, setInteriorName] = useState("");
-    const [interiorType, setInteriorType] = useState("");
-    const [description, setDescription] = useState("");
-    const [quantity, setQuantity] = useState("");
-    const [price, setPrice] = useState("");
-    const [image, setImage] = useState("");
-
-    var id, name, type, des, quan, pric, img;
 
     const [searchText, setSearchText] = useState('');
     const [searchedColumn, setSearchedColumn] = useState('');
@@ -153,63 +145,6 @@ const ListInterior = ({ handleEditInterior }) => {
             ),
         });
     }
-
-    const handleEditOk = () => {
-        if (!name) {
-            message.error('Please input the interior name!');
-            return;
-        }
-        if (!des) {
-            message.error('Please input the interior description!');
-            return;
-        }
-        if (!type) {
-            message.error('Please select the type of interior!');
-            return;
-        }
-        if (!quan){
-            message.error('Please input price number!');
-            return;
-        }
-        if (quan<=0){
-            message.error('Invalid price!');
-            return;
-        }
-        if (!pric){
-            message.error('Please input price number!');
-            return;
-        }
-        if (pric<0){
-            message.error('Invalid price!');
-            return;
-        }
-        if (!img){
-            message.error('Please select image for interior!');
-            return;
-        }
-    {/*
-        dispatch(actionUpdateInterior({
-            interiorId: interiorId,interiorName: interiorName, price: price, image: image
-        }));
-    */}
-        dispatch(actionUpdateInterior({
-            interiorId: id, interiorName: name,
-            interiorType: type, description: des, quantity: quan,
-            price: pric, image: img,
-        }));
-    };
-    const handleImageChange = (event) => {
-        console.log("event",event);
-        const data = new FileReader();
-        data.addEventListener('load',() => {
-            file = data.result;
-            console.log("file",file);
-            setImage(data.result);
-            img = data.result;
-        })
-        data.readAsDataURL(event.target.files[0]);
-    }
-    var file;
     
 
     const handleShowInterior = (record) => {
@@ -219,7 +154,7 @@ const ListInterior = ({ handleEditInterior }) => {
             content: <>
                 <span><span style={{ fontWeight: "bold" }}>
                     Id:
-                </span>
+                    </span>
                     <span>{" " + record.interiorId}</span>
                 </span>
                 <br />
@@ -236,14 +171,15 @@ const ListInterior = ({ handleEditInterior }) => {
                 <br />
                 <span><span style={{ fontWeight: "bold" }}>
                     Description:
-                </span><br />
-                    <span>{" " + record.description}</span>
+                </span>
+                    <br/>
+                    <pre style={{ whiteSpace: "pre-wrap", wordWrap:"break-word"}}>{record.description}</pre>
                 </span>
                 <br />
                 <span><span style={{ fontWeight: "bold" }}>
                     Price:
                 </span>
-                    <span>{" " + record.price}</span>
+                    <span>{" " + record.price.toLocaleString('en-US') + " VND"}</span>
                 </span>
                 <br />
                 <span><span style={{ fontWeight: "bold" }}>
@@ -291,6 +227,7 @@ const ListInterior = ({ handleEditInterior }) => {
             title: 'Price',
             dataIndex: 'price',
             width: '10%',
+            render: (text, record) => `${record.price.toLocaleString('en-US')} VND`
         },
         {
             title: 'Quantity',

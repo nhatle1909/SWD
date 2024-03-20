@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { Modal, message, Form, Input, Select } from 'antd';
 import { useDispatch } from 'react-redux';
 import { actionAddInterior } from '../../store/interior/action';
@@ -10,9 +10,8 @@ const CreateInteriorModel = ({ isModalOpen, setIsModalOpen }) => {
     const [quantity, setQuantity] = useState("");
     const [price, setPrice] = useState("");
     const [image, setImage] = useState("");
-    const showModal = () => {
-        setIsModalOpen(true);
-    };
+    const [preview, setPreview] = useState(null);
+    const formRef = useRef();
     const handleOk = () => {
         if (!interiorName) {
             message.error('Please input the interior name!');
@@ -46,9 +45,11 @@ const CreateInteriorModel = ({ isModalOpen, setIsModalOpen }) => {
                     interiorName: interiorName, interiorType: interiorType, description: description,
                     quantity: quantity, price: price, image: image
                 }));
+        formRef.current.resetFields();
         setIsModalOpen(false);
     };
     const handleCancel = () => {
+        formRef.current.resetFields();
         setIsModalOpen(false);
     };
 
@@ -59,21 +60,26 @@ const CreateInteriorModel = ({ isModalOpen, setIsModalOpen }) => {
     const onFinishFailed = (errorInfo) => {
         console.log('Failed:', errorInfo);
     };
-    
+
+    const handleImageChange = (e) => {
+        setImage(e.target.files[0]);
+        setPreview(URL.createObjectURL(e.target.files[0]));
+    }
+
     return (
         <>
             <Modal title="Add New Interior" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}
                     width={900}
             >
                 <Form
-                    name="basic"
+                    name="create"
                     labelCol={{
-                        span: 6,
+                        span: 3,
                     }}
                     wrapperCol={{
-                        span: 18,
+                        span: 21,
                     }}
-
+                    ref={formRef}
                     onFinish={onFinish}
                     onFinishFailed={onFinishFailed}
                     autoComplete="off"
@@ -148,7 +154,8 @@ const CreateInteriorModel = ({ isModalOpen, setIsModalOpen }) => {
                             },
                         ]}
                     >
-                        <input type="file" onChange={(e) => setImage(e.target.files[0])} />
+                        {preview && <img src={preview} alt="Preview"/> }
+                        <input type="file" onChange={handleImageChange} />
                     </Form.Item>
                 </Form>
             </Modal>

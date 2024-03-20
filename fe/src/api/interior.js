@@ -38,9 +38,21 @@ export const removeInterior = (request) => {
     return baseClient.delete(`/Interior/Staff/Delete-Interior`, {data: request});
 }
 
-export const updateInterior = (request) => {
+export const updateInterior = (request) => {    
+    console.log("Request",request);
     const formData = new FormData();
-    formData.append('Image', request.image);
+    if (request.image instanceof Blob)
+        formData.append("Image", request.image);
+    else {
+        var byteString = atob(request.image);
+        var arrayBuffer = new ArrayBuffer(byteString.length);
+        var _ia = new Uint8Array(arrayBuffer);
+        for (var i = 0; i < byteString.length; i++)
+            _ia[i] = byteString.charCodeAt(i);
+        var dataView = new DataView(arrayBuffer);
+        var blob = new Blob([dataView], {type: 'image/jpeg'});
+        formData.append('Image', blob);
+    }
 
     const params = {
         'InteriorId': request.interiorId,

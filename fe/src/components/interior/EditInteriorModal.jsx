@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Modal, message, Form, Input, Select } from 'antd';
 import { useDispatch } from 'react-redux';
-import { actionAddInterior, actionUpdateInterior } from '../../store/interior/action';
+import { actionUpdateInterior } from '../../store/interior/action';
 const EditInteriorModel = ({ isModalOpen, setIsModalOpen, selectedInterior}) => {
     const dispatch = useDispatch();
     const [interiorName, setInteriorName] = useState("");
@@ -9,7 +9,8 @@ const EditInteriorModel = ({ isModalOpen, setIsModalOpen, selectedInterior}) => 
     const [description, setDescription] = useState("");
     const [quantity, setQuantity] = useState("");
     const [price, setPrice] = useState("");
-    const [image, setImage] = useState("");
+    const [image, setImage] = useState(null);
+    const [preview, setPreview] = useState(null);
 
     useEffect(() => {
         if (isModalOpen && selectedInterior){
@@ -19,6 +20,7 @@ const EditInteriorModel = ({ isModalOpen, setIsModalOpen, selectedInterior}) => 
             setQuantity(selectedInterior.quantity);
             setPrice(selectedInterior.price);
             setImage(selectedInterior.image);
+            setPreview(`data:image/jpeg;base64,${selectedInterior.image}`);
         }
     },[selectedInterior]);
     const handleOk = () => {
@@ -72,132 +74,20 @@ const EditInteriorModel = ({ isModalOpen, setIsModalOpen, selectedInterior}) => 
     const onFinishFailed = (errorInfo) => {
         console.log('Failed:', errorInfo);
     };
-    {/**
- Modal.confirm({
-            title: 'Edit Interior',
-            onOk: () => handleEditOk(),
-            content:
-                <Form
-                    name="basic"
-                    labelCol={{ span: 6 }}
-                    wrapperCol={{ span: 18 }}
-                    autoComplete="off"
-                    initialValues={{
-                        interiorId: record.interiorId,
-                        interiorName: record.interiorName,
-                        interiorType: record.interiorType,
-                        description: record.description,
-                        price: record.price,
-                        quantity: record.quantity       
-                    }}
-                >
-                    <Form.Item
-                        label="ID"
-                        name = "interiorId"
-                    >
-                        <span>{ record.interiorId }</span>
-                    </Form.Item>
-                    <Form.Item
-                        label="Name"
-                        name = "interiorName"
-                        rules={[
-                            {
-                                required: true,
-                                message: 'Please input the interior name!',
-                            },
-                        ]}
-                    >
-                        <Input onChange={(e) => name = e.target.value} />
-                    </Form.Item>
-                    <Form.Item
-                        label="Interior Type"
-                        name="interiorType"
-                        rules={[
-                            {
-                                required: true,
-                                message: 'Please select interior type!',
-                            },
-                        ]}
-                    >
-                        <Select onChange={(value) => type = value}>
-                            <Option value="Chair">Chair</Option>
-                            <Option value="Desk">Desk</Option>
-                            <Option value="Cabinet">Cabinet</Option>
-                            <Option value="Clock">Clock</Option>
-                        </Select>
-                    </Form.Item>
-                    <Form.Item
-                        label="Description"
-                        name = "description"
-                        rules={[
-                            {
-                                required: true,
-                                message: 'Please input the interior name!',
-                            },
-                        ]}
-                    >
-                        <Input.TextArea onChange={(e) => des = e.target.value}
-                                        rows={8}/>
-                    </Form.Item>
-                    <Form.Item
-                        label="Price"
-                        name="price"
-                        rules={[
-                            {
-                                required: true,
-                                message: 'Please input price number!',
-                            },
-                        ]}
-                    >
-                        <Input onChange={(e) => pric = e.target.value}/>
-                    </Form.Item>
-                    <Form.Item
-                        label="Quantity"
-                        name="quantity"
-                        rules={[
-                            {
-                                required: true,
-                                message: 'Please input quantity number!',
-                            },
-                        ]}
-                    >
-                        <Input onChange={(e) => quan = e.target.value}/>
-                    </Form.Item>
-                    <Form.Item
-                        label="Image"
-                        name="image"
-                        rules={[
-                            {
-                                required: true,
-                                message: 'Please select image for interior!',
-                            },
-                        ]}
-                    >
-                        <div>
-                            <a className="block-20" style={{backgroundImage: `url(data:image/jpeg;base64,${file})`}}></a>
-                            <Input type="file" onChange={handleImageChange}/>
-                        </div>
-                    </Form.Item>
-                </Form>,
-                width: 900,
-                footer: (_, {OkBtn, CancelBtn}) => (<>
-                    <CancelBtn />
-                    <OkBtn />
-                </>),
-        });
-    */}
+
+    const handleImageChange = (e) => {
+        setImage(e.target.files[0]);
+        setPreview(URL.createObjectURL(e.target.files[0]));
+    }
     return (
         <>
-        {console.log("selectedInterior", selectedInterior)}
-            <Modal title="Edit Interior" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
+            {console.log("selectedInterior", selectedInterior)}
+            <Modal title="Edit Interior" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}
+                    width={900}>
                 <Form
-                    name="basic"
-                    labelCol={{
-                        span: 6,
-                    }}
-                    wrapperCol={{
-                        span: 18,
-                    }}
+                    name="edit"
+                    labelCol={{ span: 3, }}
+                    wrapperCol={{ span: 21, }}
                     key={ selectedInterior? selectedInterior.interiorId : 'empty'}
                     initialValues={{
                         interiorId: selectedInterior?.interiorId,
@@ -244,7 +134,8 @@ const EditInteriorModel = ({ isModalOpen, setIsModalOpen, selectedInterior}) => 
                         label="Description"
                         name="description"
                     >
-                        <Input onChange={(e) => setDescription(e.target.value)} />
+                        <Input.TextArea onChange={(e) => setDescription(e.target.value)}
+                                    rows={10}/>
                     </Form.Item>
                     <Form.Item
                         label="Quantity"
@@ -280,7 +171,8 @@ const EditInteriorModel = ({ isModalOpen, setIsModalOpen, selectedInterior}) => 
                             },
                         ]}
                     >
-                        <input type="file" onChange={(e) => setImage(e.target.files[0])} />
+                        {preview && <img src={preview} alt="Preview" />}
+                        <input type="file" onChange={handleImageChange} />
                     </Form.Item>
                 </Form>
             </Modal>
