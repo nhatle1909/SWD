@@ -38,17 +38,19 @@ const CreateRequest = () => {
         quantity: quantity,
       });
 
-      dispatch(
-        createRequestAction({
-          Email: email,
-          Address: address,
-          Phone: phone,
-          Content: content,
-          ListInterior: selectedInteriors,
-        })
-      );
-      navigator("/request/history");
+     
+      
     }
+    dispatch(
+      createRequestAction({
+        Email: email,
+        Address: address,
+        Phone: phone,
+        Content: content,
+        ListInterior: selectedInteriors,
+      })
+    );
+    navigator("/request/history");
   };
 
   const defaultColumns = [

@@ -16,7 +16,7 @@ function showPopup(text, status) {
   popup.classList.remove('hidden', 'visible');
   popup.classList.add('visible'); // Show the popup with an animation
 }
-if (localStorage.getItem('Url') === null || localStorage.getItem('Url') === redirectUrl) {
+
 
 localStorage.setItem('Url', redirectUrl);
 fetch('https://swdapi.azurewebsites.net/api/Transaction/VNPay-Return?url=' +encodeURIComponent(redirectUrl.href)) // Send the entire redirect URL
@@ -33,8 +33,8 @@ fetch('https://swdapi.azurewebsites.net/api/Transaction/VNPay-Return?url=' +enco
     console.error('Error fetching API:', error);
     showPopup('An error occurred. Please try again.', 'error');
   });
-  window.location.href = "http://localhost:3000";
-}
+
+
 closeButton.addEventListener('click', () => {
   popup.classList.remove('visible');
   window.location.href = "http://localhost:3000";

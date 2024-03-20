@@ -103,7 +103,7 @@ const Header = () => {
               <a
                 onClick={() => {
                   navigator(
-                    "https://sandbox.vnpayment.vn/merchantv2/Users/Login.htm?ReturnUrl=%2fmerchantv2%2fHome%2fDashboard.htm"
+                    "/admin/reports"
                   );
                 }}
               >
